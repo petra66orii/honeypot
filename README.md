@@ -13,11 +13,11 @@ HoneyPot is an e-commerce website that specialises in selling honey and honey by
 2. **[Target Audience](#target-audience)**
 3. **[Design](#design)**
     * [The Five Planes of UX](#the-five-planes-of-ux)
-        + [Strategy](#strategy)
-        + [Scope](#scope)
-        + [Structure](#structure)
-        + [Skeleton](#skeleton)
-        + [Surface](#surface)
+        + [1. Strategy](#1-strategy)
+        + [2. Scope](#2-scope)
+        + [3. Structure](#3-structure)
+        + [4. Skeleton](#4-skeleton)
+        + [5. Surface](#5-surface)
     * [Wireframes](#wireframes)
         + [Home Page](#home-page)
         + [Product Page](#product-page)
@@ -215,11 +215,107 @@ HoneyPot sells raw, unfiltered honey infused with different ingredients (whilst 
 
 ## The Five Planes of UX
 
-### Strategy
-### Scope
-### Structure
-### Skeleton
-### Surface
+The five planes of UX — *Strategy*, *Scope*, *Structure*, *Skeleton*, and *Surface* — offer a structured approach to crafting a seamless and engaging user experience. These principles shape the design of the e-commerce honey website.
+
+### 1. Strategy
+
+The website’s purpose is to provide customers with high-quality honey and bee-related products while fostering brand trust and educating users about honey’s benefits.
+
+**User Needs**:
+
+* A seamless shopping experience with clear product categories and easy checkout.
+* Informative content about honey, including health benefits, sustainability, and recipes.
+* Customer reviews and ratings to help with purchasing decisions.
+
+**Business Goals**:
+
+* Increase product sales through a well-optimized and conversion-driven design.
+* Build a strong brand identity and customer loyalty with engaging content and a smooth shopping experience.
+* Differentiate from competitors by emphasizing sustainability, ethical sourcing, and product quality.
+
+### 2. Scope
+
+The website includes key e-commerce and content-driven features:
+
+**Product Catalog & Shopping Experience**:
+
+* Browse products by category, type, and price range.
+* Add items to cart and complete a secure checkout using Stripe.
+* View product descriptions, ingredients, and customer reviews.
+
+**User Engagement & Content**:
+
+* *Blog*: Articles on honey’s benefits, recipes, and sustainable beekeeping.
+* *Product Reviews*: Customers can leave ratings and feedback to guide other buyers.
+* *Email Newsletter*: Users can sign up for updates, promotions, and exclusive offers.
+
+**Marketing & Retention**:
+
+* Discount codes and promotional offers.
+* Loyalty rewards for repeat customers.
+* Social media integration for sharing and engagement.
+
+### 3. Structure
+
+**Content Hierarchy**:
+
+* *Primary Navigation*: Home, Shop, Blog, About Us, Contact.
+* *Secondary Navigation*: Account, Cart, Order History, FAQs.
+
+**User Flows**:
+
+*For purchasing a product*:
+
+* Browse products by category or use filters.
+* Select an item, read the description and reviews.
+* Add to cart and proceed to checkout.
+* Enter payment and shipping details, complete the order.
+* Receive confirmation and tracking updates.
+
+*For reading the blog*:
+
+* Browse articles by category (e.g., health benefits, recipes).
+* Read content and explore related posts.
+* Share or comment on blog posts.
+
+### 4. Skeleton
+
+**Navigation Design**:
+
+* A fixed top navigation bar with dropdown menus for quick access.
+* A search bar for finding products and blog content easily.
+
+**Interface Elements**:
+
+* *Forms*: Simple, clean checkout and review submission forms.
+* *Product Cards*: Feature images, price, rating, and a quick “Add to Cart” button.
+* *Call-to-Action (CTA) Buttons*: Prominent "Buy Now," "Read More," and "Subscribe" buttons.
+
+**Feedback & Progress Indicators**:
+
+* Visual confirmation for actions like “Item added to cart” or “Order placed.”
+* Checkout progress bar to guide users through the purchase process.
+
+**Responsive Design**:
+
+* Mobile-first approach to ensure smooth shopping on all devices.
+
+### 5. Surface
+
+**Design Style**:
+
+* *Theme*: A warm, natural aesthetic that reflects purity and sustainability.
+* High-quality images of honey, bees, and nature to enhance visual appeal.
+
+**Typography**:
+
+* A clean, modern sans-serif font for readability, paired with a handwritten or organic-style font for branding elements.
+
+**Imagery & Emotional Impact**:
+
+* High-resolution product images showcasing texture and packaging details.
+* Lifestyle shots of honey being used in recipes or natural settings to reinforce authenticity.
+* Creates a sense of warmth, tradition, and natural goodness, encouraging users to connect with the brand and its values.
 
 ## Wireframes
 
