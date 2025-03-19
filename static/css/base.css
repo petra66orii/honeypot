@@ -12,12 +12,26 @@ html {
     height: 100%;
 }
 
-body {
+header {
+    background: rgb(214, 170, 48);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1030;
+    width: 100%;
+    font-family: 'Indie Flower', 'Times New Roman', Times, serif;
+}
+
+main {
     background: url('/static/images/media/background-honey.jpg') no-repeat center center fixed;
     background-size: cover;
-    height: calc(100vh - 164px);
+    height: 100vh;
     color: #555;
     font-family: 'Indie Flower', 'Times New Roman', Times, serif;
+    flex: 1 0 auto;
+    /*margin-top: 156px;
+    /*margin-bottom: 42px;*/
+    /* Enable flex properties */
+    display: flex;
+    flex-direction: column;
 }
 
 .shop-now-button {
@@ -50,8 +64,8 @@ body {
     border: 1px solid black !important;
 }
 
-.bg-black {
-    background: #000 !important;
+.bg-purple {
+    background: #c48bdf !important;
 }
 
 
@@ -67,7 +81,7 @@ body {
 /* fixed top navbar only on medium and up */
 @media (min-width: 992px) {
     .fixed-top-desktop-only {
-        position: fixed;
+        position: relative;
         top: 0;
         right: 0;
         left: 0;
@@ -79,3 +93,36 @@ body {
         padding-top: 164px;
     }
 }
+
+/* pad the top a bit when navbar is collapsed on mobile */
+@media (max-width: 991px) {
+    .header-container {
+        padding-top: 116px;
+    }
+
+    main {
+        height: calc(100vh - 116px);
+    }
+
+    .display-4.logo-font.text-black {
+        font-size: 2rem;
+    }
+
+    .nav-link {
+        padding: 0.15rem;
+    }
+
+    .nav-link i.fa-lg {
+        font-size: 1rem;
+    }
+
+    .navbar-toggler {
+        padding: .6rem .6rem;
+        font-size: 1rem;
+    }
+
+    }
+
+    .increment-qty, .decrement-qty {
+        padding: .25rem .5rem !important;
+    }
