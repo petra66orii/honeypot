@@ -27,13 +27,15 @@
   </head>
   <body>
     <header class="container-fluid fixed-top">
-      <div class="row">
-        <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
-          <a href="{% url 'home' %}" class="nav-link">
+      <div class="row d-flex align-items-center justify-content-between px-3">
+
+        <!-- Logo -->
+        <div class="col-8 col-lg-4 my-auto py-1 py-lg-0 text-start d-flex align-items-center">
+          <a href="{% url 'home' %}" class="nav-link d-flex align-items-center">
             <h1 class="text-black my-0 logo">
               <strong>HoneyPot</strong>
-              <img src="{% static 'images/icons/honeycomb.png' %}" alt="bee and honey comb icon"/>
             </h1>
+            <img src="{% static 'images/icons/honeycomb.png' %}" alt="bee and honeycomb icon" class="ms-2" />
           </a>
         </div>
         <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
