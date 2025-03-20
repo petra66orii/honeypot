@@ -12,6 +12,7 @@ html {
     height: 100%;
 }
 
+/* Header Settings */
 header {
     background: rgb(255, 255, 255);
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
@@ -27,9 +28,6 @@ main {
     color: #555;
     font-family: 'Indie Flower', 'Times New Roman', Times, serif;
     flex: 1 0 auto;
-    /*margin-top: 156px;
-    /*margin-bottom: 42px;*/
-    /* Enable flex properties */
     display: flex;
     flex-direction: column;
 }
