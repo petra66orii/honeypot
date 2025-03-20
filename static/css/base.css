@@ -70,6 +70,9 @@ body {
 .btn-black {
     background: black;
     color: white;
+    border-radius: 5px;
+    font-size: large;
+    padding: 5px;
 }
 
 .shop-now-button:hover,
