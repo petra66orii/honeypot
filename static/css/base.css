@@ -1,3 +1,5 @@
+/* General Settings */
+
 * {
     margin: 0;
     padding: 0;
@@ -21,10 +23,36 @@ header {
     font-family: 'Indie Flower', 'Times New Roman', Times, serif;
 }
 
-main {
+.border-line {
+    border-left: 1px solid #000000 !important;
+    margin-left: .5rem;
+    height: 15px;
+}
+
+.dropdown-menu {
+    width: auto !important;
+    min-width: 200px;
+    background-color: white;
+    text-align: left;
+}
+
+.dropdown-menu li {
+    white-space: nowrap;
+    padding: 5px 15px;
+}
+
+.navbar .dropdown-menu {
+    position: absolute;
+    left: auto;
+    right: auto;
+}
+
+/* Body Settings */
+
+body {
     background: url('/static/images/media/background-honey.jpg') no-repeat center center fixed;
     background-size: cover;
-    height: 100vh;
+    height: auto;
     color: #555;
     font-family: 'Indie Flower', 'Times New Roman', Times, serif;
     flex: 1 0 auto;
