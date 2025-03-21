@@ -16,6 +16,12 @@
                         </h1>
                         <img src="{% static 'images/icons/honeycomb.png' %}" alt="bee and honeycomb icon" class="ms-2" />
                       </a>
+                      <!-- Display login status -->
+                      {% if user.is_authenticated %}
+                      <p class="text-end m-0 py-2 text-black text-small">Welcome, {{ user }}</p>
+                      {% else %}
+                      <p class="text-end m-0 py-2 text-black text-small">Welcome! Please log in</p>
+                      {% endif %}
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
@@ -56,9 +62,12 @@
                 </ul>
             </div>
         </div>
+    </div>
+</nav>
 
-        <!-- Desktop Navbar -->
-        <div class="d-none d-lg-flex">
+    <!-- Desktop Navbar -->
+    <div class="container-fluid position-relative d-none d-lg-flex">
+        <div class="d-none d-lg-flex w-100 align-items-center justify-content-center">
             <ul class="navbar-nav d-flex flex-row">
                 <li class="nav-item mx-3">
                     <a class="nav-link text-black fw-bold" href="{% url 'home' %}">Home</a>
@@ -94,5 +103,14 @@
                 </li>
             </ul>
         </div>
+
+        <!-- Display login status - Absolute positioning to bottom-right -->
+        <div class="position-absolute bottom-0 end-0 me-3">
+            {% if user.is_authenticated %}
+            <p class="m-0 p-2 text-black text-small">Welcome, {{ user }}</p>
+            {% else %}
+            <p class="m-0 p-2 text-black text-small">Welcome! Please log in</p>
+            {% endif %}
+        </div>
     </div>
-</nav>
+
