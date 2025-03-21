@@ -151,6 +151,8 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
 
+ACCOUNT_SIGNUP_FORM_CLASS = 'home.forms.CustomSignupForm'
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
