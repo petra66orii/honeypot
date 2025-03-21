@@ -60,7 +60,7 @@
           </form>
         </div>
         <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
-          <ul class="list-inline list-unstyled text-center text-lg-right my-0 mx-auto">
+          <ul class="list-inline list-unstyled text-center text-lg-right my-0 mx-auto text-small fw-bold">
             <li class="list-inline-item mx-0">
               <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} text-decoration-none" href="#">
                 <div class="text-center">
@@ -129,9 +129,6 @@
       </div>
       {% endif %} 
 
-      {% block page_header %}
-      {% endblock %}
-  
       {% block content %}
       {% endblock %}
 
