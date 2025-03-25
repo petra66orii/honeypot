@@ -350,7 +350,20 @@ For establishing the UX design, wireframes were designed using Balsamiq:
 ![Blog page wireframe](static/images/README/blog-page.png)
 
 ## Typography
+
+For the logo I went for the *"Lavishly Yours"* font, because it inspired elegance to me and it felt like an appropriate font for a compelling logo. 
+
+![Lavishly Yours font](static/images/README/lavishly-yours-font.png)
+
+For the rest of the website I used *"Work Sans"* for its readablity.
+
+![Work Sans font](static/images/README/work-sans-font.png)
+
 ## Color Scheme
+
+Since it's an e-commerce website that sells honey, the color scheme is fairly simple, containing black and white to keep it classic, and added yellow-gold - to match the honey, and lavender - for a pop of color, in order to bring a nice aesthethic to the website.
+
+![Website color scheme](static/images/README/color-scheme.png)
 
 # Features
 
