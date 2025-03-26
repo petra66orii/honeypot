@@ -1,0 +1,392 @@
+[
+  {
+    "pk": 1,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-001",
+      "name": "Organic Honey",
+      "description": "Pure, unfiltered organic honey with a smooth texture and rich flavor. Perfect for sweetening tea, drizzling on toast, or adding to recipes.",
+      "price": 15.99,
+      "category": 1,
+      "rating": 4.9,
+      "image": "organic-honey.jpg"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-002",
+      "name": "Acacia Honey",
+      "description": "Light and delicate honey with a floral aroma, sourced from acacia blossoms. Naturally slow to crystallize and great for sweetening drinks.",
+      "price": 18.99,
+      "category": 1,
+      "rating": 4.7,
+      "image": "acacia-honey.jpg"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-003",
+      "name": "Hot Honey",
+      "description": "A bold blend of pure honey infused with chili for a sweet yet spicy kick. Perfect for drizzling over pizza, fried chicken, or cheese boards.",
+      "price": 19.99,
+      "category": 2,
+      "rating": 4.7,
+      "image": "hot-honey.jpg"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-004",
+      "name": "Lavender Honey",
+      "description": "Fragrant and floral honey infused with lavender blossoms, offering a calming and aromatic sweetness. Great for tea, baking, or skincare.",
+      "price": 19.99,
+      "category": 2,
+      "rating": 4.8,
+      "image": "lavender-honey.jpg"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-005",
+      "name": "Smoked Honey",
+      "description": "A rich and smoky honey with deep caramel notes, perfect for marinades, BBQ sauces, and gourmet dishes.",
+      "price": 19.99,
+      "category": 2,
+      "rating": 5.0,
+      "image": "smoked-honey.jpg"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-006",
+      "name": "Soft Set Honey",
+      "description": "Creamy and easy-to-spread honey with a velvety texture. Ideal for spreading on toast, pancakes, or scones.",
+      "price": 20.99,
+      "category": 1,
+      "rating": 4.7,
+      "image": "soft-set-honey.jpg"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-007",
+      "name": "Raw Wildflower Honey",
+      "description": "Unprocessed honey harvested from a variety of wildflowers, offering a complex and bold flavor profile.",
+      "price": 16.99,
+      "category": 1,
+      "rating": 4.8,
+      "image": "wildflower-honey.jpg"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-008",
+      "name": "Manuka Honey",
+      "description": "Premium honey with powerful antibacterial properties, sourced from the Manuka tree in New Zealand. Ideal for immune support and skincare.",
+      "price": 34.99,
+      "category": 1,
+      "rating": 5.0,
+      "image": "manuka-honey.jpg"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-009",
+      "name": "Cinnamon Infused Honey",
+      "description": "A warm and comforting blend of honey and cinnamon, perfect for stirring into coffee, oatmeal, or yogurt.",
+      "price": 17.99,
+      "category": 2,
+      "rating": 4.9,
+      "image": "cinnamon-honey.jpg"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-010",
+      "name": "Lemon Infused Honey",
+      "description": "Zesty and refreshing honey infused with lemon, ideal for soothing teas, desserts, or as a natural remedy for colds.",
+      "price": 17.99,
+      "category": 2,
+      "rating": 4.8,
+      "image": "lemon-honey.jpg"
+    }
+  },
+  {
+    "pk": 11,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-011",
+      "name": "Honeycomb",
+      "description": "All-natural, raw honeycomb straight from the hive. Enjoy its chewy texture and intense sweetness as a snack or topping.",
+      "price": 22.99,
+      "category": 3,
+      "rating": 4.9,
+      "image": "honeycomb.jpg"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-012",
+      "name": "Propolis Tincture",
+      "description": "A natural immune-boosting supplement made from bee propolis, known for its antibacterial and antiviral properties.",
+      "price": 14.99,
+      "category": 4,
+      "rating": 4.7,
+      "image": "propolis-tincture.jpg"
+    }
+  },
+  {
+    "pk": 13,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-013",
+      "name": "Bee Pollen Granules",
+      "description": "A superfood rich in protein, vitamins, and minerals. Sprinkle on smoothies, yogurt, or cereal for an energy boost.",
+      "price": 18.99,
+      "category": 4,
+      "rating": 4.8,
+      "image": "bee-pollen.jpg"
+    }
+  },
+  {
+    "pk": 14,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-014",
+      "name": "Beeswax Lip Balm",
+      "description": "Moisturizing lip balm made from pure beeswax and natural oils to keep your lips soft and hydrated.",
+      "price": 5.99,
+      "category": 5,
+      "rating": 4.9,
+      "image": "beeswax-lip-balm.jpg"
+    }
+  },
+  {
+    "pk": 15,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-015",
+      "name": "Honey & Oatmeal Soap",
+      "description": "Gentle handmade soap infused with honey and oatmeal for a soothing and nourishing cleanse.",
+      "price": 7.99,
+      "category": 5,
+      "rating": 4.9,
+      "image": "honey-oatmeal-soap.jpg"
+    }
+  },
+  {
+    "pk": 16,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-016",
+      "name": "Eucalyptus Honey",
+      "description": "Rich and aromatic honey with a hint of eucalyptus, perfect for soothing sore throats and boosting immunity.",
+      "price": 21.99,
+      "category": 2,
+      "rating": 4.8,
+      "image": "eucalyptus-honey.jpg"
+    }
+  },
+  {
+    "pk": 17,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-017",
+      "name": "Buckwheat Honey",
+      "description": "Dark and robust honey with a molasses-like taste, packed with antioxidants and great for digestion.",
+      "price": 19.99,
+      "category": 2,
+      "rating": 4.7,
+      "image": "buckwheat-honey.jpg"
+    }
+  },
+  {
+    "pk": 18,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-018",
+      "name": "Ginger Infused Honey",
+      "description": "A spicy-sweet infusion of honey and ginger, excellent for teas, marinades, and cold remedies.",
+      "price": 18.99,
+      "category": 2,
+      "rating": 4.9,
+      "image": "ginger-honey.jpg"
+    }
+  },
+  {
+    "pk": 19,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-019",
+      "name": "Vanilla Bean Honey",
+      "description": "Smooth honey infused with real vanilla beans, perfect for drizzling over desserts or mixing into coffee.",
+      "price": 20.99,
+      "category": 2,
+      "rating": 4.9,
+      "image": "vanilla-honey.jpg"
+    }
+  },
+  {
+    "pk": 20,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-020",
+      "name": "Honey Mustard Dressing",
+      "description": "A tangy and sweet honey mustard dressing made with real honey, perfect for salads and dipping sauces.",
+      "price": 12.99,
+      "category": 11,
+      "rating": 4.7,
+      "image": "honey-mustard.jpg"
+    }
+  },
+  {
+    "pk": 21,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-021",
+      "name": "Honey Balsamic Glaze",
+      "description": "A rich and flavorful balsamic glaze infused with honey, perfect for drizzling over meats and roasted vegetables.",
+      "price": 14.99,
+      "category": 11,
+      "rating": 4.8,
+      "image": "honey-balsamic.jpg"
+    }
+  },
+  {
+    "pk": 22,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-022",
+      "name": "Honey BBQ Sauce",
+      "description": "A smoky and sweet BBQ sauce made with pure honey, perfect for grilling and dipping.",
+      "price": 13.99,
+      "category": 11,
+      "rating": 4.9,
+      "image": "honey-bbq.jpg"
+    }
+  },
+  {
+    "pk": 23,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-023",
+      "name": "Honey Caramel Spread",
+      "description": "A rich and creamy caramel spread made with real honey, perfect for drizzling over pancakes and desserts.",
+      "price": 11.99,
+      "category": 11,
+      "rating": 4.9,
+      "image": "honey-caramel.jpg"
+    }
+  },
+  {
+    "pk": 24,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-024",
+      "name": "Honey Almond Butter",
+      "description": "A creamy almond butter blended with honey for a naturally sweet and nutty spread.",
+      "price": 15.99,
+      "category": 11,
+      "rating": 4.8,
+      "image": "honey-almond-butter.jpg"
+    }
+  },
+  {
+    "pk": 25,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-025",
+      "name": "Honey Gift Set",
+      "description": "A beautifully packaged selection of premium honey varieties, perfect for gifting.",
+      "price": 29.99,
+      "category": 7,
+      "rating": 5.0,
+      "image": "honey-gift-set.jpg"
+    }
+  },
+  {
+    "pk": 26,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-026",
+      "name": "Beeswax Candles",
+      "description": "Handmade natural beeswax candles that burn cleanly and emit a soft honey aroma.",
+      "price": 9.99,
+      "category": 6,
+      "rating": 4.9,
+      "image": "beeswax-candles.jpg"
+    }
+  },
+  {
+    "pk": 27,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-027",
+      "name": "Beeswax Wraps",
+      "description": "Eco-friendly reusable food wraps made with beeswax, perfect for keeping food fresh.",
+      "price": 12.99,
+      "category": 6,
+      "rating": 4.8,
+      "image": "beeswax-wraps.jpg"
+    }
+  },
+  {
+    "pk": 28,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-028",
+      "name": "Honey Lip Scrub",
+      "description": "A nourishing lip scrub made with honey and sugar to exfoliate and soften lips.",
+      "price": 6.99,
+      "category": 5,
+      "rating": 4.9,
+      "image": "honey-lip-scrub.jpg"
+    }
+  },
+  {
+    "pk": 29,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-029",
+      "name": "Honey Face Mask",
+      "description": "A hydrating face mask infused with honey to nourish and rejuvenate the skin.",
+      "price": 14.99,
+      "category": 5,
+      "rating": 5.0,
+      "image": "honey-face-mask.jpg"
+    }
+  },
+  {
+    "pk": 30,
+    "model": "products.product",
+    "fields": {
+      "sku": "HON-030",
+      "name": "Royal Jelly Capsules",
+      "description": "A premium supplement containing pure royal jelly to support energy and wellness.",
+      "price": 24.99,
+      "category": 4,
+      "rating": 4.9,
+      "image": "royal-jelly.jpg"
+    }
+  }
+]

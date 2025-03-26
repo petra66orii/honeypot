@@ -1,0 +1,102 @@
+[
+  {
+    "pk": 1,
+    "model": "products.category",
+    "fields": {
+      "name": "honey",
+      "friendly_name": "Honey",
+      "has_discount": false
+    }
+  },
+  {
+    "pk": 2,
+    "model": "products.category",
+    "fields": {
+      "name": "infused honey",
+      "friendly_name": "Infused Honey",
+      "has_discount": false
+    }
+  },
+  {
+    "pk": 3,
+    "model": "products.category",
+    "fields": {
+      "name": "honeycomb",
+      "friendly_name": "Honeycomb",
+      "has_discount": false
+    }
+  },
+  {
+    "pk": 4,
+    "model": "products.category",
+    "fields": {
+      "name": "propolis & pollen",
+      "friendly_name": "Propolis & Pollen",
+      "has_discount": false
+    }
+  },
+  {
+    "pk": 5,
+    "model": "products.category",
+    "fields": {
+      "name": "skincare",
+      "friendly_name": "Skincare",
+      "has_discount": false
+    }
+  },
+  {
+    "pk": 6,
+    "model": "products.category",
+    "fields": {
+      "name": "beeswax",
+      "friendly_name": "Beeswax",
+      "has_discount": false
+    }
+  },
+  {
+    "pk": 7,
+    "model": "products.category",
+    "fields": {
+      "name": "honey gifts",
+      "friendly_name": "Honey Gifts",
+      "has_discount": false
+    }
+  },
+  {
+    "pk": 8,
+    "model": "products.category",
+    "fields": {
+      "name": "candle making sets",
+      "friendly_name": "Candle Making Sets",
+      "has_discount": false
+    }
+  },
+  {
+    "pk": 9,
+    "model": "products.category",
+    "fields": {
+      "name": "clearance",
+      "friendly_name": "Clearance",
+      "has_discount": false
+    }
+  },
+  {
+    "pk": 10,
+    "model": "products.category",
+    "fields": {
+      "name": "special deals",
+      "friendly_name": "Special Deals",
+      "has_discount": false
+    }
+  },
+{
+  "pk": 11,
+  "model": "products.category",
+  "fields": {
+    "name": "honey-based foods",
+    "friendly_name": "Honey-Based Foods",
+    "has_discount": false
+  }
+}
+]
+
