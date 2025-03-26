@@ -9,7 +9,7 @@
       "price": 15.99,
       "category": 1,
       "rating": 4.9,
-      "image": "organic-honey.jpg"
+      "image": "organic-honey.png"
     }
   },
   {
@@ -22,7 +22,7 @@
       "price": 18.99,
       "category": 1,
       "rating": 4.7,
-      "image": "acacia-honey.jpg"
+      "image": "acacia-honey.png"
     }
   },
   {
@@ -35,7 +35,7 @@
       "price": 19.99,
       "category": 2,
       "rating": 4.7,
-      "image": "hot-honey.jpg"
+      "image": "hot-honey.png"
     }
   },
   {
@@ -48,7 +48,7 @@
       "price": 19.99,
       "category": 2,
       "rating": 4.8,
-      "image": "lavender-honey.jpg"
+      "image": "lavender-honey.png"
     }
   },
   {
@@ -61,7 +61,7 @@
       "price": 19.99,
       "category": 2,
       "rating": 5.0,
-      "image": "smoked-honey.jpg"
+      "image": "smoked-honey.png"
     }
   },
   {
@@ -74,7 +74,7 @@
       "price": 20.99,
       "category": 1,
       "rating": 4.7,
-      "image": "soft-set-honey.jpg"
+      "image": "soft-set-honey.png"
     }
   },
   {
@@ -87,7 +87,7 @@
       "price": 16.99,
       "category": 1,
       "rating": 4.8,
-      "image": "wildflower-honey.jpg"
+      "image": "wildflower-honey.png"
     }
   },
   {
@@ -100,7 +100,7 @@
       "price": 34.99,
       "category": 1,
       "rating": 5.0,
-      "image": "manuka-honey.jpg"
+      "image": "manuka-honey.png"
     }
   },
   {
@@ -113,7 +113,7 @@
       "price": 17.99,
       "category": 2,
       "rating": 4.9,
-      "image": "cinnamon-honey.jpg"
+      "image": "cinnamon-honey.png"
     }
   },
   {
@@ -126,7 +126,7 @@
       "price": 17.99,
       "category": 2,
       "rating": 4.8,
-      "image": "lemon-honey.jpg"
+      "image": "lemon-honey.png"
     }
   },
   {
@@ -139,7 +139,7 @@
       "price": 22.99,
       "category": 3,
       "rating": 4.9,
-      "image": "honeycomb.jpg"
+      "image": "honeycomb.png"
     }
   },
   {
@@ -152,7 +152,7 @@
       "price": 14.99,
       "category": 4,
       "rating": 4.7,
-      "image": "propolis-tincture.jpg"
+      "image": "propolis-tincture.png"
     }
   },
   {
@@ -165,7 +165,7 @@
       "price": 18.99,
       "category": 4,
       "rating": 4.8,
-      "image": "bee-pollen.jpg"
+      "image": "bee-pollen.png"
     }
   },
   {
@@ -178,7 +178,7 @@
       "price": 5.99,
       "category": 5,
       "rating": 4.9,
-      "image": "beeswax-lip-balm.jpg"
+      "image": "beeswax-lip-balm.png"
     }
   },
   {
@@ -191,7 +191,7 @@
       "price": 7.99,
       "category": 5,
       "rating": 4.9,
-      "image": "honey-oatmeal-soap.jpg"
+      "image": "honey-oatmeal-soap.png"
     }
   },
   {
@@ -204,7 +204,7 @@
       "price": 21.99,
       "category": 2,
       "rating": 4.8,
-      "image": "eucalyptus-honey.jpg"
+      "image": "eucalyptus-honey.png"
     }
   },
   {
@@ -217,7 +217,7 @@
       "price": 19.99,
       "category": 2,
       "rating": 4.7,
-      "image": "buckwheat-honey.jpg"
+      "image": "buckwheat-honey.png"
     }
   },
   {
@@ -230,7 +230,7 @@
       "price": 18.99,
       "category": 2,
       "rating": 4.9,
-      "image": "ginger-honey.jpg"
+      "image": "ginger-honey.png"
     }
   },
   {
@@ -243,7 +243,7 @@
       "price": 20.99,
       "category": 2,
       "rating": 4.9,
-      "image": "vanilla-honey.jpg"
+      "image": "vanilla-honey.png"
     }
   },
   {
@@ -256,7 +256,7 @@
       "price": 12.99,
       "category": 11,
       "rating": 4.7,
-      "image": "honey-mustard.jpg"
+      "image": "honey-mustard.png"
     }
   },
   {
@@ -269,7 +269,7 @@
       "price": 14.99,
       "category": 11,
       "rating": 4.8,
-      "image": "honey-balsamic.jpg"
+      "image": "honey-balsamic.png"
     }
   },
   {
@@ -282,7 +282,7 @@
       "price": 13.99,
       "category": 11,
       "rating": 4.9,
-      "image": "honey-bbq.jpg"
+      "image": "honey-bbq.png"
     }
   },
   {
@@ -295,7 +295,7 @@
       "price": 11.99,
       "category": 11,
       "rating": 4.9,
-      "image": "honey-caramel.jpg"
+      "image": "honey-caramel.png"
     }
   },
   {
@@ -308,7 +308,7 @@
       "price": 15.99,
       "category": 11,
       "rating": 4.8,
-      "image": "honey-almond-butter.jpg"
+      "image": "honey-almond-butter.png"
     }
   },
   {
@@ -321,7 +321,7 @@
       "price": 29.99,
       "category": 7,
       "rating": 5.0,
-      "image": "honey-gift-set.jpg"
+      "image": "honey-gift-set.png"
     }
   },
   {
@@ -334,7 +334,7 @@
       "price": 9.99,
       "category": 6,
       "rating": 4.9,
-      "image": "beeswax-candles.jpg"
+      "image": "beeswax-candles.png"
     }
   },
   {
@@ -347,7 +347,7 @@
       "price": 12.99,
       "category": 6,
       "rating": 4.8,
-      "image": "beeswax-wraps.jpg"
+      "image": "beeswax-wraps.png"
     }
   },
   {
@@ -360,7 +360,7 @@
       "price": 6.99,
       "category": 5,
       "rating": 4.9,
-      "image": "honey-lip-scrub.jpg"
+      "image": "honey-lip-scrub.png"
     }
   },
   {
@@ -373,7 +373,7 @@
       "price": 14.99,
       "category": 5,
       "rating": 5.0,
-      "image": "honey-face-mask.jpg"
+      "image": "honey-face-mask.png"
     }
   },
   {
@@ -386,7 +386,7 @@
       "price": 24.99,
       "category": 4,
       "rating": 4.9,
-      "image": "royal-jelly.jpg"
+      "image": "royal-jelly.png"
     }
   }
 ]
