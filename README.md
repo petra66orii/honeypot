@@ -410,4 +410,8 @@ Since it's an e-commerce website that sells honey, the color scheme is fairly si
 ## Code Used
 ## Content
 
+The "No Image Available" placeholder image was taken this [website](https://commons.wikimedia.org/wiki/File:No-Image-Placeholder.svg).
+
+The honey jar images were AI-generated using [Leonardo AI](https://app.leonardo.ai/).
+
 # Acknowledgements
