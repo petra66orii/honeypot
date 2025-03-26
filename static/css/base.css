@@ -99,6 +99,10 @@ main {
     color: #000 !important;
 }
 
+.text-black:hover {
+    color: #302e2e !important;
+}
+
 .border-black {
     border: 1px solid black !important;
 }
@@ -127,6 +131,7 @@ a:hover {
 /* Footer Settings */
 
 footer {
+    margin-top: 40px;
     background-color: rgba(255, 255, 255, 0.7);
     box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.7);
     z-index: 1030;
