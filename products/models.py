@@ -3,10 +3,15 @@ from django.db import models
 
 # Create your models here.
 class Category(models.Model):
-    name = models.CharField(max_length=254)
+    name = models.CharField(max_length=256)
+    friendly_name = models.CharField(max_length=256, null=True, blank=True)
+    has_discount = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
+
+    def get_friendly_name(self):
+        return self.friendly_name
 
 
 class Product(models.Model):
