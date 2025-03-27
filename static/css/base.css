@@ -119,6 +119,7 @@ main {
 
 .overlay {
     margin: 150px 0 150px 0;
+    padding-bottom: 40px;
     background-color: rgba(255, 255, 255, 0.7);
     color: black;
     font-size: larger;
