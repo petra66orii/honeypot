@@ -8,6 +8,7 @@
 
 .logo {
     font-family: "Lavishly Yours", Geneva, Verdana, sans-serif;
+    color:#000 !important;
 }
 
 html {
@@ -85,6 +86,11 @@ main {
     padding: 5px;
 }
 
+.btn-warning {
+    font-size: large;
+    padding: 5px;
+}
+
 .shop-now-button:hover,
 .shop-now-button:active,
 .shop-now-button:focus,
@@ -111,7 +117,6 @@ main {
     background: #c48bdf !important;
 }
 
-/* Login/Register Pages */
 .overlay {
     margin: 150px 0 150px 0;
     background-color: rgba(255, 255, 255, 0.7);
@@ -137,6 +142,11 @@ footer {
     z-index: 1030;
     width: 100%;
     font-family: 'Work Sans', 'Times New Roman', Times, serif;
+}
+
+/* Form styles */
+form input {
+    width: 75%;
 }
 
 /* Media Queries */
