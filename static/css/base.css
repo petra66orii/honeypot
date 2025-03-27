@@ -86,7 +86,7 @@ main {
     padding: 5px;
 }
 
-.btn-warning {
+.btn-warning, .btn-danger {
     font-size: large;
     padding: 5px;
 }
