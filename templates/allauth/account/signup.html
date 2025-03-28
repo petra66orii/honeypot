@@ -6,7 +6,7 @@
 {% block head_title %}{% trans "Signup" %}{% endblock %}
 
 {% block content %}
-<main class="px-3 sign-up-page">
+<main class="px-3 overlay">
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-6 my-4 offset-md-2">
@@ -24,7 +24,7 @@
             <form class="col-12 signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
               {% csrf_token %}
               {{ form.non_field_errors }}
-              <div class="p-xs-2 mb-1">
+              <div class="p-xs-2 mb-3">
                 <label for="id_first_name">First Name</label>
                 {{ form.first_name }}
                 {% if form.first_name.errors %}
@@ -35,7 +35,7 @@
                 </div>
               {% endif %}
               </div>
-              <div class="p-xs-2 mb-1">
+              <div class="p-xs-2 mb-3">
                 <label for="id_last_name">Last Name</label>
                 {{ form.last_name }}
                 {% if form.last_name.errors %}
@@ -46,7 +46,7 @@
                 </div>
               {% endif %}
               </div>
-              <div class="p-xs-2 mb-1">
+              <div class="p-xs-2 mb-3">
                 <label for="id_username">Username</label>
                 {{ form.username }}
                 {% if form.username.errors %}
@@ -58,7 +58,7 @@
               {% endif %}
                 <small class="help-text">Choose a unique username</small>
               </div>
-              <div class="p-xs-2 mb-1">
+              <div class="p-xs-2 mb-3">
                 <label for="id_email">Email</label>
                 {{ form.email }}
                 {% if form.email.errors %}
@@ -70,7 +70,7 @@
               {% endif %}
                 <small class="help-text">Enter your email address</small>
               </div>
-              <div class="p-xs-2 mb-1">
+              <div class="p-xs-2 mb-3">
                 <label for="id_password1">Password</label>
                 {{ form.password1 }}
                 {% if form.password1.errors %}
@@ -87,7 +87,7 @@
                   &#9900; Your password can't be a commonly used password
                   &#9900; Your password can't be entirely numeric">?</button>
               </div>
-              <div class="p-xs-2 mb-1">
+              <div class="p-xs-2 mb-3">
                 <label for="id_password2">Confirm Password</label>
                 {{ form.password2 }}
                 {% if form.password2.errors %}
