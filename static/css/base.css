@@ -72,6 +72,12 @@ main {
     padding-top: var(--header-height, 80px);
 }
 
+.container {
+    max-width: 100%;
+    position: relative;
+    top: 100px;
+}
+
 .shop-now-button {
     background: black;
     color: white;
@@ -119,7 +125,7 @@ main {
 }
 
 .overlay {
-    margin: 50px 0 150px 0;
+    margin: 150px 0 150px 0;
     padding-bottom: 40px;
     background-color: rgba(255, 255, 255, 0.7);
     color: black;
@@ -130,7 +136,6 @@ main {
 a {
     color: #b973da;
 }
-
 
 #signup_form button {
     display: block;
@@ -159,20 +164,24 @@ a {
     background-color: #8b2fb6;
 }
 
-#signup_form {
+#signup_form, #login_form {
     display: flex;
     flex-flow: column nowrap;
     padding-bottom: 60px;
 }
 
-#signup_form input {
+#signup_form input, #login_form input {
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
+#login_form input[type="checkbox"] {
+    width: 20px;
+}
   
-#signup_form button {
+#signup_form button, #login_form button {
     display: block;
     margin: 20px auto;
     padding: 4px;
