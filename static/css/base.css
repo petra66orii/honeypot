@@ -58,6 +58,7 @@ header {
 body {
     background: url('/media/background-honey.jpg') no-repeat center center fixed;
     background-size: cover;
+    min-height: 100vh;
     height: 100vh;
     color: #555;
     font-family: 'Work Sans', 'Times New Roman', Times, serif;
@@ -67,14 +68,8 @@ body {
 }
 
 main {
-    flex: 1 0 auto;
-    height:auto;
-}
-
-.container {
-    max-width: 100%;
-    position: relative;
-    top: 100px;
+    flex: 1;
+    padding-top: var(--header-height, 80px);
 }
 
 .shop-now-button {
@@ -124,7 +119,7 @@ main {
 }
 
 .overlay {
-    margin: 150px 0 150px 0;
+    margin: 50px 0 150px 0;
     padding-bottom: 40px;
     background-color: rgba(255, 255, 255, 0.7);
     color: black;
@@ -134,6 +129,74 @@ main {
 
 a {
     color: #b973da;
+}
+
+
+#signup_form button {
+    display: block;
+    margin: 20px auto;
+    padding: 4px;
+    font-size: 1.1rem;
+}
+
+.toggle-popover {
+    background-color: #b973da;
+    color: #000000;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    width: 20px;
+    align-self: center;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.sign-up-button {
+    width: 80px;
+}
+
+.toggle-popover:hover {
+    background-color: #8b2fb6;
+}
+
+#signup_form {
+    display: flex;
+    flex-flow: column nowrap;
+    padding-bottom: 60px;
+}
+
+#signup_form input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+  
+#signup_form button {
+    display: block;
+    margin: 20px auto;
+    padding: 4px;
+    font-size: 1.1rem;
+}
+
+.toggle-popover {
+    background-color: #b973da;
+    color: #000000;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    width: 20px;
+    align-self: center;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.sign-up-button {
+    width: 80px;
+}
+
+.toggle-popover:hover {
+    background-color: #8b2fb6;
 }
 
 a:hover {
@@ -152,7 +215,7 @@ footer {
 }
 
 a {
-    color: #c48bdf;
+    color: #b973da;
 }
 
 a:hover {
