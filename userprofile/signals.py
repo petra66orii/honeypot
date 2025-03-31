@@ -20,7 +20,7 @@ def create_user_profile(sender, instance, created, **kwargs):
       instance: The newly created User object.
       created: A boolean flag indicating if a new user is created.
     """
-    if created:
+    if created and not UserProfile.objects.filter(user=instance).exists():
         UserProfile.objects.create(user=instance)
 
 
@@ -28,16 +28,9 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     """
     Saves the user's profile whenever the User model is saved.
-
-    This signal handler is triggered whenever a User object is saved.
-    It assumes the user has an associated Profile object and attempts
-    to save the profile object as well.
-
-    Args:
-        sender: The User model class.
-        instance: The User object being saved.
     """
-    instance.profile.save()
+    if hasattr(instance, 'userprofile'):
+        instance.userprofile.save()
 
 
 @receiver(user_signed_up)
