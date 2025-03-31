@@ -91,7 +91,7 @@
             {% if user.is_authenticated %}
             <li class="list-inline-item mx-0">
                 <a class="text-black text-decoration-none" aria-current="page"
-                    href="#">My Profile</a>
+                    href="{% url 'userprofile' %}">My Profile</a>
             </li>
             <li class="list-inline-item mx-1 border-start border-line"></li>
             <li class="list-inline-item mx-0">
