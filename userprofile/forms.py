@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from .models import UserProfile
 
 
@@ -40,6 +42,45 @@ class EditProfileForm(forms.ModelForm):
     Form for editing user profile information.
     Inherits from Django's ModelForm.
     """
+    first_name = forms.CharField(
+        max_length=50,
+        required=True,
+        )
+    last_name = forms.CharField(
+        max_length=50,
+        required=True,
+        )
+
+    def clean_username(self):
+        username = self.cleaned_data.get("username")
+        if username and not username.isalnum():
+            raise ValidationError(
+                "Username may contain only letters, numbers, and @/./+/-/_."
+                )
+        elif User.objects.filter(username=username).exists():
+            raise ValidationError(
+                "Username is already taken. Please choose a different one."
+                )
+        elif len(username) > 50:
+            raise ValidationError(
+                "Username must be 50 characters or less."
+                )
+        elif len(username) < 5:
+            raise ValidationError(
+                "Username must be at least 5 characters long."
+                )
+        elif username == "admin":
+            raise ValidationError(
+                "Username cannot be 'admin'. Please choose a different one."
+                )
+        return username
+
+    def save(self, commit=True):
+        if not self.is_valid():
+            return self.instance
+
+        return super().save(commit=commit)
+
     class Meta:
         model = User
         fields = ["username", "email", "first_name", "last_name"]
