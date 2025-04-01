@@ -61,3 +61,22 @@ def edit_profile(request):
             "form": form
             }
         )
+
+
+@login_required
+def change_password(request):
+    form = PasswordChangeForm(request.user, request.POST or None)
+
+    if request.method == "POST" and form.is_valid():
+        user = form.save()
+        update_session_auth_hash(request, user)
+        messages.success(request, "Your password was successfully updated!")
+        return redirect("edit_profile")
+
+    return render(
+        request,
+        "allauth/account/password_change.html",
+        {
+            "form": form
+            }
+            )
