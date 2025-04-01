@@ -75,7 +75,6 @@ main {
 .container {
     max-width: 100%;
     position: relative;
-    top: 100px;
 }
 
 .shop-now-button {

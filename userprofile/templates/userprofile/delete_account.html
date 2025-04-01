@@ -4,14 +4,18 @@
 {% block title %}Delete Profile{% endblock %}
 
 {% block content %}
-<div class="overlay">
+<main class="overlay">
     <div class="container">
-        <h2>Delete Profile</h2>
-        <form method="POST" action="{% url 'delete_account' %}">
+        <div class="row">
+            <div class="col text-center">
+                <h2 class="header-font mb-4">Delete Account</h2>
+                <hr class="w-50 mx-auto">
+            </div>
+        <form class="text-center" method="POST" action="{% url 'delete_account' %}">
             {% csrf_token %}
             <p>Are you sure you want to delete your profile? This action cannot be undone.</p>
             <button type="submit" class="btn btn-danger">Delete Profile</button>
         </form>
     </div>
-</div>
+</main>
 {% endblock %}

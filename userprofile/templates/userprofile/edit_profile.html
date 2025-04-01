@@ -4,9 +4,13 @@
 {% block title %}Edit Profile{% endblock %}
 
 {% block content %}
-<div class="overlay">
+<main class="overlay">
     <div class="container">
-        <h2>Edit Profile</h2>
+        <div class="row">
+            <div class="col text-center">
+                <h2 class="header-font mb-4">Edit Profile</h2>
+                <hr class="w-50 mx-auto">
+            </div>
         {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -18,12 +22,12 @@
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form | crispy }}
-            <button type="submit" class="btn btn-black rounded-1">Save changes</button>
+            <button type="submit" class="btn btn-black rounded-1 mb-3">Save changes</button>
         </form>
-        <hr>
-        <a href="{% url 'change_password' %}" class="btn btn-warning rounded-1">Change Password</a>
-        <a href="{% url 'delete_account' %}" class="btn btn-danger rounded-1">Delete Profile</a>
-        <hr> 
+        <div class="my-3">
+            <a href="{% url 'change_password' %}" class="btn btn-warning rounded-1">Change Password</a>
+            <a href="{% url 'delete_account' %}" class="btn btn-danger rounded-1">Delete Profile</a>
+        </div>
     </div>
-</div>
+</main>
 {% endblock %}
