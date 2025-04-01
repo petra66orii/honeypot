@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Product
-from .forms import ProductForm
+from .models import Product, ProductReview
+from .forms import ProductForm, ReviewForm
 
 
 # Create your views here.
@@ -22,14 +22,35 @@ def product_detail(request, product_id):
     """
     A view to show individual product details
     """
-
     product = get_object_or_404(Product, pk=product_id)
 
-    context = {
-        'product': product,
-    }
+    reviews = ProductReview.objects.filter(
+        product=product,
+        approved=True
+        ).order_by("-created_on")
+    review_count = reviews.count()
 
-    return render(request, 'products/product_detail.html', context)
+    if request.method == "POST":
+        review_form = ReviewForm(data=request.POST)
+        if review_form.is_valid():
+            review = review_form.save(commit=False)
+            review.user = request.user
+            review.product = product
+            review.save()
+            messages.success(request, 'Review submitted and awaiting approval')
+
+    review_form = ReviewForm()
+
+    return render(
+        request,
+        "products/product_detail.html",
+        {
+            "product": product,
+            "reviews": reviews,
+            "review_count": review_count,
+            "review_form": review_form,
+        },
+    )
 
 
 # Function borrowed from Boutique Ado walkthrough project
