@@ -80,3 +80,28 @@ def change_password(request):
             "form": form
             }
             )
+
+
+@login_required
+def delete_account(request):
+    """
+    Deletes the user's account.
+    Args:
+        request: The HTTP request object.
+    Returns:
+        An HTTPResponse object rendering the
+        'delete_account.html' template.
+    """
+    user = request.user
+
+    if request.method == 'POST' and request.user == user:
+        user.delete()
+        return redirect('home')
+
+    return render(
+        request,
+        'delete_profile.html',
+        {
+            'user': user
+            }
+            )
