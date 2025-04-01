@@ -100,7 +100,7 @@ def delete_account(request):
 
     return render(
         request,
-        'delete_profile.html',
+        'userprofile/delete_account.html',
         {
             'user': user
             }
