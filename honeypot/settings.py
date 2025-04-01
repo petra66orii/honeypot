@@ -156,6 +156,7 @@ MESSAGE_TAGS = {
 }
 
 ACCOUNT_SIGNUP_FORM_CLASS = 'home.forms.CustomSignupForm'
+ACCOUNT_CHANGE_PASSWORD_REDIRECT_URL = "/edit-profile/"
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
