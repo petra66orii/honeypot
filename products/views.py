@@ -30,6 +30,8 @@ def product_detail(request, product_id):
         ).order_by("-created_on")
     review_count = reviews.count()
 
+    review_form = ReviewForm()
+
     if request.method == "POST":
         review_form = ReviewForm(data=request.POST)
         if review_form.is_valid():
@@ -38,8 +40,6 @@ def product_detail(request, product_id):
             review.product = product
             review.save()
             messages.success(request, 'Review submitted and awaiting approval')
-
-    review_form = ReviewForm()
 
     return render(
         request,
@@ -51,6 +51,51 @@ def product_detail(request, product_id):
             "review_form": review_form,
         },
     )
+
+
+def edit_review(request, product_id, review_id):
+    """
+    Handles editing a review.
+
+    Fetches the review object,
+    validates the review form with the new content,
+    saves the review if valid,
+    displays success/error messages,
+    and redirects back to the product detail page.
+    If the user is not the owner of the review, an error message is displayed.
+    """
+    review = get_object_or_404(ProductReview, id=review_id, user=request.user)
+
+    if request.method == 'POST':
+        form = ReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Review updated successfully!")
+        else:
+            messages.error(request, "Oops! Error updating review!")
+
+    return redirect('product_detail', product_id=product_id)
+
+
+def delete_review(request, product_id, review_id):
+    """
+    Handles deleting a review.
+
+    Fetches the review object, checks if the user is the owner,
+    deletes the review if authorized,
+    displays success/error messages,
+    and redirects back to the product detail page.
+    If the user is not authorized, an error message is displayed.
+    """
+    review = get_object_or_404(ProductReview, id=review_id, user=request.user)
+
+    if review.user == request.user:
+        review.delete()
+        messages.success(request, "Review deleted successfully!")
+    else:
+        messages.error(request, "Failed to delete the review.")
+
+    return redirect('product_detail', product_id=product_id)
 
 
 # Function borrowed from Boutique Ado walkthrough project
