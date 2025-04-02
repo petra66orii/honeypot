@@ -211,6 +211,13 @@ a:hover {
     color: #9637c2;
 }
 
+/* Review Section */
+
+.review-section {
+    margin-left: 50px;
+    padding: 20px;
+}
+
 /* Footer Settings */
 
 footer {
