@@ -40,6 +40,7 @@ def product_detail(request, product_id):
             review.product = product
             review.save()
             messages.success(request, 'Review submitted and awaiting approval')
+            review_form = ReviewForm()
 
     return render(
         request,
