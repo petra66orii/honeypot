@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 <main>
@@ -59,35 +60,52 @@
                     </div>
                 </div>
                 <!-- Review Section -->
-                {% if user.is_authenticated %}
                 <hr>
-                <h3>Leave a Review</h3>
+                <h3 class="mb-3 text-center">Leave a Review</h3>
+
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6 d-flex flex-column float-md-start mt-5">
                             {% if reviews %}
-                                {% for review in reviews %}
-                                <div class="review-section mb-3">
-                                    <strong>{{ review.user.username }}</strong>
-                                    <span>⭐ {{ review.rating }}/5</span>
-                                    <p id="review-{{ review.id }}" data-comment-id="{{ review.id }}">{{ review.review_text }}</p>
-                                    <small>{{ review.created_at|date:"d M Y, H:i" }}</small>
+                            {% for review in reviews %}
+                            <div class="review-section mb-3">
+                                <strong>{{ review.user.username }}</strong>
+                                <span>⭐ {{ review.rating }}/5</span>
+                                <p class="mb-0" id="review-{{ review.id }}" data-review-id="{{ review.id }}">{{ review.review_text }}</p>
+                                <small>{{ review.created_on|date:"d M Y, H:i" }}</small>
                                     {% if user.is_authenticated and review.user == user %}
-                                    <div class="row justify-content-center align-items-start">
-                                        <button class="btn btn-sm btn-red mt-1 me-1 mb-5 delete-btn"
-                                            data-comment-id="{{ review.id }}">Delete</button>
-                                        <button class="btn btn-sm btn-orange mt-1 mb-5 edit-btn"
-                                            data-comment-id="{{ review.id }}">Edit</button>
+                                    <div>
+                                        <button class="btn btn-sm btn-danger mt-1 me-1 mb-5"
+                                            data-review-id="{{ review.id }}">Delete</button>
+                                        <button class="btn btn-sm btn-warning mt-1 mb-5"
+                                            data-review-id="{{ review.id }}">Edit</button>
                                     </div>
                                     {% endif %}
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <p class="text-center">No reviews yet. Be the first to review! &#128512;</p>
+                        {% endif %}
+                        {% if user.is_authenticated %}
+                        {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                        {% endif %}
+                        {% if errors %}
+                            {% for error in errors %}
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    {{ error }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
-                                {% endfor %}
-                            {% else %}
-                                <p>No reviews yet. Be the first to review!</p>
-                            {% endif %}
+                            {% endfor %}
+                        {% endif %}
                         </div>
                         <div class="col-md-6 d-flex flex-column float-md-end">
-                            <form method="post">
+                            <form method="post" id="review-form">
                                 {% csrf_token %}
                                 {{ review_form | crispy }}
                                 <button id="submit-btn" type="submit" class="btn btn-black mb-5 mt-0">Post Review</button>
@@ -96,7 +114,10 @@
                     </div>
                 </div>
                 {% else %}
-                <p>Log in to leave a review</p>
+                <div class="alert alert-warning mt-5 w-50 d-inline-flex flex-column align-items-center mx-auto" role="alert">
+                    You need to be logged in to leave a review.
+                    <a href="{% url 'account_login' %}" class="btn btn-black btn-sm mt-2">Log in</a>
+                </div>
                 {% endif %}
 
                 <!-- Delete Confirmation Modal - Code borrowed from the Codestar walkthrough project -->
@@ -123,4 +144,9 @@
         </div>
     </div>
 </main>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'js/reviews.js' %}"></script>
 {% endblock %}
