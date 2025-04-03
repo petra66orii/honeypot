@@ -218,6 +218,31 @@ a:hover {
     padding: 20px;
 }
 
+/* Rating System */
+
+.rating-system {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+  .rating-system img {
+    cursor: pointer;
+    font-style: normal;
+    width: 50px;
+    height: 20%;
+    margin: 0 5px;
+  }
+
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+
 /* Footer Settings */
 
 footer {
