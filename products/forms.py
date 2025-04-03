@@ -24,16 +24,16 @@ class ProductForm(forms.ModelForm):
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = ProductReview
-        fields = ('review_text',
-                  'rating',)
+        fields = ('review_text', 'rating',)
         widgets = {
             'review_text': forms.Textarea(attrs={
                 'rows': 9,
                 'placeholder': 'Write your review here...'
             }),
-            'rating': forms.Select(choices=[
-                (0.5, "0.5 ★"), (1, "1 ★"), (1.5, "1.5 ★"),
-                (2, "2 ★"), (2.5, "2.5 ★"), (3, "3 ★"),
-                (3.5, "3.5 ★"), (4, "4 ★"), (4.5, "4.5 ★"), (5, "5 ★")
-            ]),
+            'rating': forms.NumberInput(
+                attrs={
+                    'id': 'rating-input',
+                    'type': 'hidden'
+                    }
+                    ),
         }
