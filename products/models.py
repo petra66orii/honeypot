@@ -41,7 +41,15 @@ class ProductReview(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     review_text = models.TextField()
-    rating = models.FloatField()
+    rating = models.IntegerField(
+        choices=[
+            (1, '1 star'),
+            (2, '2 stars'),
+            (3, '3 stars'),
+            (4, '4 stars'),
+            (5, '5 stars'),
+        ],
+        default=1)
     approved = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True)
 
@@ -49,12 +57,10 @@ class ProductReview(models.Model):
         ordering = ["created_on"]
 
     def __str__(self):
-        return f"{self.user.username} - {self.product.name}"
+        return f"{self.user.username} - {self.rating}★"
 
     def clean(self):
         if not self.rating:
             raise ValidationError("A rating is required.")
-        if not self.review_text and self.rating is None:
-            raise ValidationError(
-                "You cannot submit a review without a rating."
-                )
+        if not self.review_text.strip():
+            raise ValidationError("You cannot submit an empty review.")
