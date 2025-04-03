@@ -107,7 +107,17 @@
                         <div class="col-md-6 d-flex flex-column float-md-end">
                             <form method="post" id="review-form">
                                 {% csrf_token %}
-                                {{ review_form | crispy }}
+                                <span class="rating-system">
+                                    <i data-value="1"><img src="/static/images/icons/empty-bee.ico" alt="bee icon"/></i>
+                                    <i data-value="2"><img src="/static/images/icons/empty-bee.ico" alt="bee icon"/></i>
+                                    <i data-value="3"><img src="/static/images/icons/empty-bee.ico" alt="bee icon"/></i>
+                                    <i data-value="4"><img src="/static/images/icons/empty-bee.ico" alt="bee icon"/></i>
+                                    <i data-value="5"><img src="/static/images/icons/empty-bee.ico" alt="bee icon"/></i>
+                                </span>
+                                <textarea rows="9" name="review_text" placeholder="Write your review here..."></textarea>
+    
+                                <!-- Hidden input for rating -->
+                                <input type="hidden" id="rating-input" name="rating" value="1">
                                 <button id="submit-btn" type="submit" class="btn btn-black mb-5 mt-0">Post Review</button>
                             </form>
                         </div>
@@ -149,4 +159,5 @@
 {% block postloadjs %}
     {{ block.super }}
     <script type="text/javascript" src="{% static 'js/reviews.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/star-rating.js' %}"></script>
 {% endblock %}
