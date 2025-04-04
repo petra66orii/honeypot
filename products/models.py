@@ -36,13 +36,22 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    @property
     def average_rating(self):
         approved_reviews = self.productreview_set.filter(approved=True)
         if approved_reviews.exists():
             return round(approved_reviews.aggregate(
-                models.Avg('rating')
-                )['rating__avg'], 1)
+                models.Avg('rating'))['rating__avg'], 1)
         return 0
+
+    @property
+    def full_bees(self):
+        return int(self.average_rating)
+
+    @property
+    def has_half_bee(self):
+        remainder = self.average_rating - self.full_bees
+        return 0.25 <= remainder < 0.75
 
 
 class ProductReview(models.Model):
