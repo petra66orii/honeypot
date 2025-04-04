@@ -29,6 +29,7 @@ def product_detail(request, product_id):
         approved=True
         ).order_by("-created_on")
     review_count = reviews.count()
+    average_rating = product.average_rating()
 
     review_form = ReviewForm()
 
@@ -50,6 +51,7 @@ def product_detail(request, product_id):
             "reviews": reviews,
             "review_count": review_count,
             "review_form": review_form,
+            "average_rating": average_rating,
         },
     )
 
