@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.db.models import Avg
 from .models import Product, ProductReview
 from .forms import ProductForm, ReviewForm
 
@@ -12,11 +11,6 @@ def all_products(request):
     A view that displays all of the products
     """
     products = Product.objects.all()
-    for product in products:
-        # Calculate the average rating for each product
-        product.average_rating = product.productreview_set.filter(
-            approved=True
-            ).aggregate(Avg('rating'))['rating__avg'] or 0
     context = {
         'products': products,
     }
@@ -35,7 +29,7 @@ def product_detail(request, product_id):
         approved=True
         ).order_by("-created_on")
     review_count = reviews.count()
-    average_rating = product.average_rating()
+    average_rating = product.average_rating
 
     review_form = ReviewForm()
 
