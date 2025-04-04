@@ -108,11 +108,14 @@
                             <form method="post" id="review-form">
                                 {% csrf_token %}
                                 <span class="rating-system">
-                                    <i data-value="1"><img src="/static/images/icons/empty-bee.ico" alt="bee icon"/></i>
-                                    <i data-value="2"><img src="/static/images/icons/empty-bee.ico" alt="bee icon"/></i>
-                                    <i data-value="3"><img src="/static/images/icons/empty-bee.ico" alt="bee icon"/></i>
-                                    <i data-value="4"><img src="/static/images/icons/empty-bee.ico" alt="bee icon"/></i>
-                                    <i data-value="5"><img src="/static/images/icons/empty-bee.ico" alt="bee icon"/></i>
+                                    {% for i in "12345" %}
+                                    <i data-value="{{ i }}"
+                                       data-empty-icon="{% static 'images/icons/empty-bee.ico' %}"
+                                       data-active-icon="{% static 'images/icons/active-bee.ico' %}"
+                                       data-full-icon="{% static 'images/icons/full-bee.ico' %}">
+                                       <img src="{% static 'images/icons/empty-bee.ico' %}" alt="bee icon"/>
+                                    </i>
+                                    {% endfor %}
                                 </span>
                                 <textarea rows="9" name="review_text" placeholder="Write your review here..."></textarea>
     

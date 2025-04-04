@@ -1,13 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const ratingInput = document.getElementById("rating-input");
     const bees = document.querySelectorAll(".rating-system i");
     let selectedRating = 0;
-
-    bees.forEach((bee, index) => {
-        bee.addEventListener("click", function () {
-            ratingInput.value = index + 1;
-        });
-    });
 
     bees.forEach((bee, index) => {
         bee.addEventListener("mouseenter", () => {
@@ -15,29 +8,27 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         bee.addEventListener("mouseleave", () => {
-            if (selectedRating === 0) {
-                highlightBees(0, "leave");
-            }
+            highlightBees(selectedRating, "leave");
         });
 
         bee.addEventListener("click", () => {
             selectedRating = index + 1;
-            ratingInput.value = selectedRating;
+            document.getElementById("rating-input").value = selectedRating;
             highlightBees(selectedRating, "click");
         });
     });
 
-    // Function to highlight bees based on the rating
     function highlightBees(count, type) {
         bees.forEach((bee, i) => {
             const img = bee.querySelector("img");
+            const emptyIcon = bee.dataset.emptyIcon;
+            const activeIcon = bee.dataset.activeIcon;
+            const fullIcon = bee.dataset.fullIcon;
+
             if (i < count) {
-                img.src = "/static/images/icons/active-bee.ico"; 
-                if (type === "click") {
-                    img.src = "/static/images/icons/full-bee.ico"; 
-                }
+                img.src = type === "click" ? fullIcon : activeIcon;
             } else {
-                img.src = "/static/images/icons/empty-bee.ico"; 
+                img.src = emptyIcon;
             }
         });
     }
