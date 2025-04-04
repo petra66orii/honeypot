@@ -24,12 +24,12 @@ document.addEventListener("DOMContentLoaded", function () {
             const emptyIcon = bee.dataset.emptyIcon;
             const activeIcon = bee.dataset.activeIcon;
             const fullIcon = bee.dataset.fullIcon;
-
+    
             if (i < count) {
-                img.src = type === "click" ? fullIcon : activeIcon;
+                img.src = (type === "click" || i < selectedRating) ? fullIcon : activeIcon;
             } else {
                 img.src = emptyIcon;
             }
         });
-    }
+    }  
 });
