@@ -18,7 +18,7 @@
                       </a>
                       <!-- Display login status -->
                       {% if user.is_authenticated %}
-                      <p class="text-end m-0 py-2 text-black text-small">Welcome, {{ user }}</p>
+                      <p class="text-end m-0 py-2 text-black text-small">Welcome, {{ user.first_name }}</p>
                       {% else %}
                       <p class="text-end m-0 py-2 text-black text-small">Welcome! Please log in</p>
                       {% endif %}
@@ -107,7 +107,7 @@
         <!-- Display login status - Absolute positioning to bottom-right -->
         <div class="position-absolute bottom-0 end-0 me-3">
             {% if user.is_authenticated %}
-            <p class="m-0 p-2 text-black text-small">Welcome, {{ user }}</p>
+            <p class="m-0 p-2 text-black text-small">Welcome, {{ user.first_name }}</p>
             {% else %}
             <p class="m-0 p-2 text-black text-small">Welcome! Please log in</p>
             {% endif %}
