@@ -35,11 +35,13 @@
                                         <div class="row">
                                             <div class="col">
                                                 <p class="lead mb-0 text-left font-weight-bold">&#8364;{{ product.price }}</p>
-                                                {% if product.rating %}
-                                                    <small class="text-warning"><i class="fas fa-star mr-1"></i>{{ product.rating }} / 5</small>
-                                                {% else %}
-                                                    <small class="text-warning">No Rating</small>
-                                                {% endif %}
+                                                {% with product.average_rating as avg %}
+                                                    {% if avg > 0 %}
+                                                        <small class="text-warning"><i class="fas fa-star mr-1"></i>{{ avg }} / 5</small>
+                                                    {% else %}
+                                                        <small class="text-warning">No Rating</small>
+                                                    {% endif %}
+                                                {% endwith %}
                                             </div>
                                         </div>
                                     </div>
