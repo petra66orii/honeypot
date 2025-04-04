@@ -36,6 +36,14 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    def average_rating(self):
+        approved_reviews = self.productreview_set.filter(approved=True)
+        if approved_reviews.exists():
+            return round(approved_reviews.aggregate(
+                models.Avg('rating')
+                )['rating__avg'], 1)
+        return 0
+
 
 class ProductReview(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
