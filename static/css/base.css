@@ -220,6 +220,12 @@ a:hover {
 
 /* Rating System */
 
+.average-rating-bees img {
+    width: 30px;
+    height: 30px;
+    margin-right: 2px;
+  }  
+
 .rating-system {
     display: flex;
     justify-content: center;
