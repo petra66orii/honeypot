@@ -28,7 +28,7 @@
     <title>HoneyPot</title>
   </head>
   <body>
-    <header class="container-fluid fixed-top">
+    <header class="container-fluid fixed-top m-0 p-0">
       <div class="row d-flex align-items-center justify-content-between px-3">
 
         <!-- Logo -->
@@ -117,27 +117,27 @@
       <div class="d-none d-lg-flex justify-content-center">
         {% include 'includes/main-nav.html' %}
       </div>
-      <div id="delivery-banner w-100" class="row text-center">
+      <div id="delivery-banner" class="row text-center">
         <div class="col bg-purple text-black">
           <h5 class="my-1">
           Free delivery on orders over &#8364;{{ free_shipping_threshold }}!
           </h5>
         </div>
       </div>
+      {% for message in messages %}
+      <div class="alert-{{ message.tags }} alert-dismissible fade-alert show p-2 w-100" id="msg" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close position-relative p-1" data-bs-dismiss="alert"
+              aria-label="Close"></button>
+      </div>
+      {% endfor %}
     </header>
-
-    {% for message in messages %}
-    <div class="alert-{{ message.tags }} alert-dismissible fade show p-2 w-100" id="msg" role="alert">
-        {{ message }}
-        <button type="button" class="btn-close position-relative p-1" data-bs-dismiss="alert"
-            aria-label="Close"></button>
-    </div>
-    {% endfor %}
 
       {% block content %}
       {% endblock %}
 
       {% block postloadjs %}
+        <script src="{% static 'js/dismiss-messages.js' %}"></script>
       {% endblock %}
 
     <!-- Footer -->
