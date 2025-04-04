@@ -111,10 +111,6 @@ main {
     color: #000 !important;
 }
 
-.text-black:hover {
-    color: #302e2e !important;
-}
-
 .border-black {
     border: 1px solid black !important;
 }
@@ -134,6 +130,12 @@ main {
 
 a {
     color: #b973da;
+}
+
+#delivery-banner {
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 #signup_form button {
