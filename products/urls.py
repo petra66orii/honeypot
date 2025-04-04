@@ -21,4 +21,20 @@ urlpatterns = [
         views.delete_review,
         name='delete_review'
         ),
+    path('manage_reviews/', views.manage_reviews, name='manage_reviews'),
+    path(
+        'approve_review/<int:review_id>/',
+        views.approve_review,
+        name='approve_review'
+        ),
+    path(
+        'admin_delete_review/<int:review_id>/',
+        views.admin_delete_review,
+        name='admin_delete_review'
+        ),
+    path(
+        'admin_edit_review/<int:review_id>/',
+        views.admin_edit_review,
+        name='admin_edit_review'
+        ),
 ]
