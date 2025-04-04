@@ -6,30 +6,39 @@
     <div class="overlay">
         <div class="container mt-3 p-3">
             <div class="row justify-content-center">
-                <div class="col-12 col-md-6 text-center">
-                    <h2 class="mb-4">Product Management</h2>
-                    <h5 class="text-muted">Add a Product</h5>
+                <div class="col-12 text-center">
+                    <h2 class="mb-4">Admin Management</h2>
+                    <h5 class="text-muted">Manage Your Store</h5>
                     <hr>
                 </div>
             </div>
-        
             <div class="row">
                 <div class="col-12 col-md-6">
-                    
+                    <div class="col-12 text-center">
+                        <h4 class="my-4">Add Products</h4>
+                        <hr>
+                    </div>     
                     <form method="POST" action="{% url 'add_product' %}" class="form mb-2" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        {% for field in form %}
-                            {% if field.name != 'image' %}
-                                {{ field | as_crispy_field }}
-                            {% else %}
-                                {{ field }}
-                            {% endif %}
-                        {% endfor %}
+                    {% csrf_token %}
+                    {% for field in form %}
+                        {% if field.name != 'image' %}
+                            {{ field | as_crispy_field }}
+                        {% else %}
+                            {{ field }}
+                        {% endif %}
+                    {% endfor %}
                         <div class="text-right mt-3 mb-5">
-                            <a class="btn btn-warning rounded-1 me-2" href="{% url 'products' %}">Cancel</a>
-                            <button class="btn btn-black rounded-1" type="submit">Add Product</button>
+                            <a class="btn btn-warning rounded-2 me-2" href="{% url 'products' %}">Cancel</a>
+                            <button class="btn btn-black" type="submit">Add Product</button>
                         </div>
                     </form>
+                </div>
+                <div class="col-12 col-md-6 mx-auto">
+                    <div class="col-12 text-center">
+                        <h4 class="my-4">Reviews Management</h4>
+                        <hr>
+                        <a href="{% url 'manage_reviews' %}" class="btn btn-black mt-3">Manage Reviews</a>
+                    </div>
                 </div>            
             </div>
         </div>
