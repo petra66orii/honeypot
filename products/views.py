@@ -181,3 +181,95 @@ def delete_product(request, product_id):
     messages.success(request, 'Product deleted!')
 
     return redirect(reverse('products'))
+
+
+# Admin review management views
+@login_required
+def manage_reviews(request):
+    """
+    Admin view to manage all reviews (approve, edit, delete).
+    """
+    if not request.user.is_staff:
+        # Ensure only admins can access this page
+        messages.error(
+            request,
+            "You do not have permission to view this page."
+            )
+        return redirect('home')
+
+    reviews = ProductReview.objects.all().order_by("-created_on")
+
+    return render(request, 'products/review_management.html', {
+        'reviews': reviews
+    })
+
+
+@login_required
+def approve_review(request, review_id):
+    """
+    Approve a review and allow it to be displayed on the product page.
+    """
+    if not request.user.is_staff:
+        messages.error(
+            request,
+            "You do not have permission to approve reviews."
+            )
+        return redirect('manage_reviews')
+
+    review = get_object_or_404(ProductReview, id=review_id)
+    review.approved = True
+    review.save()
+    messages.success(request, "Review approved successfully!")
+
+    return redirect('manage_reviews')
+
+
+@login_required
+def admin_delete_review(request, review_id):
+    """
+    Delete a review.
+    """
+    if not request.user.is_staff:
+        messages.error(
+            request,
+            "You do not have permission to delete reviews."
+            )
+        return redirect('manage_reviews')
+
+    review = get_object_or_404(ProductReview, id=review_id)
+    review.delete()
+    messages.success(request, "Review deleted successfully!")
+
+    return redirect('manage_reviews')
+
+
+@login_required
+def admin_edit_review(request, review_id):
+    """
+    Edit an existing review.
+    """
+    if not request.user.is_staff:
+        messages.error(
+            request,
+            "You do not have permission to edit reviews."
+            )
+        return redirect('manage_reviews')
+
+    review = get_object_or_404(ProductReview, id=review_id)
+
+    if request.method == "POST":
+        form = ReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Review updated successfully!")
+            return redirect('manage_reviews')
+        else:
+            messages.error(request, "Error updating review.")
+
+    else:
+        form = ReviewForm(instance=review)
+
+    return render(request, 'products/edit_review.html', {
+        'form': form,
+        'review': review
+    })
