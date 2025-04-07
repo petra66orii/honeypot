@@ -51,13 +51,18 @@ class EditProfileForm(forms.ModelForm):
         required=True,
         )
 
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+
     def clean_username(self):
         username = self.cleaned_data.get("username")
         if username and not username.isalnum():
             raise ValidationError(
                 "Username may contain only letters, numbers, and @/./+/-/_."
                 )
-        elif User.objects.filter(username=username).exists():
+        elif User.objects.filter(username=username).exclude(
+                pk=self.user.pk).exists():
             raise ValidationError(
                 "Username is already taken. Please choose a different one."
                 )

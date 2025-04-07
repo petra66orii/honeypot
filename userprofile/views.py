@@ -46,13 +46,17 @@ def user_profile(request):
 @login_required
 def edit_profile(request):
     if request.method == "POST":
-        form = EditProfileForm(request.POST, instance=request.user)
+        form = EditProfileForm(
+            request.POST,
+            instance=request.user,
+            user=request.user
+            )
         if form.is_valid():
             form.save()
             messages.success(request, "Profile updated successfully!")
             return redirect("userprofile")
     else:
-        form = EditProfileForm(instance=request.user)
+        form = EditProfileForm(instance=request.user, user=request.user)
 
     return render(
         request,
