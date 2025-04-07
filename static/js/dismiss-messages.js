@@ -1,6 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const messageElement = document.getElementById('msg');
-
+document.addEventListener('DOMContentLoaded', function () {
     function fadeAndRemove(element) {
         element.classList.add('fade-out');
         setTimeout(() => {
@@ -8,24 +6,29 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 500);
     }
 
-    document.addEventListener('click', function(event) {
-        if (!messageElement) return;
+    document.addEventListener('click', function (event) {
+        const alertBox = event.target.closest('.feedback-msg');
 
-        if (event.target.closest('.btn-close')) {
-            if (messageElement) {
-                fadeAndRemove(messageElement);
+        // If the close button was clicked
+        if (event.target.classList.contains('btn-close')) {
+            if (alertBox) {
+                fadeAndRemove(alertBox);
             }
             return;
         }
 
-        if (!event.target.closest('.alert')) {
-            fadeAndRemove(messageElement);
+        // If click was outside any feedback message
+        if (!alertBox) {
+            document.querySelectorAll('.feedback-msg').forEach(alert => {
+                fadeAndRemove(alert);
+            });
         }
     });
 
-    if (messageElement) {
-        messageElement.addEventListener('click', (event) => {
+    // Prevent dismiss when clicking inside the alert itself
+    document.querySelectorAll('.feedback-msg').forEach(alert => {
+        alert.addEventListener('click', event => {
             event.stopPropagation();
         });
-    }
+    });
 });
