@@ -20,7 +20,7 @@
                       {% if user.is_authenticated %}
                       <p class="text-end m-0 py-2 text-black text-small">Welcome, {{ user.first_name }}</p>
                       {% else %}
-                      <p class="text-end m-0 py-2 text-black text-small">Welcome! Please log in</p>
+                      <p class="text-end m-0 py-2 text-black text-small">Welcome! Please <a href="{% url 'account_login' %}">log in</a></p>
                       {% endif %}
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -109,7 +109,7 @@
             {% if user.is_authenticated %}
             <p class="m-0 p-2 text-black text-small">Welcome, {{ user.first_name }}</p>
             {% else %}
-            <p class="m-0 p-2 text-black text-small">Welcome! Please log in</p>
+            <p class="m-0 p-2 text-black text-small">Welcome! Please <a href="{% url 'account_login' %}">log in</a></p>
             {% endif %}
         </div>
     </div>
