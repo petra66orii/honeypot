@@ -57,10 +57,10 @@ header {
 /* Body Settings */
 
 body {
-    background: url('/media/background-honey.jpg') no-repeat center center fixed;
+    background: url('/media/background-honey.png') no-repeat center center fixed;
     background-size: cover;
     min-height: 100vh;
-    height: 100vh;
+    margin: 0;
     color: #555;
     font-family: 'Work Sans', 'Times New Roman', Times, serif;
     flex: 1 0 auto;
@@ -78,6 +78,29 @@ main {
     position: relative;
 }
 
+/* Home Page Styling */
+.hero-section {
+    position: relative;
+    height: 500px;
+}
+
+.bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    color: white;
+    padding-top: 100px;
+}
+
 .shop-now-button {
     background: black;
     color: white;
@@ -85,6 +108,7 @@ main {
     min-width: 260px;
 }
 
+/* Buttons Stylings */
 .btn-black {
     background: black;
     color: white;
@@ -108,10 +132,6 @@ main {
     color: white;
 }
 
-.text-black {
-    color: #000 !important;
-}
-
 .border-black {
     border: 1px solid black !important;
 }
@@ -120,8 +140,12 @@ main {
     background: #b973da !important;
 }
 
+.text-black {
+    color: #000 !important;
+}
+
 .overlay {
-    margin: 150px 0 150px 0;
+    margin: 150px 0 90px 0;
     padding-bottom: 40px;
     background-color: rgba(255, 255, 255, 0.7);
     color: black;
@@ -285,13 +309,6 @@ a:hover {
 }
 
 /* Media Queries */
-
-/* Slightly larger container on xl screens */
-@media (min-width: 1200px) {
-  .container {
-    max-width: 80%;
-  }
-}
 
 /* fixed top navbar only on medium and up */
 @media (min-width: 992px) {
