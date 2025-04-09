@@ -16,10 +16,10 @@
                       Sort
                     </button>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="{% url 'products' %}?sort=price&direction=asc">Price Low to High</a></li>
-                      <li><a class="dropdown-item" href="{% url 'products' %}?sort=price&direction=desc">Price High to Low</a></li>
-                      <li><a class="dropdown-item" href="{% url 'products' %}?sort=rating&direction=desc">Rating High to Low</a></li>
-                      <li><a class="dropdown-item" href="{% url 'products' %}?sort=rating&direction=asc">Rating Low to High</a></li>
+                      <li><a class="dropdown-item" href="{% url 'products' %}?sort=price&direction=asc">Price (Low to High)</a></li>
+                      <li><a class="dropdown-item" href="{% url 'products' %}?sort=price&direction=desc">Price (High to Low)</a></li>
+                      <li><a class="dropdown-item" href="{% url 'products' %}?sort=rating&direction=desc">Rating (High to Low)</a></li>
+                      <li><a class="dropdown-item" href="{% url 'products' %}?sort=rating&direction=asc">Rating (Low to High)</a></li>
                       <li><a class="dropdown-item" href="{% url 'products' %}?sort=category&direction=asc">By Category</a></li>
                     </ul>
                 </div>
@@ -35,7 +35,7 @@
                                     </a>
                                     {% else %}
                                     <a href="{% url 'product_detail' product.id %}">
-                                        <img class="card-img-top img-fluid" src="/media/no-image-placeholder.png" alt="{{ product.name }}">
+                                        <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}no-image-placeholder.png" alt="{{ product.name }}">
                                     </a>
                                     {% endif %}
                                     <div class="card-body pb-0">
