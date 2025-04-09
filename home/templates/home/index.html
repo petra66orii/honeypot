@@ -8,17 +8,137 @@
 
 {% block content %}
 <main class="container h-100 w-100 mt-5">
-
+    <!-- Hero Section -->
     <div class="col-12">
         <div class="row h-100">
-            <div class="col-7 col-md-6 my-auto">
-                <h1 class="text-black mt-5">
-                    Own Your Health Today
-                </h1>
-                <div class="my-5">
-                    <h4>
-                        <a href="{% url 'products' %}" class="shop-now-button btn btn-lg rounded-1 text-uppercase py-3">Shop Now</a>
-                    </h4>
+            <div class="col-12 my-auto px-0">
+                <section class="hero-section position-relative overflow-hidden">
+                    <video autoplay muted loop class="bg-video">
+                        <source src="{{ MEDIA_URL }}background-honey-drip.mp4" type="video/mp4">
+                    </video>
+                    <div class="hero-content container h-100 d-flex flex-column justify-content-center align-items-start">
+                        <h1 class="text-black">Own Your Health Today</h1>
+                        <a href="{% url 'products' %}" class="shop-now-button btn btn-lg rounded-1 text-uppercase py-3 mt-4">Shop Now</a>
+                    </div>
+                </section>                
+            </div>
+        </div>
+    </div>
+    <section class="">
+        <hr class="invisible">
+        <div class="col-12">
+            <div class="row">
+                <!-- Bootstrap Carousel for products - taken from Bootstrap 5 documentation -->
+                <h2 class="text-center my-4 text-black">Our Products</h2>
+                <hr class="invisible">
+                <div id="carouselDark" class="carousel carousel-dark slide mx-auto" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+
+                        <!-- First slide -->
+                    <div class="carousel-item active" data-bs-interval="8000">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body bg-white bg-opacity-50">
+                                    <img src="{{ MEDIA_URL }}hot-honey.png" class="d-block w-100 img-fluid card-img-top" alt="Hot Honey Jar">
+                                    <h5 class="card-title text-center text-black mt-2">Hot Honey</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body bg-white bg-opacity-50">
+                                    <img src="{{ MEDIA_URL }}ginger-honey.png" class="d-block w-100 img-fluid card-img-top" alt="Hot Honey Jar">
+                                    <h5 class="card-title text-center text-black mt-2">Ginger Honey</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body bg-white bg-opacity-50">
+                                    <img src="{{ MEDIA_URL }}lemon-honey.png" class="d-block w-100 img-fluid card-img-top" alt="Hot Honey Jar">
+                                    <h5 class="card-title text-center text-black mt-2">Lemon Honey</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Second slide -->
+                    <div class="carousel-item" data-bs-interval="8000">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body bg-white bg-opacity-50">
+                                    <img src="{{ MEDIA_URL }}lavender-honey.png" class="d-block w-100 img-fluid card-img-top" alt="Lavender Honey Jar">
+                                    <h5 class="card-title text-center text-black mt-2">Lavender Honey</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body bg-white bg-opacity-50">
+                                    <img src="{{ MEDIA_URL }}honey-balsamic.png" class="d-block w-100 img-fluid card-img-top" alt="Hot Honey Jar">
+                                    <h5 class="card-title text-center text-black mt-2">Honey Balsamic Glaze</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body bg-white bg-opacity-50">
+                                    <img src="{{ MEDIA_URL }}propolis-tincture.png" class="d-block w-100 img-fluid card-img-top" alt="Hot Honey Jar">
+                                    <h5 class="card-title text-center text-black mt-2">Propolis Tincture</h5>
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+
+                    <!-- Third slide -->
+                    <div class="carousel-item" data-bs-interval="8000">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body bg-white bg-opacity-50">
+                                    <img src="{{ MEDIA_URL }}cinnamon-honey.png" class="d-block w-100 img-fluid card-img-top" alt="Cinnamon Honey Jar">
+                                    <h5 class="card-title text-center text-black mt-2">Cinnamon Honey</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body bg-white bg-opacity-50">
+                                        <img src="{{ MEDIA_URL }}beeswax-lip-balm.png" class="d-block w-100 img-fluid card-img-top" alt="Hot Honey Jar">
+                                        <h5 class="card-title text-center text-black mt-2">Beeswax Lip Balm</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body bg-white bg-opacity-50">
+                                        <img src="{{ MEDIA_URL }}honey-face-mask.png" class="d-block w-100 img-fluid card-img-top" alt="Hot Honey Jar">
+                                        <h5 class="card-title text-center text-black mt-2">Honey Face Mask</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-5">
+                    <button class="carousel-control-prev mx-0" type="button" data-bs-target="#carouselDark" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next mx-0" type="button" data-bs-target="#carouselDark" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
                 </div>
             </div>
         </div>
