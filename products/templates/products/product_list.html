@@ -11,6 +11,18 @@
                 </div>
             </div>
             <div class="row">
+                <div class="dropdown my-3 d-flex justify-content-end">
+                    <button type="button" class="btn btn-black dropdown-toggle me-md-5" data-bs-toggle="dropdown">
+                      Sort
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="{% url 'products' %}?sort=price&direction=asc">Price Low to High</a></li>
+                      <li><a class="dropdown-item" href="{% url 'products' %}?sort=price&direction=desc">Price High to Low</a></li>
+                      <li><a class="dropdown-item" href="{% url 'products' %}?sort=rating&direction=desc">Rating High to Low</a></li>
+                      <li><a class="dropdown-item" href="{% url 'products' %}?sort=rating&direction=asc">Rating Low to High</a></li>
+                      <li><a class="dropdown-item" href="{% url 'products' %}?sort=category&direction=asc">By Category</a></li>
+                    </ul>
+                </div>
                 <div class="product-container col-10 offset-1">
                     <div class="row mt-1 mb-2"></div>
                     <div class="row">
