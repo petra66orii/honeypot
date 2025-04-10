@@ -68,11 +68,15 @@
                         </div>
                         {% endif %}
                         <p class="mt-3">{{ product.description }}</p>
-                        <form action="{% url 'add_to_bag' product.id %}" method="POST" class="d-flex gap-2">
+                        <form action="{% url 'add_to_bag' product.id %}" method="POST" class="d-flex align-items-center gap-2">
                             {% csrf_token %}
-                            <input type="number" name="quantity" value="1" min="1" class="form-control w-25">
+                            <div class="input-group" style="width: 120px;">
+                                <button type="button" class="btn btn-outline-secondary btn-sm" onclick="changeQuantity(-1)">-</button>
+                                <input type="number" name="quantity" id="quantityInput" value="1" min="1" class="form-control form-control-sm text-center">
+                                <button type="button" class="btn btn-outline-secondary btn-sm" onclick="changeQuantity(1)">+</button>
+                            </div>
                             <button type="submit" class="btn btn-purple">Add to Basket</button>
-                        </form>                        
+                        </form>                      
                     </div>
                 </div>
                 <!-- Review Section -->
@@ -161,6 +165,15 @@
 
 {% block postloadjs %}
     {{ block.super }}
+    <script>
+            function changeQuantity(change) {
+        const input = document.getElementById('quantityInput');
+        let newValue = parseInt(input.value) + change;
+        if (newValue >= 1) {
+            input.value = newValue;
+        }
+    }
+    </script>
     <script type="text/javascript" src="{% static 'js/reviews.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/star-rating.js' %}"></script>
 {% endblock %}
