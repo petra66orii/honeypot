@@ -16,6 +16,7 @@ html {
 }
 
 /* Header Settings */
+
 header {
     background: url('/media/header-background.png') repeat fixed;
     background-color: rgb(255, 255, 255);
@@ -79,6 +80,7 @@ main {
 }
 
 /* Home Page Styling */
+
 .hero-section {
     position: relative;
     height: 500px;
@@ -109,8 +111,17 @@ main {
 }
 
 /* Buttons Stylings */
+
 .btn-black {
     background: black;
+    color: white;
+    border-radius: 5px;
+    font-size: large;
+    padding: 5px;
+}
+
+.btn-purple {
+    background: #b973da;
     color: white;
     border-radius: 5px;
     font-size: large;
@@ -131,6 +142,8 @@ main {
     background: #222;
     color: white;
 }
+
+/* General Stylings */
 
 .border-black {
     border: 1px solid black !important;
@@ -157,6 +170,12 @@ a {
     color: #b973da;
 }
 
+a:hover {
+    color: #9637c2;
+}
+
+/* Delivery and messages banners */
+
 #delivery-banner {
     width: 100%;
     margin: 0;
@@ -175,6 +194,14 @@ a {
 .fade-alert.fade-out {
     opacity: 0;
 }
+
+/* Shopping Bag Stylings */
+
+.img-thumbnail {
+    width: 35%;
+}
+
+/* AllAuth Styles */
 
 #signup_form button {
     display: block;
@@ -247,10 +274,6 @@ a {
     background-color: #8b2fb6;
 }
 
-a:hover {
-    color: #9637c2;
-}
-
 /* Review Section */
 
 .review-section {
@@ -309,6 +332,12 @@ a:hover {
 }
 
 /* Media Queries */
+
+@media (min-width: 768px) {
+    .img-thumbnail {
+        width: 10%;
+    }    
+}
 
 /* fixed top navbar only on medium and up */
 @media (min-width: 992px) {
