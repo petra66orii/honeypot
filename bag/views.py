@@ -25,7 +25,7 @@ def add_to_bag(request, item_id):
     else:
         bag[item_id] = quantity
 
-    messages.success(request, f'Added {product.name} to your bag')
+    messages.success(request, f'Added {product.name} to your bag.')
 
     request.session['bag'] = bag
     return redirect(redirect_url)
@@ -35,6 +35,7 @@ def update_bag(request, item_id):
     """
     Update the quantity of the specified product to the specified amount
     """
+    product = get_object_or_404(Product, pk=item_id)
     quantity = int(request.POST.get('quantity'))
     bag = request.session.get('bag', {})
 
@@ -43,6 +44,7 @@ def update_bag(request, item_id):
     else:
         bag.pop(item_id, None)
 
+    messages.success(request, f'{product.name} quantity updated.')
     request.session['bag'] = bag
     return redirect('view_bag')
 
@@ -58,5 +60,5 @@ def remove_from_bag(request, item_id):
         messages.success(request, "Item removed from your bag.")
         return redirect('view_bag')
     except Exception as e:
-        messages.error(request, f"Error removing item: {e}")
+        messages.error(request, f"Error removing item: {e}.")
         return redirect('view_bag')
