@@ -15,16 +15,33 @@
             <div class="row">
                 <div class="col">
                     {% if bag_items %}
-                        <div class="table-responsive rounded"></div>
+                    <ul class="list-group">
+                        {% for item in bag_items %}
+                            <li class="list-group-item d-flex justify-content-between">
+                                <div class="row">
+                                    <img src="{{ item.product.image.url }}" alt="Product image" class="img-thumbnail">
+                                    <div class="col mt-4">
+                                        <strong>{{ item.product.name }}</strong><br>
+                                        Quantity: {{ item.quantity }}
+                                    </div>
+                                </div>
+                                <div>€{{ item.product.price|floatformat:2 }}</div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <hr>
+                    <p>Subtotal: €{{ total|floatformat:2 }}</p>
+                    <p>Delivery: €{{ delivery|floatformat:2 }}</p>
+                    <p><strong>Grand Total: €{{ grand_total|floatformat:2 }}</strong></p>
                     {% else %}
                         <p class="lead mb-5">Your bag is empty.</p>
-                        <a href="{% url 'products' %}" class="btn btn-black rounded-1">
-                            <span class="icon">
-                                <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="text-white">Keep Shopping</span>
-                        </a>
                     {% endif %}
+                    <a href="{% url 'products' %}" class="btn btn-black rounded-1">
+                        <span class="icon">
+                            <i class="fas fa-chevron-left"></i>
+                        </span>
+                        <span class="text-white">Keep Shopping</span>
+                    </a>
                 </div>
             </div>
         </div>
