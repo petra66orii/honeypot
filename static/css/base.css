@@ -199,6 +199,10 @@ a:hover {
 
 .img-thumbnail {
     width: 35%;
+    height: auto;
+    object-fit: contain;
+    border: none;
+    padding: 0;
 }
 
 /* AllAuth Styles */
@@ -336,6 +340,8 @@ a:hover {
 @media (min-width: 768px) {
     .img-thumbnail {
         width: 10%;
+        height: auto;
+        object-fit: contain;
     }    
 }
 
