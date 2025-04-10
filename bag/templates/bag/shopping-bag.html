@@ -40,10 +40,32 @@
                                             <button type="button" class="btn btn-outline-secondary btn-sm quantity-increment">+</button>
                                             <button type="submit" class="btn btn-success btn-sm ms-1">Update</button>
                                         </form>
-                                        <form action="{% url 'remove_from_bag' item.product.id %}" method="POST" class="d-inline">
-                                            {% csrf_token %}
-                                            <button type="submit" class="btn btn-sm text-white" style="background-color: #dc3545;">Remove</button>
-                                        </form>
+                                        <button type="submit" class="btn btn-sm text-white" style="background-color: #dc3545;" data-bs-toggle="modal" data-bs-target="#removeItemModal" data-product-url="{% url 'remove_from_bag' item.product.id %}">Remove</button>
+                                    </div>
+                                    
+                                    <!-- Modal for deleting products confirmation -->
+                                    <div class="modal fade" id="removeItemModal" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <form method="post"  id="removeItemForm">
+                                                {% csrf_token %}
+                                                <div class="modal-content">
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                    <h4 class="modal-title">Confirm Deletion</h4>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                    </div>
+                                                    <!-- Modal body -->
+                                                    <div class="modal-body">
+                                                    <p>Are you sure you want to remove this product?</p>
+                                                    </div>
+                                                    <!-- Modal footer -->
+                                                    <div class="modal-footer">
+                                                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
+                                                    <button class="btn btn-danger" type="submit">Remove</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </li>
@@ -77,6 +99,7 @@
 {% endblock %}
 
 {% block postloadjs %}
+<!-- Script for changing quantities -->
 <script>
     document.querySelectorAll('.quantity-increment').forEach(btn => {
         btn.addEventListener('click', function() {
@@ -92,4 +115,14 @@
         });
     });
 </script>
+<!-- Script for item removal from shopping bag -->
+<script>
+    const removeItemModal = document.getElementById('removeItemModal');
+    removeItemModal.addEventListener('show.bs.modal', function (event) {
+      const button = event.relatedTarget;
+      const url = button.getAttribute('data-product-url');
+      const form = document.getElementById('removeItemForm');
+      form.action = url;
+    });
+</script>  
 {% endblock %}
