@@ -17,18 +17,39 @@
                     {% if bag_items %}
                     <ul class="list-group">
                         {% for item in bag_items %}
-                            <li class="list-group-item d-flex justify-content-between">
-                                <div class="row">
-                                    <img src="{{ item.product.image.url }}" alt="Product image" class="img-thumbnail">
-                                    <div class="col mt-4">
+                            <li class="list-group-item">
+                                <div class="row align-items-center">
+                                    <!-- Image -->
+                                    <div class="col-3 col-md-2">
+                                        <img src="{{ item.product.image.url }}" alt="Product image" class="img-thumbnail w-100">
+                                    </div>
+                    
+                                    <!-- Product info -->
+                                    <div class="col-9 col-md-4">
                                         <strong>{{ item.product.name }}</strong><br>
-                                        Quantity: {{ item.quantity }}
+                                        <span>€{{ item.product.price|floatformat:2 }}</span><br>
+                                        <span>Qty: {{ item.quantity }}</span>
+                                    </div>
+                    
+                                    <!-- Update & Remove Forms -->
+                                    <div class="col-12 col-md-6 mt-3 mt-md-0 text-md-end">
+                                        <form action="{% url 'update_bag' item.product.id %}" method="POST" class="d-inline-flex align-items-center flex-wrap">
+                                            {% csrf_token %}
+                                            <button type="button" class="btn btn-outline-secondary btn-sm quantity-decrement">-</button>
+                                            <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control form-control-sm text-center" style="width: 60px;">
+                                            <button type="button" class="btn btn-outline-secondary btn-sm quantity-increment">+</button>
+                                            <button type="submit" class="btn btn-success btn-sm ms-1">Update</button>
+                                        </form>
+                                        <form action="{% url 'remove_from_bag' item.product.id %}" method="POST" class="d-inline">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-sm text-white" style="background-color: #dc3545;">Remove</button>
+                                        </form>
                                     </div>
                                 </div>
-                                <div>€{{ item.product.price|floatformat:2 }}</div>
                             </li>
                         {% endfor %}
                     </ul>
+                    
                     <hr>
                     <p>Subtotal: €{{ total|floatformat:2 }}</p>
                     <p>Delivery: €{{ delivery|floatformat:2 }}</p>
@@ -42,9 +63,33 @@
                         </span>
                         <span class="text-white">Keep Shopping</span>
                     </a>
+                    <a href="#" class="btn btn-black rounded-1 float-end">
+                        <span class="text-white">Go to Checkout</span>
+                        <span class="icon">
+                            <i class="fas fa-chevron-right"></i>
+                        </span>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </main>
+{% endblock %}
+
+{% block postloadjs %}
+<script>
+    document.querySelectorAll('.quantity-increment').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const input = this.previousElementSibling;
+            input.stepUp();
+        });
+    });
+
+    document.querySelectorAll('.quantity-decrement').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const input = this.nextElementSibling;
+            if (parseInt(input.value) > 1) input.stepDown();
+        });
+    });
+</script>
 {% endblock %}
