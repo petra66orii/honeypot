@@ -36,10 +36,10 @@
                             <td>
                                 <div class="text-center">
                                     {% if not review.approved %}
-                                    <a href="{% url 'approve_review' review.id %}" class="btn btn-success me-2">Approve</a>
+                                    <a href="{% url 'approve_review' review.id %}" class="btn btn-success me-2 mb-1">Approve</a>
                                     {% endif %}
-                                    <a href="{% url 'admin_edit_review' review.id %}" class="btn btn-warning me-2">Edit</a>
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ review.id }}" class="btn btn-danger me-2">Delete</a>
+                                    <a href="{% url 'admin_edit_review' review.id %}" class="btn btn-warning me-2 mb-1">Edit</a>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ review.id }}" class="btn btn-danger me-2 mb-1">Delete</a>
                                 </div>
                             </td>
                         </tr>
