@@ -79,18 +79,20 @@
                     {% else %}
                         <p class="lead mb-5">Your bag is empty.</p>
                     {% endif %}
-                    <a href="{% url 'products' %}" class="btn btn-black rounded-1">
-                        <span class="icon">
-                            <i class="fas fa-chevron-left"></i>
-                        </span>
-                        <span class="text-white">Keep Shopping</span>
-                    </a>
-                    <a href="#" class="btn btn-black rounded-1 float-end">
-                        <span class="text-white">Go to Checkout</span>
-                        <span class="icon">
-                            <i class="fas fa-chevron-right"></i>
-                        </span>
-                    </a>
+                    <div class="d-flex flex-wrap justify-content-between">
+                        <a href="{% url 'products' %}" class="btn btn-black rounded-1 float-start mb-2">
+                            <span class="icon">
+                                <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="text-white">Keep Shopping</span>
+                        </a>
+                        <a href="{% url 'checkout' %}" class="btn btn-black rounded-1 float-end mb-2">
+                            <span class="text-white">Go to Checkout</span>
+                            <span class="icon">
+                                <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
