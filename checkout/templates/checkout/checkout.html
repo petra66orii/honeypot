@@ -11,8 +11,7 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <hr>
-                    <h2 class="logo-font mb-4">Checkout</h2>
+                    <h2 class="text-center my-4">Checkout</h2>
                     <hr>
                 </div>
             </div>
@@ -48,7 +47,7 @@
                             </div>
                         </div>
                     {% endfor %}
-                    <hr class="my-0">
+                    <hr class="my-2">
                     <div class="row text-black text-right">
                         <div class="col-7 offset-2">
                             <p class="my-0">Order Total:</p>
@@ -61,6 +60,12 @@
                             <p class="my-0"><strong>&#8364;{{ grand_total | floatformat:2 }}</strong></p>
                         </div>
                     </div>
+                    <hr>
+                    {% if total > free_delivery_threshold %}
+                    <div class="text-center fw-bold">&#10024; You qualify for free shipping! &#128029; Yeyyy! &#10024;</div>
+                    {% elif free_delivery_delta > 0 %}
+                    <div class="text-center fw-bold text-warning">You could get free delivery by spending just <strong>${{ free_delivery_delta }}</strong> more!</div>
+                    {% endif %}
                 </div>
                 <div class="col-12 col-lg-6">
                     <p class="text-muted">Please fill out the form below to complete your order</p>
@@ -93,6 +98,28 @@
                                 {% endif %}
                             </div>
                         </fieldset>
+                        <!-- Display at the bottom of the page on screens smaller than 991px -->
+                        <div class="payment-container">
+                            {% include 'checkout/stripe_payment.html' %}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="loading-overlay">
+            <h1 class="text-light logo-font loading-spinner">
+                <span class="icon">
+                    <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+                </span>
+            </h1>
+        </div>
     </div>
 </main>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+    {{ client_secret|json_script:"id_client_secret" }}
+    <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
 {% endblock %}
