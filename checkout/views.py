@@ -1,6 +1,15 @@
-from django.shortcuts import render
-from .forms import OrderForm
+import stripe
+import json
+from django.shortcuts import render, redirect, HttpResponse
+from django.conf import settings
+from django.contrib import messages
+from django.views.decorators.http import require_POST
 from userprofile.models import UserProfile
+from .forms import OrderForm
+# from .models import Order, OrderItem
+from bag.contexts import bag_contents
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 # Create your views here.
@@ -8,6 +17,20 @@ def checkout(request):
     """
     A view that renders the checkout page
     """
+    bag = request.session.get('bag', {})
+    if not bag:
+        messages.error(request, "Your bag is empty.")
+        return redirect('products')
+
+    context = bag_contents(request)
+    total = context['grand_total']
+    stripe_total = round(total * 100)
+
+    intent = stripe.PaymentIntent.create(
+        amount=stripe_total,
+        currency=settings.STRIPE_CURRENCY,
+    )
+
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
@@ -48,5 +71,7 @@ def checkout(request):
 
     context = {
         'form': form,
+        'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
+        'client_secret': intent.client_secret,
     }
     return render(request, 'checkout/checkout.html', context)
