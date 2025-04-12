@@ -2,3 +2,105 @@
     background-color: #b973da;
     border-color: #b973da;
 }
+
+.stripe-style-input {
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid transparent #b973da;
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 3px 5px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus,
+.stripe-style-input:focus,
+.stripe-style-input:active {
+  box-shadow: 0 3px 5px 0 #a852cf;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
+
+.stripe-style-input::placeholder {
+    color: #d26fdf;
+}
+
+.fieldset-label {
+    position: relative;
+    right: .5rem;
+}
+
+/* Ensure the payment element sits clearly and doesn't overflow */
+#payment-element {
+    display: block;
+    min-height: 150px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Prevent button from overlapping it */
+.submit-button {
+    position: relative;
+    z-index: 2;
+    clear: both;
+}
+
+fieldset {
+    position: relative;
+    overflow: visible;
+}
+
+.payment-wrapper {
+    position: relative;
+    z-index: 0;
+}
+
+.payment-container {
+    margin-top: 2rem;
+}
+
+#payment-form .form-control {
+    color: #000;
+    border: 1px solid #000;
+}
+
+select,
+select option {
+    color: #000000;
+}
+
+select:invalid,
+select option[value=""] {
+    color: #aab7c4 !important;
+}
+
+#loading-overlay {
+	display: none;
+	position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 231, 11, 0.925);
+    z-index: 9999;
+}
+
+.loading-spinner {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    height: 100%;
+}
+
+@media (min-width: 992px) {
+    .payment-container {
+        position: absolute;
+        right: 2rem;
+        top: 30rem;
+        width: 40%;
+    }
+}
