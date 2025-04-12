@@ -75,3 +75,17 @@ def checkout(request):
         'client_secret': intent.client_secret,
     }
     return render(request, 'checkout/checkout.html', context)
+
+
+@require_POST
+def cache_checkout_data(request):
+    try:
+        pid = request.POST.get('client_secret').split('_secret')[0]
+        stripe.PaymentIntent.modify(pid, metadata={
+            'bag': json.dumps(request.session.get('bag', {})),
+            'save_info': request.POST.get('save_info'),
+            'username': request.user.username,
+        })
+        return HttpResponse(status=200)
+    except Exception as e:
+        return HttpResponse(content=e, status=400)
