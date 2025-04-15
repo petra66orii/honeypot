@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
+from checkout.models import Order
 from .models import UserProfile
 from .forms import UserProfileForm, EditProfileForm
 
@@ -35,9 +36,11 @@ def user_profile(request):
                 )
     else:
         form = UserProfileForm(instance=profile)
+    orders = profile.orders.all()
 
     context = {
         'form': form,
+        'orders': orders,
         'on_profile_page': True
     }
     return render(request, 'userprofile/profile.html', context)
@@ -109,3 +112,20 @@ def delete_account(request):
             'user': user
             }
             )
+
+
+def order_history(request, order_number):
+    order = get_object_or_404(Order, order_number=order_number)
+
+    messages.info(request, (
+        f'This is a past confirmation for order number {order_number}. '
+        'A confirmation email was sent on the order date.'
+    ))
+
+    template = 'checkout/checkout_success.html'
+    context = {
+        'order': order,
+        'from_profile': True,
+    }
+
+    return render(request, template, context)
