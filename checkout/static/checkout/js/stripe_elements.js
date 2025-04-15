@@ -2,11 +2,11 @@
 // configuration and adapted using the official Stripe JS documentation:
 // https://docs.stripe.com/js/
 
-var stripe_public_key = $('#id_stripe_public_key').text().slice(1, -1);
-var client_secret = $('#id_client_secret').text().slice(1, -1);
-var stripe = Stripe(stripe_public_key);
+var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
+var clientSecret = $('#id_client_secret').text().slice(1, -1);
+var stripe = Stripe(stripePublicKey);
 const options = {
-    clientSecret: client_secret,
+    clientSecret: clientSecret,
     appearance:  {
         theme: 'stripe',
         variables: {
@@ -37,9 +37,9 @@ form.addEventListener('submit', function (ev) {
     const saveInfo = Boolean($('#id-save-info').attr('checked'));
     const csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
     const postData = {
-        csrfmiddlewaretoken: csrfToken,
-        client_secret: client_secret,
-        save_info: saveInfo,
+        'csrfmiddlewaretoken': csrfToken,
+        'client_secret': clientSecret,
+        'save_info': saveInfo,
     };
     const url = '/checkout/cache_checkout_data/';
 
@@ -47,22 +47,9 @@ form.addEventListener('submit', function (ev) {
         stripe.confirmPayment({
             elements,
             confirmParams: {
-                return_url: "https://honeypot-6aa199604c8f.herokuapp.com/checkout/success/",
-                payment_method_data: {
-                    billing_details: {
-                        name: $.trim(form.first_name.value) + ' ' + $.trim(form.last_name.value),
-                        email: $.trim(form.email.value),
-                        phone: $.trim(form.phone_number.value),
-                        address: {
-                            line1: $.trim(form.street_address1.value),
-                            line2: $.trim(form.street_address2.value),
-                            city: $.trim(form.town.value),
-                            country: $.trim(form.country.value),
-                            state: $.trim(form.county.value),
-                        }
-                    }
-                }
-            }
+                return_url: `${window.location}/checkout/checkout_success/`,
+            },
+            redirect: 'if_required'
         }).then(function (result) {
             if (result.error) {
                 const errorDiv = document.getElementById('card-errors');
@@ -74,8 +61,12 @@ form.addEventListener('submit', function (ev) {
                 $(errorDiv).html(html);
                 $('#loading-overlay').fadeToggle(100);
                 $('#submit-button').attr('disabled', false);
+            } else {
+                // The payment has been processed!
+                if (result.paymentIntent && result.paymentIntent.status === 'succeeded') {
+                    form.submit();
+                }
             }
-            // On success, Stripe will redirect to `return_url`
         });
     }).fail(function () {
         location.reload();
