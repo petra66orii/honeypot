@@ -8,7 +8,7 @@ class OrderAdmin(admin.ModelAdmin):
                        'delivery_cost', 'order_total',
                        'total_price',)
 
-    fields = ('order_number', 'date', 'first_name', 'last_name'
+    fields = ('order_number', 'date', 'first_name', 'last_name',
               'email', 'phone_number', 'country',
               'postcode', 'town', 'street_address1',
               'street_address2', 'county', 'delivery_cost',
