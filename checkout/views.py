@@ -79,6 +79,9 @@ def checkout(request):
 
 @require_POST
 def cache_checkout_data(request):
+    """
+    Cache checkout data to be used later in the checkout process
+    """
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.PaymentIntent.modify(pid, metadata={
