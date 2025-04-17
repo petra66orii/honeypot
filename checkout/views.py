@@ -43,28 +43,19 @@ def checkout(request):
         order_form = OrderForm(form_data)
         if order_form.is_valid():
             order = order_form.save(commit=False)
-            pid = request.POST.get('client_secret').split('_secret')[0]
+            pid = request.session.get('stripe_pid')
             order.stripe_pid = pid
             order.original_bag = json.dumps(bag)
             order.save()
             for item_id, item_data in bag.items():
                 try:
                     product = Product.objects.get(id=item_id)
-                    if isinstance(item_data, int):
-                        order_item = OrderItem(
-                            order=order,
-                            product=product,
-                            quantity=item_data,
-                        )
-                        order_item.save()
-                    else:
-                        for quantity in item_data.items():
-                            order_item = OrderItem(
-                                order=order,
-                                product=product,
-                                quantity=quantity,
-                            )
-                            order_item.save()
+                    order_item = OrderItem(
+                        order=order,
+                        product=product,
+                        quantity=item_data,
+                    )
+                    order_item.save()
                 except Product.DoesNotExist:
                     messages.error(request, (
                         "One of the products in your bag wasn't found. "
@@ -99,6 +90,7 @@ def checkout(request):
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,
         )
+        request.session['stripe_pid'] = intent.id
 
         if request.user.is_authenticated:
             try:
@@ -140,7 +132,7 @@ def cache_checkout_data(request):
     Cache checkout data to be used later in the checkout process
     """
     try:
-        pid = request.POST.get('client_secret').split('_secret')[0]
+        pid = request.session.get('stripe_pid')
         stripe.PaymentIntent.modify(pid, metadata={
             'bag': json.dumps(request.session.get('bag', {})),
             'save_info': request.POST.get('save_info'),
