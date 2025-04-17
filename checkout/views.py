@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.views.decorators.http import require_POST
 
 from products.models import Product
-from userprofile.forms import EditProfileForm
+# from userprofile.forms import EditProfileForm
 from userprofile.models import UserProfile
 from .forms import OrderForm
 from .models import Order, OrderItem
@@ -46,6 +46,10 @@ def checkout(request):
             pid = request.session.get('stripe_pid')
             order.stripe_pid = pid
             order.original_bag = json.dumps(bag)
+
+            if request.user.is_authenticated:
+                order.user_profile = UserProfile.objects.get(user=request.user)
+
             order.save()
             for item_id, item_data in bag.items():
                 try:
@@ -65,11 +69,22 @@ def checkout(request):
                     return redirect(reverse('view_bag'))
 
             request.session['save_info'] = 'save-info' in request.POST
+            if request.user.is_authenticated and request.session['save_info']:
+                profile = UserProfile.objects.get(user=request.user)
+                profile.phone_number = order.phone_number
+                profile.street_address1 = order.street_address1
+                profile.street_address2 = order.street_address2
+                profile.country = order.country
+                profile.town = order.town
+                profile.county = order.county
+                profile.postcode = order.postcode
+                profile.save()
+
             return redirect(reverse(
                 'checkout_success',
                 args=[order.order_number]
-                )
-                )
+            )
+            )
         else:
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
@@ -79,7 +94,7 @@ def checkout(request):
             messages.error(
                 request,
                 "There's nothing in your bag at the moment"
-                )
+            )
             return redirect(reverse('products'))
 
         current_bag = bag_contents(request)
@@ -147,36 +162,33 @@ def checkout_success(request, order_number):
     """
     Handle successful checkouts
     """
-    save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
-    print("Order number from URL:", order_number)
+
+    save_info = request.session.get('save_info')
 
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
         order.user_profile = profile
         order.save()
 
-        # Save the user's info
         if save_info:
-            profile_data = {
-                'phone_number': order.phone_number,
-                'country': order.country,
-                'postcode': order.postcode,
-                'town_or_city': order.town,
-                'street_address1': order.street_address1,
-                'street_address2': order.street_address2,
-                'county': order.county,
-            }
-            user_profile_form = EditProfileForm(profile_data, instance=profile)
-            if user_profile_form.is_valid():
-                user_profile_form.save()
+            profile.phone_number = order.phone_number
+            profile.street_address1 = order.street_address1
+            profile.street_address2 = order.street_address2
+            profile.country = order.country
+            profile.town = order.town
+            profile.county = order.county
+            profile.postcode = order.postcode
+            profile.save()
 
     messages.success(request, f'Order successfully processed! \
-        Your order number is {order_number}. A confirmation \
-        email will be sent to {order.email}.')
+        Your order number is {order_number}. A confirmation email \
+        will be sent to {order.email}.')
 
     if 'bag' in request.session:
         del request.session['bag']
+    if 'save_info' in request.session:
+        del request.session['save_info']
 
     template = 'checkout/checkout_success.html'
     context = {
