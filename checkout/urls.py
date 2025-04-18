@@ -16,4 +16,9 @@ urlpatterns = [
         ),
     path('wh/', webhook, name='webhook'),
     path('order_management/', views.order_management, name='order_management'),
+    path(
+        'mark-fulfilled/<order_number>/',
+        views.mark_order_fulfilled,
+        name='mark_order_fulfilled'
+        ),
 ]

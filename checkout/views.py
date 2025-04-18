@@ -8,6 +8,8 @@ from django.conf import settings
 from django.contrib import messages
 from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 
 from products.models import Product
 from userprofile.models import UserProfile
@@ -219,3 +221,26 @@ def order_management(request):
     }
 
     return render(request, template, context)
+
+
+def mark_order_fulfilled(request, order_number):
+    if request.method == 'POST':
+        order = get_object_or_404(Order, order_number=order_number)
+        order.status = 'fulfilled'
+        order.save()
+
+        # Send email to customer
+        subject = render_to_string(
+            'checkout/emails/order_fulfilled_email_subject.txt',
+            {'order': order})
+        body = render_to_string(
+            'checkout/emails/order_fulfilled_email_body.txt',
+            {
+                'order': order,
+                'contact_email': settings.DEFAULT_FROM_EMAIL,
+                }
+        )
+        send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [order.email])
+
+        messages.success(request, f"Order {order_number} marked as fulfilled.")
+        return redirect('order_management')
