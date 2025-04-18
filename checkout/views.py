@@ -21,15 +21,27 @@ from bag.contexts import bag_contents
 # Create your views here.
 # Checkout view borrowed and adapted from Code Institute's Boutique Ado project
 def checkout(request):
-    """
-    A view that handles the checkout process
-    """
     stripe_secret_key = settings.STRIPE_SECRET_KEY
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
+    bag = request.session.get('bag', {})
+
+    if not bag:
+        messages.error(request, "There's nothing in your bag at the moment")
+        return redirect(reverse('products'))
+
+    current_bag = bag_contents(request)
+    total = current_bag['grand_total']
+    stripe_total = round(total * 100)
+    stripe.api_key = stripe_secret_key
+
+    # Create a new PaymentIntent on every load
+    intent = stripe.PaymentIntent.create(
+        amount=stripe_total,
+        currency=settings.STRIPE_CURRENCY,
+    )
+    request.session['stripe_pid'] = intent.id
 
     if request.method == 'POST':
-        bag = request.session.get('bag', {})
-
         form_data = {
             'first_name': request.POST['first_name'],
             'last_name': request.POST['last_name'],
@@ -45,8 +57,7 @@ def checkout(request):
         order_form = OrderForm(form_data)
         if order_form.is_valid():
             order = order_form.save(commit=False)
-            pid = request.session.get('stripe_pid')
-            order.stripe_pid = pid
+            order.stripe_pid = request.session.get('stripe_pid')
             order.original_bag = json.dumps(bag)
 
             if request.user.is_authenticated:
@@ -85,30 +96,15 @@ def checkout(request):
             return redirect(reverse(
                 'checkout_success',
                 args=[order.order_number]
-            )
-            )
+                )
+                )
         else:
-            messages.error(request, 'There was an error with your form. \
-                Please double check your information.')
-    else:
-        bag = request.session.get('bag', {})
-        if not bag:
             messages.error(
                 request,
-                "There's nothing in your bag at the moment"
-            )
-            return redirect(reverse('products'))
-
-        current_bag = bag_contents(request)
-        total = current_bag['grand_total']
-        stripe_total = round(total * 100)
-        stripe.api_key = stripe_secret_key
-        intent = stripe.PaymentIntent.create(
-            amount=stripe_total,
-            currency=settings.STRIPE_CURRENCY,
-        )
-        request.session['stripe_pid'] = intent.id
-
+                'There was an error with your form. '
+                'Please double check your information.'
+                )
+    else:
         if request.user.is_authenticated:
             try:
                 profile = UserProfile.objects.get(user=request.user)
@@ -130,8 +126,11 @@ def checkout(request):
             form = OrderForm()
 
     if not stripe_public_key:
-        messages.warning(request, 'Stripe public key is missing. \
-            Did you forget to set it in your environment?')
+        messages.warning(
+            request,
+            'Stripe public key is missing. '
+            'Did you forget to set it in your environment?'
+            )
 
     template = 'checkout/checkout.html'
     context = {
@@ -185,7 +184,8 @@ def checkout_success(request, order_number):
 
     messages.success(request, f'Order successfully processed! \
         Your order number is {order_number}. A confirmation email \
-        will be sent to {order.email}.')
+        will be sent to {order.email}. If the email is not found in the \
+        inbox, please check your spam folder.')
 
     if 'bag' in request.session:
         del request.session['bag']
