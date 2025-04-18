@@ -21,6 +21,7 @@
                             <th>Items</th>
                             <th>Order Total</th>
                             <th>Status</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
@@ -43,7 +44,18 @@
                                 </ul>
                             </td>
                             <td>&#8364;{{ order.total_price }}</td>
-                            <td></td>
+                            <td class="text-capitalize">{{ order.get_status_display }}</td>
+                            <td>
+                                {% if order.status == 'unfulfilled' %}
+                                    <form method="post" action="{% url 'mark_order_fulfilled' order.order_number %}">
+                                        {% csrf_token %}
+                                        <button class="btn btn-sm btn-success">Mark as Fulfilled</button>
+                                    </form>
+                                {% else %}
+                                    <span class="text-success">Fulfilled</span>
+                                {% endif %}
+                            </td>
+
                         </tr>
                         {% endfor %}
                     </tbody>
