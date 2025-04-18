@@ -11,6 +11,12 @@ from products.models import Product
 
 # Create your models here.
 class Order(models.Model):
+
+    STATUS_CHOICES = [
+        ('unfulfilled', 'Unfulfilled'),
+        ('fulfilled', 'Fulfilled'),
+    ]
+
     order_number = models.CharField(max_length=32, null=False, editable=False)
     user_profile = models.ForeignKey(
         UserProfile,
@@ -52,6 +58,11 @@ class Order(models.Model):
         blank=False,
         default=''
         )
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='unfulfilled',
+    )
 
     def _generate_order_number(self):
         """
