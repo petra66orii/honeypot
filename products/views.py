@@ -253,7 +253,7 @@ def approve_review(request, review_id):
             request,
             "You do not have permission to approve reviews."
             )
-        return redirect('manage_reviews')
+        return redirect('home')
 
     review = get_object_or_404(ProductReview, id=review_id)
     review.approved = True
@@ -273,7 +273,7 @@ def admin_delete_review(request, review_id):
             request,
             "You do not have permission to delete reviews."
             )
-        return redirect('manage_reviews')
+        return redirect('home')
 
     review = get_object_or_404(ProductReview, id=review_id)
     review.delete()
@@ -292,7 +292,7 @@ def admin_edit_review(request, review_id):
             request,
             "You do not have permission to edit reviews."
             )
-        return redirect('manage_reviews')
+        return redirect('home')
 
     review = get_object_or_404(ProductReview, id=review_id)
 
