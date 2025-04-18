@@ -1,0 +1,11 @@
+Hi {{ order.first_name }},
+
+Great news! Your order {{ order.order_number }} has been fulfilled and is on its way to you.
+
+Your package should arrive in 2-3 business days.
+
+If you have any questions, feel free to reach out to us at {{ contact_email }}.
+
+Thanks for shopping with us!
+
+- HoneyPot Team
