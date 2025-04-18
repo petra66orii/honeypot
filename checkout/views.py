@@ -38,6 +38,11 @@ def checkout(request):
     intent = stripe.PaymentIntent.create(
         amount=stripe_total,
         currency=settings.STRIPE_CURRENCY,
+        metadata={
+            'bag': json.dumps(bag),
+            'save_info': request.POST.get('save_info') if request.method == 'POST' else '',
+            'username': request.user.username if request.user.is_authenticated else 'guest',
+        }
     )
     request.session['stripe_pid'] = intent.id
 
