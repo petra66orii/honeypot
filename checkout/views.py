@@ -7,9 +7,9 @@ from django.shortcuts import (
 from django.conf import settings
 from django.contrib import messages
 from django.views.decorators.http import require_POST
+from django.core.paginator import Paginator
 
 from products.models import Product
-# from userprofile.forms import EditProfileForm
 from userprofile.models import UserProfile
 from .forms import OrderForm
 from .models import Order, OrderItem
@@ -193,6 +193,29 @@ def checkout_success(request, order_number):
     template = 'checkout/checkout_success.html'
     context = {
         'order': order,
+    }
+
+    return render(request, template, context)
+
+
+def order_management(request):
+
+    if not request.user.is_staff:
+        # Ensure only admins can access this page
+        messages.error(
+            request,
+            "You do not have permission to view this page."
+            )
+        return redirect('products')
+    orders = Order.objects.all().order_by('-date')
+    paginator = Paginator(orders, 10)
+
+    page_number = request.GET.get('page')
+    page_orders = paginator.get_page(page_number)
+
+    template = 'checkout/order_management.html'
+    context = {
+        'orders': page_orders,
     }
 
     return render(request, template, context)

@@ -15,4 +15,5 @@ urlpatterns = [
         name='cache_checkout_data'
         ),
     path('wh/', webhook, name='webhook'),
+    path('order_management/', views.order_management, name='order_management'),
 ]
