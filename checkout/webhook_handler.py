@@ -1,5 +1,3 @@
-import time
-
 from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
@@ -47,32 +45,20 @@ class StripeWH_Handler:
         pid = intent.id
         print(f"Stripe PID from webhook: {pid}")
 
-        order = None
-        attempt = 1
-        max_attempts = 5
-
-        while attempt <= max_attempts:
-            try:
-                order = Order.objects.get(stripe_pid=pid)
-                break
-            except Order.DoesNotExist:
-                attempt += 1
-                time.sleep(1)
-
-        if order:
+        try:
+            # Retrieve the order using the Stripe PaymentIntent ID
+            order = Order.objects.get(stripe_pid=pid)
             self._send_confirmation_email(order)
             return HttpResponse(
                 content=f'Webhook received: {event["type"]} | '
-                        f'SUCCESS: Sent confirmation email after {attempt} attempt(s)',
-                status=200
-            )
-        else:
-            print(f"Order with stripe_pid={pid} not found after {max_attempts} attempts.")
+                'SUCCESS: Sent confirmation email',
+                status=200)
+        except Order.DoesNotExist:
+            print(f"Order with stripe_pid={pid} not found in the database.")
             return HttpResponse(
                 content=f'Webhook received: {event["type"]} | '
-                        'ERROR: Order not found after retries',
-                status=404
-            )
+                'ERROR: Order not found',
+                status=404)
 
     def handle_payment_intent_payment_failed(self, event):
         """
