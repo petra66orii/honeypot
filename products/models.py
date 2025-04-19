@@ -66,7 +66,8 @@ class ProductReview(models.Model):
             (4, '4 stars'),
             (5, '5 stars'),
         ],
-        default=1)
+        null=False,
+        blank=False,)
     approved = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True)
 
@@ -79,5 +80,3 @@ class ProductReview(models.Model):
     def clean(self):
         if not self.rating:
             raise ValidationError("A rating is required.")
-        if not self.review_text.strip():
-            raise ValidationError("You cannot submit an empty review.")
