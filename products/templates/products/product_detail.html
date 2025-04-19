@@ -95,9 +95,9 @@
                                 <small>{{ review.created_on|date:"d M Y, H:i" }}</small>
                                     {% if user.is_authenticated and review.user == user %}
                                     <div>
-                                        <button class="btn btn-sm btn-danger mt-1 me-1 mb-5"
+                                        <button class="btn btn-sm btn-danger my-2 me-1"
                                             data-review-id="{{ review.id }}">Delete</button>
-                                        <button class="btn btn-sm btn-warning mt-1 mb-5"
+                                        <button class="btn btn-sm btn-warning my-2"
                                             data-review-id="{{ review.id }}">Edit</button>
                                     </div>
                                     {% endif %}
@@ -111,7 +111,8 @@
                         <div class="col-md-6 d-flex flex-column float-md-end">
                             <form method="post" id="review-form">
                                 {% csrf_token %}
-                                <span class="rating-system">
+                                {{ review_form.rating }}
+                                <span class="rating-system" id="rating-input">
                                     {% for i in "12345" %}
                                     <i data-value="{{ i }}"
                                        data-empty-icon="{% static 'images/icons/empty-bee.ico' %}"
@@ -121,10 +122,16 @@
                                     </i>
                                     {% endfor %}
                                 </span>
-                                <textarea rows="9" name="review_text" placeholder="Write your review here..."></textarea>
-    
-                                <!-- Hidden input for rating -->
-                                <input type="hidden" id="rating-input" name="rating" value="1">
+                                {% for error in review_form.rating.errors %}
+                                    <div class="error">{{ error }}</div>
+                                {% endfor %}
+                                <div class="mx-3">
+                                    {{ review_form.review_text.label_tag }}
+                                    {{ review_form.review_text }}
+                                    {% for error in review_form.review_text.errors %}
+                                        <div class="error">{{ error }}</div>
+                                    {% endfor %}
+                                </div>
                                 <button id="submit-btn" type="submit" class="btn btn-black mb-5 mt-0">Post Review</button>
                             </form>
                         </div>
