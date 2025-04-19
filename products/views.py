@@ -86,7 +86,12 @@ def product_detail(request, product_id):
             review.product = product
             review.save()
             messages.success(request, 'Review submitted and awaiting approval')
-            review_form = ReviewForm()
+            return redirect('product_detail', product_id=product.id)
+        else:
+            messages.error(
+                request,
+                'You cannot submit a review without rating the product.'
+                )
 
     return render(
         request,
