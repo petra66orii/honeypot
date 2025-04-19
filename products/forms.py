@@ -18,7 +18,7 @@ class ProductForm(forms.ModelForm):
 
         self.fields['category'].choices = friendly_names
         for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'border-black rounded-0'
+            field.widget.attrs['class'] = 'border-black rounded-1'
 
 
 class ReviewForm(forms.ModelForm):
@@ -30,10 +30,19 @@ class ReviewForm(forms.ModelForm):
                 'rows': 9,
                 'placeholder': 'Write your review here...'
             }),
-            'rating': forms.NumberInput(
-                attrs={
-                    'id': 'rating-input',
-                    'type': 'hidden'
-                    }
-                    ),
+            'rating': forms.NumberInput(attrs={
+                'id': 'rating-input',
+                'type': 'hidden',
+            }),
         }
+
+    def clean_rating(self):
+        rating = self.cleaned_data.get('rating')
+        if not rating:
+            raise forms.ValidationError("Please provide a rating.")
+        return rating
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['rating'].required = True
+        self.fields['review_text'].required = False
