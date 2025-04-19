@@ -17,7 +17,7 @@
                         <source src="{{ MEDIA_URL }}background-honey-drip.mp4" type="video/mp4">
                     </video>
                     <div class="hero-content container h-100 d-flex flex-column justify-content-center align-items-start">
-                        <h1 class="text-black">Own Your Health Today</h1>
+                        <h1 class="text-white">Your One Stop Honey Shop</h1>
                         <a href="{% url 'products' %}" class="shop-now-button btn btn-lg rounded-1 text-uppercase py-3 mt-4">Shop Now</a>
                     </div>
                 </section>                
@@ -26,219 +26,87 @@
     </div>
     <section class="">
         <hr class="invisible">
-        <div class="col-12">
-            <div class="row">
-                <!-- Bootstrap Carousel for products - taken from Bootstrap 5 documentation -->
-                <h2 class="text-center my-4 text-black">Our Products</h2>
-                <hr class="invisible">
-                <div id="carouselDark" class="carousel carousel-dark slide mx-auto" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    </div>
-                    <div class="carousel-inner">
-
-                        <!-- First slide -->
-                    <div class="carousel-item active" data-bs-interval="8000">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <div class="card-body bg-white bg-opacity-50">
-                                    <img src="{{ MEDIA_URL }}hot-honey.png" class="d-block w-100 img-fluid card-img-top" alt="Hot Honey Jar">
-                                    <h5 class="card-title text-center text-black mt-2">Hot Honey</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <div class="card-body bg-white bg-opacity-50">
-                                    <img src="{{ MEDIA_URL }}ginger-honey.png" class="d-block w-100 img-fluid card-img-top" alt="Hot Honey Jar">
-                                    <h5 class="card-title text-center text-black mt-2">Ginger Honey</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <div class="card-body bg-white bg-opacity-50">
-                                    <img src="{{ MEDIA_URL }}lemon-honey.png" class="d-block w-100 img-fluid card-img-top" alt="Hot Honey Jar">
-                                    <h5 class="card-title text-center text-black mt-2">Lemon Honey</h5>
-                                    </div>
-                                </div>
-                            </div>
+          <h2 class="text-center my-4 text-black">Our Products</h2>
+          <hr class="invisible">
+          <!-- Products Carousel - used Bootstrap 5 documentation -->
+          <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              {% for block in product_blocks %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                  <div class="row">
+                    {% for product in block %}
+                      <div class="col-md-4 {% if not forloop.first %}d-none d-md-block{% endif %}">
+                        <div class="card">
+                          <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                          <div class="card-body text-center">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                          </div>
                         </div>
-                    </div>
-
-                    <!-- Second slide -->
-                    <div class="carousel-item" data-bs-interval="8000">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <div class="card-body bg-white bg-opacity-50">
-                                    <img src="{{ MEDIA_URL }}lavender-honey.png" class="d-block w-100 img-fluid card-img-top" alt="Lavender Honey Jar">
-                                    <h5 class="card-title text-center text-black mt-2">Lavender Honey</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <div class="card-body bg-white bg-opacity-50">
-                                    <img src="{{ MEDIA_URL }}honey-balsamic.png" class="d-block w-100 img-fluid card-img-top" alt="Hot Honey Jar">
-                                    <h5 class="card-title text-center text-black mt-2">Honey Balsamic Glaze</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <div class="card-body bg-white bg-opacity-50">
-                                    <img src="{{ MEDIA_URL }}propolis-tincture.png" class="d-block w-100 img-fluid card-img-top" alt="Hot Honey Jar">
-                                    <h5 class="card-title text-center text-black mt-2">Propolis Tincture</h5>
-                                    </div>
-                                </div>
-                            </div>  
-                        </div>
-                    </div>
-
-                    <!-- Third slide -->
-                    <div class="carousel-item" data-bs-interval="8000">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <div class="card-body bg-white bg-opacity-50">
-                                    <img src="{{ MEDIA_URL }}cinnamon-honey.png" class="d-block w-100 img-fluid card-img-top" alt="Cinnamon Honey Jar">
-                                    <h5 class="card-title text-center text-black mt-2">Cinnamon Honey</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <div class="card-body bg-white bg-opacity-50">
-                                        <img src="{{ MEDIA_URL }}beeswax-lip-balm.png" class="d-block w-100 img-fluid card-img-top" alt="Hot Honey Jar">
-                                        <h5 class="card-title text-center text-black mt-2">Beeswax Lip Balm</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <div class="card-body bg-white bg-opacity-50">
-                                        <img src="{{ MEDIA_URL }}honey-face-mask.png" class="d-block w-100 img-fluid card-img-top" alt="Hot Honey Jar">
-                                        <h5 class="card-title text-center text-black mt-2">Honey Face Mask</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                      </div>
+                    {% endfor %}
+                  </div>
                 </div>
-                <div class="mt-5">
-                    <button class="carousel-control-prev mx-0" type="button" data-bs-target="#carouselDark" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next mx-0" type="button" data-bs-target="#carouselDark" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-                </div>
+              {% endfor %}
             </div>
-        </div>
+              <!-- Carousel controls -->
+              <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+          </div>
+
+                 
     </section>
     <hr class="invisible">
     <section class="container my-5">
         <h2 class="text-center text-black mb-4">What Our Customers Say</h2>
-        <div id="testimonialCarousel" class="carousel slide w-100 pb-5" data-bs-ride="carousel" data-bs-interval="8000">
-          <div class="carousel-inner">
-      
-            <!-- First Slide -->
-            <div class="carousel-item active">
+       <!-- Testimonials Carousel - used Bootstrap 5 documentation -->
+      <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          {% for block in testimonial_blocks %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
               <div class="row">
-                <div class="col-md-4">
-                  <div class="card h-100 shadow-sm">
-                    <div class="card-body">
-                      <div class="mb-2 text-warning">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                {% for t in block %}
+                  <div class="col-md-4 {% if not forloop.first %}d-none d-md-block{% endif %}">
+                    <div class="card h-100 shadow-sm">
+                      <div class="card-body">
+                        <div class="mb-2 text-warning">
+                          {% with total=5 %}
+                            {% for i in "12345"|make_list %}
+                              {% if forloop.counter <= t.rating %}
+                                <i class="fas fa-star"></i>
+                              {% else %}
+                                <i class="far fa-star"></i>
+                              {% endif %}
+                            {% endfor %}
+                          {% endwith %}
+                        </div>
+                        <p class="card-text">“{{ t.text }}”</p>
+                        <small class="text-muted">— {{ t.name }}</small>
                       </div>
-                      <p class="card-text">“I was blown away by the hot honey! It’s the perfect mix of sweet and spicy. Fast delivery and beautiful packaging too—I'm officially obsessed!”</p>
-                      <small class="text-muted">— Jamie T.</small>
                     </div>
                   </div>
-                </div>
-                <div class="col-md-4 d-none d-md-block">
-                  <div class="card h-100 shadow-sm">
-                    <div class="card-body">
-                      <div class="mb-2 text-warning">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                      </div>
-                      <p class="card-text">“The lavender honey is so calming and floral. I stir it into my tea every night. Love love love it!”</p>
-                      <small class="text-muted">— Priya S.</small>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4 d-none d-md-block">
-                  <div class="card h-100 shadow-sm">
-                    <div class="card-body">
-                      <div class="mb-2 text-warning">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
-                      </div>
-                      <p class="card-text">“This honey is pure, rich, and incredibly flavorful. You can really tell it’s small-batch and made with care.”</p>
-                      <small class="text-muted">— Leo M.</small>
-                    </div>
-                  </div>
-                </div>
+                {% endfor %}
               </div>
             </div>
-      
-            <!-- Second Slide -->
-            <div class="carousel-item">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="card h-100 shadow-sm">
-                    <div class="card-body">
-                      <div class="mb-2 text-warning">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i>
-                      </div>
-                      <p class="card-text">“I gave a jar of cinnamon honey as a gift and it was the star of the show. Everyone asked where it was from.”</p>
-                      <small class="text-muted">— Aria D.</small>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4 d-none d-md-block">
-                  <div class="card h-100 shadow-sm">
-                    <div class="card-body">
-                      <div class="mb-2 text-warning">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-                      </div>
-                      <p class="card-text">“Everything arrived beautifully packed and super fast. The honey tastes amazing and the eco packaging was a bonus.”</p>
-                      <small class="text-muted">— Marcus H.</small>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4 d-none d-md-block">
-                  <div class="card h-100 shadow-sm">
-                    <div class="card-body">
-                      <div class="mb-2 text-warning">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
-                      </div>
-                      <p class="card-text">“Absolutely love the website and the honey quality is unmatched. Smooth experience from order to first taste!”</p>
-                      <small class="text-muted">— Samira K.</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-      
-          </div>
-      
-          <!-- Controls -->
-          <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
+          {% endfor %}
         </div>
-      </section>      
+        <!-- Carousel Controls -->
+          <div class="d-flex justify-content-center mt-3">
+            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+      </div>
+    </section>      
 </main>
 {% endblock %}
