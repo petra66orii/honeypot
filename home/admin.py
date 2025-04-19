@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import ProductCarousel, Testimonial
 
-# Register your models here.
+admin.site.register(ProductCarousel)
+admin.site.register(Testimonial)
