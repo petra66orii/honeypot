@@ -1,0 +1,57 @@
+[
+    {
+      "model": "home.testimonial",
+      "pk": 1,
+      "fields": {
+        "name": "Jamie T.",
+        "text": "I was blown away by the hot honey! It’s the perfect mix of sweet and spicy. Fast delivery and beautiful packaging too—I'm officially obsessed!",
+        "rating": 4
+      }
+    },
+    {
+      "model": "home.testimonial",
+      "pk": 2,
+      "fields": {
+        "name": "Priya S.",
+        "text": "The lavender honey is so calming and floral. I stir it into my tea every night. Love love love it!",
+        "rating": 5
+      }
+    },
+    {
+      "model": "home.testimonial",
+      "pk": 3,
+      "fields": {
+        "name": "Leo M.",
+        "text": "This honey is pure, rich, and incredibly flavorful. You can really tell it’s small-batch and made with care.",
+        "rating": 4
+      }
+    },
+    {
+      "model": "home.testimonial",
+      "pk": 4,
+      "fields": {
+        "name": "Aria D.",
+        "text": "I gave a jar of cinnamon honey as a gift and it was the star of the show. Everyone asked where it was from.",
+        "rating": 5
+      }
+    },
+    {
+      "model": "home.testimonial",
+      "pk": 5,
+      "fields": {
+        "name": "Marcus H.",
+        "text": "Everything arrived beautifully packed and super fast. The honey tastes amazing and the eco packaging was a bonus.",
+        "rating": 5
+      }
+    },
+    {
+      "model": "home.testimonial",
+      "pk": 6,
+      "fields": {
+        "name": "Samira K.",
+        "text": "Absolutely love the website and the honey quality is unmatched. Smooth experience from order to first taste!",
+        "rating": 4
+      }
+    }
+  ]
+  

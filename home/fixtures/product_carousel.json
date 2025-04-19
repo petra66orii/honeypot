@@ -1,0 +1,75 @@
+[
+    {
+      "model": "home.productcarousel",
+      "pk": 1,
+      "fields": {
+        "name": "Ginger Honey",
+        "image": "ginger-honey.png"
+      }
+    },
+    {
+      "model": "home.productcarousel",
+      "pk": 2,
+      "fields": {
+        "name": "Hot Honey",
+        "image": "hot-honey.png"
+      }
+    },
+    {
+      "model": "home.productcarousel",
+      "pk": 3,
+      "fields": {
+        "name": "Lavender Honey",
+        "image": "lavender-honey.png"
+      }
+    },
+    {
+      "model": "home.productcarousel",
+      "pk": 4,
+      "fields": {
+        "name": "Lemon Honey",
+        "image": "lemon-honey.png"
+      }
+    },
+    {
+      "model": "home.productcarousel",
+      "pk": 5,
+      "fields": {
+        "name": "Honey Balsamic Glaze",
+        "image": "honey-balsamic.png"
+      }
+    },
+    {
+      "model": "home.productcarousel",
+      "pk": 6,
+      "fields": {
+        "name": "Honeycomb",
+        "image": "honeycomb.png"
+      }
+    },
+    {
+      "model": "home.productcarousel",
+      "pk": 7,
+      "fields": {
+        "name": "Propolis Tincture",
+        "image": "propolis-tincture.png"
+      }
+    },
+    {
+      "model": "home.productcarousel",
+      "pk": 8,
+      "fields": {
+        "name": "Beeswax Lip Balm",
+        "image": "beeswax-lip-balm.png"
+      }
+    },
+    {
+      "model": "home.productcarousel",
+      "pk": 9,
+      "fields": {
+        "name": "Honey Face Mask",
+        "image": "honey-face-mask.png"
+      }
+    }
+  ]
+  
