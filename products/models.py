@@ -5,6 +5,10 @@ from django.core.exceptions import ValidationError
 
 # Create your models here.
 class Category(models.Model):
+
+    class Meta:
+        verbose_name_plural = 'Categories'
+
     name = models.CharField(max_length=256)
     friendly_name = models.CharField(max_length=256, null=True, blank=True)
     has_discount = models.BooleanField(default=False)
