@@ -27,7 +27,12 @@
                                     <!-- Product info -->
                                     <div class="col-9 col-md-4">
                                         <strong>{{ item.product.name }}</strong><br>
-                                        <span>€{{ item.product.price|floatformat:2 }}</span><br>
+                                        {% if item.product.price > item.price %}
+                                            <del>€{{ item.product.price|floatformat:2 }}</del><br>
+                                            <span class="text-success">€{{ item.price|floatformat:2 }}</span><br>
+                                        {% else %}
+                                            <span>€{{ item.price|floatformat:2 }}</span><br>
+                                        {% endif %}
                                         <span>Qty: {{ item.quantity }}</span>
                                     </div>
                     
@@ -76,6 +81,55 @@
                     <p>Subtotal: €{{ total|floatformat:2 }}</p>
                     <p>Delivery: €{{ delivery|floatformat:2 }}</p>
                     <p><strong>Grand Total: €{{ grand_total|floatformat:2 }}</strong></p>
+
+                    <!-- Recommendations Section -->
+                    {% if recommendations %}
+                    <hr>
+                    <h2 class="text-center mt-5 mb-4">You Might Also Like</h2>
+                        <div class="d-none d-md-flex flex-wrap justify-content-center gap-4">
+                            {% for item in recommendations %}
+                            <div class="product-card">
+                                <img src="{{ item.product.image.url }}" class="card-img-top img-fluid rounded-1" alt="{{ item.product.name }}">
+                                    <h5 class="card-title text-center mt-2">{{ item.product.name }}</h5>
+                                    <p class="card-text float-start">
+                                        <del class="text-muted">€{{ item.original_price|floatformat:2 }}</del><br>
+                                        <span class="text-success fw-bold">€{{ item.discounted_price|floatformat:2 }}</span>
+                                    </p>
+                                    <form method="POST" action="{% url 'add_to_bag' item.product.id %}" class="mt-3 float-end">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="quantity" value="1">
+                                        <input type="hidden" name="discounted_price" value="{{ item.discounted_price }}">
+                                        <button type="submit" class="btn btn-warning btn-sm float-end">Add to Bag</button>
+                                    </form>
+                            </div>
+                        {% endfor %}
+                        </div>
+                        <!-- Mobile swiper: visible up until 768px, after that it's hidden -->
+                        <div class="d-block d-md-none">
+                            <div class="swiper">
+                                <div class="swiper-wrapper">
+                                    {% for item in recommendations %}
+                                    <div class="swiper-slide">
+                                        <a class="text-black text-decoration-none" href="{% url 'product_detail' item.product.id %}">
+                                            <img class="img-fluid rounded mx-auto d-block" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                            <h5 class="text-center my-3 text-decoration-none">{{ item.product.name }}</h5>
+                                        </a>
+                                        <del class="text-muted float-start">€{{ item.original_price|floatformat:2 }}</del><br>
+                                        <span class="text-success fw-bold float-start">€{{ item.discounted_price|floatformat:2 }}</span>
+                                        <form method="POST" action="{% url 'add_to_bag' item.product.id %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="quantity" value="1">
+                                            <input type="hidden" name="discounted_price" value="{{ item.discounted_price }}">
+                                            <button type="submit" id="add-to-bag-btn" class="btn btn-warning btn-sm float-end">Add to Bag</button>
+                                        </form>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="swiper-pagination"></div>
+                            </div>
+                        </div> 
+                    {% endif %}
+
                     {% else %}
                         <p class="lead mb-5">Your bag is empty.</p>
                     {% endif %}
