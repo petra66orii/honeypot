@@ -43,7 +43,12 @@
                                 <p class="my-0 small text-muted">Qty: {{ item.quantity }}</p>
                             </div>
                             <div class="col-3 text-right">
-                                <p class="my-0 small text-muted">&#8364;{{ item.product.price }}</p>
+                                {% if item.product.price > item.price %}
+                                <del>€{{ item.product.price|floatformat:2 }}</del><br>
+                                <span class="text-success">€{{ item.price|floatformat:2 }}</span><br>
+                            {% else %}
+                                <span>€{{ item.price|floatformat:2 }}</span><br>
+                            {% endif %}
                             </div>
                         </div>
                     {% endfor %}
