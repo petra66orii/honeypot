@@ -164,6 +164,43 @@
                     </div>
                 </div>
             <!-- End of Reviews Section -->
+             <hr>
+                <section class="related-products">
+                    <h2 class="text-center mb-3">Related Products</h2>
+                    <!-- Desktop display: Hidden up until 768px, then it's visible from there -->
+                    <div class="d-none d-md-flex flex-wrap justify-content-center gap-4">
+                        {% for related in related_products %}
+                            <div class="product-card">
+                                <a class="text-black text-decoration-none" href="{% url 'product_detail' related.id %}">
+                                    <img class="card-img-top img-fluid rounded-1" src="{{ related.image.url }}" alt="{{ related.name }}">
+                                    <h5 class="text-center my-3">{{ related.name }}</h5>
+                                </a>
+                                <p class="float-start text-purple ms-4">€{{ related.price }}</p>
+                                <p class="float-end text-warning me-4">⭐{{ related.rating }}</p>
+                            </div>
+                        {% empty %}
+                            <p>No related products found.</p>
+                        {% endfor %}
+                    </div>
+                    <!-- Mobile swiper: visible up until 768px, after that it's hidden -->
+                    <div class="d-block d-md-none">
+                        <div class="swiper">
+                            <div class="swiper-wrapper">
+                                {% for related in related_products %}
+                                <div class="swiper-slide">
+                                    <a class="text-black text-decoration-none" href="{% url 'product_detail' related.id %}">
+                                        <img class="img-fluid rounded mx-auto d-block" src="{{ related.image.url }}" alt="{{ related.name }}">
+                                        <h5 class="text-center my-3 text-decoration-none">{{ related.name }}</h5>
+                                    </a>
+                                    <p class="float-start text-purple my-2">€{{ related.price }}</p>
+                                    <p class="float-end text-warning my-2">⭐{{ related.rating }}</p>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>                    
+                </section>            
             </div>
         </div>
     </div>
