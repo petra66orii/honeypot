@@ -110,6 +110,23 @@ main {
     min-width: 260px;
 }
 
+/* Newsletter Style */
+#mc_embed_signup {
+    background: #fff;
+    clear: left;
+    font-size: 14px;
+    font-family: 'Work Sans', 'Times New Roman', Times, serif;
+    width: 100%;
+    padding: 10px;
+}
+
+#mc_embed_signup .button {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    background-color: #ffc107 !important;
+    color: #000 !important;
+}
+
 /* Buttons Stylings */
 
 .btn-black {
@@ -369,6 +386,11 @@ a:hover {
         height: auto;
         object-fit: contain;
     }    
+
+    #mc_embed_signup {
+        width: 50%;
+        margin: auto;
+    }
 }
 
 /* fixed top navbar only on medium and up */
