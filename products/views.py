@@ -68,6 +68,9 @@ def product_detail(request, product_id):
     A view to show individual product details
     """
     product = get_object_or_404(Product, pk=product_id)
+    related_products = Product.objects.filter(
+        category=product.category
+        ).exclude(id=product.id)[:4]
 
     reviews = ProductReview.objects.filter(
         product=product,
@@ -102,6 +105,7 @@ def product_detail(request, product_id):
             "review_count": review_count,
             "review_form": review_form,
             "average_rating": average_rating,
+            "related_products": related_products,
         },
     )
 
