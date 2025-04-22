@@ -22,12 +22,23 @@ def bag_contents(request):
         else:
             quantity = item_data
 
-        total += quantity * product.price
+        price = Decimal(
+            item_data['price']
+            ) if isinstance(
+                item_data,
+                dict
+                ) and 'price' in item_data else product.price
+
+        subtotal = quantity * price
+        total += subtotal
         product_count += quantity
+
         bag_items.append({
             'item_id': item_id,
             'quantity': quantity,
             'product': product,
+            'price': price,
+            'subtotal': subtotal,
         })
 
     if total < settings.FREE_DELIVERY_THRESHOLD:
