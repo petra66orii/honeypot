@@ -101,6 +101,17 @@
 {% endblock %}
 
 {% block postloadjs %}
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+new Swiper(".swiper", {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    pagination: {
+    el: ".swiper-pagination",
+    },
+});
+</script>
 <!-- Script for changing quantities -->
 <script>
     document.querySelectorAll('.quantity-increment').forEach(btn => {
