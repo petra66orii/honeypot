@@ -335,6 +335,13 @@ textarea {
     background: #ffc107 !important;
 }
 
+/* Shopping Bag */
+
+#add-to-bag-btn {
+    position: relative;
+    bottom: 20px;
+}
+
 /* Footer Settings */
 
 footer {
