@@ -56,17 +56,17 @@
                                                 <div class="modal-content">
                                                     <!-- Modal Header -->
                                                     <div class="modal-header">
-                                                    <h4 class="modal-title">Confirm Deletion</h4>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                        <h4 class="modal-title">Confirm Deletion</h4>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                                     </div>
                                                     <!-- Modal body -->
                                                     <div class="modal-body">
-                                                    <p>Are you sure you want to remove this product?</p>
+                                                        <p>Are you sure you want to remove this product?</p>
                                                     </div>
                                                     <!-- Modal footer -->
                                                     <div class="modal-footer">
-                                                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
-                                                    <button class="btn btn-danger" type="submit">Remove</button>
+                                                        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancel</button>
+                                                        <button class="btn btn-danger" type="submit">Remove</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -186,10 +186,10 @@ new Swiper(".swiper", {
 <script>
     const removeItemModal = document.getElementById('removeItemModal');
     removeItemModal.addEventListener('show.bs.modal', function (event) {
-      const button = event.relatedTarget;
-      const url = button.getAttribute('data-product-url');
-      const form = document.getElementById('removeItemForm');
-      form.action = url;
+        const button = event.relatedTarget;
+        const url = button.getAttribute('data-product-url');
+        const form = document.getElementById('removeItemForm');
+        form.action = url;
     });
 </script>  
 {% endblock %}
