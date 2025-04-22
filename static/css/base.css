@@ -157,6 +157,10 @@ main {
     color: #000 !important;
 }
 
+.text-purple {
+    color: #b973da !important;
+}
+
 .overlay {
     margin: 150px 0 90px 0;
     padding-bottom: 40px;
@@ -168,10 +172,12 @@ main {
 
 a {
     color: #b973da;
+    cursor: pointer;
 }
 
 a:hover {
     color: #9637c2;
+    cursor: pointer;
 }
 
 /* Delivery and messages banners */
@@ -300,21 +306,34 @@ a:hover {
     margin: 20px 0;
 }
 
-  .rating-system img {
+.rating-system img {
     cursor: pointer;
     font-style: normal;
     width: 50px;
     height: 20%;
     margin: 0 5px;
-  }
+}
 
-  textarea {
+textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 10px;
-  }
+}
+
+.product-card {
+    margin: 20px 10px;
+    width: 18rem;
+}
+
+.swiper-pagination {
+    position: relative !important;
+}
+
+.swiper-pagination-bullet-active {
+    background: #ffc107 !important;
+}
 
 /* Footer Settings */
 
