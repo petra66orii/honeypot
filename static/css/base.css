@@ -166,6 +166,12 @@ main {
     color: #000;
 }
 
+.buy-now-btn {
+    width: 65%;
+    margin: auto;
+    margin-bottom: 5px;
+}
+
 /* General Stylings */
 
 .border-black {
@@ -187,7 +193,7 @@ main {
 .overlay {
     margin: 150px 0 90px 0;
     padding-bottom: 40px;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.2);
     color: black;
     font-size: larger;
     font-weight: bold;
