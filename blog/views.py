@@ -1,9 +1,12 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+
 from .forms import CreatePost, EditPost, CommentForm
 from .models import BlogPost, Comment
 
@@ -298,3 +301,66 @@ class PostDeleteView(AdminRequiredMixin, LoginRequiredMixin, DeleteView):
         """
         messages.success(self.request, "Post deleted successfully!")
         return reverse('blog')
+
+
+@login_required
+def comment_management(request):
+
+    if not request.user.is_staff:
+        # Ensure only admins can access this page
+        messages.error(
+            request,
+            "You do not have permission to view this page."
+            )
+        return redirect('products')
+    comments = Comment.objects.all().order_by('-created_at')
+    paginator = Paginator(comments, 10)
+
+    page_number = request.GET.get('page')
+    page_comments = paginator.get_page(page_number)
+
+    template = 'blog/comment_management.html'
+    context = {
+        'comments': page_comments,
+    }
+
+    return render(request, template, context)
+
+
+@login_required
+def approve_comment(request, comment_id):
+    """
+    Approve a review and allow it to be displayed on the product page.
+    """
+    if not request.user.is_staff:
+        messages.error(
+            request,
+            "You do not have permission to approve comments."
+            )
+        return redirect('home')
+
+    comment = get_object_or_404(Comment, id=comment_id)
+    comment.approved = True
+    comment.save()
+    messages.success(request, "Comment approved successfully!")
+
+    return redirect('comment_management')
+
+
+@login_required
+def admin_delete_comment(request, comment_id):
+    """
+    Delete a review.
+    """
+    if not request.user.is_staff:
+        messages.error(
+            request,
+            "You do not have permission to delete comments."
+            )
+        return redirect('home')
+
+    comment = get_object_or_404(Comment, id=comment_id)
+    comment.delete()
+    messages.success(request, "Comment deleted successfully!")
+
+    return redirect('comment_management')
