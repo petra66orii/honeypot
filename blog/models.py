@@ -20,7 +20,11 @@ class BlogPost(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     status = models.IntegerField(choices=STATUS, default=0)
     excerpt = models.TextField(blank=True)
-    featured_image = models.ImageField(null=True, blank=True)
+    featured_image = models.ImageField(
+        upload_to='blog_images/',
+        null=True,
+        blank=True
+        )
 
     def save(self, *args, **kwargs):
         """
