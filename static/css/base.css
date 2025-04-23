@@ -160,6 +160,11 @@ main {
     color: white;
 }
 
+.btn-orange {
+    background-color: #ff8b07;
+    color: #000;
+}
+
 /* General Stylings */
 
 .border-black {
