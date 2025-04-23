@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    <div class="overlay">
+        <a class="text-decoration-none d-flex ms-3 mt-5" href="{% url 'blog' %}">&laquo; Go Back</a>
+        
+        <!-- Blog Post Section -->
+        <h2 class="my-4 p-1 text-center">{{ blogpost.title }}</h2>
+        <p class="my-2 p-1 text-center">{{ blogpost.created_at }}</p>
+        <hr>
+        <h3 class="hidden-heading"></h3>
+        <article class="card-text m-2 p-2 m-lg-5 p-lg-5 text-start blog-post">
+            {% if blogpost.featured_image and blogpost.featured_image.url %}
+            <img src="{{ blogpost.featured_image.url }}" alt="{{ post.title }}" class="img-fluid image-post">
+            {% else %}
+            <img src="{{ MEDIA_URL }}no-image-placeholder.png" alt="{{ post.title }}" class="image-post">
+            {% endif %}
+            {{ blogpost.content | safe }}
+
+            {% if user == blogpost.author %}
+            <div class="ms-2 my-5">
+                <a class="btn btn-sm btn-warning mt-0 mb-5" href="{% url 'edit_post' blogpost.slug %}?next={{ request.path }}">Edit Post</a>
+                <a class="btn btn-sm btn-danger mt-0 mb-5 me-3" href="{% url 'delete_post' blogpost.slug %}" type="submit">Delete</a>
+            </div>
+            {% endif %}
+        </article>
+        
+        <!-- Comments Section -->
+        {% if user.is_authenticated %}
+        <hr>
+        <h4 class="ms-3">Leave a Comment</h4>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 d-flex flex-column float-md-start mt-5">
+                    {% if comments %}
+                    {% for comment in comments %}
+                    <div class="comment-section mb-3">
+                        <strong>{{ comment.user }}</strong>
+                        <p id="comment-{{ comment.id }}" data-comment-id="{{ comment.id }}">{{ comment.content }}</p>
+                        <small>{{ comment.created_at|date:"d M Y, H:i" }}</small>
+                        {% if user.is_authenticated and comment.user == user %}
+                        <div class="justify-content-center align-items-start">
+                            <button class="btn btn-sm btn-danger mt-1 me-1 mb-5 delete-btn"
+                                data-comment-id="{{ comment.id }}">Delete</button>
+                            <button class="btn btn-sm btn-warning mt-1 mb-5 edit-btn"
+                                data-comment-id="{{ comment.id }}">Edit</button>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p>No comments yet. Be the first to comment!</p>
+                    {% endif %}
+                </div>
+                <div class="col-md-6 d-flex flex-column float-md-end">
+                    <form method="post" id="comment-form">
+                        {% csrf_token %}
+                        {{ form | crispy }}
+                        <button id="submit-btn" type="submit" class="btn btn-sm btn-black mb-5 mt-0">Post Comment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <p>Log in to leave a comment</p>
+        {% endif %}
+        
+        <!-- Delete Confirmation Modal - Code borrowed from the Codestar walkthrough project -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Delete comment?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete your comment?
+                        <p class="text-danger">Warning: This action is irreversible.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a id="deleteConfirm" href="#" class="btn btn-red
+                  btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block postloadjs %}
+    <!-- JS Script -->
+    <script src="{% static 'js/comments.js' %}"></script>
+{% endblock %}
