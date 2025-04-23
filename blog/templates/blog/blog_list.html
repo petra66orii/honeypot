@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    <div class="overlay">
+        <hr class="invisible">
+        <h2 class="mt-4 mb-2 p-1 text-center">Blog Posts</h2>
+        <h5 class="my-2 p-1 text-center">Welcome to the Blog section! Feel free to explore articles about healthy recipes and find out more about the benefits of consuming honey!</h5>
+        <hr>
+        {% if blogpost_list %}
+        <!-- Blog posts section -->
+        <div class="container-fluid">
+            <div class="row">
+                {% for blogpost in blogpost_list %}
+                <div class="card-body m-2 mb-5">
+                    <div class="mb-2 col-md-4 float-md-start my-md-4">
+                        {% if blogpost.featured_image and blogpost.featured_image.url %}
+                        <img src="{{ blogpost.featured_image.url }}" alt="{{ post.title }}" class="img-fluid">
+                        {% else %}
+                        <img src="{{ MEDIA_URL }}no-image-placeholder.png" alt="Placeholder image" class="img-fluid">
+                        {% endif %}
+                    </div>
+                    <div class="col-md-8 float-md-end my-md-2 p-2">
+                        <a href="{% url 'post' blogpost.slug %}?next={{ request.path }}" class="post-link">
+                            <h2 class="card-title">{{ blogpost.title }}</h2>
+                        </a>
+                        <p class="card-text">{{ blogpost.excerpt }}</p>
+                        <p class="card-text h6">{{ blogpost.created_at }}
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <p class="my-5 text-center">No blog posts available.</p>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- This code snippet was borrowed from the Codestar Walkthrough Project -->
+        <!-- Pagination -->
+        {% if is_paginated %}
+        <nav aria-label="Page navigation" class="mb-5">
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                <li>
+                    <a href="?page={{ page_obj.previous_page_number }}" class="page-link me-1">&laquo; Previous Page</a>
+                </li>
+                {% endif %}
+                {% if page_obj.has_next %}
+                <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> Next Page &raquo;</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </div>
+</main>
+{% endblock %}
