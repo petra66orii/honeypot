@@ -85,6 +85,10 @@ def product_detail(request, product_id):
         ).order_by("-created_on")
     review_count = reviews.count()
     average_rating = product.average_rating
+    paginator = Paginator(reviews, 5)
+
+    page_number = request.GET.get('page')
+    page_reviews = paginator.get_page(page_number)
 
     review_form = ReviewForm()
 
@@ -113,6 +117,7 @@ def product_detail(request, product_id):
             "review_form": review_form,
             "average_rating": average_rating,
             "related_products": related_products,
+            "page_reviews": page_reviews,
         },
     )
 
