@@ -364,6 +364,19 @@ textarea {
     bottom: 20px;
 }
 
+/* Blog */
+.blog-post {
+    font-family: 'Work Sans', 'Times New Roman', Times, serif;
+    font-weight: 500;
+}
+
+.image-post {
+    width: 30rem;
+    height: auto;
+    float: left;
+    margin: 15px 25px 5px 0;
+}
+
 /* Footer Settings */
 
 footer {
