@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    <div class="overlay">
+        <form method="post" enctype="multipart/form-data" class="mb-5 p-3 m-2 align-items-center">
+            {% csrf_token %}
+            {{ form | crispy }}
+            {{ blogpost.content | safe }}
+            <div>
+                <button class="btn btn-black mb-5 mt-0 me-1" type="submit">Post</button>
+                <a class="mb-5 mt-0 btn btn-warning" href="{% url 'blog' %}">Cancel</a>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}
