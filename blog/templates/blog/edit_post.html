@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    <div class="overlay">
+        <form method="post" enctype="multipart/form-data" class="mb-5 p-3 m-2 align-items-center">
+            {% csrf_token %}
+            {{ form | crispy }}   
+            <div>
+                <button class="btn btn-black mb-5 mt-0" type="submit">Post</button>
+                <a class="mb-5 mt-0 btn btn-warning" href="{% url 'post' blogpost.slug %}">Cancel</a>
+                <form action="{% url 'delete_post' blogpost.slug %}" method="get" class="mb-5">
+                    {% csrf_token %}        
+                    <button class="btn btn-danger mb-5 mt-0" type="submit">Delete</button>
+                </form>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}
