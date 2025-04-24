@@ -39,7 +39,7 @@ class BlogPostList(generic.ListView):
         paginate_by: The number of posts to display per page.
     """
     model = BlogPost
-    queryset = BlogPost.objects.filter(status=1)
+    queryset = BlogPost.objects.filter(status=1).order_by('-created_at')
     template_name = "blog/blog_list.html"
     paginate_by = 5
 
