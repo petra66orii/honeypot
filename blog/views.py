@@ -24,7 +24,7 @@ class AdminRequiredMixin:
                 request,
                 "You do not have permission to access this page."
                 )
-            return redirect('home')
+            return render(request, "403.html")
         return super().dispatch(request, *args, **kwargs)
 
 
@@ -308,11 +308,7 @@ def comment_management(request):
 
     if not request.user.is_staff:
         # Ensure only admins can access this page
-        messages.error(
-            request,
-            "You do not have permission to view this page."
-            )
-        return redirect('products')
+        return render(request, "403.html")
     comments = Comment.objects.all().order_by('-created_at')
     paginator = Paginator(comments, 10)
 
@@ -337,7 +333,7 @@ def approve_comment(request, comment_id):
             request,
             "You do not have permission to approve comments."
             )
-        return redirect('home')
+        return render(request, "403.html")
 
     comment = get_object_or_404(Comment, id=comment_id)
     comment.approved = True
@@ -357,7 +353,7 @@ def admin_delete_comment(request, comment_id):
             request,
             "You do not have permission to delete comments."
             )
-        return redirect('home')
+        return render(request, "403.html")
 
     comment = get_object_or_404(Comment, id=comment_id)
     comment.delete()
