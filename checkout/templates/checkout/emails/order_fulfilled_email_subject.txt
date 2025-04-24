@@ -1,1 +1,1 @@
-HoneyPot - Your Order {order.order_number} is on the way!
+HoneyPot - Your Order {{ order.order_number }} is on the way!
