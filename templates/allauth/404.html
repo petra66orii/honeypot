@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}   
+
+{% block content %}
+<main>
+    <div class="overlay overflow-hidden">
+            <h1 class="text-center page-title-font">Oops! Page Not Found</h1>
+            <hr>
+        <div class="container ms-5 fw-lighter">
+            <p>Sorry, the page you were looking for seems to have flown away like a busy bee!</p>
+            <p>We can't find the sweet spot you were aiming for. &#128029;</p>
+            <p>You might want to:</p>
+            <ul>
+                <li>Go back to the <a href="{% url 'home' %}">homepage</a>.</li>
+                <li>Double-check the web address to make sure it's spelled correctly.</li>
+                <li>Use our site search (if available) to find what you're looking for.</li>
+            </ul>
+            <p>We apologize for any inconvenience!</p>
+        </div>
+    </div>
+</main>
+{% endblock %}
