@@ -208,7 +208,7 @@ def order_management(request):
             request,
             "You do not have permission to view this page."
             )
-        return redirect('products')
+        return render(request, "403.html")
     orders = Order.objects.all().order_by('-date')
     paginator = Paginator(orders, 10)
 
