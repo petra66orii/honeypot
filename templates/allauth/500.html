@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}   
+
+{% block content %}
+<main>
+    <div class="overlay overflow-hidden">
+            <h1 class="text-center page-title-font">Uh Oh! Something Went Wrong</h1>
+            <hr>
+        <div class="container ms-5 fw-lighter">
+            <p>Our bees seem to have gotten a little too busy and caused a temporary buzz in the system. &#128029;</p>
+            <p>We've encountered an unexpected error on our server.</p>
+            <p>Please try one of the following:</p>
+            <ul>
+                <li>Go back to the <a href="{% url 'home' %}">homepage</a> and try again.</li>
+                <li>Refresh the page. Sometimes a simple reload can fix it.</li>
+                <li>Please try again later. Our team is likely working on getting things back to their sweet spot.</li>
+            </ul>
+            <p>We apologize for any inconvenience this may cause. Thank you for your patience!</p>
+        </div>
+    </div>
+</main>
+{% endblock %}
