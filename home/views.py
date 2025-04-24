@@ -36,6 +36,8 @@ def index(request):
 
 def admin_management(request):
     """ A view to return the admin management page """
+    if not request.user.is_superuser:
+        return render(request, "403.html")
 
     return render(request, "home/admin_management.html")
 
