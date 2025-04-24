@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}   
+
+{% block content %}
+<main>
+    <div class="overlay overflow-hidden">
+            <h1 class="text-center page-title-font">Oops! Forbidden Access</h1>
+            <hr>
+        <div class="container ms-5 fw-lighter">
+            <p>Sorry, you don't have permission to access this page.</p>
+            <p>It's like a bee trying to get into a flower that hasn't bloomed yet - sometimes the nectar is just out of reach! &#128029;</p>
+            <p>You might want to:</p>
+            <ul>
+                <li>Go back to the <a href="{% url 'home' %}">homepage</a>.</li>
+                <li>Double-check the web address to make sure it's correct.</li>
+                <li>If you believe you should have access, please contact us.</li>
+            </ul>
+            <p>Thank you for your understanding!</p>
+        </div>
+    </div>
+</main>
+{% endblock %}
