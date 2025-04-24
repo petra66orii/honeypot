@@ -32,3 +32,9 @@ def index(request):
         "product_blocks": product_blocks,
         "testimonial_blocks": testimonial_blocks,
     })
+
+
+def admin_management(request):
+    """ A view to return the admin management page """
+
+    return render(request, "home/admin_management.html")
