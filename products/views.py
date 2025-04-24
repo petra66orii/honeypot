@@ -185,7 +185,7 @@ def add_product(request):
     """ Add a product to the store """
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
-        return redirect(reverse('home'))
+        return render(request, "403.html")
 
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
@@ -214,7 +214,7 @@ def edit_product(request, product_id):
     """ Edit a product in the store """
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
-        return redirect(reverse('home'))
+        return render(request, "403.html")
 
     product = get_object_or_404(Product, pk=product_id)
     if request.method == 'POST':
@@ -246,7 +246,7 @@ def delete_product(request, product_id):
     """ Delete a product from the store """
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
-        return redirect(reverse('home'))
+        return render(request, "403.html")
 
     product = get_object_or_404(Product, pk=product_id)
     product.delete()
@@ -267,7 +267,7 @@ def manage_reviews(request):
             request,
             "You do not have permission to view this page."
             )
-        return redirect('home')
+        return render(request, "403.html")
 
     reviews = ProductReview.objects.all().order_by("-created_on")
 
@@ -286,7 +286,7 @@ def approve_review(request, review_id):
             request,
             "You do not have permission to approve reviews."
             )
-        return redirect('home')
+        return render(request, "403.html")
 
     review = get_object_or_404(ProductReview, id=review_id)
     review.approved = True
@@ -306,7 +306,7 @@ def admin_delete_review(request, review_id):
             request,
             "You do not have permission to delete reviews."
             )
-        return redirect('home')
+        return render(request, "403.html")
 
     review = get_object_or_404(ProductReview, id=review_id)
     review.delete()
@@ -325,7 +325,7 @@ def admin_edit_review(request, review_id):
             request,
             "You do not have permission to edit reviews."
             )
-        return redirect('home')
+        return render(request, "403.html")
 
     review = get_object_or_404(ProductReview, id=review_id)
 
