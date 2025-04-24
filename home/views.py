@@ -38,3 +38,9 @@ def admin_management(request):
     """ A view to return the admin management page """
 
     return render(request, "home/admin_management.html")
+
+
+def about_us(request):
+    """ A view to return the About Us page """
+
+    return render(request, "home/about_us.html")
