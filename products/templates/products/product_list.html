@@ -23,6 +23,9 @@
                       <li><a class="dropdown-item" href="{% url 'products' %}?sort=category&direction=asc">By Category</a></li>
                     </ul>
                 </div>
+                <div class="text-md-end">
+                    <p class="fs-6 fw-light text-muted me-5">Showing {{ start_index }}–{{ end_index }} of {{ total_products }}</p>
+                </div>
                 <div class="product-container col-10 offset-1">
                     <div class="row mt-1 mb-2"></div>
                     <div class="row">

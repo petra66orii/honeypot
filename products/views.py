@@ -20,10 +20,6 @@ def all_products(request):
     sort = None
     direction = None
 
-    paginator = Paginator(products, 20)
-    page_number = request.GET.get('page')
-    page_products = paginator.get_page(page_number)
-
     if request.GET:
         if 'sort' in request.GET:
             sortkey = request.GET['sort']
@@ -59,12 +55,28 @@ def all_products(request):
 
     current_sorting = f'{sort}_{direction}'
 
+    # To silence Django's warning related to pagination
+    # when no sorting is applied
+    if not sort:
+        products = products.order_by('id')
+
+    paginator = Paginator(products, 20)
+    page_number = request.GET.get('page')
+    page_products = paginator.get_page(page_number)
+
+    start_index = page_products.start_index()
+    end_index = page_products.end_index()
+    total_products = paginator.count
+
     context = {
-        'products': products,
+        'products': page_products,
         'search_term': query,
         'current_categories': categories,
         'current_sorting': current_sorting,
         'page_products': page_products,
+        'start_index': start_index,
+        'end_index': end_index,
+        'total_products': total_products,
     }
 
     return render(request, 'products/product_list.html', context)
