@@ -21,7 +21,11 @@
                                 <div class="row align-items-center">
                                     <!-- Image -->
                                     <div class="col-3 col-md-2">
-                                        <img src="{{ item.product.image.url }}" alt="Product image" class="img-thumbnail w-100">
+                                        {% if item.product.image %}
+                                            <img class="img-fluid rounded mx-auto d-block" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                        {% else %}
+                                            <img class="card-img-top img-fluid rounded-1" src="{{ MEDIA_URL }}no-image-placeholder.png" alt="No image available">
+                                        {% endif %}
                                     </div>
                     
                                     <!-- Product info -->
@@ -89,7 +93,11 @@
                         <div class="d-none d-md-flex flex-wrap justify-content-center gap-4">
                             {% for item in recommendations %}
                             <div class="product-card">
-                                <img src="{{ item.product.image.url }}" class="card-img-top img-fluid rounded-1" alt="{{ item.product.name }}">
+                                {% if item.product.image %}
+                                    <img class="img-fluid rounded mx-auto d-block" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                {% else %}
+                                    <img class="card-img-top img-fluid rounded-1" src="{{ MEDIA_URL }}no-image-placeholder.png" alt="No image available">
+                                {% endif %}
                                     <h5 class="card-title text-center mt-2">{{ item.product.name }}</h5>
                                     <p class="card-text float-start">
                                         <del class="text-muted">€{{ item.original_price|floatformat:2 }}</del><br>
@@ -111,7 +119,11 @@
                                     {% for item in recommendations %}
                                     <div class="swiper-slide">
                                         <a class="text-black text-decoration-none" href="{% url 'product_detail' item.product.id %}">
+                                            {% if item.product.image %}
                                             <img class="img-fluid rounded mx-auto d-block" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                            {% else %}
+                                                <img class="card-img-top img-fluid rounded-1" src="{{ MEDIA_URL }}no-image-placeholder.png" alt="No image available">
+                                            {% endif %}
                                             <h5 class="text-center my-3 text-decoration-none">{{ item.product.name }}</h5>
                                         </a>
                                         <del class="text-muted float-start">€{{ item.original_price|floatformat:2 }}</del><br>
