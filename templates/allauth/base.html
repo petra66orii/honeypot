@@ -86,7 +86,7 @@
             <!-- Admin panel link -->
             {% if user.is_authenticated and user.is_staff %}
             <li class="list-inline-item mx-0">
-                <a class="text-black text-decoration-none" aria-current="page" href="{% url 'add_product' %}">Admin</a>
+                <a class="text-black text-decoration-none" aria-current="page" href="{% url 'admin_management' %}">Admin</a>
             </li>
             <li class="list-inline-item mx-1 border-start border-line"></li>
             <li class="list-inline-item mx-0">
