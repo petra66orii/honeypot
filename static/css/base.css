@@ -26,6 +26,10 @@ header {
     font-family: 'Work Sans', 'Times New Roman', Times, serif;
 }
 
+.offcanvas-body {
+    background: url('/media/header-background.png') repeat fixed;
+}
+
 .page-title-font {
     font-family: "Lavishly Yours", Geneva, Verdana, sans-serif;
     color: #000;
