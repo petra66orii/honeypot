@@ -1,3 +1,5 @@
+import re
+
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
@@ -56,7 +58,7 @@ class EditProfileForm(forms.ModelForm):
 
     def clean_username(self):
         username = self.cleaned_data.get("username")
-        if username and not username.isalnum():
+        if username and not re.match(r'^[a-zA-Z0-9@\.\+\-\_]+$', username):
             raise ValidationError(
                 "Username may contain only letters, numbers, and @/./+/-/_."
                 )
