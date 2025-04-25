@@ -60,6 +60,14 @@ header {
     right: auto;
 }
 
+.dropdown-item:focus, .dropdown-item:hover {
+    background-color: #b973da !important;
+}
+
+.dropdown-item:active {
+    background-color: #8d27bd !important;
+} 
+
 /* Body Settings */
 
 body {
