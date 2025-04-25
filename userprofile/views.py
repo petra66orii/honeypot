@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
+from django.core.paginator import Paginator
 from checkout.models import Order
 from .models import UserProfile
 from .forms import UserProfileForm, EditProfileForm
@@ -36,12 +37,17 @@ def user_profile(request):
                 )
     else:
         form = UserProfileForm(instance=profile)
-    orders = profile.orders.all()
+
+    orders = profile.orders.all().order_by('-date')
+    paginator = Paginator(orders, 10)
+    page_number = request.GET.get('page')
+    page_orders = paginator.get_page(page_number)
 
     context = {
         'form': form,
-        'orders': orders,
-        'on_profile_page': True
+        'orders': page_orders,
+        'on_profile_page': True,
+        'page_orders': page_orders,
     }
     return render(request, 'userprofile/profile.html', context)
 
