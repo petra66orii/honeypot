@@ -8,6 +8,11 @@ from django_countries.fields import CountryField
 
 # Create your models here.
 class UserProfile(models.Model):
+    """
+    User Profile model to store additional information about the user.
+    This model extends the default User model to include fields
+    such as phone number, address, and location.
+    """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=20, null=True, blank=True)
     street_address1 = models.CharField(max_length=255)

@@ -6,5 +6,8 @@ class UserprofileConfig(AppConfig):
     name = "userprofile"
 
     def ready(self):
+        """
+        Ensures that the signals are imported and
+        connected when the app is ready.
+        """
         import userprofile.signals
-        # Import the signals module to ensure signal handlers are connected

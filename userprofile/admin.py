@@ -4,6 +4,10 @@ from .models import UserProfile
 
 # Register your models here.
 class UserProfileAdmin(admin.ModelAdmin):
+    """
+    Admin interface for managing UserProfile objects.
+    This class customizes the display and behavior of the UserProfile.
+    """
     list_display = (
         'user',
         'phone_number',
