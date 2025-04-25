@@ -429,18 +429,79 @@ Since it's an e-commerce website that sells honey, the color scheme is fairly si
 
 # Deployment and Local Development
 
-## Deployment
+## Create a Database
 
-1. Log in to **[Heroku](https://www.heroku.com/)** if you already have an account with them. If not, **[create an account](https://signup.heroku.com/)**.
-2. Once signed in, click on the "**Create New App**" button located above your dashboard. Give your app a unique name, choose the region you're in (United States/Europe) and click "**Create app**".
-3. Before deploying, you need to go to the **Settings** tab. Once there, scroll down and click on **Reveal Config Vars** to open this section.
-4. In this section, enter all of your environment variables that are present in your `env.py` file. Fields like `DATABASE_URL`, `SECRET_KEY`, `CLOUDINARY_URL` (*if using Cloudinary*), or `AWS_ACCESS_ID_KEY` and `AWS_SECRET_ACCESS_KEY` if using Amazon AWS for storage, `EMAIL_HOST_USER` and `EMAIL_HOST_PASSWORD` if you are planning on sending emails to users (like having a *Reset Password* functionality).
-5. After that, make sure to go to the **Resources** tab and make sure Heroku didn't automatically set up a database for you. If that happens, simply remove the PostgreSQL database.
-6. Now, go to the **Deploy** tab. Once there, in the **Deployment Method** section, click `GitHub` and if needed, authorize `GitHub` to access your `Heroku` account. Click **Connect to GitHub**.
-7. Once connected, look up your GitHub repository by entering the name of it under **Search for a repository to connect to** and click **Search**. After you've found your repo, click **Connect**. 
-8. Now, you can click on **Enable Automatic Deploys** (optional, but I'd recommend it to save time and to detect any issues should they arise), and then select **Deploy Branch**. *If you enabled automatic deploys, every time you push changes to GitHub, the app will be automatically deployed every time, just like you would with a webpage deployed on GitHub Pages*.
-9. The app can take a couple of minutes until it's deployed. Once it's done, you'll see the message **Your app was successfully deployed** and a **View** button will come up where you can see your deployed app. 
+1. Go to [PostgreSQL from Code Institute](https://dbs.ci-dbs.net/).
+2. Enter your email address.
+3. Click 'Submit' and wait until the database is created.
+4. Once you've received a notification that your database has been created, navigate to your email address.
+5. Copy the link provided in the email.
 
+## Django Project Settings
+
+6. In the project workspace, create a file named 'Procfile'.
+7. Add the following code replacing ```<myproject>``` with the actual project name then save the file:
+
+    ``` python
+    web: gunicorn <myproject>.wsgi:application
+    ```
+
+8. Generate a secret key for your project - go to [Randon Keygen](https://randomkeygen.com/) and copy any random keys for your project. *Note: Your Secret Key in your Heroku app has to be different from the key in your workspace, so you'll need to generate two different keys for each.*
+9. Create a file named `.python-version` and add the Python version that you're using in your workspace, like this: `3.12.9` (or whatever version you're currently using)
+10. Now, create a file named 'env.py'. This file contains all of your environment variables like `EMAIL_HOST_USER`, `EMAIL_HOST_PASSWORD` and your `Stripe` keys.
+11. Add the following code, replacing ```<myurl>``` with the URL just copied from Code Institute's PostgreSQL and ```<mykey>``` with your generated secret key then save the file:
+
+    ``` python
+    import os
+
+    os.environ["DATABASE_URL"]=<myurl>
+    os.environ["SECRET_KEY"]=<mykey>
+    ```
+
+12. Open 'settings.py' and add the following near the top of the code:
+
+    ```python
+    import os
+    import dj_database_url
+    if os.path.isfile('env.py'):
+    import env
+    ```
+
+13. Further down the page, replace any current instance of the SECRET_KEY variable with:
+
+    ``` python
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    ```
+
+14. Replace the DATABASES variable with
+
+    ```python
+    DATABASES = {
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    }
+    ```
+
+15. Save the file then run ```python manage.py migrate``` in the terminal
+16. Commit and push these changes to the repository
+
+## Heroku Deployment
+
+17. Log in to **[Heroku](https://www.heroku.com/)** if you already have an account with them. If not, **[create an account](https://signup.heroku.com/)**.
+18. Once signed in, click on the "**Create New App**" button located above your dashboard. Give your app a unique name, choose the region you're in (United States/Europe) and click "**Create app**".
+19. Before deploying, you need to go to the **Settings** tab. Once there, scroll down and click on **Reveal Config Vars** to open this section.
+20. In this section, enter all of your environment variables that are present in your `env.py` file. Fields like:
+ * `DATABASE_URL` - Your PostgreSQL database URL that you received in your email
+ * `SECRET_KEY` - (*!!! Important: This key has to be a different one from the secret key within your workspace.*)
+ * `CLOUDINARY_URL` - *If using Cloudinary*
+ * `AWS_ACCESS_ID_KEY` and `AWS_SECRET_ACCESS_KEY` - If using Amazon AWS for storage
+ * `EMAIL_HOST_USER` and `EMAIL_HOST_PASSWORD` - If you are planning on sending emails to users (like having a *Reset Password* functionality).
+ * `USE_AWS` - Add 'True' to `Value` field
+ * `STRIPE_PUBLIC_KEY`, `STRIPE_SECRET_KEY` and `STRIPE_WH_SECRET` - If you're using a payment API like Stripe
+21. After that, make sure to go to the **Resources** tab and make sure Heroku didn't automatically set up a database for you. If that happens, simply remove the PostgreSQL database.
+22. Now, go to the **Deploy** tab. Once there, in the **Deployment Method** section, click `GitHub` and if needed, authorize `GitHub` to access your `Heroku` account. Click **Connect to GitHub**.
+23. Once connected, look up your GitHub repository by entering the name of it under **Search for a repository to connect to** and click **Search**. After you've found your repo, click **Connect**. 
+24. Now, you can click on **Enable Automatic Deploys** (optional, but I'd recommend it to save time and to detect any issues should they arise), and then select **Deploy Branch**. *If you enabled automatic deploys, every time you push changes to GitHub, the app will be automatically deployed every time, just like you would with a webpage deployed on GitHub Pages*.
+25. The app can take a couple of minutes until it's deployed. Once it's done, you'll see the message **Your app was successfully deployed** and a **View** button will come up where you can see your deployed app. 
 
 ## Local Development
 
