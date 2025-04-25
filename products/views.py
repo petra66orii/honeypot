@@ -13,6 +13,9 @@ from .forms import ProductForm, ReviewForm
 def all_products(request):
     """
     A view that displays all of the products
+    in the store, with optional search and filtering.
+    Products can be filtered by category and sorted
+    by name, price, or rating.
     """
     products = Product.objects.all()
     query = None
@@ -85,6 +88,9 @@ def all_products(request):
 def product_detail(request, product_id):
     """
     A view to show individual product details
+    and handle product reviews.
+    Displays product information, related products,
+    reviews, and a review form.
     """
     product = get_object_or_404(Product, pk=product_id)
     related_products = Product.objects.filter(
@@ -182,7 +188,10 @@ def delete_review(request, product_id, review_id):
 # Function borrowed from Boutique Ado walkthrough project
 @login_required
 def add_product(request):
-    """ Add a product to the store """
+    """
+    Add a product to the store
+    Only accessible to superusers (store owners).
+    """
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return render(request, "403.html")
@@ -211,7 +220,12 @@ def add_product(request):
 
 @login_required
 def edit_product(request, product_id):
-    """ Edit a product in the store """
+    """
+    Edit a product in the store
+    Only accessible to superusers (store owners).
+    Fetches the product object, validates the form with the new content,
+    saves the product if valid, and displays success/error messages.
+    """
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return render(request, "403.html")
@@ -243,7 +257,12 @@ def edit_product(request, product_id):
 
 @login_required
 def delete_product(request, product_id):
-    """ Delete a product from the store """
+    """
+    Delete a product from the store
+    Only accessible to superusers (store owners).
+    Fetches the product object and deletes it.
+    Displays success/error messages.
+    """
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only store owners can do that.')
         return render(request, "403.html")
@@ -260,6 +279,8 @@ def delete_product(request, product_id):
 def manage_reviews(request):
     """
     Admin view to manage all reviews (approve, edit, delete).
+    Only accessible to superusers (store owners).
+    Displays all reviews with options to approve or delete them.
     """
     if not request.user.is_staff:
         # Ensure only admins can access this page
@@ -280,6 +301,9 @@ def manage_reviews(request):
 def approve_review(request, review_id):
     """
     Approve a review and allow it to be displayed on the product page.
+    Only accessible to superusers (store owners).
+    Fetches the review object, sets it as approved,
+    and saves the changes.
     """
     if not request.user.is_staff:
         messages.error(
@@ -300,6 +324,9 @@ def approve_review(request, review_id):
 def admin_delete_review(request, review_id):
     """
     Delete a review.
+    Only accessible to superusers (store owners).
+    Fetches the review object and deletes it.
+    Displays success/error messages.
     """
     if not request.user.is_staff:
         messages.error(
@@ -319,6 +346,9 @@ def admin_delete_review(request, review_id):
 def admin_edit_review(request, review_id):
     """
     Edit an existing review.
+    Only accessible to superusers (store owners).
+    Fetches the review object, validates the form with the new content,
+    saves the review if valid, and displays success/error messages.
     """
     if not request.user.is_staff:
         messages.error(
