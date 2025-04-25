@@ -104,8 +104,6 @@ Users can do the following:
 * Review Products: [EPIC: Product Reviews](https://github.com/petra66orii/honeypot/milestone/3)
 * Purchase Products: [EPIC: Checkout](https://github.com/petra66orii/honeypot/milestone/5)
 
-## Data Schema
-
 ## Data Schema 
 
 Planning for the database involved creating an ERD diagram to see the relationships between the data models:
@@ -123,7 +121,7 @@ The application uses a relational database to store and manage data. Below is th
 * `price`: DecimalField (max_digits=10) - Price of the product
 * `description`: TextField - Description of product
 * `sku`: CharField (max_length=100) - Unique indentifier of the product
-* `avg_rating`: FloatField (default=0.0) - Average rating of the product
+* `rating`: FloatField (default=0.0) - Average rating of the product
 * `image`: ImageField - Picture of the product
 
 ### ProductReview Model
@@ -134,84 +132,97 @@ The application uses a relational database to store and manage data. Below is th
 * `product`: *ForeignKey* to the *Product* model - *Relation*:
 * `review_text`: TextField - The content of the review
 * `rating`: FloatField - Rating of the product
+* `approved`: BooleanField - Whether the review is approved or not
+* `created_on`: DateTimeField - Date of creation
 
 ### Category Model
 
 **Fields**:
 
-* `name` = CharField (max_length=100) - Name of the category in the Admin panel
-* `friendly_name` = CharField (max_length=100) - Category name displayed in the website
-* `has_discount` = BooleanField - Boolean for whether the products in said category are discounted or not
+* `name`: CharField (max_length=100) - Name of the category in the Admin panel
+* `friendly_name`: CharField (max_length=100) - Category name displayed in the website
  
 ### UserProfile Model
 
 **Fields**:
 
-* `user` = *OneToOneField* to the *User* model (*Relation*: One user has one profile)
-* `profile_picture` = ImageField - Optional profile picture of the user
-* `phone_number` = CharField (max_length=20) - User's phone number
-* `street_address1` = CharField (max_length=255) - First line of the address
-* `street_address2` = CharField (max_length=255) - Second (optional) line of the address
-* `country` = CharField (max_length=100) - User's country of residence
-* `county` = CharField (max_length=100) - User's county of residence
-* `town` = CharField (max_length=100) - User's town/city of residence
-* `postcode` = CharField (max_length=20) - User's postcode
+* `user`: *OneToOneField* to the *User* model (*Relation*: One user has one profile)
+* `phone_number`: CharField (max_length=20) - User's phone number
+* `street_address1`: CharField (max_length=255) - First line of the address
+* `street_address2`: CharField (max_length=255) - Second (optional) line of the address
+* `country`: CharField (max_length=100) - User's country of residence
+* `county`: CharField (max_length=100) - User's county of residence
+* `town`: CharField (max_length=100) - User's town/city of residence
+* `postcode`: CharField (max_length=20) - User's postcode
 
 ### Order Model
 
 **Fields**:
 
-* `order_number` = CharField (max_length=100) - Unique number order
-* `user_profile` = *ForeignKey* to the *UserProfile* model
-* `first_name` = CharField (max_length=150) - User's first name
-* `last_name` = CharField (max_length=150) - User's last name
-* `email` = EmailField - User's email address
-* `phone_number` = CharField (max_length=20) - User's phone number
-* `address1` = CharField (max_length=255) - First line of the address
-* `address2` = CharField (max_length=255) - Second (optional) line of the address
-* `country` = CharField (max_length=100) - User's country of residence
-* `town` = CharField (max_length=100) - User's town/city of residence
-* `county` = CharField (max_length=100) - User's county of residence
-* `postcode` = CharField (max_length=20) - User's postcode
-* `date` = DateTimeField - Date of purchase
-* `delivery_cost` = DecimalField (max_digits=10) - Cost of delivery
-* `order_total` = IntegerField - Total number of products ordered
-* `total_price` = DecimalField(max_digits=10) - Total price of the order
-* `stripe_pid` = CharField (max_length=255) - Unique client secret for Stripe API
+* `order_number`: CharField (max_length=100) - Unique number order
+* `user_profile`: *ForeignKey* to the *UserProfile* model
+* `first_name`: CharField (max_length=150) - User's first name
+* `last_name`: CharField (max_length=150) - User's last name
+* `email`: EmailField - User's email address
+* `phone_number`: CharField (max_length=20) - User's phone number
+* `street_address1`: CharField (max_length=255) - First line of the address
+* `street_address2`: CharField (max_length=255) - Second (optional) line of the address
+* `country`: CharField (max_length=100) - User's country of residence
+* `town`: CharField (max_length=100) - User's town/city of residence
+* `county`: CharField (max_length=100) - User's county of residence
+* `postcode`: CharField (max_length=20) - User's postcode
+* `date`: DateTimeField - Date of purchase
+* `delivery_cost`: DecimalField (max_digits=10) - Cost of delivery
+* `bag`: TextField - Contents of the bag
+* `order_total`: IntegerField - Total number of products ordered
+* `total_price`: DecimalField(max_digits=10) - Total price of the order
+* `stripe_pid`: CharField (max_length=255) - Unique client secret for Stripe API
+* `status`: CharField (max_length=20) - Whether the order has been fulfilled or not
 
 ### OrderItem Model
 
 **Fields**:
 
-* `order` = *ForeignKey* to the *Order* model
-* `product` = *ForeignKey* to the *Product* model
-* `quantity` = IntegerField - Quantity of the item bought
-* `price_at_purchase` = DecimalField (max_digits=10) - Price paid when item was purchased
-* `item_total` = DecimalField (max_digits=10) - Total price of the product
+* `order`: *ForeignKey* to the *Order* model
+* `product`: *ForeignKey* to the *Product* model
+* `quantity`: IntegerField - Quantity of the item bought
+* `item_total`: DecimalField (max_digits=10) - Total price of the product
 
 ### BlogPost Model
 
 **Fields**:
 
-* `author` = *ForeignKey* to the *User* model
-* `title` = CharField (max_length=255) - Title of the blog post
-* `slug` = SlugField - Blog post's slug
-* `content` = TextField - Content of the post
-* `created_on` = DateTimeField - Date of creation
-* `updated_on` = DateTimeField - Date of update (if any)
-* `status` = CharField (max_length=10) - Whether the post is a draft or published
-* `excerpt` = TextField - A short excerpt of the post
-* `featured_image` = ImageField - Feautred image (optional)
+* `author`: *ForeignKey* to the *User* model
+* `title`: CharField (max_length=255) - Title of the blog post
+* `slug`: SlugField - Blog post's slug
+* `content`: TextField - Content of the post
+* `post_type`: CharField (max_length=10) - Whether the post is a regular blog post or recipe
+* `created_at`: DateTimeField - Date of creation
+* `updated_at`: DateTimeField - Date of update (if any)
+* `status`: CharField (max_length=10) - Whether the post is a draft or published
+* `excerpt`: TextField - A short excerpt of the post
+* `featured_image`: ImageField - Feautred image (optional)
 
-### Comments Model
+### Comment Model
 
 **Fields**:
 
-* `blog_post` = *ForeignKey* to the *BlogPost* model
-* `user` = *ForeignKey* to the *User* model
-* `content` = TextField - Content of comments
-* `created_on` = DateTimeField - Date of comment posted
-* `updated_on` = DateTimeField - Date of comment updated (if any)
+* `blog_post`: *ForeignKey* to the *BlogPost* model
+* `user`: *ForeignKey* to the *User* model
+* `approved`: BooleanField - Whether the comment is approved or not
+* `content`: TextField - Content of comments
+* `created_on`: DateTimeField - Date of comment posted
+
+### ProductCarousel Model
+
+* `name`: CharField (max_length=255) - Name of the product
+* `image`: ImageField - The product's image
+
+### Testimonial Model
+
+* name: CharField (max_length=100) - The author's name
+* text: TextField - The content of the testimonial
+* rating: PositiveIntegerField (default=5) - Rating included in the testimonial
 
 ## Business Model
 
