@@ -6,7 +6,7 @@ STATUS = ((0, 'Draft'), (1, 'Published'))
 # Create your models here.
 
 
-# Blog post model - borrowed and adapted from Codestar Blog project
+# Models borrowed and adapted from my Timeless Travel project
 class BlogPost(models.Model):
     """
     Stores a single blog post entry related to :model:`auth.User`.
@@ -59,7 +59,6 @@ class BlogPost(models.Model):
         return f"{self.title} | Written by {self.author}"
 
 
-# Comments model
 class Comment(models.Model):
     """
     Stores a single comment entry related to :model:`auth.User`

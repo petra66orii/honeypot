@@ -305,6 +305,11 @@ class PostDeleteView(AdminRequiredMixin, LoginRequiredMixin, DeleteView):
 
 @login_required
 def comment_management(request):
+    """
+    View for managing comments.
+    Displays a paginated list of all comments.
+    Allows admins to approve or delete comments.
+    """
 
     if not request.user.is_staff:
         # Ensure only admins can access this page
@@ -327,6 +332,11 @@ def comment_management(request):
 def approve_comment(request, comment_id):
     """
     Approve a review and allow it to be displayed on the product page.
+    This view is only accessible to staff users.
+
+    Args:
+        request: The HTTP request object.
+        comment_id: The ID of the comment to approve.
     """
     if not request.user.is_staff:
         messages.error(
@@ -346,7 +356,11 @@ def approve_comment(request, comment_id):
 @login_required
 def admin_delete_comment(request, comment_id):
     """
-    Delete a review.
+    Delete a comment.
+    This view is only accessible to staff users.
+    Args:
+        request: The HTTP request object.
+        comment_id: The ID of the comment to delete.
     """
     if not request.user.is_staff:
         messages.error(
