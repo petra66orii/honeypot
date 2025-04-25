@@ -54,6 +54,14 @@ def user_profile(request):
 
 @login_required
 def edit_profile(request):
+    """
+    Displays the edit profile page for the user.
+    Args:
+        request: The HTTP request object.
+    Returns:
+        An HTTPResponse object rendering the
+        'userprofile/edit_profile.html' template.
+    """
     if request.method == "POST":
         form = EditProfileForm(
             request.POST,
@@ -78,6 +86,15 @@ def edit_profile(request):
 
 @login_required
 def change_password(request):
+    """
+    Displays the change password page for the user.
+
+    Args:
+        request: The HTTP request object.
+    Returns:
+        An HTTPResponse object rendering the
+        'userprofile/change_password.html' template.
+        """
     form = PasswordChangeForm(request.user, request.POST or None)
 
     if request.method == "POST" and form.is_valid():
@@ -121,6 +138,16 @@ def delete_account(request):
 
 
 def order_history(request, order_number):
+    """
+    Displays the order history page for the user.
+
+    Args:
+        request: The HTTP request object.
+        order_number: The order number to retrieve.
+    Returns:
+        An HTTPResponse object rendering the
+        'checkout/checkout_success.html' template.
+    """
     order = get_object_or_404(Order, order_number=order_number)
 
     messages.info(request, (
