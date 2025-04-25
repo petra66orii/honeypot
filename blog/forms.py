@@ -18,6 +18,7 @@ class CreatePost(forms.ModelForm):
                   'status',
                   'excerpt',
                   'featured_image',
+                  'post_type',
                   ]
         widgets = {
             'content': SummernoteWidget(),
@@ -38,6 +39,7 @@ class EditPost(forms.ModelForm):
                   'status',
                   'excerpt',
                   'featured_image',
+                  'post_type',
                   ]
         widgets = {
             'content': SummernoteWidget(),
