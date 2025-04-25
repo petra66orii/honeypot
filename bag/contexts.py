@@ -7,7 +7,9 @@ from products.models import Product
 
 # Bag contents function borrowed from the Boutique Ado walkthrough project
 def bag_contents(request):
-
+    """
+    Context processor that returns the contents of the shopping bag
+    """
     bag_items = []
     total = 0
     product_count = 0

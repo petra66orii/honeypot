@@ -72,6 +72,11 @@ def view_bag(request):
 def add_to_bag(request, item_id):
     """
     Add the specified product to the shopping bag
+    and redirect to the previous page.
+
+    Args:
+        request: The HTTP request object.
+        item_id: The ID of the product to add to the bag.
     """
     product = get_object_or_404(Product, pk=item_id)
     quantity = int(request.POST.get('quantity'))
@@ -113,6 +118,11 @@ def add_to_bag(request, item_id):
 def update_bag(request, item_id):
     """
     Update the quantity of the specified product to the specified amount
+    and redirect to the shopping bag page.
+
+    Args:
+        request: The HTTP request object.
+        item_id: The ID of the product to update in the bag.
     """
     product = get_object_or_404(Product, pk=item_id)
     quantity = int(request.POST.get('quantity'))
@@ -138,7 +148,11 @@ def update_bag(request, item_id):
 
 def remove_from_bag(request, item_id):
     """
-    Remove the item from the shopping bag
+    Remove the item from the shopping bag and redirect to the bag page.
+
+    Args:
+        request: The HTTP request object.
+        item_id: The ID of the product to remove from the bag.
     """
     try:
         bag = request.session.get('bag', {})
@@ -154,6 +168,10 @@ def remove_from_bag(request, item_id):
 def buy_now(request, item_id):
     """
     Add the item to the bag and redirect to checkout
+
+    Args:
+        request: The HTTP request object.
+        item_id: The ID of the product to add to the bag.
     """
     quantity = 1
     redirect_url = '/checkout/'
