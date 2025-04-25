@@ -106,9 +106,13 @@ Users can do the following:
 
 ## Data Schema 
 
-Planning for the database involved creating an ERD diagram to see the relationships between the data models:
+Planning for the database involved creating an ERD to see the relationships between the data models. Models have changed and evolved over the course of this project, so here is the initial ERD image:
 
-![ERD Diagram](static/images/README/erd-diagram.png)
+![Initial ERD Diagram](static/images/README/initial-erd-diagram.png)
+
+And here is the final version of the ERD:
+
+![Final ERD Diagram](static/images/README/final-erd-diagram.png)
 
 The application uses a relational database to store and manage data. Below is the data schema:
 
