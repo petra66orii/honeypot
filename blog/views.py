@@ -39,9 +39,36 @@ class BlogPostList(generic.ListView):
         paginate_by: The number of posts to display per page.
     """
     model = BlogPost
-    queryset = BlogPost.objects.filter(status=1).order_by('-created_at')
+    queryset = BlogPost.objects.filter(
+        status=1,
+        post_type='blog'
+        ).order_by('-created_at')
     template_name = "blog/blog_list.html"
     paginate_by = 5
+
+
+class RecipeListView(generic.ListView):
+    """
+    Displays a paginated list of Recipe objects.
+    Allows users to view recipes separately from other blog posts.
+
+    Attributes:
+        model: The BlogPost model.
+        template_name: The HTML template used to render the list.
+        context_object_name: The name of the variable used
+        in the template to access the list of recipes.
+        paginate_by: The number of recipes to display per page.
+    """
+    model = BlogPost
+    template_name = 'blog/recipes_list.html'
+    context_object_name = 'recipes'
+    paginate_by = 6
+
+    def get_queryset(self):
+        return BlogPost.objects.filter(
+            post_type='recipe',
+            status='1'
+        ).order_by('-created_at')
 
 
 class PostDetailView(DetailView):
@@ -60,6 +87,11 @@ class PostDetailView(DetailView):
     model = BlogPost
     template_name = 'blog/blog_post.html'
     context_object_name = 'blogpost'
+
+    def get_template_names(self):
+        if self.object.post_type == 'recipe':
+            return ['blog/recipe_detail.html']
+        return super().get_template_names()
 
     def get_context_data(self, **kwargs):
         """
