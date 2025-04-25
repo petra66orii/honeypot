@@ -11,6 +11,31 @@ from products.models import Product
 
 # Create your models here.
 class Order(models.Model):
+    """
+    Order model to store order details
+    and link to the user profile.
+
+    Attributes:
+        order_number (str): Unique identifier for the order.
+        user_profile (ForeignKey): Link to the user profile.
+        first_name (str): First name of the user.
+        last_name (str): Last name of the user.
+        email (str): Email address of the user.
+        phone_number (str): Phone number of the user.
+        street_address1 (str): First line of the street address.
+        street_address2 (str): Second line of the street address.
+        country (str): Country of the user.
+        town (str): Town of the user.
+        county (str): County of the user.
+        postcode (str): Postcode of the user.
+        date (datetime): Date and time of the order.
+        delivery_cost (Decimal): Cost of delivery.
+        bag (str): JSON string of the items in the order.
+        order_total (Decimal): Total cost of the items in the order.
+        total_price (Decimal): Total price of the order including delivery.
+        stripe_pid (str): Stripe payment ID.
+        status (str): Status of the order (unfulfilled or fulfilled).
+        """
 
     STATUS_CHOICES = [
         ('unfulfilled', 'Unfulfilled'),
@@ -96,6 +121,15 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
+    """
+    OrderItem model to store individual items in an order.
+
+    Attributes:
+        order (ForeignKey): Link to the order.
+        product (ForeignKey): Link to the product.
+        quantity (int): Quantity of the product.
+        item_total (Decimal): Total cost of the item.
+    """
     order = models.ForeignKey(
         Order,
         null=False,

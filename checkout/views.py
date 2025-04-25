@@ -201,7 +201,9 @@ def checkout_success(request, order_number):
 
 
 def order_management(request):
-
+    """
+    A view to manage orders
+    """
     if not request.user.is_staff:
         # Ensure only admins can access this page
         messages.error(
@@ -224,6 +226,9 @@ def order_management(request):
 
 
 def mark_order_fulfilled(request, order_number):
+    """
+    A view to mark an order as fulfilled
+    """
     if request.method == 'POST':
         order = get_object_or_404(Order, order_number=order_number)
         order.status = 'fulfilled'

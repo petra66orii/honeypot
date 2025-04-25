@@ -3,6 +3,9 @@ from .models import Order
 
 
 class OrderForm(forms.ModelForm):
+    """
+    Form to collect order information
+    """
     class Meta:
         model = Order
         fields = ('first_name', 'last_name', 'email', 'phone_number',

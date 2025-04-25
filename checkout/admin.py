@@ -4,6 +4,12 @@ from .models import Order
 
 # Register your models here.
 class OrderAdmin(admin.ModelAdmin):
+    """
+    Admin settings for Order model.
+    This class customizes the admin interface for the Order model.
+    It specifies which fields are read-only, which fields to display
+    in the list view, and the ordering of the list.
+    """
     readonly_fields = ('order_number', 'date',
                        'delivery_cost', 'order_total',
                        'total_price',)

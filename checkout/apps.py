@@ -6,4 +6,7 @@ class CheckoutConfig(AppConfig):
     name = "checkout"
 
     def ready(self):
+        """
+        Connect signals when the app is ready.
+        """
         import checkout.signals
