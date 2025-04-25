@@ -1,9 +1,11 @@
 from django.db.models.signals import post_save
 from allauth.account.signals import user_signed_up
 from django.dispatch import receiver
-from django.contrib.auth.models import User
-from .models import UserProfile
 from django.contrib import messages
+from django.contrib.auth.models import User
+
+from .models import UserProfile
+from checkout.models import Order
 
 
 @receiver(post_save, sender=User)
@@ -28,6 +30,11 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     """
     Saves the user's profile whenever the User model is saved.
+
+    Args:
+        sender: The User model class.
+        instance: The User object being saved.
+        kwargs: Additional keyword arguments.
     """
     if hasattr(instance, 'userprofile'):
         instance.userprofile.save()
@@ -49,3 +56,46 @@ def on_user_signup(request, user, **kwargs):
     """
     messages.success(request,
                      "You have successfully registered!")
+
+
+@receiver(post_save, sender=User)
+def assign_guest_orders_to_new_user(sender, instance, created, **kwargs):
+    """
+    Assigns guest orders to a new user profile upon user creation.
+    This signal handler is triggered when a new User instance is created.
+    It links any guest orders (orders without a user profile) that
+    match the user's email address to the newly created UserProfile.
+
+    Args:
+        sender: The User model class.
+        instance: The newly created User object.
+        created: A boolean flag indicating if a new user is created.
+        kwargs: Additional keyword arguments.
+    """
+    if created:
+        user = instance
+        try:
+            profile = user.userprofile
+        except UserProfile.DoesNotExist:
+            profile = UserProfile.objects.create(user=user)
+
+        # Link orders with matching email that are still unassigned
+        guest_orders = Order.objects.filter(
+            user_profile__isnull=True,
+            email=user.email
+        )
+        for order in guest_orders:
+            order.user_profile = profile
+            order.save()
+
+        if guest_orders.exists():
+            latest_order = guest_orders.order_by('-created_at').first()
+
+            profile.phone_number = latest_order.phone_number
+            profile.street_address1 = latest_order.street_address1
+            profile.street_address2 = latest_order.street_address2
+            profile.town_or_city = latest_order.town_or_city
+            profile.county = latest_order.county
+            profile.postcode = latest_order.postcode
+            profile.country = latest_order.country
+            profile.save()
