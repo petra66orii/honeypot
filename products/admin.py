@@ -26,7 +26,6 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = (
         'name',
         'friendly_name',
-        'has_discount'
     )
 
 
