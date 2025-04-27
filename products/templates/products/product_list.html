@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 
+{% block extra_meta %}
+<meta name="description" content="{{ product.name }} - {{ product.description|truncatechars:155 }}">
+<meta name="keywords" content="honey, {{ product.name }}, natural honey, raw honey, artisanal honey">
+<meta name="author" content="Honeypot">
+<meta property="og:title" content="{{ product.name }} - Natural Honey">
+<meta property="og:description" content="{{ product.description|truncatechars:155 }}">
+{% endblock %}
+
 {% block content %}
 <main>
     <div class="overlay">
