@@ -10,9 +10,9 @@ const options = {
     appearance:  {
         theme: 'stripe',
         variables: {
-            colorPrimary: '#b973da',
+            colorPrimary: '#9957b8',
             colorBackground: '#f5f5f5',
-            colorText: '#b973da',
+            colorText: '#9957b8',
             colorDanger: '#df1b41',
             fontFamily: 'Times New Roman, system-ui, sans-serif',
             spacingUnit: '2px',

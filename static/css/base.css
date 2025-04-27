@@ -61,7 +61,7 @@ header {
 }
 
 .dropdown-item:focus, .dropdown-item:hover {
-    background-color: #b973da !important;
+    background-color: #9957b8 !important;
 }
 
 .dropdown-item:active {
@@ -151,7 +151,7 @@ main {
 }
 
 .btn-purple {
-    background: #b973da;
+    background: #9957b8;
     color: white;
     border-radius: 5px;
     font-size: large;
@@ -191,7 +191,7 @@ main {
 }
 
 .bg-purple {
-    background: #b973da !important;
+    background: #9957b8 !important;
 }
 
 .text-black {
@@ -199,7 +199,11 @@ main {
 }
 
 .text-purple {
-    color: #b973da !important;
+    color: #9957b8 !important;
+}
+
+.text-warning {
+    color: #9c5708 !important;
 }
 
 .overlay {
@@ -212,7 +216,7 @@ main {
 }
 
 a {
-    color: #b973da;
+    color: #9957b8;
     cursor: pointer;
 }
 
@@ -262,7 +266,7 @@ a:hover {
 }
 
 .toggle-popover {
-    background-color: #b973da;
+    background-color: #9957b8;
     color: #000000;
     border: 1px solid #000000;
     border-radius: 5px;
@@ -278,7 +282,7 @@ a:hover {
 }
 
 .toggle-popover:hover {
-    background-color: #8b2fb6;
+    background-color: #611f80;
 }
 
 #signup_form, #login_form {
@@ -306,7 +310,7 @@ a:hover {
 }
 
 .toggle-popover {
-    background-color: #b973da;
+    background-color: #9957b8;
     color: #000000;
     border: 1px solid #000000;
     border-radius: 5px;
@@ -322,7 +326,7 @@ a:hover {
 }
 
 .toggle-popover:hover {
-    background-color: #8b2fb6;
+    background-color: #611f80;
 }
 
 /* Review Section */
@@ -408,11 +412,11 @@ footer {
 }
 
 a {
-    color: #b973da;
+    color: #9957b8;
 }
 
 a:hover {
-    color: #8b2fb6;
+    color: #611f80;
 }
 
 /* Media Queries */

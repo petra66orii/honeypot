@@ -1,26 +1,26 @@
 .form-check-input:checked {
-    background-color: #b973da;
-    border-color: #b973da;
+    background-color: #9957b8;
+    border-color: #9957b8;
 }
 
 .text-info {
-    color: #b973da !important;
+    color: #9957b8 !important;
 }
 
 .page-link {
-    color: #b973da !important;
+    color: #9957b8 !important;
 }
 
 .stripe-style-input {
   box-sizing: border-box;
   padding: 10px 12px;
-  border: 1px solid transparent #b973da;
+  border: 1px solid transparent #9957b8;
   border-radius: 5px;
   background-color: rgb(255, 255, 255);
   box-shadow: 0 3px 5px 0 #e6ebf1;
   -webkit-transition: box-shadow 150ms ease;
   transition: box-shadow 150ms ease;
-  color: #b973da;
+  color: #9957b8;
 }
 
 .StripeElement--focus,
@@ -76,11 +76,11 @@ fieldset {
 select,
 select option {
     border: 1px solid #000 !important;
-    color: #b973da;
+    color: #9957b8;
 }
 
 select option[value=""] {
-    color: #b973da;
+    color: #9957b8;
 }
 
 #loading-overlay {

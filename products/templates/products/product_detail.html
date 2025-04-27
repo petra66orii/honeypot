@@ -58,7 +58,7 @@
                                 <!-- Modal Header -->
                                 <div class="modal-header">
                                 <h4 class="modal-title">Confirm Deletion</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close modal"></button>
                                 </div>
                                 <!-- Modal body -->
                                 <div class="modal-body">
@@ -79,7 +79,7 @@
                             {% csrf_token %}
                             <div class="input-group" style="width: 120px;">
                                 <button type="button" class="btn btn-outline-secondary btn-sm" onclick="changeQuantity(-1)">-</button>
-                                <input type="number" name="quantity" id="quantityInput" value="1" min="1" class="form-control form-control-sm text-center">
+                                <input type="number" name="quantity" id="quantityInput" value="1" min="1" class="form-control form-control-sm text-center" aria-label="Quantity">
                                 <button type="button" class="btn btn-outline-secondary btn-sm" onclick="changeQuantity(1)">+</button>
                             </div>
                             <button type="submit" class="btn btn-purple">Add to Basket</button>
