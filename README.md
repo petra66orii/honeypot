@@ -125,7 +125,7 @@ Planning for the database involved creating an ERD to see the relationships betw
 
 And here is the final version of the ERD:
 
-![Final ERD Diagram](static/images/README/final-erd-diagram.png)
+![Final ERD Diagram](static/images/README/final-ERD-diagram.png)
 
 The application uses a relational database to store and manage data. Below is the data schema:
 
