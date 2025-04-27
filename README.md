@@ -694,6 +694,24 @@ This website has huge potential to expand upon, and a few future implementations
 
 # Technologies
 
+- **Django**: Web framework for backend development, which provided a structured approach to building this website.
+- **PostgreSQL**: Database management system for storing and managing users, products, orders, reviews etc. securely.
+- **Amazon AWS**: Cloud-based image and video management service used for handling images of honey products.
+- **Stripe API**: API that manages payments and orders.
+- **HTML/CSS/JavaScript**: Frontend technologies for creating interactive and responsive user interfaces.
+- **Bootstrap**: Frontend framework for designing mobile-first and responsive websites.
+- **Git/GitHub**: Version control system and platform for project management.
+- **Heroku**: Cloud platform for deploying the application.
+- **VSCode**: IDE for coding and developing the project.
+- **PEP8**: Python style guide used to ensure code readability and consistency.
+- **WAVE Accessibility Tool**: Web accessibility evaluation tool for ensuring accessibility inclusive design practices.
+- **W3C Validator**: Tools for validating HTML, CSS, and web standards used in website development.
+- **dbdiagram.io**: ERD design.
+- **Pexels**: Royalty free images.
+- **Balsamiq**: Wireframe building app.
+- **ChatGPT**: For generating the blog content and prompts for image generation.
+- **LeonardoAI**: Used for generating the product images.
+
 # Deployment and Local Development
 
 ## Create a Database
