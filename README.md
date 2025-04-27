@@ -632,6 +632,19 @@ In order to raise awareness and to further educate users on the benefits of hone
 
 ![Blog page](static/images/README/blog-page.gif)
 
+The Admin is the only one that can create posts:
+
+![Create post first screenshot](static/images/README/create-post1.png)
+![Create post second screenshot](static/images/README/create-post2.png)
+
+Edit them:
+
+![Edit post screenshot](static/images/README/edit-post.png)
+
+And delete them:
+
+![Delete post confirmation](static/images/README/delete-post-confirmation.png)
+
 #### Single Blog Post
 
 Users can click on any blog post and read it:
