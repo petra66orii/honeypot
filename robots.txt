@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /accounts/
+Disallow: /admin/
+Disallow: /bag/
+Sitemap: https://honeypot-6aa199604c8f.herokuapp.com/sitemap.xml
