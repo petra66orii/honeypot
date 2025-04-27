@@ -263,6 +263,8 @@ Email marketing includes newsletters with exclusive discounts, first-time purcha
 
 The Facebook page is optimized with a high-quality logo, engaging cover image, and a compelling About section. A Shop Now button links to the website, and Messenger is set up for customer inquiries.
 
+![Facebook business page](static/images/README/honeypot-mock-facebook-page.png)
+
 Content includes educational posts on honey’s benefits, product highlights, behind-the-scenes production stories, customer testimonials, live Q&As, and seasonal promotions. The brand engages with relevant Facebook groups and creates a community where customers share recipes and reviews.
 
 # Target Audience
