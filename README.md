@@ -833,11 +833,91 @@ To fork the repository:
 ## Validation
 
 ### W3C Validator
+
+There were several errors highlighted in the W3C Validator. The fixes can be seen within these commits:
+
+* [Remove meta tags with description class to correct validation error](https://github.com/petra66orii/honeypot/commit/e73e36a2b05a45cd9f4e5f09cdb3100ab25eb276)
+* [Fix W3C errors](https://github.com/petra66orii/honeypot/commit/6f476d7861c293234e023593ff8320032ef1f607)
+* [Fix further W3C errors and warnings](https://github.com/petra66orii/honeypot/commit/bf41f189971897cf4ed5c59830e2e215420e40ad)
+* [Fix duplicate ID W3C error by separating navbar files](https://github.com/petra66orii/honeypot/commit/aee3d2397ba4cc5f440df10efe91f72466aab3a3)
+
+After these errors were corrected, the W3C validator returned no errors:
+
+![W3C validator](static/images/README/w3c-html-validator.png)
+
 ### Jigsaw CSS Validator
+
+The site passed the CSS Jigsaw validator with no issues:
+
+![CSS Validator](static/images/README/css-jigsaw-validator.png)
+
 ### JS Hint
+
+All JavaScript files passed with no issues with the exception of a missing semicolon:
+
+![JS Hint Validator](static/images/README/jshint-validator1.png)
+![JS Hint Validator](static/images/README/jshint-validator2.png)
+![JS Hint Validator](static/images/README/jshint-validator3.png)
+![JS Hint Validator](static/images/README/jshint-validator4.png)
+![JS Hint Validator](static/images/README/jshint-validator5.png)
+![JS Hint Validator](static/images/README/jshint-validator6.png)
+
 ### PEP8
+
+[Pep8 CI](https://pep8ci.herokuapp.com/) linter was used, the results are as follows:
+
+| App            | File                 | CI Linter Result           |
+|----------------|----------------------|----------------------------|
+| bag            | apps.py              | All clear, no errors found |
+|                | contexts.py          | All clear, no errors found |
+|                | urls.py              | All clear, no errors found |
+|                | views.py             | All clear, no errors found |
+| blog           | admin.py             | All clear, no errors found |
+|                | apps.py              | All clear, no errors found |
+|                | forms.py             | All clear, no errors found |
+|                | models.py            | All clear, no errors found |
+|                | urls.py              | All clear, no errors found |
+|                | views.py             | All clear, no errors found |
+| checkout       | admin.py             | All clear, no errors found |
+|                | apps.py              | All clear, no errors found |
+|                | forms.py             | All clear, no errors found |
+|                | models.py            | All clear, no errors found |
+|                | signals.py           | All clear, no errors found |
+|                | urls.py              | All clear, no errors found |
+|                | views.py             | All clear, no errors found |
+|                | webhook_handler.py   | All clear, no errors found |
+|                | webhooks.py          | All clear, no errors found |
+| home           | admin.py             | All clear, no errors found |
+|                | apps.py              | All clear, no errors found |
+|                | forms.py             | All clear, no errors found |
+|                | models.py            | All clear, no errors found |
+|                | urls.py              | All clear, no errors found |
+|                | views.py             | All clear, no errors found |
+| products       | admin.py             | All clear, no errors found |
+|                | apps.py              | All clear, no errors found |
+|                | forms.py             | All clear, no errors found |
+|                | models.py            | All clear, no errors found |
+|                | urls.py              | All clear, no errors found |
+|                | views.py             | All clear, no errors found |
+| userprofile    | admin.py             | All clear, no errors found |
+|                | apps.py              | All clear, no errors found |
+|                | forms.py             | All clear, no errors found |
+|                | models.py            | All clear, no errors found |
+|                | signals.py           | All clear, no errors found |
+|                | urls.py              | All clear, no errors found |
+|                | views.py             | All clear, no errors found |
+
 ### Wave Accessibility
+
+The website passed the accessibility test with no issues:
+
+![WAVE Accessibility test](static/images/README/wave-accessibility-test.png)
+
 ### Lighthouse Report
+
+The Lighthouse report provided the following results:
+
+![Lighthouse report](static/images/README/lighthouse-report.png)
 
 ## Manual Testing
 ## Fixed Bugs
