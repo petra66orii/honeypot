@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/accounts/login/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/?category=honey,infused%20honey</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/?category=infused%20honey</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/?category=honey-based%20foods,honeycomb</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/?category=propolis%20and%20pollen</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/?category=skincare</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/?category=beeswax</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/?category=honey%20gifts</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/?category=candle%20making%20sets</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/?category=clearance</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/?category=special%20deals</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/recipes/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/about_us/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/bag/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/accounts/signup/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/accounts/password/reset/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/?sort=price&amp;direction=asc</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/?sort=price&amp;direction=desc</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/?sort=rating&amp;direction=desc</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/?sort=rating&amp;direction=asc</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/?sort=category&amp;direction=asc</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/1</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/checkout/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/2</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/3</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/4</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/5</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/6</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/7</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/8</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/9</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/10</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/16</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/17</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/18</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/19</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/11</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/20</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/21</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/22</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/23</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/24</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/12</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/13</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/30</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/14</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/15</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/28</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/29</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/26</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/27</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/?page=2</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/?page=3</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/25</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/32</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/33</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/38</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/39</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/34</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/35</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/40</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/41</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/36</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/37</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/42</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/43</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/ask-the-beekeeper-your-questions-about-honey-and-bees-answered/?next=/blog/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/understanding-honey-crystallization-why-it-happens-and-what-to-do/?next=/blog/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/the-history-of-honey-a-sweet-story-through-the-ages/?next=/blog/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/honey-for-every-season-pairing-different-honey-varieties-with-seasonal-foods/?next=/blog/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/gift-of-gold-thoughtful-honey-themed-gift-ideas-for-every-occasion/?next=/blog/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/?page=2</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/recipes/hot-honey-ricotta-pizza/?next=/blog/recipes/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/recipes/honey-caramel-apple-dip/?next=/blog/recipes/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/recipes/honey-balsamic-roasted-brussels-sprouts/?next=/blog/recipes/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/recipes/honey-bbq-pulled-pork-sliders/?next=/blog/recipes/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/recipes/honey-almond-butter-banana-toast/?next=/blog/recipes/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/recipes/ginger-honey-stir-fry-sauce/?next=/blog/recipes/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/recipes/?page=2</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/products/?page=1</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/honey-in-the-kitchen-beyond-sweetening-savory-and-unexpected-uses/?next=/blog/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/the-buzz-about-bees-supporting-pollinators-and-sustainable-honey-production/?next=/blog/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/diy-beauty-with-honey-simple-recipes-for-radiant-skin-and-hair/?next=/blog/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/honey-vs-sugar-a-sweet-showdown/?next=/blog/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/taste-the-terroir-exploring-the-unique-flavors-of-single-origin-honey/?next=/blog/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/?page=1</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/?page=3</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/recipes/eucalyptus-honey-lemon-sore-throat-soother/?next=/blog/recipes/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/recipes/cinnamon-honey-glazed-chicken-wings/?next=/blog/recipes/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/recipes/buckwheat-honey-blue-cheese-crostini/?next=/blog/recipes/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/recipes/acacia-honey-berry-parfait/?next=/blog/recipes/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/recipes/?page=1</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://honeypot-6aa199604c8f.herokuapp.com/blog/the-sweet-science-understanding-honeys-amazing-properties/?next=/blog/</loc>
+  <lastmod>2025-04-27T17:55:59+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+
+
+</urlset>
