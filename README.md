@@ -685,6 +685,13 @@ Admin can approve comments and/or delete them:
 
 ## Future Implementations
 
+This website has huge potential to expand upon, and a few future implementations I consider in the future would be:
+
+* *Wishlist* feature, where users can add to wishlist products they'd wish to buy in the future.
+* *Testimonials* feature, where users can leave reviews and testimonials regarding the business itself (for now, the testimonials are not implemented, they're read only)
+* *Sign In Social Accounts* feature, where users can sign in using their social media accounts, like Facebook, Google or Apple.
+* *Generate Sales Reports* feature, where the store owner can generate reports to see which products are the best-selling ones, which aren't performing as well, so that they can push offers on the less popular products to increase sales. This also provides great insight for the store owner.
+
 # Technologies
 
 # Deployment and Local Development
