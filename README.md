@@ -421,20 +421,267 @@ Since it's an e-commerce website that sells honey, the color scheme is fairly si
 
 # Features
 
+There are multiple features in this website, and there are plenty of future developments available for this website as well.
+
 ## Existing Features
 
 ### Navbar
+
+The navbar has a lot of options for users:
+
+![Shop dropdown](static/images/README/shop-dropdown.png)
+![Gifts and deals dropdown](static/images/README/gifts-deals-dropdown.png)
+![Blog dropdown](static/images/README/blog-dropdown.png)
+
+Navbar changes its options depending on user's level of access:
+
+1. User not logged in:
+![Navbar not logged in](static/images/README/not-logged-in-navbar.png)
+
+2. User logged in:
+![User logged in](static/images/README/user-navbar.png)
+
+3. Admin logged in:
+![Admin navbar](static/images/README/admin-navbar.png)
+
+The navbar is also responsive:
+
+![Mobile screen home page](static/images/README/mobile-home-page.png)
+![Mobile navbar](static/images/README/offcanvas-mobile-navbar.png)
+
 ### Home Page
+
+The home page is Honeypot's calling card: the honey dripping video is meant to invoke a pleasant feeling and induce craving for honey. The user has the option to go straight to the Products section by clicking on the "Shop Now" button, or they can scroll down to see a carousel of products, where they can see a selection of products being displayed. 
+
+![Home page display](static/images/README/home-page.gif)
+
+Below the products, the users can sign up for the store's newsletter to receive more updates. Scrolling further down, the user can see a selection of positve testimonials from previous customers, praising the products and their quality. Both of these carousels are responsive.
+
+#### Products Carousel
+
+The Products carousel offers a selection of products that changes automatically, but also allows the user to scroll at their own pace. Below the carousel, a button "Check our products" redirects the user to the "Products" page. 
+
+![Products carousel](static/images/README/products-carousel.png)
+
+#### Testimonials
+
+The Testimonials carousel offers a selection of testimonials from happy customers that praise the products they've bought and their quality. The testimonial displays their name, rating and their review. The carousel is changing automatically, providing a pleasant UX.
+
+![Testimonials carousel](static/images/README/testimonials-carousel.png)
+
+#### Newsletter
+
+The newsletter is positioned between the two carousels, so that the user can see the appealing products above the newsletter, whilst the testimonials underneath provide reliable feedback, prompting the user to sign up for this newsletter. The newsletter was set up using MailChimp's embedded code.
+
+![Newsletter](static/images/README/newsletter.png)
+
 ### User Profile
+
+On sign up, a profile is automatically created for users. On the left side of the profile, they have multiple options within their profile, such as editing their delivery infromation, editing their account details, changing their password, and even deleting their account should they desire to do so. On the right side of their profile, there is a section displaying their order history, where they can access their previous orders by clicking on the order number (*See [Checkout](#checkout) section for more information*).
+
+#### My Profile
+
+![My profile](static/images/README/my-profile.png)
+
+At the top of the profile page, the user sees their details like full name, username, and email address (*Note: Did you spot the reference from "The Office"?*). Under these details, the button "Edit Profile" allows the user to make any changes they wish to any of their details. 
+
+![Profle information](static/images/README/profile-info.png)
+
+More profile information is provided underneath in the shape of a form where the user can update their delivery information like street address, county, town (or city), postcode and more. When the user makes an order (while logged in), their delivery information is automatically updated and displayed in their profile and available for future use.
+
+#### Edit Profile
+
+This page gives the user the opportunity to change their sign-in information like username and email address. Underneath this form, the button "Change Password" and "Delete Profile" are displayed.
+
+![Edit profile page](static/images/README/edit-profile.png)
+
+#### Change Password
+
+This page enables the user to change their password. They're required to enter their old password, and then their new password twice to confirm it. If the user doesn't remember their old password, they have the option to click on the "Forgot Password?" link, which redirects them to the page where they can reset their password.
+
+![Change password page](static/images/README/change-password.png)
+
+#### Delete Account
+
+If the user desires to do so, they can opt to delete their account altogther. This change is permanent and irreversible, and the user is let known before making this decision. They're asked to confirm this action, so that if the user accidentally clicks on the button, they can safely cancel it.
+
+![Delete account page](static/images/README/delete-account.png)
+
 ### User Authentication
 
+While orders can be made as guests as well, the user is highly recommended to create an account so that their information can be saved in their profile for future use. Also, if they sign up, they can check their user history, whilst they can't do that as guest users.
+
 #### Sign Up Page
+
+The sign up page requires the user to input their full name, username, email address and password. The form is validated and the user is given information regarding the strength of their password.
+
+![Sign up page](static/images/README/sign-up-page.gif)
+
+#### Confirm Email Page
+
+After signing up, the user is required to verify their email address. An email is automatically sent to the user's email address where a link redirects them to another page, requesting users to confirm their email address. After doing so, the user is redirected to the Sign In page.
+
 #### Sign In Page
-#### Reset Password Feature
+
+This the user sign in page. They can sign in with their username or by using their email address. If the user doesn't remember their password, they can click on the "Forgot Password?" link. 
+
+![Sign in page](static/images/README/sign-in-page.png)
+
+![Sign out page](static/images/README/sign-out-page.png)
+
+#### Reset Password
+
+When redirected to this page, the user is required to input their email address. After this, the user receives a link that redirects them to a page where they can input their new password and confirm it. 
+
+![Reset password](static/images/README/reset-password.png)
+
+### Products Page
+
+The Products page contains all of the products listed, each product having a name, rating (if applicable), their image, and a "Buy Now" button. User can click on either the name of the product or the image to be redirected to the product detail page. 
+
+If the user clicks on the "Buy Now" button, the product is added to cart and the user is immediately redirected to the checkout page.
+
+![Products page](static/images/README/products-page.gif)
+
+#### Product List
+
+Products are listed and paginated, the user can easily navigate throughout the products, and there is a "Sort" option at the top of the page, where the user can sort products depending on price, rating or category.
+
+![Sorting feature](static/images/README/sorting-feature.png)
+
+#### Searching & Filtering 
+
+User can filter the products as well by selecting one of the options in dropdown menus "Shop" and/or "Gift Baskets & Deals" located in the navbar (*See [Navbar](#navbar)*). If they want to look up a particular product, they can look it up by typing the name in the search bar:
+
+![Search bar](static/images/README/search-bar.png)
+
+#### Product Details
+
+The user can see details regarding the product, such as a description, the price and the average rating, alongisde an option to add to basket with the possibility to choose the quantity.
+
+![Product detail page](static/images/README/product-detail.png)
+
+#### Reviews & Ratings
+
+Underneath the product details, user can see the reviews and ratings of the product. In order to leave a review, the user has to first be logged in. They can leave a rating without a review, but they can't leave a review without rating the product.
+
+Once a review is submitted, the user receives a feedback message letting them know that the review is submitted and awaiting approval.
+
+![Review section](static/images/README/review-section.png)
+
+After the review has been approved by the store owner, users can edit and/or delete their own reviews if they want.
+
+The rating feature is interactive, and instead of classical stars, it contains bees. In its initial state, the bees are grey, indicating no rating:
+
+![Rating displaying empty bees](static/images/README/rating-empty-bees.png)
+
+When hovering over a number of bees, the bees are colored and sparkle:
+
+![Rating displaying active bees](static/images/README/rating-active-bees.png)
+
+When the user clicks on the bees, the bees are colored and stay like this:
+
+![Rating displaying full bees](static/images/README/rating-full-bees.png)
+
+#### Related Products
+
+Under the reviews section, users can see products related to the product they are currently viewing.
+
+![Related products section](static/images/README/related-products.png)
+
+### Shopping Bag
+
+The shopping bag feature displays the user's basket. They can choose to update their basket adding or subtracting the quantity of the desired product, or even remove the product altogether if they don't want it anymore.
+
+![Shopping bag page](static/images/README/shopping-bag.png)
+
+#### "You Might Also Like"
+
+Before the "Checkout" button, users come across a section called "You Might Also Like", where related products are displayed, with a small discount in order to persuade the user into purchasing more products before checkout.
+
+!["You might also like" section](static/images/README/you-might-also-like.png)
+
+### Checkout
+
+The checkout has the user's information on the left side (if it's the first order and the user didn't fill in their details in their profile page, the form is empty), and on the right side they get a summary of their products plus the payment section. The user still has the option to update the bag from the checkout page. Once they've filled up the delivery information and payment details, the user receives a confirmation email and is redirected to the successful checkout page.
+
+![Checkout page](static/images/README/checkout.png)
+![Payment section](static/images/README/checkout-payment.png)
+
+#### Successful Checkout
+
+If the payment is successful, the user is redirected to this page, where they get the full details of their order, including the order summary and their delivery details. They will also receive a confirmation email regarding their order.
+
+![Checkout success page](static/images/README/checkout-success.png)
 
 ### Blog Posts
 
+In order to raise awareness and to further educate users on the benefits of honey, users can read blog posts relating to the benefits of honey and what it takes to take up beekeeping. 
+
+![Blog page](static/images/README/blog-page.gif)
+
+#### Single Blog Post
+
+Users can click on any blog post and read it:
+
+![Blog post page](static/images/README/blog-post.png)
+
+#### Recipes
+
+Another useful section for honey lovers is the Recipes section, where users can explore healthy honey recipes that contain our honey. 
+
+![Recipe posts list](static/images/README/recipe-section.png)
+![Recipe post](static/images/README/recipe-post.png)
+
 #### Comments
+
+Users that have an account and are logged in can leave comments on any blog post or recipe post. After being submitted, the user is told that their comment is awaiting approval, in the same manner as the reviews of the products. 
+
+![Comment section](static/images/README/comment-section.png)
+
+After the comment has been approved by the store owner, users can edit and/or delete their own comments if they want.
+
+### Admin Management
+
+Another important feature of this website is the Admin management, where the Admin (i.e. store owner), can manage the website from one place. Admin can add, edit and delete products, reviews and comments, while they can also view the orders placed across the website and fulfill them.
+
+![Admin management page](static/images/README/admin-management.png)
+
+This feature can't be accessed by a regular user. There are no links within the page where they can access it in the first, but even if they write the URL, they're redirected to a 403 error page:
+
+![403 error page](static/images/README/403-error-page.png)
+
+#### Product Management
+
+Admin can add, edit or delete products as they wish:
+
+![Product management first screenshot](static/images/README/product-management-add1.png)
+![Product management second screenshot](static/images/README/product-management-add2.png)
+
+In the products page, store owners can choose to edit or delete their product:
+
+![Admin product view](static/images/README/edit-delete-admin-product-view.png)
+
+![Edit product admin](static/images/README/product-management-edit.png)
+![Delete product modal](static/images/README/product-management-delete.png)
+
+#### Reviews Management
+
+Admin can approve reviews, edit them or delete them entirely:
+
+![Review management table](static/images/README/reviews-management.png)
+
+#### Orders Management
+
+Admin can view orders and fulfill them if they're ready to be dispatched. When Admin clicks on "Mark as Fulfilled", the customer receives an email letting them know that their order is on their way.
+
+![Orders management](static/images/README/orders-management.png)
+
+#### Comments Management
+
+Admin can approve comments and/or delete them:
+
+![Comment management](static/images/README/comments-management.png)
 
 ## Future Implementations
 
