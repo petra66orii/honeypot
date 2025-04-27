@@ -1,0 +1,66 @@
+{% load static %}
+
+<nav class="navbar navbar-light">
+    <div class="container-fluid">
+
+        <!-- Mobile Navbar (Offcanvas) - Used W3Schools Bootstrap 5 offcanvas tutorial -->
+        <button class="btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNavbar" aria-controls="mobileNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-start d-lg-none" tabindex="-1" id="mobileNavbar" aria-labelledby="mobileNavbarLabel">
+            <div class="offcanvas-header">
+                <div class="offcanvas-title" id="mobileNavbarLabel">
+                    <a href="{% url 'home' %}" class="nav-link d-flex align-items-center">
+                        <p class="text-black my-0 logo h1">
+                          <strong>HoneyPot</strong>
+                        </p>
+                        <img src="{% static 'images/icons/honeycomb.png' %}" alt="bee and honeycomb icon" class="ms-2">
+                      </a>
+                      <!-- Display login status -->
+                      {% if user.is_authenticated %}
+                      <p class="text-end m-0 py-2 text-black text-small">Welcome, {{ user.first_name }}</p>
+                      {% else %}
+                      <p class="text-end m-0 py-2 text-black text-small">Welcome! Please <a href="{% url 'account_login' %}">log in</a></p>
+                      {% endif %}
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-black fw-bold" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link text-black dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown">Shop</a>
+                        <ul class="dropdown-menu border-0">
+                            <li><a href="{% url 'products' %}?category=honey,infused_honey" class="dropdown-item">Honey Products</a></li>
+                            <li><a href="{% url 'products' %}?category=infused_honey" class="dropdown-item">Infused Honey</a></li>
+                            <li><a href="{% url 'products' %}?category=honey-based_foods,honeycomb" class="dropdown-item">Honey-Based Food</a></li>
+                            <li><a href="{% url 'products' %}?category=propolis_and_pollen" class="dropdown-item">Propolis & Pollen</a></li>
+                            <li><a href="{% url 'products' %}?category=skincare" class="dropdown-item">Skincare</a></li>
+                            <li><a href="{% url 'products' %}?category=beeswax" class="dropdown-item">Beeswax</a></li>
+                            <li><a href="{% url 'products' %}" class="dropdown-item">All Products</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link text-black dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown">Gift Baskets &amp; Deals</a>
+                        <ul class="dropdown-menu border-0">
+                            <li><a href="{% url 'products' %}?category=honey_gifts" class="dropdown-item">Honey Gifts</a></li>
+                            <li><a href="{% url 'products' %}?category=candle_making_sets" class="dropdown-item">Candle Making Sets</a></li>
+                            <li><a href="{% url 'products' %}?category=clearance" class="dropdown-item">Clearance</a></li>
+                            <li><a href="{% url 'products' %}?category=special_deals" class="dropdown-item">Special Deals</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link text-black dropdown-toggle fw-bold" href="#" data-bs-toggle="dropdown">Blog</a>
+                        <ul class="dropdown-menu border-0">
+                            <li><a href="{% url 'blog' %}" class="dropdown-item">Blog Posts</a></li>
+                            <li><a href="{% url 'recipes' %}" class="dropdown-item">Recipes</a></li>
+                            <li><a href="{% url 'about_us' %}" class="dropdown-item">About Us</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
