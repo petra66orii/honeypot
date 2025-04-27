@@ -523,7 +523,13 @@ The sign up page requires the user to input their full name, username, email add
 
 #### Confirm Email Page
 
-After signing up, the user is required to verify their email address. An email is automatically sent to the user's email address where a link redirects them to another page, requesting users to confirm their email address. After doing so, the user is redirected to the Sign In page.
+After signing up, the user is required to verify their email address.
+
+![Verify email page](static/images/README/verify-email-notification.png)
+
+An email is automatically sent to the user's email address where a link redirects them to another page, requesting users to confirm their email address. After doing so, the user is redirected to the Sign In page.
+
+![Confirm email](static/images/README/confirm-email.png)
 
 #### Sign In Page
 
