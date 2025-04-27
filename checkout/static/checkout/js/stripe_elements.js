@@ -22,7 +22,7 @@ const options = {
 };
 
 const elements = stripe.elements(options);
-const paymentElementOptions = {layout: 'accordion'}
+const paymentElementOptions = {layout: 'accordion'};
 const paymentElement = elements.create('payment', paymentElementOptions);
 paymentElement.mount('#payment-element');
 
