@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block extra_meta %}
-    <meta name="description" content="{{ blogpost.excerpt|default_if_none:'Read this article on our blog about honey, health, and more!' }}">
     <meta name="keywords" content="honey blog, health tips, recipes, wellness blog, {{ blogpost.title }}">
     <meta property="og:title" content="{{ blogpost.title }}">
     <meta property="og:description" content="{{ blogpost.excerpt|default_if_none:'Discover insights about honey, health, and more.' }}">
