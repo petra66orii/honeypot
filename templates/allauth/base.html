@@ -5,7 +5,7 @@
   <head>
     {% block meta %}
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <!-- SEO Meta Tags -->
     <meta name="description" content="Discover the purest, most delicious honey products crafted with care. Taste the nature's finest in every drop.">
@@ -51,7 +51,7 @@
             <h1 class="my-0">
               <strong>HoneyPot</strong>
             </h1>
-            <img src="{% static 'images/icons/honeycomb.png' %}" alt="bee and honeycomb icon" class="ms-2" />
+            <img src="{% static 'images/icons/honeycomb.png' %}" alt="bee and honeycomb icon" class="ms-2">
           </a>
         </div>
     
@@ -62,7 +62,7 @@
         <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
           <form method="GET" action="{% url 'products' %}">
             <div class="input-group w-100">
-            <input class="form-control border border-black rounded-1" type="text" name="q" placeholder="Search our site" />
+            <input class="form-control border border-black rounded-1" type="text" name="q" placeholder="Search our site">
               <div class="input-group-append">
                 <button class="form-control btn btn-black border border-black rounded-1" type="submit">
                 <span class="icon">
@@ -73,7 +73,7 @@
             </div>
           </form>
         </div>
-        <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
+      <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
           <ul class="list-inline list-unstyled text-center text-lg-right my-0 mx-auto text-small fw-bold">
             <li class="list-inline-item mx-0">
               <a class="text-black text-decoration-none" href="{% url 'view_bag' %}">
@@ -145,6 +145,7 @@
               aria-label="Close"></button>
       </div>
       {% endfor %}
+      </div>
     </header>
 
 

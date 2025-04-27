@@ -4,17 +4,17 @@
     <div class="container-fluid">
 
         <!-- Mobile Navbar (Offcanvas) - Used W3Schools Bootstrap 5 offcanvas tutorial -->
-        <button class="btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+        <button class="btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNavbar" aria-controls="mobileNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="offcanvas offcanvas-start d-lg-none" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas offcanvas-start d-lg-none" tabindex="-1" id="mobileNavbar" aria-labelledby="mobileNavbarLabel">
             <div class="offcanvas-header">
-                <div class="offcanvas-title" id="offcanvasNavbarLabel">
+                <div class="offcanvas-title" id="mobileNavbarLabel">
                     <a href="{% url 'home' %}" class="nav-link d-flex align-items-center">
                         <p class="text-black my-0 logo h1">
                           <strong>HoneyPot</strong>
                         </p>
-                        <img src="{% static 'images/icons/honeycomb.png' %}" alt="bee and honeycomb icon" class="ms-2" />
+                        <img src="{% static 'images/icons/honeycomb.png' %}" alt="bee and honeycomb icon" class="ms-2">
                       </a>
                       <!-- Display login status -->
                       {% if user.is_authenticated %}
