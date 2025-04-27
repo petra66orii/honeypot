@@ -842,6 +842,12 @@ To fork the repository:
 ## Manual Testing
 ## Fixed Bugs
 
+Comprehensive details about the bugs encountered and fixed can be found here:
+
+[EPIC: Bugs](https://github.com/petra66orii/honeypot/milestone/11?closed=1)
+
+All of these bugs are documented accordingly and they've been resolved.
+
 # Credits
 
 ## Code Used
