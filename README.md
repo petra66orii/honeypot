@@ -2,6 +2,10 @@
 
 HoneyPot is an e-commerce website that specialises in selling honey and honey by-products like beeswax. This website is perfect for people who want to invest into a healthier lifestyle and are looking for raw, unfiltered sweetners like our honey.
 
+![Am I Responsive image](static/images/README/am-i-responsive.png)
+
+# Access the live site [here](https://honeypot-6aa199604c8f.herokuapp.com/)!
+
 # Table of Contents
 
 1. **[Project Goals](#project-goals)**
