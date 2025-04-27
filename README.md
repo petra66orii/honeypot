@@ -377,31 +377,31 @@ For establishing the UX design, wireframes were designed using Balsamiq:
 
 ### Home Page
 
-![Home page wireframe](static/images/README/home-page.png)
+![Home page wireframe](static/images/README/home-page-wireframe.png)
 
 ### Product Page
 
-![Products wireframe](static/images/README/product-list.png)
+![Products wireframe](static/images/README/product-list-wireframe.png)
 
 ### Product Detail Page
 
-![Product detail wireframe](static/images/README/product-detail.png)
+![Product detail wireframe](static/images/README/product-detail-wireframe.png)
 
 ### Profile Page
 
-![User profile wireframe](static/images/README/user-profile.png)
+![User profile wireframe](static/images/README/user-profile-wireframe.png)
 
 ### Shopping Bag Page
 
-![Shopping bag wireframe](static/images/README/shopping-bag.png)
+![Shopping bag wireframe](static/images/README/shopping-bag-wireframe.png)
 
 ### Checkout Page
 
-![Checkout page wireframe](static/images/README/checkout-page.png)
+![Checkout page wireframe](static/images/README/checkout-page-wireframe.png)
 
 ### Blog Page
 
-![Blog page wireframe](static/images/README/blog-page.png)
+![Blog page wireframe](static/images/README/blog-page-wireframe.png)
 
 ## Typography
 
