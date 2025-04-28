@@ -920,6 +920,198 @@ The Lighthouse report provided the following results:
 ![Lighthouse report](static/images/README/lighthouse-report.png)
 
 ## Manual Testing
+
+### **Sign Up Page**
+|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
+|----------------|----------------|-------------------|---------|
+|Inputting details and click on *Sign Up* button|User should be signed up and redirected to verify their email address|User Sign Up #1 - AC 3|PASS|
+|Attempting signing up with an empty field|The empty field is highlighted and displays `Please fill out this field`|User Sign Up #1 - AC 2|PASS|
+|Hover over popover toggle (the little purple question mark)|When hovered over, the popover toggle displays password validation rules|User Sign Up #1 - AC 2|PASS|
+|`Your password can't be too similar to your other personal information`|Typing a password (`greg123`) resembing the username (`greg123`) stops the sign up process|User Sign Up #1 - AC 2|PASS|
+|`Your password must contain at least 8 characters`|User is not allowed to sign up and receives feedback accordingly|User Sign Up #1 - AC 2|PASS|
+|`Your password can't be a commonly used password`|Typing a common password like... `password`; The sign up process is stopped|User Sign Up #1 - AC 2|PASS|
+|`Your password can't be entirely numeric`|By typing a fully numeric password, `1234567890` the user is not allowed to sign up and receives feedback accordingly|User Sign Up #1 - AC 2|PASS|
+|`Sign In` link redirects to sign in template|If user clicks on the *sign in* link above the sign up form, they should be redirected to the *sign in* page|User Sign In #2 - AC 1|PASS|     
+
+
+
+### **Confirm Email**
+|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
+|------------------|------------------|-------------------|-------|
+|Email is received|User receives email to verify their email address|User Sign Up #1 - AC 3|PASS|
+
+
+
+### **Sign In Page**
+|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
+|------------------|------------------|-------------------|-------|
+|Inputting details and click on *Sign In* button|User should be signed up and redirected to *Home Page* with feedback from the webpage|User Sign In #2 - AC 3|PASS|
+|Enter the wrong password/username|Input is not accepted. The message `The username and/or password you specified are not correct.` User receives appropriate feedback and the form reloads.|User Sign In #2 - AC 2|PASS|
+|`Sign Up` link redirects to sign up template|If user clicks on the *sign up* link above, they are redirected to the *sign up* page|User Sign Up #1 - AC 1|PASS|
+
+
+
+### **Reset Password**
+|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
+|------------------|------------------|-------------------|-------|
+|`Forgot Password?` link redirects the user to reset password|User is redirected to said page, where they are required to input their email address so that they can receive a link which will prompt them to reset their password|Password Reset #4 - AC 2|PASS|
+|Input an invalid email address|Input is not accepted. The message `Enter a valid email address.` appears and prompts the user to enter the email address again|Password Reset #4 - AC 2|PASS|
+|User receives email from HoneyPot|User receives reset password link through an email|Password Reset #4 - AC 3|PASS|
+
+
+
+### **Navigation Bar**
+|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
+|------------------|------------------|-------------------|-------|
+|*Home* link brings the user to the main page|User is redirected to home page|N/A|PASS|
+|*Shop* dropdown brings the user to any of the dropdown items displayed|User is redirected as expected|Filter Feature #30 - AC 1|PASS|
+|*Gift Baskets & Deals* dropdown brings the user to any of the dropdown items displayed|User is redirected as expected|Filter Feature #30 - AC 1|PASS|
+|*Blog* dropdown brings the user to any of the dropdown items displayed|User is redirected as expected|Filter Feature #30 - AC 1|PASS|
+|Search feature|User can search for products|Search Feature #29 - AC 1|PASS|
+|Search feature|Products that the user is searching for are displayed|Search Feature #29 - AC 2|PASS|
+|*Login* link brings the user to the *sign in* page|User is redirected to login page|User Sign In #2 - AC 1|PASS|
+|*Register* link brings the user to the *register* page|User is redirected to sign up page|User Sign Up #1 - AC 1|PASS|
+|Navbar changes its links when a user is registered|*Login* and *Register* are changed to *My Profile* and *Logout*, respectively when the user is logged in, and new *Create Post* and *Admin* links appear next to *My Profile* for Admins|N/A|PASS|
+|*Create Post* button|Admin should be redirected to a `Create Post` form|Admin CRUD Capabilities #8 - AC 1|PASS|
+|*Admin* button|Admin should be redirected to Admin Management page|Admin CRUD Capabilities #8 - AC 1|PASS|
+|Login status information|When the user is logged in, the message is `Welcome, [first name]`. Otherwise, the message displayed is: `Welcome! Please log in`|User Sign In #2 - AC 3|PASS|
+
+
+
+### **Home Page**
+|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
+|------------------|------------------|-------------------|-------|
+|*Shop Now* button|User is redirected to the *Products* page|Product List #12 - AC 1|PASS|
+|*Check Our Products* button|User is redirected to the *Products* page|Product List #12 - AC 1|PASS|
+|*Newsletter* sign up|User inputs their email to subscribe to newsletter and receives feedback messgae|Newsletter #34 - AC 2|PASS|
+
+
+
+### **User Profile**
+|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
+|------------------|------------------|-------------------|-------|
+|*Edit Profile* button|User is redirected to a form to edit their profile|Edit Profile #6 - AC 2|PASS|
+|Changes are saved|Changes that the user inputs are successfully saved if valid, else the errors are highlighted and require the user to input their details again|Edit Profile #6 - AC 3|PASS|
+|*Change Password* button|Button works|Change Password #32 - AC 1|PASS| 
+|*Change Password* button|User is required to input their current password before the new one|Change Password #32 - AC 2|PASS| 
+|*Change Password* button|User can change their password|Change Password #32 - AC 3|PASS| 
+|*Delete Account* button|Button works|Delete Account #7 - AC 1|PASS|
+|*Delete Account* button|User is asked to confirm|Delete Account #7 - AC 2|PASS|
+|*Delete Account* button|Profile is permanently deleted|Delete Account #7 - AC 3|PASS|
+|*Default Delivery Information* form|User can fill their delivery information within their profile|Auto Create Profile #5 - AC 2|PASS|
+
+
+
+### **Admin Management**
+|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
+|------------------|------------------|-------------------|-------|
+|*Add Product* button|Admin can add more products|Admin CRUD Capabilities #8 - AC 1|PASS|
+|*Manage Reviews* button|Admin is redirected to *Reviews Manageent* page, containing all reviews on the website, approved or otherwise|Manage User Reviews #9 - AC 1|PASS|
+|*Approve* button|Review is displayed once approved|Manage User Reviews #9 - AC 1|PASS|
+|*Edit* button|Admin can edit reviews|Manage User Reviews #9|PASS|
+|*Delete* button|Admin can delete reviews, after confirming it|Manage User Reviews #9 - AC 3|PASS|
+|*Manage Orders* button|Admin is redirected to *Order Management* page|Manage Orders #10 - AC 1|PASS|
+|Mark orders as *Fulfilled*|When the user clicks on *Mark as Fulfilled*, the customer receives an email confirming them that their order is on its way|Add Order Fulfillment #41 - AC 1|PASS|
+|*Manage Comments* button|Admin is redirected to *Comments Management* page, containing all comments on the website, approved or otherwise|Comments on Blog Posts #27 - AC 2|PASS|
+|*Approve* button|Comment is displayed once approved|Comments on Blog Posts #27 - AC 2|PASS|
+|*Delete* button|Admin can delete comments, after confirming so|Comments on Blog Posts #27 - AC 2|PASS|
+
+
+
+### **Products**
+|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
+|------------------|------------------|-------------------|-------|
+|Product name contains link to said product|User is redirected to product detail page|Product List #12 - AC 1|PASS|
+|Product image contains link to said product|User is redirected to product detail page|Product List #12 - AC 1|PASS|
+|*Buy Now* button|Product is added to basket, and the user is redirected straight to checkout page|"Buy Now" Button #43 - AC 1|PASS|
+|*Sort* dropdown|User can sort products given the options|N/A|PASS|
+
+
+### **Products Detail**
+|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
+|------------------|------------------|-------------------|-------|
+|*Add to Basket* button|User can add multiple items to basket|Add to Shopping Bag #19 - AC 1|PASS|
+|*Edit* button (Admin Only)|When Admin clicks on the *Edit* button, they can edit the product details - Users can't access this page|Admin CRUD Capabilities #8 - AC 2|PASS|
+|*Delete* button (Admin Only)|When Admin clicks on the *Delete* button, they are asked to confirm their decision and then the product is deleted - Users can't access this page|Admin CRUD Capabilities #8 - AC 2|PASS|
+|*Rating* bees|Bees are highlighted so the user can rate a product|Rate Products #16 - AC 1|PASS|
+|Submit rating without writing review|User can submit ratings without writing a review|Rate Products #16 - AC 1|PASS|
+|Can't submit review without rating|User can't submit review without rating product|Rate Products #16 - AC 1|PASS|
+|Review is submitted for approval|The review is first submitted for approval, the user receives feedback as well|Write Reviews #15 - AC 2|PASS|
+|*Edit* and *Delete* buttons are only visible to the author of the review|Logging in into a different account makes the buttons invisible|N/A|PASS|
+|*Edit* review button|Text field is filled with the review and the *Post Review* buttons changes to *Update*|N/A|PASS|
+|*Delete* review button|The *Delete* button triggers a modal box asking for confirmation|N/A|PASS|
+|*Related Products* have links to said product|User can choose a different product to view from the *Related Products* section|View Related Products #14 - AC 1|PASS|
+
+
+
+### **Shopping Bag**
+|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
+|------------------|------------------|-------------------|-------|
+|Basket dynamically updates price|When adding to basket, the basket updates its' price|View Total Cost #22 - AC 2|PASS|
+|Update quantity from the *Shopping Bag* page|User can update product quantity by selecting the desired number and clicking *Update*|Update Shopping Bag #20 - AC 1|PASS|
+|Remove product from the *Shopping Bag* page|User can remove product from *Shopping Bag* and they're asked to confirm removal|Delete Shopping Bag Items #21 - AC 1|PASS|
+|*You Might Also Like* section displays reduced prices|Products in this section are displayed underneath the shopping bag with a discount|"You Might Also Like" Section #33 - AC 1|PASS|
+|*Add to Bag* button|User can add items in the *You Might Also Like* section straight to their bag|"You Might Also Like" Section #33 - AC 3|PASS|
+|*Keep Shopping* button|User is redirected back to the *Products* page|N/A|PASS|
+|*Go to Checkout* button|User is redirected to the *Checkout* page|Billing Information #23 - AC 1|PASS|
+
+
+
+### **Checkout**
+|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
+|------------------|------------------|-------------------|-------|
+|*Delivery Information* form|User is requested to fill their delivery information, otherwise the order can't be processed|Billing Information #23 - AC 2|PASS|
+|`4242 4242 4242 4242` - Successful payment|Payment is successful|Billing Information #23 - AC 2|PASS|
+|`4000 0000 0000 0002` - Payment declined|Payment is declined|N/A|PASS|
+|`4000 0027 6000 3184` - Authenticate before payment|User needs to confirm card authentication before payment is successful|N/A|PASS|
+|Checkout Success|User is redirected to a confirmation page, and is given feedback regarding their order|Billing Information #23 - AC 3|PASS|
+|Confirmation Email|User receives email confirming their order|Confirmation Email #25 - AC 1|PASS|
+
+
+
+### **Blog Posts Page**
+|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
+|------------------|------------------|-------------------|-------|
+|Blog posts displaying|Blog posts are displayed|View Blog Posts #26 - AC 1|PASS|
+|Recipe posts displaying|Recipe posts are displayed|View Blog Posts #26 - AC 1|PASS|
+|Blog posts title links|When clicked, it should redirect the user to the post detail page|View Blog Posts #26 - AC 2|PASS|
+|Recipe posts title links|When clicked, it should redirect the user to the recipe detail page|View Blog Posts #26 - AC 2|PASS|
+|*Go Back* button|When clicked, it should redirect back to the main blog posts page|N/A|PASS|
+|*Edit Post* and *Delete* buttons are visible to Admin only|Buttons are only visible to Admin|Manage Blog Posts #28 - AC 1|PASS|
+|*Edit Post* button|When clicked, it redirects the Admin to a prefilled form and Admin is able to edit|Manage Blog Posts #28 - AC 2|PASS|
+|*Cancel* button|Admin goes back to the post detail page without any changes|N/A|PASS|
+|*Delete* button|Admin is asked to confirm if they want to delete a post|Manage Blog Posts #28 - AC 3|PASS|
+
+
+
+### **Comment Section**
+|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
+|------------------|------------------|-------------------|-------|
+|*Post Comment* button|User can type a comment in the text field and post a comment|Comments on Blog Posts #27 - AC 1|PASS|
+|Comment is submitted for approval|Comment is first submitted for approval, the user receives feedback as well|Comments on Blog Posts #27 - AC 2|PASS|
+|*Edit* and *Delete* buttons are only visible to the author of the comment|Logging in into a different account makes the buttons invisible|N/A|PASS|
+|*Edit* comment button|Text field is filled with the comment and the *Post Comment* buttons changes to *Update*|N/A|PASS|
+|*Delete* comment button|The *Delete* button triggers a modal box asking for confirmation|N/A|PASS|
+
+
+
+### **Footer**
+|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
+|------------------|------------------|-------------------|-------|
+|*GitHub* icon|Redirects to [GitHub](https://github.com/petra66orii) in a new tab|N/A|PASS|
+|*Facebook* icon|Redirects to [Facebook](https://www.facebook.com) in a new tab|N/A|PASS|
+|*Instagram* icon|Redirects to [Instagram](https://www.instagram.com) in a new tab|N/A|PASS|
+|*Youtube* icon|Redirects to [Youtube](https://www.youtube.com) in a new tab|N/A|PASS|
+
+
+
+### **Error Pages**
+|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
+|------------------|------------------|-------------------|-------|
+|403 Page - Forbidden Access|Accessing an Admin-Only page while not logged in as Admin|N/A|PASS|
+|404 Page - Invalid URL|Entering an invalid URL should redirect to a 404 page|N/A|PASS|
+|500 Page - Server Error|Removing a website from `ALLOWED_HOSTS` should redirect to a 500 page|N/A|PASS|
+
 ## Fixed Bugs
 
 Comprehensive details about the bugs encountered and fixed can be found here:
