@@ -1125,6 +1125,8 @@ All of these bugs are documented accordingly and they've been resolved.
 ## Code Used
 
 * [Django Documentation](https://docs.djangoproject.com/en/4.2/) - This was a lifesaver for so many things
+* [SwiperJS](https://swiperjs.com/get-started#use-swiper-from-cdn) - For the mobile carousels
+* [Adding Meta Tags in Django](https://dev.to/makneta/how-to-add-unique-meta-tags-in-django-328i) - Very informative article
 * [Boutique Ado Project](https://github.com/petra66orii/boutique-ado) - Code Institute's wakthrough project to create an e-commerce website
 * [Timeless Travel](https://github.com/petra66orii/timeless-travel) - My personal project, used the blog app and the JS scripts
 * [Django Paginator Class](https://docs.djangoproject.com/en/5.1/topics/pagination/):
