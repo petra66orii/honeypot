@@ -103,9 +103,11 @@
                                     {% if user.is_authenticated and review.user == user %}
                                     <div>
                                         <button class="btn btn-sm btn-danger my-2 me-1"
-                                            data-review-id="{{ review.id }}">Delete</button>
+                                        data-review-id="{{ review.id }}"
+                                        data-delete-url="{% url 'delete_review' product.id review.id %}">Delete</button>                                                                    
                                         <button class="btn btn-sm btn-warning my-2"
-                                            data-review-id="{{ review.id }}">Edit</button>
+                                        data-review-id="{{ review.id }}"
+                                        data-edit-url="{% url 'edit_review' product.id review.id %}">Edit</button>                                        
                                     </div>
                                     {% endif %}
                             </div>

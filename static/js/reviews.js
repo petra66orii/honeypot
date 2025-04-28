@@ -14,17 +14,25 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', () => {
             let reviewId = button.getAttribute('data-review-id');
             let reviewContent = document.getElementById(`review-${reviewId}`).innerText;
-            reviewText.value = reviewContent; // Populate the form with the review content
-            submitButton.innerText = 'Update'; // Change button text
-            reviewForm.action = `/edit_review/${reviewId}/`;
+            let editUrl = button.getAttribute('data-edit-url');
+    
+            reviewText.value = reviewContent;
+            submitButton.innerText = 'Update';
+            reviewForm.setAttribute("action", editUrl);
         });
     });
 
     deleteButtons.forEach(button => {
-        button.addEventListener("click", (e) => {
-            let reviewId = e.target.getAttribute("data-review-id");
-            deleteConfirm.href = `/delete_review/${reviewId}/`;
-            deleteModal.show();
+        button.addEventListener("click", () => {
+            const deleteUrl = button.getAttribute("data-delete-url");
+            console.log(deleteUrl);
+
+            if (deleteUrl) {
+                deleteConfirm.setAttribute('href', deleteUrl);
+                deleteModal.show();
+            } else {
+                console.error("Delete URL is not set correctly.");
+            }
         });
     });
 });
