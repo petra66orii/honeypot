@@ -159,7 +159,10 @@ def edit_review(request, product_id, review_id):
             form.save()
             messages.success(request, "Review updated successfully!")
         else:
-            messages.error(request, "Oops! Error updating review!")
+            messages.error(
+                request,
+                "Oops! Error updating review!"
+                "Make sure to update your rating as well.")
 
     return redirect('product_detail', product_id=product_id)
 
