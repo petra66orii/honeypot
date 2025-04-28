@@ -1159,3 +1159,7 @@ The product images were AI-generated using [Leonardo AI](https://app.leonardo.ai
 The blog images were downloaded from [Pexels](https://pexels.com/).
 
 # Acknowledgements
+
+I would like to thank my partner Gerry and my brother Eric for their support and honest feedback from the perspective of a user.
+
+I would also like to thank mentors Luke and Graeme for their help and feedback in making this project a high quality one.
