@@ -2,39 +2,44 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.all_products, name='products'),
-    path('<product_id>', views.product_detail, name='product_detail'),
-    path('add/', views.add_product, name='add_product'),
-    path('edit/<int:product_id>/', views.edit_product, name='edit_product'),
-    path(
-        'delete/<int:product_id>/',
-        views.delete_product,
-        name='delete_product'
-        ),
-    path(
-        '<int:product_id>/edit_review/<int:review_id>/',
-        views.edit_review,
-        name='edit_review'
-        ),
-    path(
-        '<int:product_id>/delete_review/<int:review_id>/',
-        views.delete_review,
-        name='delete_review'
-        ),
-    path('manage_reviews/', views.manage_reviews, name='manage_reviews'),
-    path(
-        'approve_review/<int:review_id>/',
-        views.approve_review,
-        name='approve_review'
-        ),
-    path(
-        'admin_delete_review/<int:review_id>/',
-        views.admin_delete_review,
-        name='admin_delete_review'
-        ),
-    path(
-        'admin_edit_review/<int:review_id>/',
-        views.admin_edit_review,
-        name='admin_edit_review'
-        ),
+    # ==========================================
+    # PUBLIC SHOP ENDPOINTS
+    # ==========================================
+    # GET: List all categories
+    path('categories/', views.CategoryList.as_view(), name='category-list'),
+    
+    # GET: List all products (supports search, sort, and category filtering)
+    path('products/', views.ProductList.as_view(), name='product-list'),
+    
+    # GET: Retrieve single product details
+    path('products/<int:pk>/', views.ProductDetail.as_view(), name='product-detail'),
+    
+    # GET: Retrieve 4 related products
+    path('products/<int:product_id>/related/', views.RelatedProductList.as_view(), name='related-products'),
+
+
+    # ==========================================
+    # USER REVIEW ENDPOINTS
+    # ==========================================
+    # GET: List approved reviews / POST: Create a new review
+    path('products/<int:product_id>/reviews/', views.ProductReviewListCreate.as_view(), name='product-reviews'),
+    
+    # PUT/PATCH/DELETE: Edit or delete a user's OWN review
+    path('reviews/<int:pk>/', views.UserReviewDetail.as_view(), name='user-review-detail'),
+
+
+    # ==========================================
+    # ADMIN DASHBOARD ENDPOINTS (Superuser Only)
+    # ==========================================
+    # GET: List all products / POST: Add a new product
+    path('admin/products/', views.AdminProductListCreate.as_view(), name='admin-product-list'),
+    
+    # PUT/PATCH/DELETE: Edit or delete a specific product
+    path('admin/products/<int:pk>/', views.AdminProductDetail.as_view(), name='admin-product-detail'),
+
+    # GET: List ALL reviews (approved and unapproved)
+    path('admin/reviews/', views.AdminReviewList.as_view(), name='admin-review-list'),
+    
+    # PUT/PATCH/DELETE: Approve, edit, or delete ANY review
+    path('admin/reviews/<int:pk>/', views.AdminReviewDetail.as_view(), name='admin-review-detail'),
 ]
