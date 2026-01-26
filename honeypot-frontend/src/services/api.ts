@@ -20,6 +20,15 @@ export const honeypotApi = createApi({
       }),
       transformResponse: (response: { results: Product[] }) => response.results,
     }),
+
+    getProduct: builder.query<Product, string>({
+      query: (id) => `products/${id}/`,
+    }),
+
+    getRelatedProducts: builder.query<Product[], string>({
+      query: (id) => `products/${id}/related/`,
+      transformResponse: (response: { results: Product[] }) => response.results,
+    }),
     
     // 3. New endpoint to fetch categories for the dropdown
 getCategories: builder.query<Category[], void>({
@@ -29,4 +38,9 @@ getCategories: builder.query<Category[], void>({
   }),
 });
 
-export const { useGetProductsQuery, useGetCategoriesQuery } = honeypotApi;
+export const { 
+  useGetProductsQuery, 
+  useGetCategoriesQuery, 
+  useGetProductQuery,       
+  useGetRelatedProductsQuery
+} = honeypotApi;

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import type { Product } from "../services/types";
 import BeeRating from "./BeeRating";
 
@@ -10,19 +11,21 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <div className="group flex flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md transition-all hover:shadow-xl">
       {/* Product Image */}
-      <div className="relative aspect-square overflow-hidden bg-gray-50">
-        {product.image ? (
-          <img
-            src={product.image}
-            alt={product.name}
-            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-          />
-        ) : (
-          <div className="flex h-full items-center justify-center text-gray-400">
-            No image available
-          </div>
-        )}
-      </div>
+      <Link to={`/products/${product.id}`}>
+        <div className="relative aspect-square overflow-hidden bg-gray-50">
+          {product.image ? (
+            <img
+              src={product.image}
+              alt={product.name}
+              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+          ) : (
+            <div className="flex h-full items-center justify-center text-gray-400">
+              No image available
+            </div>
+          )}
+        </div>
+      </Link>
 
       {/* Product Details */}
       <div className="flex flex-1 flex-col p-4">
@@ -31,9 +34,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             {product.category.friendly_name}
           </span>
         )}
-        <h3 className="mt-1 text-lg font-semibold text-gray-900">
-          {product.name}
-        </h3>
+        <Link to={`/products/${product.id}`}>
+          <h3 className="mt-1 text-lg font-semibold text-gray-900">
+            {product.name}
+          </h3>
+        </Link>
 
         {/* Bee Rating System */}
         <div className="mt-2">
