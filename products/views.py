@@ -1,7 +1,7 @@
 from rest_framework import generics, permissions, filters, status
 from rest_framework.response import Response
 from rest_framework.exceptions import PermissionDenied
-from rest_framework import DjangoFilterBackend
+from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models import Avg
 
 from .models import Category, Product, ProductReview
