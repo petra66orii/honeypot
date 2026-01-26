@@ -2,12 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 import type { Product } from "../services/types";
 import BeeRating from "./BeeRating";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../services/cartSlice";
 
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const dispatch = useDispatch();
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault(); // Prevent navigating to the Detail page when clicking the button
+    dispatch(addToCart(product));
+  };
+
   return (
     <div className="group flex flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md transition-all hover:shadow-xl">
       {/* Product Image */}
@@ -52,7 +60,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         {/* Price and Add to Bag */}
         <div className="mt-auto flex items-center justify-between pt-4">
           <p className="text-xl font-bold text-gray-900">€{product.price}</p>
-          <button className="rounded-full bg-honey-gold px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-yellow-600 focus:ring-2 focus:ring-yellow-400 focus:outline-none">
+          <button
+            onClick={handleAddToCart} // Add the click handler
+            className="rounded-full bg-honey-gold px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-yellow-600 focus:ring-2 focus:ring-yellow-400 focus:outline-none"
+          >
             Add to Bag
           </button>
         </div>

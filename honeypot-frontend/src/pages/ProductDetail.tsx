@@ -6,6 +6,8 @@ import {
 } from "../services/api";
 import BeeRating from "../components/BeeRating";
 import ProductCard from "../components/ProductCard";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../services/cartSlice";
 
 const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>(); // Get ID from URL
@@ -13,6 +15,7 @@ const ProductDetail: React.FC = () => {
   const { data: relatedProducts } = useGetRelatedProductsQuery(id!, {
     skip: !id,
   });
+  const dispatch = useDispatch();
 
   if (isLoading)
     return <div className="text-center py-20">Finding the hive...</div>;
@@ -68,7 +71,10 @@ const ProductDetail: React.FC = () => {
 
           {/* Add to Bag (Static for now) */}
           <div className="mt-8 flex gap-4">
-            <button className="flex-1 rounded-full bg-honey-gold px-8 py-3 text-white font-bold hover:bg-yellow-600 transition">
+            <button
+              onClick={() => product && dispatch(addToCart(product))}
+              className="flex-1 rounded-full bg-honey-gold..."
+            >
               Add to Bag
             </button>
             <button className="rounded-full border border-gray-300 px-4 py-3 hover:bg-gray-50">
