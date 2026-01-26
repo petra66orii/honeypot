@@ -233,11 +233,11 @@ STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# React will run on localhost:3000 during development
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
 ]
-
 # Set up DRF to use JWT authentication
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
