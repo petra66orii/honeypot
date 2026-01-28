@@ -4,6 +4,8 @@ import Navbar from "./components/Navbar";
 import ProductGrid from "./components/ProductGrid";
 import ProductDetail from "./pages/ProductDetail";
 import ShoppingBag from "./pages/ShoppingBag";
+import Checkout from "./pages/Checkout";
+import CheckoutSuccess from "./pages/CheckoutSuccess";
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <Route path="/" element={<ProductGrid />} />
         <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/bag" element={<ShoppingBag />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/checkout-success" element={<CheckoutSuccess />} />
       </Routes>
     </div>
   );
