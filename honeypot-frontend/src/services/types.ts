@@ -26,6 +26,24 @@ export interface AuthResponse {
   user: User;  // The user details
 }
 
+export interface RegisterRequest {
+  username: string;
+  password: string;
+  email: string;
+}
+
+export interface LoginRequest {
+  username: string;
+  password: string;
+}
+
+export interface Testimonial {
+  id: number;
+  name: string;
+  text: string;
+  rating: number;
+}
+
 export interface Category {
   id: number;
   name: string;
@@ -54,10 +72,19 @@ export interface Review {
   created_at: string;
 }
 
+export interface PaginatedResponse<T> {
+    count: number;
+    next: string | null;
+    previous: string | null;
+    results: T[];
+}
+
 export interface ProductFilters {
+  category: string;
   search?: string;
   category__name?: string;
   ordering?: string;
+  page: number;
 }
 
 // Define the response shape for Creating a Payment Intent

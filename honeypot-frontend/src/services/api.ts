@@ -1,16 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { Product, Category, ProductFilters, PaymentIntentResponse, CartItem, SaveOrderResponse, SaveOrderRequest, Review, AuthResponse, User, Order, UserProfile, BlogPost, BlogPostDetail, Comment } from './types'; 
-
-export interface RegisterRequest {
-  username: string;
-  password: string;
-  email: string;
-}
-
-export interface LoginRequest {
-  username: string;
-  password: string;
-}
+import type { Product, Category, ProductFilters, PaymentIntentResponse, CartItem, SaveOrderResponse, SaveOrderRequest, Review, AuthResponse, User, Order, UserProfile, BlogPost, BlogPostDetail, Comment, RegisterRequest, LoginRequest, Testimonial, PaginatedResponse, } from './types'; 
 
 export const honeypotApi = createApi({
   reducerPath: 'honeypotApi',
@@ -182,6 +171,14 @@ baseQuery: fetchBaseQuery({
       invalidatesTags: (_result, _error, { slug }) => [{ type: 'Comments', id: slug }],
     }),
 
+    getTestimonials: builder.query<Testimonial[], void>({
+      query: () => 'home/testimonials/',
+      transformResponse: (response: { results: Testimonial[] }) => response.results,
+    }),
+
+    getDeals: builder.query<Product[], void>({
+      query: () => 'products/gifts/',
+    }),
   }),
 });
 
@@ -203,7 +200,9 @@ export const {
   useGetUserProfileQuery,
   useUpdateUserProfileMutation,
   useGetBlogPostsQuery,
-useGetBlogPostQuery,
-useGetCommentsQuery,
-useAddCommentMutation,
+  useGetBlogPostQuery,
+  useGetCommentsQuery,
+  useAddCommentMutation,
+  useGetTestimonialsQuery,
+  useGetDealsQuery,
 } = honeypotApi;
