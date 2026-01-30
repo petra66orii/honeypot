@@ -25,7 +25,7 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
 # ==========================================
 class CategoryList(generics.ListAPIView):
     """API endpoint to list all categories."""
-    queryset = Category.objects.all()
+    queryset = Category.objects.all().order_by('id')
     serializer_class = CategorySerializer
     permission_classes = [permissions.AllowAny]
 
@@ -35,7 +35,7 @@ class ProductList(generics.ListAPIView):
     Replaces: `all_products`
     Handles searching, filtering by category, and sorting.
     """
-    queryset = Product.objects.all()
+    queryset = Product.objects.all().order_by('id')
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
@@ -50,7 +50,7 @@ class ProductDetail(generics.RetrieveAPIView):
     Replaces: `product_detail` (The Product Info part)
     Retrieves a single product.
     """
-    queryset = Product.objects.all()
+    queryset = Product.objects.all().order_by('id')
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]
 
