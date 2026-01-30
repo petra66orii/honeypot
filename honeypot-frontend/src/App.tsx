@@ -14,6 +14,7 @@ import CheckoutSuccess from "./pages/CheckoutSuccess";
 import BlogList from "./pages/BlogList";
 import BlogPost from "./pages/BlogPost";
 import GiftsDeals from "./pages/GiftsDeals";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/checkout/success" element={<CheckoutSuccess />} />
         <Route path="/blog" element={<BlogList />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
       <Footer />
     </div>

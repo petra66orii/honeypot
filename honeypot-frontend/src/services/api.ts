@@ -193,6 +193,13 @@ baseQuery: fetchBaseQuery({
         body,
       }),
     }),
+    sendContactMessage: builder.mutation<{ message: string }, { name: string; email: string; subject: string; message: string }>({
+      query: (body) => ({
+        url: 'home/contact/',
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 });
 
@@ -220,4 +227,5 @@ export const {
   useGetTestimonialsQuery,
   useGetDealsQuery,
   useSubscribeToNewsletterMutation,
+  useSendContactMessageMutation,
 } = honeypotApi;

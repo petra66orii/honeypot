@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Testimonial, NewsletterSubscriber
+from .models import Testimonial, NewsletterSubscriber, ContactMessage
 
 class TestimonialSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,3 +10,8 @@ class NewsletterSerializer(serializers.ModelSerializer):
     class Meta:
         model = NewsletterSubscriber
         fields = ['email']
+
+class ContactMessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactMessage
+        fields = ['name', 'email', 'subject', 'message']

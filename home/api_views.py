@@ -1,6 +1,6 @@
 from rest_framework import generics
-from .models import Testimonial, NewsletterSubscriber
-from .serializers import TestimonialSerializer, NewsletterSerializer
+from .models import Testimonial, NewsletterSubscriber, ContactMessage
+from .serializers import TestimonialSerializer, NewsletterSerializer, ContactMessageSerializer
 
 class TestimonialListAPI(generics.ListAPIView):
     queryset = Testimonial.objects.all().order_by('-rating')
@@ -14,3 +14,11 @@ class NewsletterSignupAPI(generics.CreateAPIView):
     queryset = NewsletterSubscriber.objects.all()
     serializer_class = NewsletterSerializer
     permission_classes = [] # No login required
+
+class ContactMessageAPI(generics.CreateAPIView):
+    """
+    Allow users to send a contact message.
+    """
+    queryset = ContactMessage.objects.all()
+    serializer_class = ContactMessageSerializer
+    permission_classes = []
