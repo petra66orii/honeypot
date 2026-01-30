@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { Product, Category, ProductFilters, PaymentIntentResponse, CartItem, SaveOrderResponse, SaveOrderRequest, Review, AuthResponse, User, Order, UserProfile } from './types'; 
+import type { Product, Category, ProductFilters, PaymentIntentResponse, CartItem, SaveOrderResponse, SaveOrderRequest, Review, AuthResponse, User, Order, UserProfile, BlogPost, BlogPostDetail, Comment } from './types'; 
 
 export interface RegisterRequest {
   username: string;
@@ -30,7 +30,7 @@ baseQuery: fetchBaseQuery({
       return headers;
     },
   }),  
-  tagTypes: ['Reviews', 'Profile'], 
+  tagTypes: ['Reviews', 'Profile', 'Comments'], 
 
   endpoints: (builder) => ({
     getProducts: builder.query<Product[], ProductFilters>({
@@ -144,6 +144,44 @@ baseQuery: fetchBaseQuery({
       invalidatesTags: ['Profile'], // Refresh data after update
     }),
 
+    // --- BLOG ENDPOINTS ---
+
+// --- BLOG ENDPOINTS ---
+
+    // Get all posts
+    // Resulting URL: /api/blog/posts/
+    getBlogPosts: builder.query<BlogPost[], string | void>({
+      query: (type) => type ? `blog/posts/?type=${type}` : 'blog/posts/',
+      transformResponse: (response: { results: BlogPost[] }) => response.results,
+    }),
+
+    // Get single post by slug
+    // Resulting URL: /api/blog/posts/my-slug/
+    getBlogPost: builder.query<BlogPostDetail, string>({
+      query: (slug) => `blog/posts/${slug}/`,
+    }),
+
+    // Get comments for a post
+    // Resulting URL: /api/blog/posts/my-slug/comments/
+    getComments: builder.query<Comment[], string>({
+      query: (slug) => `blog/posts/${slug}/comments/`,
+      transformResponse: (response: { results: Comment[] } | Comment[]) => {
+          // Safety check: if it's already an array, return it. If it's an object, return .results
+          return Array.isArray(response) ? response : response.results;
+      },
+      providesTags: (_result, _error, slug) => [{ type: 'Comments', id: slug }],
+    }),
+
+    // Add a comment
+    addComment: builder.mutation<Comment, { slug: string; content: string }>({
+      query: ({ slug, content }) => ({
+        url: `blog/posts/${slug}/comments/`,
+        method: 'POST',
+        body: { content },
+      }),
+      invalidatesTags: (_result, _error, { slug }) => [{ type: 'Comments', id: slug }],
+    }),
+
   }),
 });
 
@@ -164,4 +202,8 @@ export const {
   useGetMyOrdersQuery,
   useGetUserProfileQuery,
   useUpdateUserProfileMutation,
+  useGetBlogPostsQuery,
+useGetBlogPostQuery,
+useGetCommentsQuery,
+useAddCommentMutation,
 } = honeypotApi;

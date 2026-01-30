@@ -94,3 +94,27 @@ export interface Order {
   status: string;
   items: Array<{ product_name: string; quantity: number }>;
 }
+
+export interface BlogPost {
+  id: number;
+  title: string;
+  slug: string;
+  excerpt: string;
+  featured_image: string | null;
+  created_at: string;
+  post_type: 'blog' | 'recipe';
+}
+
+export interface BlogPostDetail extends BlogPost {
+  content: string;
+  author: string;
+  comment_count: number;
+}
+
+export interface Comment {
+  id: number;
+  user: string;
+  content: string;
+  created_at: string;
+  approved: boolean;
+}

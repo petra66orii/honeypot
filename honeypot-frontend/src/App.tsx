@@ -9,6 +9,8 @@ import ProductDetail from "./pages/ProductDetail";
 import ShoppingBag from "./pages/ShoppingBag";
 import Checkout from "./pages/Checkout";
 import CheckoutSuccess from "./pages/CheckoutSuccess";
+import BlogList from "./pages/BlogList";
+import BlogPost from "./pages/BlogPost";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
         <Route path="/bag" element={<ShoppingBag />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/checkout/success" element={<CheckoutSuccess />} />
+        <Route path="/blog" element={<BlogList />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
       </Routes>
     </div>
   );
