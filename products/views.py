@@ -25,6 +25,21 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
 # ==========================================
 # PUBLIC VIEWS (Replacing all_products & product_detail)
 # ==========================================
+class DealProductList(generics.ListAPIView):
+    """
+    Returns all products that are considered 'deals'.
+    No pagination, so the frontend gets the full list to display.
+    """
+    serializer_class = ProductSerializer
+    pagination_class = None # Disable pagination for this specific view
+    
+    def get_queryset(self):
+        # These MUST match the 'Programmatic Name' (slug) in your Django Admin Category list
+        target_categories = ['honey_gifts', 'clearance', 'special_deals', 'bundles']
+        
+        # Filter products where the category name is in our target list
+        return Product.objects.filter(category__name__in=target_categories)
+
 class CategoryList(generics.ListAPIView):
     """API endpoint to list all categories."""
     queryset = Category.objects.all().order_by('id')
@@ -41,7 +56,7 @@ class ProductList(generics.ListAPIView):
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    
+
     filterset_fields = ['category__name'] 
     search_fields = ['name', 'description']
     ordering_fields = ['price', 'rating', 'name']

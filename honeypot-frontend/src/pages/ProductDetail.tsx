@@ -119,8 +119,6 @@ const ProductDetail: React.FC = () => {
           </div>
         </div>
       )}
-      {/* ... inside the return statement, after the Related Products block ... */}
-
       {/* REVIEWS SECTION */}
       <div className="mt-16 border-t border-gray-100 pt-16 grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* Left Column: Existing Reviews */}
