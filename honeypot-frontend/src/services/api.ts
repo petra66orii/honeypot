@@ -22,12 +22,17 @@ baseQuery: fetchBaseQuery({
   tagTypes: ['Reviews', 'Profile', 'Comments'], 
 
   endpoints: (builder) => ({
-    getProducts: builder.query<Product[], ProductFilters>({
+    getProducts: builder.query<PaginatedResponse<Product>, ProductFilters>({
       query: (params) => ({
         url: 'products/',
-        params: params,
+        params: {
+          category: params.category,
+          search: params.search,
+          ordering: params.ordering,
+          page: params.page,
+        }
       }),
-      transformResponse: (response: { results: Product[] }) => response.results,
+      // transformResponse: (response: { results: Product[] }) => response.results,
     }),
     getCategories: builder.query<Category[], void>({
       query: () => 'categories/',
