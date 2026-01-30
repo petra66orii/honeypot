@@ -5,11 +5,12 @@ from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, generics
 
 from products.models import Product
 from userprofile.models import UserProfile
 from .models import Order, OrderItem
+from .serializers import OrderSerializer
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -61,6 +62,10 @@ def create_payment_intent(request):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def save_order(request):
+    """
+    Handle the checkout process.
+    If the user is logged in, attach their profile to the order.
+    """
     try:
         data = request.data
         order_data = data.get('order_data', {})
@@ -68,7 +73,6 @@ def save_order(request):
         stripe_pid = data.get('stripe_pid')
 
         # 1. Create the Order
-        # We use first_name and last_name to match your original Order model
         order = Order(
             first_name=order_data.get('firstName'),
             last_name=order_data.get('lastName'),
@@ -83,17 +87,34 @@ def save_order(request):
             bag=json.dumps(cart_items),
         )
 
-        # Attach UserProfile if logged in
+        # 2. ROBUST USER HANDLING
+        # If the user is logged in, we MUST attach a profile.
         if request.user.is_authenticated:
             try:
+                # Try to get the existing profile
                 profile = UserProfile.objects.get(user=request.user)
-                order.user_profile = profile
-            except UserProfile.DoesNotExist:
-                pass
+                
+                # Optional: Update profile info if 'save_info' was checked
+                if data.get('save_info'):
+                    profile.default_phone_number = order.phone_number
+                    profile.default_street_address1 = order.street_address1
+                    profile.default_town = order.town
+                    profile.default_county = order.county
+                    profile.default_postcode = order.postcode
+                    profile.default_country = order.country
+                    profile.save()
 
+            except UserProfile.DoesNotExist:
+                # FIX: If profile is missing, CREATE IT instead of failing
+                profile = UserProfile.objects.create(user=request.user)
+            
+            # Attach the profile to the order
+            order.user_profile = profile
+
+        # 3. Save the Order to DB
         order.save()
 
-        # 2. Create OrderLineItems
+        # 4. Create Order Items
         for item in cart_items:
             try:
                 product = Product.objects.get(id=item['id'])
@@ -111,3 +132,11 @@ def save_order(request):
     except Exception as e:
         print(f"Order Save Error: {e}") 
         return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+    
+class OrderList(generics.ListAPIView):
+    serializer_class = OrderSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        # This is the magic filter: only show orders for the current user
+        return Order.objects.filter(user_profile__user=self.request.user).order_by('-date')

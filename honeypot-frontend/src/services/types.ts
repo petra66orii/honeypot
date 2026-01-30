@@ -71,3 +71,11 @@ export interface SaveOrderRequest {
   items: CartItem[];
   // add other order fields if required, e.g. shipping info, totals, etc.
 }
+
+export interface Order {
+  order_number: string;
+  date: string;
+  grand_total: number;
+  status: string;
+  items: Array<{ product_name: string; quantity: number }>;
+}

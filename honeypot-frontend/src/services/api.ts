@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { Product, Category, ProductFilters, PaymentIntentResponse, CartItem, SaveOrderResponse, SaveOrderRequest, Review, AuthResponse, User } from './types'; 
+import type { Product, Category, ProductFilters, PaymentIntentResponse, CartItem, SaveOrderResponse, SaveOrderRequest, Review, AuthResponse, User, Order } from './types'; 
 
 export interface RegisterRequest {
   username: string;
@@ -122,6 +122,12 @@ baseQuery: fetchBaseQuery({
       }),
     }),
 
+    // Order History
+    getMyOrders: builder.query<Order[], void>({
+        query: () => 'checkout/orders/',
+        transformResponse: (response: { results: Order[] }) => response.results,
+    }),
+
   }),
 });
 
@@ -138,5 +144,6 @@ export const {
    useRegisterMutation,
    useLogoutMutation,
    useGetUserQuery,
-   useLazyGetUserQuery
+   useLazyGetUserQuery,
+    useGetMyOrdersQuery
 } = honeypotApi;

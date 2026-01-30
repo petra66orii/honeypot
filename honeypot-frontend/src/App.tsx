@@ -3,6 +3,7 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Profile from "./pages/Profile";
 import ProductGrid from "./components/ProductGrid";
 import ProductDetail from "./pages/ProductDetail";
 import ShoppingBag from "./pages/ShoppingBag";
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/" element={<ProductGrid />} />
         <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/bag" element={<ShoppingBag />} />
