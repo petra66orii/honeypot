@@ -1,14 +1,36 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSubscribeToNewsletterMutation } from "../services/api";
 
 const Footer: React.FC = () => {
   const [email, setEmail] = useState("");
+  const [msg, setMsg] = useState("");
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  // Use the mutation hook
+  const [subscribe, { isLoading }] = useSubscribeToNewsletterMutation();
+
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    // We will wire this up to the API once we see your Newsletter model!
-    alert(`Subscribed: ${email}`);
-    setEmail("");
+    setMsg(""); // Clear previous messages
+
+    try {
+      // Unwrap allows us to catch the error easily
+      await subscribe({ email }).unwrap();
+      setMsg("Subscribed! Welcome to the hive. 🐝");
+      setEmail("");
+    } catch (err: unknown) {
+      // If unique=True fails (duplicate email)
+      if (typeof err === "object" && err !== null && "data" in err) {
+        const maybeErr = err as { data?: { email?: string | string[] } };
+        if (maybeErr.data?.email) {
+          setMsg("You are already subscribed! 🍯");
+        } else {
+          setMsg("Oops, something went wrong. Try again.");
+        }
+      } else {
+        setMsg("Oops, something went wrong. Try again.");
+      }
+    }
   };
 
   return (
@@ -23,9 +45,10 @@ const Footer: React.FC = () => {
             Subscribe to our newsletter for sweet deals, new recipes, and
             buzz-worthy news.
           </p>
+
           <form
             onSubmit={handleSubscribe}
-            className="flex flex-col sm:flex-row justify-center gap-4 max-w-md mx-auto"
+            className="flex flex-col sm:flex-row justify-center gap-4 max-w-md mx-auto relative"
           >
             <input
               type="email"
@@ -34,14 +57,25 @@ const Footer: React.FC = () => {
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-5 py-3 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
               required
+              disabled={isLoading}
             />
             <button
               type="submit"
-              className="bg-gray-900 text-white px-8 py-3 rounded-full font-bold hover:bg-gray-800 transition"
+              disabled={isLoading}
+              className="bg-gray-900 text-white px-8 py-3 rounded-full font-bold hover:bg-gray-800 transition disabled:opacity-50"
             >
-              Subscribe
+              {isLoading ? "..." : "Subscribe"}
             </button>
           </form>
+
+          {/* SUCCESS / ERROR MESSAGE DISPLAY */}
+          {msg && (
+            <p
+              className={`mt-4 font-bold ${msg.includes("already") ? "text-gray-800" : "text-green-900"}`}
+            >
+              {msg}
+            </p>
+          )}
         </div>
       </div>
 

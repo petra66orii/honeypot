@@ -1,6 +1,5 @@
 from django.db import models
 
-
 # Create your models here.
 class ProductCarousel(models.Model):
     """
@@ -33,3 +32,10 @@ class Testimonial(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.rating}⭐)"
+
+class NewsletterSubscriber(models.Model):
+    email = models.EmailField(unique=True) # unique=True prevents duplicates!
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email

@@ -184,6 +184,15 @@ baseQuery: fetchBaseQuery({
     getDeals: builder.query<Product[], void>({
       query: () => 'products/gifts/',
     }),
+    
+    // Subscribe to Newsletter
+    subscribeToNewsletter: builder.mutation<{ message: string }, { email: string }>({
+      query: (body) => ({
+        url: 'home/newsletter/',
+        method: 'POST',
+        body,
+      }),
+    }),
   }),
 });
 
@@ -210,4 +219,5 @@ export const {
   useAddCommentMutation,
   useGetTestimonialsQuery,
   useGetDealsQuery,
+  useSubscribeToNewsletterMutation,
 } = honeypotApi;
