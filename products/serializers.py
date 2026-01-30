@@ -28,3 +28,23 @@ class ProductSerializer(serializers.ModelSerializer):
             'price', 'rating', 'image', 'average_rating', 
             'full_bees', 'has_half_bee'
         ]
+
+class ReviewSerializer(serializers.ModelSerializer):
+    # We want to show the username, not just the user ID
+    user = serializers.ReadOnlyField(source='user.username')
+    
+    class Meta:
+        model = ProductReview
+        fields = ['id', 'user', 'rating', 'content', 'created_at', 'is_approved']
+        read_only_fields = ['is_approved', 'created_at']
+
+class ProductSerializer(serializers.ModelSerializer):
+    # ... your existing product serializer code ...
+    class Meta:
+        model = Product
+        fields = '__all__'
+        
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = '__all__'

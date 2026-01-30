@@ -1,6 +1,8 @@
 from rest_framework import generics, permissions, filters, status
 from rest_framework.response import Response
 from rest_framework.exceptions import PermissionDenied
+from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models import Avg
 
@@ -43,6 +45,26 @@ class ProductList(generics.ListAPIView):
     filterset_fields = ['category__name'] 
     search_fields = ['name', 'description']
     ordering_fields = ['price', 'rating', 'name']
+
+    @action(detail=True, methods=['get', 'post'], permission_classes=[IsAuthenticatedOrReadOnly])
+    def reviews(self, request, pk=None):
+        product = self.get_object()
+
+        if request.method == 'GET':
+            # 1. Fetch only approved reviews for this product
+            reviews = Review.objects.filter(product=product, is_approved=True).order_by('-created_at')
+            serializer = ReviewSerializer(reviews, many=True)
+            return Response(serializer.data)
+
+        elif request.method == 'POST':
+            # 2. Create a new review
+            serializer = ReviewSerializer(data=request.data)
+            if serializer.is_valid():
+                # We manually attach the user and product since they aren't in the form data
+                serializer.save(user=request.user, product=product, is_approved=False)
+                return Response({'message': 'Review submitted! It is awaiting approval.'}, status=status.HTTP_201_CREATED)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ProductDetail(generics.RetrieveAPIView):

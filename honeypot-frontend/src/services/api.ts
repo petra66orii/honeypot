@@ -1,42 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { Product, Category } from './types'; 
-
-export interface ProductFilters {
-  search?: string;
-  category__name?: string;
-  ordering?: string;
-}
-
-// Define the response shape for Creating a Payment Intent
-interface PaymentIntentResponse {
-  clientSecret: string;
-  id: string;
-}
-
-// Request shape for items in the cart/payment intent
-interface CartItem {
-  // Accept either backend naming "productId" or "id" to be flexible
-  productId?: string;
-  id?: string;
-  quantity: number;
-  // additional optional fields can be added as needed
-}
-
-// Define the response shape for Saving an Order
-interface SaveOrderResponse {
-  success: boolean;
-  order_number: string;
-}
-
-// Request shape for saving an order
-interface SaveOrderRequest {
-  items: CartItem[];
-  // add other order fields if required, e.g. shipping info, totals, etc.
-}
+import type { Product, Category, ProductFilters, PaymentIntentResponse, CartItem, SaveOrderResponse, SaveOrderRequest, Review } from './types'; 
 
 export const honeypotApi = createApi({
   reducerPath: 'honeypotApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://127.0.0.1:8000/api/' }),
+  
+  tagTypes: ['Reviews'], 
+
   endpoints: (builder) => ({
     getProducts: builder.query<Product[], ProductFilters>({
       query: (params) => ({
@@ -55,12 +25,11 @@ export const honeypotApi = createApi({
     getRelatedProducts: builder.query<Product[], string>({
       query: (id) => `products/${id}/related/`,
       transformResponse: (response: { results: Product[] }) => response.results,
-    }),
+    }),    
     
     // --- CHECKOUT ENDPOINTS ---
 
     // 1. Create Payment Intent
-    // Accept a typed array of cart items
     createPaymentIntent: builder.mutation<PaymentIntentResponse, { items: CartItem[] }>({
         query: (cartData) => ({
             url: 'checkout/create-payment-intent/',
@@ -77,6 +46,25 @@ export const honeypotApi = createApi({
             body: orderData,
         }),
     }),
+
+    // --- REVIEW ENDPOINTS ---
+
+    // 3. Get Reviews
+    getReviews: builder.query<Review[], string>({
+      query: (productId) => `products/${productId}/reviews/`,
+      providesTags: ['Reviews'], // This tells Redux "This list depends on the 'Reviews' tag"
+    }),
+
+    // 4. Add Review
+    addReview: builder.mutation<{ message: string }, { productId: string; rating: number; content: string }>({
+      query: ({ productId, ...body }) => ({
+        url: `products/${productId}/reviews/`,
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['Reviews'], // This tells Redux "I changed 'Reviews', please re-fetch the list!"
+    }),
+
   }),
 });
 
@@ -86,5 +74,7 @@ export const {
     useGetProductQuery, 
     useGetRelatedProductsQuery,
     useCreatePaymentIntentMutation,
-    useSaveOrderMutation 
+    useSaveOrderMutation,
+    useGetReviewsQuery,
+    useAddReviewMutation
 } = honeypotApi;

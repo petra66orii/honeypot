@@ -17,3 +17,44 @@ export interface Product {
   full_bees: number;
   has_half_bee: boolean;
 }
+
+export interface Review {
+  id: number;
+  user: string;
+  rating: number;
+  content: string; // or 'comment' depending on your Django model
+  created_at: string;
+}
+
+export interface ProductFilters {
+  search?: string;
+  category__name?: string;
+  ordering?: string;
+}
+
+// Define the response shape for Creating a Payment Intent
+export interface PaymentIntentResponse {
+  clientSecret: string;
+  id: string;
+}
+
+// Request shape for items in the cart/payment intent
+export interface CartItem {
+  // Accept either backend naming "productId" or "id" to be flexible
+  productId?: string;
+  id?: string;
+  quantity: number;
+  // additional optional fields can be added as needed
+}
+
+// Define the response shape for Saving an Order
+export interface SaveOrderResponse {
+  success: boolean;
+  order_number: string;
+}
+
+// Request shape for saving an order
+export interface SaveOrderRequest {
+  items: CartItem[];
+  // add other order fields if required, e.g. shipping info, totals, etc.
+}
