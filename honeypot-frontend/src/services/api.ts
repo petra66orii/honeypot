@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { Product, Category, ProductFilters, PaymentIntentResponse, CartItem, SaveOrderResponse, SaveOrderRequest, Review, AuthResponse, User, Order } from './types'; 
+import type { Product, Category, ProductFilters, PaymentIntentResponse, CartItem, SaveOrderResponse, SaveOrderRequest, Review, AuthResponse, User, Order, UserProfile } from './types'; 
 
 export interface RegisterRequest {
   username: string;
@@ -30,7 +30,7 @@ baseQuery: fetchBaseQuery({
       return headers;
     },
   }),  
-  tagTypes: ['Reviews'], 
+  tagTypes: ['Reviews', 'Profile'], 
 
   endpoints: (builder) => ({
     getProducts: builder.query<Product[], ProductFilters>({
@@ -128,22 +128,40 @@ baseQuery: fetchBaseQuery({
         transformResponse: (response: { results: Order[] }) => response.results,
     }),
 
+    // GET PROFILE
+    getUserProfile: builder.query<UserProfile, void>({
+      query: () => 'profiles/',
+      providesTags: ['Profile'], // Tag for auto-refreshing
+    }),
+
+    // UPDATE PROFILE
+    updateUserProfile: builder.mutation<UserProfile, Partial<UserProfile>>({
+      query: (data) => ({
+        url: 'profiles/',
+        method: 'PATCH',
+        body: data,
+      }),
+      invalidatesTags: ['Profile'], // Refresh data after update
+    }),
+
   }),
 });
 
 export const { 
-    useGetProductsQuery, 
-    useGetCategoriesQuery, 
-    useGetProductQuery, 
-    useGetRelatedProductsQuery,
-    useCreatePaymentIntentMutation,
-    useSaveOrderMutation,
-    useGetReviewsQuery,
-    useAddReviewMutation,
-    useLoginMutation,
-   useRegisterMutation,
-   useLogoutMutation,
-   useGetUserQuery,
-   useLazyGetUserQuery,
-    useGetMyOrdersQuery
+  useGetProductsQuery, 
+  useGetCategoriesQuery, 
+  useGetProductQuery, 
+  useGetRelatedProductsQuery,
+  useCreatePaymentIntentMutation,
+  useSaveOrderMutation,
+  useGetReviewsQuery,
+  useAddReviewMutation,
+  useLoginMutation,
+  useRegisterMutation,
+  useLogoutMutation,
+  useGetUserQuery,
+  useLazyGetUserQuery,
+  useGetMyOrdersQuery,
+  useGetUserProfileQuery,
+  useUpdateUserProfileMutation,
 } = honeypotApi;

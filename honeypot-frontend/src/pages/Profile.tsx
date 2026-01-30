@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../store";
 import { logout } from "../services/authSlice";
-import { useLogoutMutation, useGetMyOrdersQuery } from "../services/api";
+import {
+  useLogoutMutation,
+  useGetMyOrdersQuery,
+  useGetUserProfileQuery,
+  useUpdateUserProfileMutation,
+} from "../services/api";
 import { useNavigate } from "react-router-dom";
 
 const Profile: React.FC = () => {
@@ -11,8 +16,24 @@ const Profile: React.FC = () => {
   const navigate = useNavigate();
   const [logoutApi] = useLogoutMutation();
 
-  // Fetch Orders
+  // 1. Fetch Data
   const { data: orders, isLoading, error } = useGetMyOrdersQuery();
+  const { data: profile } = useGetUserProfileQuery();
+  const [updateProfile, { isLoading: isUpdating }] =
+    useUpdateUserProfileMutation();
+
+  // 2. Local State for Form
+  const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({
+    phone_number: "",
+    street_address1: "",
+    street_address2: "",
+    town: "",
+    county: "",
+    postcode: "",
+    country: "IE",
+  });
+  const [msg, setMsg] = useState("");
 
   const handleLogout = async () => {
     await logoutApi();
@@ -20,12 +41,48 @@ const Profile: React.FC = () => {
     navigate("/");
   };
 
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await updateProfile(formData).unwrap();
+      setMsg("Address updated successfully!");
+      setTimeout(() => setMsg(""), 3000);
+      setShowForm(false);
+    } catch (err) {
+      console.error("Update failed", err);
+      setMsg("Failed to update address.");
+    }
+  };
+
   if (!user) return null;
+
+  const handleToggleForm = () => {
+    // If we are about to OPEN the form, populate it with the latest profile data
+    if (!showForm && profile) {
+      setFormData({
+        phone_number: profile.phone_number || "",
+        street_address1: profile.street_address1 || "",
+        street_address2: profile.street_address2 || "",
+        town: profile.town || "",
+        county: profile.county || "",
+        postcode: profile.postcode || "",
+        country: profile.country || "IE",
+      });
+    }
+    // Toggle the visibility
+    setShowForm(!showForm);
+  };
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="md:flex md:gap-12">
-        {/* Left Column: User Card */}
+        {/* LEFT COLUMN: User Info & Address Form */}
         <div className="md:w-1/3 mb-8">
           <div className="rounded-lg border border-gray-100 bg-white p-6 shadow-sm sticky top-8">
             <div className="flex items-center gap-4 mb-6">
@@ -41,6 +98,69 @@ const Profile: React.FC = () => {
                 </p>
               </div>
             </div>
+
+            {/* Address Management Toggle */}
+            <button
+              onClick={handleToggleForm} // <--- Use the new handler here!
+              className="w-full mb-3 rounded-md border border-honey-gold text-honey-gold px-4 py-2 text-sm font-bold hover:bg-yellow-50 transition"
+            >
+              {showForm ? "Cancel Editing" : "Update Address"}
+            </button>
+
+            {showForm && (
+              <form onSubmit={handleSubmit} className="space-y-3 mb-4">
+                <input
+                  name="street_address1"
+                  placeholder="Street Address"
+                  value={formData.street_address1}
+                  onChange={handleChange}
+                  className="w-full border p-2 rounded text-sm"
+                />
+                <input
+                  name="town"
+                  placeholder="City / Town"
+                  value={formData.town}
+                  onChange={handleChange}
+                  className="w-full border p-2 rounded text-sm"
+                />
+                <input
+                  name="postcode"
+                  placeholder="Postcode"
+                  value={formData.postcode}
+                  onChange={handleChange}
+                  className="w-full border p-2 rounded text-sm"
+                />
+                <input
+                  name="county"
+                  placeholder="County"
+                  value={formData.county}
+                  onChange={handleChange}
+                  className="w-full border p-2 rounded text-sm"
+                />
+                <select
+                  name="country"
+                  value={formData.country}
+                  onChange={handleChange}
+                  className="w-full border p-2 rounded text-sm"
+                >
+                  <option value="IE">Ireland</option>
+                  <option value="US">United States</option>
+                  <option value="GB">United Kingdom</option>
+                </select>
+                <button
+                  type="submit"
+                  disabled={isUpdating}
+                  className="w-full bg-honey-gold text-white rounded p-2 text-sm font-bold hover:bg-yellow-600"
+                >
+                  {isUpdating ? "Saving..." : "Save Changes"}
+                </button>
+              </form>
+            )}
+
+            {msg && (
+              <p className="text-sm text-green-600 text-center mb-4">{msg}</p>
+            )}
+
             <button
               onClick={handleLogout}
               className="w-full rounded-md border border-red-100 bg-red-50 px-4 py-2 text-left text-sm font-medium text-red-600 hover:bg-red-100 transition"
@@ -81,7 +201,7 @@ const Profile: React.FC = () => {
                     </div>
                     <div className="text-right">
                       <p className="text-sm font-bold text-gray-900">
-                        €{order.grand_total}
+                        €{order.total_price}
                       </p>
                       <span className="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
                         {order.status || "Paid"}

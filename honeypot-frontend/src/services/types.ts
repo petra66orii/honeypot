@@ -6,6 +6,21 @@ export interface User {
   last_name?: string;
 }
 
+export interface UserProfile {
+  username: string;
+  email: string;
+  first_name?: string;
+  last_name?: string;
+  // Note: NO 'default_' prefix here, matching your python model
+  phone_number: string;
+  street_address1: string;
+  street_address2: string;
+  town: string;
+  county: string;
+  postcode: string;
+  country: string;
+}
+
 export interface AuthResponse {
   key: string; // The token
   user: User;  // The user details
@@ -75,7 +90,7 @@ export interface SaveOrderRequest {
 export interface Order {
   order_number: string;
   date: string;
-  grand_total: number;
+  total_price: number;
   status: string;
   items: Array<{ product_name: string; quantity: number }>;
 }
