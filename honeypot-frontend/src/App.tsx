@@ -1,6 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
@@ -11,6 +13,7 @@ import Checkout from "./pages/Checkout";
 import CheckoutSuccess from "./pages/CheckoutSuccess";
 import BlogList from "./pages/BlogList";
 import BlogPost from "./pages/BlogPost";
+import GiftsDeals from "./pages/GiftsDeals";
 
 function App() {
   return (
@@ -20,7 +23,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/" element={<ProductGrid />} />
+        <Route path="/gifts" element={<GiftsDeals />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<ProductGrid />} />
         <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/bag" element={<ShoppingBag />} />
         <Route path="/checkout" element={<Checkout />} />
@@ -28,6 +33,7 @@ function App() {
         <Route path="/blog" element={<BlogList />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

@@ -48,7 +48,7 @@ const Navbar: React.FC = () => {
 
           {/* 2. Desktop Navigation (Hidden on Mobile) */}
           <div className="hidden md:flex items-center gap-8">
-            <NavLink to="/" className={navLinkClass}>
+            <NavLink to="/products" className={navLinkClass}>
               Shop
             </NavLink>
             <NavLink to="/gifts" className={navLinkClass}>
