@@ -7,6 +7,7 @@ import {
 import { useSelector } from "react-redux";
 import type { RootState } from "../store";
 import { useSaveOrderMutation } from "../services/api";
+import { COUNTRIES } from "../utils/countries";
 
 interface CheckoutFormProps {
   stripePid: string;
@@ -193,9 +194,12 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ stripePid }) => {
           className="input-field"
         />
         <select name="country" onChange={handleChange} className="input-field">
-          <option value="IE">Ireland</option>
-          <option value="GB">United Kingdom</option>
-          <option value="US">United States</option>
+          {COUNTRIES.map((c) => (
+            // Change 'code'/'name' to 'value'/'label'
+            <option key={c.value} value={c.value}>
+              {c.label}
+            </option>
+          ))}
         </select>
       </div>
 

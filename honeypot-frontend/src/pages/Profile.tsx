@@ -9,6 +9,7 @@ import {
   useUpdateUserProfileMutation,
 } from "../services/api";
 import { useNavigate } from "react-router-dom";
+import { COUNTRIES } from "../utils/countries";
 
 const Profile: React.FC = () => {
   const { user } = useSelector((state: RootState) => state.auth);
@@ -143,9 +144,12 @@ const Profile: React.FC = () => {
                   onChange={handleChange}
                   className="w-full border p-2 rounded text-sm"
                 >
-                  <option value="IE">Ireland</option>
-                  <option value="US">United States</option>
-                  <option value="GB">United Kingdom</option>
+                  {COUNTRIES.map((c) => (
+                    // Change 'code'/'name' to 'value'/'label'
+                    <option key={c.value} value={c.value}>
+                      {c.label}
+                    </option>
+                  ))}
                 </select>
                 <button
                   type="submit"
