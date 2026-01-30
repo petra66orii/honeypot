@@ -1,31 +1,33 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { honeypotApi } from './services/api';
-import cartReducer from './services/cartSlice'; 
+import cartReducer from './services/cartSlice';
+import authReducer from './services/authSlice'; // Import Auth
 import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; 
+import storage from 'redux-persist/lib/storage';
 
-// Configuration for persistence
+const rootReducer = combineReducers({
+  [honeypotApi.reducerPath]: honeypotApi.reducer,
+  cart: cartReducer,
+  auth: authReducer, // Add Auth here
+});
+
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['cart'], // Only persist the cart, not the API cache
+  whitelist: ['cart', 'auth'], // Persist both!
 };
 
-const persistedCartReducer = persistReducer(persistConfig, cartReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: {
-    [honeypotApi.reducerPath]: honeypotApi.reducer,
-    cart: persistedCartReducer, // Use the persisted version
-  },
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false, // Required for Redux Persist to work without errors
+      serializableCheck: false,
     }).concat(honeypotApi.middleware),
 });
 
-export const persistor = persistStore(store); // Export the persistor
+export const persistor = persistStore(store);
 
-// Types
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

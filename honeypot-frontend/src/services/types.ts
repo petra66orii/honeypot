@@ -1,3 +1,16 @@
+export interface User {
+  pk: number;
+  username: string;
+  email: string;
+  first_name?: string;
+  last_name?: string;
+}
+
+export interface AuthResponse {
+  key: string; // The token
+  user: User;  // The user details
+}
+
 export interface Category {
   id: number;
   name: string;

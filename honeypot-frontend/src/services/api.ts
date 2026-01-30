@@ -1,10 +1,35 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { Product, Category, ProductFilters, PaymentIntentResponse, CartItem, SaveOrderResponse, SaveOrderRequest, Review } from './types'; 
+import type { Product, Category, ProductFilters, PaymentIntentResponse, CartItem, SaveOrderResponse, SaveOrderRequest, Review, AuthResponse, User } from './types'; 
+
+export interface RegisterRequest {
+  username: string;
+  password: string;
+  email: string;
+}
+
+export interface LoginRequest {
+  username: string;
+  password: string;
+}
 
 export const honeypotApi = createApi({
   reducerPath: 'honeypotApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://127.0.0.1:8000/api/' }),
-  
+baseQuery: fetchBaseQuery({ 
+    baseUrl: 'http://127.0.0.1:8000/api/',
+    prepareHeaders: (headers, { getState }) => {
+      // 1. Get the token from the Redux store
+      // (Use a narrow typed state shape to avoid 'any' and circular deps)
+      const state = getState() as { auth?: { token?: string | null } };
+      const token = state?.auth?.token;
+      
+      // 2. If a token exists, attach it to the headers
+      if (token) {
+        headers.set('authorization', `Token ${token}`);
+      }
+      
+      return headers;
+    },
+  }),  
   tagTypes: ['Reviews'], 
 
   endpoints: (builder) => ({
@@ -29,7 +54,7 @@ export const honeypotApi = createApi({
     
     // --- CHECKOUT ENDPOINTS ---
 
-    // 1. Create Payment Intent
+    // Create Payment Intent
     createPaymentIntent: builder.mutation<PaymentIntentResponse, { items: CartItem[] }>({
         query: (cartData) => ({
             url: 'checkout/create-payment-intent/',
@@ -38,7 +63,7 @@ export const honeypotApi = createApi({
         }),
     }),
 
-    // 2. Save Order
+    // Save Order
     saveOrder: builder.mutation<SaveOrderResponse, SaveOrderRequest>({
         query: (orderData) => ({
             url: 'checkout/save-order/',
@@ -49,13 +74,13 @@ export const honeypotApi = createApi({
 
     // --- REVIEW ENDPOINTS ---
 
-    // 3. Get Reviews
+    // Reviews
     getReviews: builder.query<Review[], string>({
       query: (productId) => `products/${productId}/reviews/`,
       providesTags: ['Reviews'], // This tells Redux "This list depends on the 'Reviews' tag"
     }),
 
-    // 4. Add Review
+    // Add Review
     addReview: builder.mutation<{ message: string }, { productId: string; rating: number; content: string }>({
       query: ({ productId, ...body }) => ({
         url: `products/${productId}/reviews/`,
@@ -63,6 +88,38 @@ export const honeypotApi = createApi({
         body,
       }),
       invalidatesTags: ['Reviews'], // This tells Redux "I changed 'Reviews', please re-fetch the list!"
+    }),
+
+    // --- AUTHENTICATION ENDPOINTS ---
+
+    // Login
+    login: builder.mutation<AuthResponse, LoginRequest>({
+      query: (credentials) => ({
+        url: 'auth/login/',
+        method: 'POST',
+        body: credentials,
+      }),
+    }),
+
+    getUser: builder.query<User, void>({
+      query: () => 'auth/user/',
+    }),
+    
+    // Register
+    register: builder.mutation<AuthResponse, RegisterRequest>({
+      query: (userData) => ({
+        url: 'auth/registration/',
+        method: 'POST',
+        body: userData,
+      }),
+    }),
+    
+    // Logout
+    logout: builder.mutation<void, void>({
+      query: () => ({
+        url: 'auth/logout/',
+        method: 'POST',
+      }),
     }),
 
   }),
@@ -76,5 +133,10 @@ export const {
     useCreatePaymentIntentMutation,
     useSaveOrderMutation,
     useGetReviewsQuery,
-    useAddReviewMutation
+    useAddReviewMutation,
+    useLoginMutation,
+   useRegisterMutation,
+   useLogoutMutation,
+   useGetUserQuery,
+   useLazyGetUserQuery
 } = honeypotApi;

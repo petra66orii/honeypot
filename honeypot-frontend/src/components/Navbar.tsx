@@ -1,10 +1,27 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../store";
+import { logout } from "../services/authSlice";
+import { useLogoutMutation } from "../services/api";
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const dispatch = useDispatch();
+  const { user, isAuthenticated } = useSelector(
+    (state: RootState) => state.auth,
+  );
+  const [logoutApi] = useLogoutMutation();
+
+  const handleLogout = async () => {
+    try {
+      await logoutApi().unwrap(); // Tell backend to destroy token
+    } catch (e) {
+      console.log("Logout error", e);
+    } finally {
+      dispatch(logout()); // Clear frontend state
+    }
+  };
 
   // Connect to the Redux store to get the live cart count
   const cartQuantity = useSelector(
@@ -61,25 +78,46 @@ const Navbar: React.FC = () => {
               </svg>
             </button>
 
-            {/* User Profile */}
-            <Link
-              to="/profile"
-              className="text-gray-500 hover:text-honey-gold hidden sm:block"
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+            {/* User Profile / Login Link */}
+            {isAuthenticated ? (
+              <div className="flex items-center gap-4">
+                <span className="hidden text-sm font-medium sm:block text-gray-700">
+                  Hi, {user?.username}
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className="text-sm font-medium text-gray-500 hover:text-red-500"
+                >
+                  Logout
+                </button>
+                {/* Link to Profile (Coming soon) */}
+                <Link
+                  to="/profile"
+                  className="text-gray-500 hover:text-honey-gold"
+                >
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                    />
+                  </svg>
+                </Link>
+              </div>
+            ) : (
+              <Link
+                to="/login"
+                className="text-sm font-bold text-gray-700 hover:text-honey-gold"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                />
-              </svg>
-            </Link>
+                Log In
+              </Link>
+            )}
 
             {/* Shopping Bag with Badge */}
             <Link
