@@ -61,11 +61,6 @@ def create_payment_intent(request):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def save_order(request):
-    """
-    Step 2: React sends the user's address info and the stripe_pid.
-    We save the Order to the database immediately.
-    This ensures the Order exists BEFORE the Stripe Webhook fires.
-    """
     try:
         data = request.data
         order_data = data.get('order_data', {})
@@ -73,8 +68,10 @@ def save_order(request):
         stripe_pid = data.get('stripe_pid')
 
         # 1. Create the Order
+        # We use first_name and last_name to match your original Order model
         order = Order(
-            full_name=f"{order_data.get('firstName')} {order_data.get('lastName')}",
+            first_name=order_data.get('firstName'),
+            last_name=order_data.get('lastName'),
             email=order_data.get('email'),
             phone_number=order_data.get('phone'),
             country=order_data.get('country'),
@@ -83,22 +80,14 @@ def save_order(request):
             street_address1=order_data.get('address'),
             county=order_data.get('county'),
             stripe_pid=stripe_pid,
-            original_bag=json.dumps(cart_items), # Keep for record keeping
+            bag=json.dumps(cart_items),
         )
 
-        # Attach UserProfile if user is logged in
+        # Attach UserProfile if logged in
         if request.user.is_authenticated:
             try:
                 profile = UserProfile.objects.get(user=request.user)
                 order.user_profile = profile
-                
-                # Optional: Update profile info if user requested (logic simplified for API)
-                if data.get('save_info'):
-                    profile.phone_number = order.phone_number
-                    profile.street_address1 = order.street_address1
-                    profile.country = order.country
-                    profile.town = order.town
-                    profile.save()
             except UserProfile.DoesNotExist:
                 pass
 
@@ -120,4 +109,5 @@ def save_order(request):
         return Response({'success': True, 'order_number': order.order_number}, status=status.HTTP_201_CREATED)
 
     except Exception as e:
+        print(f"Order Save Error: {e}") 
         return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)

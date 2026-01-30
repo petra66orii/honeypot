@@ -10,7 +10,7 @@ export interface ProductFilters {
 // Define the response shape for Creating a Payment Intent
 interface PaymentIntentResponse {
   clientSecret: string;
-  id: string; // Added this!
+  id: string;
 }
 
 // Request shape for items in the cart/payment intent
@@ -25,7 +25,7 @@ interface CartItem {
 // Define the response shape for Saving an Order
 interface SaveOrderResponse {
   success: boolean;
-  order_number: string; // Added this!
+  order_number: string;
 }
 
 // Request shape for saving an order

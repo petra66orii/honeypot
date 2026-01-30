@@ -101,6 +101,24 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ stripePid }) => {
       } else {
         console.error("Checkout failed:", err);
         setErrorMessage(String(err) || "Payment failed. Please try again.");
+        let serverError;
+        type ErrorWithData = { data?: { error?: string } };
+        if (
+          typeof err === "object" &&
+          err !== null &&
+          "data" in err &&
+          typeof (err as ErrorWithData).data === "object" &&
+          (err as ErrorWithData).data !== null
+        ) {
+          serverError = (err as ErrorWithData).data?.error;
+        }
+        const generalError =
+          typeof err === "object" && err !== null && "message" in err
+            ? (err as { message?: string }).message
+            : "Payment failed. Please try again.";
+        setErrorMessage(
+          serverError ?? generalError ?? "Payment failed. Please try again.",
+        );
       }
     } finally {
       setIsProcessing(false);
