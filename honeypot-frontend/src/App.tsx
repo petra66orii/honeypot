@@ -16,6 +16,7 @@ import BlogPost from "./pages/BlogPost";
 import GiftsDeals from "./pages/GiftsDeals";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </div>
