@@ -8,7 +8,7 @@ const About: React.FC = () => {
       <div className="relative bg-gray-900 py-24 sm:py-32">
         <div className="absolute inset-0 overflow-hidden opacity-50">
           <img
-            src="https://images.unsplash.com/photo-1600189020968-30792376dc4c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80"
+            src="/beekeeper-hero.jpg"
             alt="Beekeeper at work"
             className="h-full w-full object-cover"
           />
@@ -59,7 +59,7 @@ const About: React.FC = () => {
           </div>
           <div className="relative">
             <img
-              src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+              src="/honey-jar.jpg"
               alt="Honey Jar"
               className="rounded-2xl shadow-xl rotate-2 hover:rotate-0 transition duration-500"
             />
