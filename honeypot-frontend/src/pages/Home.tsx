@@ -25,7 +25,6 @@ const Home: React.FC = () => {
   return (
     <div className="bg-white">
       {/* --- HERO SECTION WITH HONEY DRIP --- */}
-      {/* FIX: Removed 'overflow-hidden' and added z-index so drips sit on top of the next section */}
       <div className="relative w-full h-150 flex items-center justify-center bg-gray-900 z-10">
         {/* Background Media Container - We keep overflow hidden HERE to clip the video */}
         <div className="absolute inset-0 overflow-hidden">

@@ -249,6 +249,10 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 12,
 }
 
+REST_AUTH = {
+    'USER_DETAILS_SERIALIZER': 'userprofile.serializers.CustomUserDetailsSerializer',
+}
+
 # JWT Configuration
 REST_USE_JWT = True
 JWT_AUTH_SECURE = True

@@ -4,6 +4,7 @@ export interface User {
   email: string;
   first_name?: string;
   last_name?: string;
+  is_staff: boolean;
 }
 
 export interface UserProfile {
@@ -11,7 +12,6 @@ export interface UserProfile {
   email: string;
   first_name?: string;
   last_name?: string;
-  // Note: NO 'default_' prefix here, matching your python model
   phone_number: string;
   street_address1: string;
   street_address2: string;
