@@ -17,6 +17,12 @@ import GiftsDeals from "./pages/GiftsDeals";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
+import Forbidden from "./pages/Forbidden";
+import ServerError from "./pages/ServerError";
+import ProtectedRoute from "./components/ProtectedRoute";
+
+import AdminLayout from "./pages/admin/AdminLayout";
+import Dashboard from "./pages/admin/Dashboard";
 
 function App() {
   return (
@@ -37,6 +43,25 @@ function App() {
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
+        <Route path="/forbidden" element={<Forbidden />} />
+        <Route path="/server-error" element={<ServerError />} />
+
+        {/* --- ADMIN ROUTES (PROTECTED) --- */}
+        {/* The Wrapper checks if user is Admin. If yes, it renders the AdminLayout */}
+        <Route element={<ProtectedRoute adminOnly={true} />}>
+          <Route path="/admin" element={<AdminLayout />}>
+            {/* These render INSIDE the AdminLayout <Outlet /> */}
+            <Route index element={<Dashboard />} />
+            <Route
+              path="products"
+              element={<div>Product Manager Coming Soon</div>}
+            />
+            <Route
+              path="orders"
+              element={<div>Order Manager Coming Soon</div>}
+            />
+          </Route>
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
