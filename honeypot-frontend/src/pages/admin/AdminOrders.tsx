@@ -4,8 +4,9 @@ import {
   useUpdateOrderStatusMutation,
 } from "../../services/api";
 import type { Order } from "../../services/types";
+import OrderDetailsModal from "../../components/admin/OrderDetailsModal";
 
-// Helper for Status Colors
+// Helper for Status Colors (unchanged)
 const getStatusColor = (status: string) => {
   switch (status) {
     case "Pending":
@@ -33,18 +34,64 @@ const AdminOrders: React.FC = () => {
   const [updateStatus, { isLoading: isUpdating }] =
     useUpdateOrderStatusMutation();
 
+  // 🆕 STATE FOR MASS ACTIONS & MODAL
+  const [selectedIds, setSelectedIds] = useState<number[]>([]);
+  const [viewOrder, setViewOrder] = useState<Order | null>(null);
   const PAGE_SIZE = 12;
   const totalPages = ordersData ? Math.ceil(ordersData.count / PAGE_SIZE) : 0;
-  const isFirstPage = page === 1;
-  const isLastPage = page === totalPages || totalPages === 0;
 
   const handleStatusChange = async (id: number, newStatus: string) => {
     try {
       await updateStatus({ id, status: newStatus }).unwrap();
-      // Toast notification could go here
     } catch (err) {
-      console.error("Failed to update status", err);
-      alert("Failed to update status");
+      console.error(err);
+      alert("Failed to update order status.");
+    }
+  };
+
+  // Clear selection when navigating pages is handled directly in the pagination controls.
+
+  // 1. Handle Single Checkbox Click
+  const toggleSelect = (id: number) => {
+    setSelectedIds((prev) =>
+      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id],
+    );
+  };
+
+  const currentPageIds = ordersData?.results.map((o) => o.id) || [];
+
+  const isAllSelected =
+    currentPageIds.length > 0 &&
+    currentPageIds.every((id) => selectedIds.includes(id));
+
+  // 2. Handle "Select All" (Current Page Only)
+  const toggleSelectAll = () => {
+    if (isAllSelected) {
+      // If all are selected, clear ONLY current page IDs (keep others if you want multi-page, but for now we clear all for safety)
+      setSelectedIds([]);
+    } else {
+      // Select all on current page
+      setSelectedIds(currentPageIds);
+    }
+  };
+
+  // 3. Handle Mass Update
+  const handleBulkUpdate = async (newStatus: string) => {
+    if (!window.confirm(`Mark ${selectedIds.length} orders as ${newStatus}?`))
+      return;
+
+    // We loop through and update them one by one (Parallel Promises)
+    try {
+      await Promise.all(
+        selectedIds.map((id) =>
+          updateStatus({ id, status: newStatus }).unwrap(),
+        ),
+      );
+      setSelectedIds([]); // Clear selection on success
+      alert("Orders updated successfully!");
+    } catch (err) {
+      console.error(err);
+      alert("Some updates failed.");
     }
   };
 
@@ -57,14 +104,58 @@ const AdminOrders: React.FC = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-6 text-gray-800">
-        Order Management 📦
-      </h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold text-gray-800">
+          Order Management 📦
+        </h1>
+
+        {/* 🆕 BULK ACTION BAR */}
+        {selectedIds.length > 0 && (
+          <div className="flex items-center gap-2 bg-blue-50 px-4 py-2 rounded-lg border border-blue-200 animate-fade-in">
+            <span className="text-sm font-medium text-blue-800">
+              {selectedIds.length} Selected
+            </span>
+            <div className="h-4 w-px bg-blue-200 mx-2"></div>
+            <span className="text-xs text-blue-600 uppercase font-bold">
+              Set Status:
+            </span>
+            <div className="flex gap-1">
+              <button
+                onClick={() => handleBulkUpdate("Processing")}
+                className="px-3 py-1 bg-white border border-blue-200 rounded hover:bg-blue-100 text-xs"
+              >
+                Processing
+              </button>
+              <button
+                onClick={() => handleBulkUpdate("Shipped")}
+                className="px-3 py-1 bg-white border border-blue-200 rounded hover:bg-blue-100 text-xs"
+              >
+                Shipped
+              </button>
+              <button
+                onClick={() => handleBulkUpdate("Delivered")}
+                className="px-3 py-1 bg-white border border-blue-200 rounded hover:bg-blue-100 text-xs"
+              >
+                Delivered
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
 
       <div className="overflow-x-auto bg-white rounded-lg shadow border border-gray-200">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
+              {/* CHECKBOX HEADER */}
+              <th className="px-4 py-3">
+                <input
+                  type="checkbox"
+                  onChange={toggleSelectAll}
+                  checked={isAllSelected}
+                  className="rounded border-gray-300 text-honey-gold focus:ring-honey-gold"
+                />
+              </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 ID
               </th>
@@ -93,10 +184,21 @@ const AdminOrders: React.FC = () => {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {ordersData?.results.map((order: Order) => (
-              <tr key={order.order_number} className="hover:bg-gray-50">
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {order.id}
+              <tr
+                key={order.id}
+                className={`hover:bg-gray-50 transition-colors ${selectedIds.includes(order.id) ? "bg-blue-50/50" : ""}`}
+              >
+                {/* CHECKBOX ROW */}
+                <td className="px-4 py-4">
+                  <input
+                    type="checkbox"
+                    checked={selectedIds.includes(order.id)}
+                    onChange={() => toggleSelect(order.id)}
+                    className="rounded border-gray-300 text-honey-gold focus:ring-honey-gold"
+                  />
                 </td>
+
+                {/* ID with Truncation */}
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                   <div className="flex items-center gap-2">
                     <span
@@ -151,6 +253,15 @@ const AdminOrders: React.FC = () => {
                     {order.status}
                   </span>
                 </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 flex gap-2">
+                  {/* VIEW DETAILS BUTTON */}
+                  <button
+                    onClick={() => setViewOrder(order)}
+                    className="text-honey-gold hover:text-yellow-600 font-medium hover:underline"
+                  >
+                    View
+                  </button>
+                </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   <select
                     value={order.status}
@@ -173,11 +284,17 @@ const AdminOrders: React.FC = () => {
         </table>
       </div>
 
-      {/* PAGINATION */}
+      {/* PAGINATION (Same as before) */}
       <div className="mt-4 flex items-center justify-between">
         <button
-          onClick={() => setPage((p) => Math.max(1, p - 1))}
-          disabled={isFirstPage}
+          onClick={() =>
+            setPage((p) => {
+              const next = Math.max(1, p - 1);
+              setSelectedIds([]);
+              return next;
+            })
+          }
+          disabled={page === 1}
           className="px-4 py-2 border rounded-md disabled:opacity-50"
         >
           Previous
@@ -186,13 +303,27 @@ const AdminOrders: React.FC = () => {
           Page {page} of {totalPages}
         </span>
         <button
-          onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-          disabled={isLastPage}
+          onClick={() =>
+            setPage((p) => {
+              const next = Math.min(totalPages, p + 1);
+              setSelectedIds([]);
+              return next;
+            })
+          }
+          disabled={page === totalPages}
           className="px-4 py-2 border rounded-md disabled:opacity-50"
         >
           Next
         </button>
       </div>
+
+      {/* 🆕 ORDER DETAILS MODAL */}
+      {viewOrder && (
+        <OrderDetailsModal
+          order={viewOrder}
+          onClose={() => setViewOrder(null)}
+        />
+      )}
     </div>
   );
 };

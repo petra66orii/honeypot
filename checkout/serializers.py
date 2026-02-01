@@ -21,11 +21,13 @@ class OrderSerializer(serializers.ModelSerializer):
             'first_name', 
             'last_name',
             'email',
+            'phone_number',
             'order_total', 
             'total_price', 
             'street_address1', 
             'town', 
             'country', 
+            'postcode',
             'status', 
             'items'
         ]

@@ -120,6 +120,11 @@ export interface Order {
   first_name: string;
   last_name: string;
   email: string;
+  phone_number: string;
+  street_address1: string;
+  town: string;
+  postcode: string;
+  country: string;
   date: string;
   total_price: string;
   status: 'Pending' | 'Processing' | 'Shipped' | 'Delivered' | 'Cancelled';
