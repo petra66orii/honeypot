@@ -8,8 +8,6 @@ from django_countries.fields import CountryField
 from userprofile.models import UserProfile
 from products.models import Product
 
-
-# Create your models here.
 class Order(models.Model):
     """
     Order model to store order details
@@ -37,10 +35,13 @@ class Order(models.Model):
         status (str): Status of the order (unfulfilled or fulfilled).
         """
 
-    STATUS_CHOICES = [
-        ('unfulfilled', 'Unfulfilled'),
-        ('fulfilled', 'Fulfilled'),
-    ]
+    STATUS_CHOICES = (
+        ('Pending', 'Pending'),
+        ('Processing', 'Processing'),
+        ('Shipped', 'Shipped'),
+        ('Delivered', 'Delivered'),
+        ('Cancelled', 'Cancelled'),
+    )
 
     order_number = models.CharField(max_length=32, null=False, editable=False)
     user_profile = models.ForeignKey(
@@ -86,7 +87,7 @@ class Order(models.Model):
     status = models.CharField(
         max_length=20,
         choices=STATUS_CHOICES,
-        default='unfulfilled',
+        default='Pending',
     )
 
     def _generate_order_number(self):

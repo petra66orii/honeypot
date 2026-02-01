@@ -15,10 +15,12 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = [
+            'id',
             'order_number', 
             'date', 
             'first_name', 
             'last_name',
+            'email',
             'order_total', 
             'total_price', 
             'street_address1', 

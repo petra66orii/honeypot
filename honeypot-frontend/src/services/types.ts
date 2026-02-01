@@ -115,11 +115,16 @@ export interface SaveOrderRequest {
 }
 
 export interface Order {
+  id: number;
   order_number: string;
+  first_name: string;
+  last_name: string;
+  email: string;
   date: string;
-  total_price: number;
-  status: string;
-  items: Array<{ product_name: string; quantity: number }>;
+  total_price: string;
+  status: 'Pending' | 'Processing' | 'Shipped' | 'Delivered' | 'Cancelled';
+  items: OrderItem[];
+  shipping_address: string;
 }
 
 export interface BlogPost {
@@ -144,4 +149,11 @@ export interface Comment {
   content: string;
   created_at: string;
   approved: boolean;
+}
+
+export interface OrderItem {
+  id: number;
+  product_name: string;
+  product_price: string;
+  quantity: number;
 }

@@ -25,6 +25,7 @@ import AdminLayout from "./pages/admin/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
 import AdminProducts from "./pages/admin/AdminProducts";
 import AdminProductForm from "./pages/admin/AdminProductForm";
+import AdminOrders from "./pages/admin/AdminOrders";
 
 function App() {
   return (
@@ -57,10 +58,7 @@ function App() {
             <Route path="products" element={<AdminProducts />} />
             <Route path="products/new" element={<AdminProductForm />} />
             <Route path="products/edit/:id" element={<AdminProductForm />} />
-            <Route
-              path="orders"
-              element={<div>Order Manager Coming Soon</div>}
-            />
+            <Route path="orders" element={<AdminOrders />} />
           </Route>
         </Route>
         <Route path="*" element={<NotFound />} />

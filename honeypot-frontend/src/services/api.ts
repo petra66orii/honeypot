@@ -19,7 +19,7 @@ baseQuery: fetchBaseQuery({
       return headers;
     },
   }),  
-  tagTypes: ['Reviews', 'Profile', 'Comments', 'Products'], 
+  tagTypes: ['Reviews', 'Profile', 'Comments', 'Products', 'Orders'], 
 
   endpoints: (builder) => ({
     getProducts: builder.query<PaginatedResponse<Product>, ProductFilters>({
@@ -242,6 +242,27 @@ baseQuery: fetchBaseQuery({
       }),
       invalidatesTags: ['Products'],
     }),
+
+    // --- ADMIN ORDER ENDPOINTS ---
+
+    // 1. Get All Orders (Paginated)
+    getAdminOrders: builder.query<PaginatedResponse<Order>, { page: number }>({
+      query: ({ page }) => ({
+        url: 'checkout/orders/', // Ensure your Django URL matches this (e.g., router.register('orders', OrderViewSet))
+        params: { page },
+      }),
+      providesTags: ['Orders'],
+    }),
+
+    // 2. Update Order Status
+    updateOrderStatus: builder.mutation<Order, { id: number; status: string }>({
+      query: ({ id, status }) => ({
+        url: `checkout/orders/${id}/`,
+        method: 'PATCH',
+        body: { status },
+      }),
+      invalidatesTags: ['Orders'], // Refreshes the list automatically!
+    }),
   }),
 });
 
@@ -274,4 +295,6 @@ export const {
   useAddProductMutation,
   useUpdateProductMutation,
   useGetAdminCategoriesQuery,
+  useGetAdminOrdersQuery,
+  useUpdateOrderStatusMutation,
 } = honeypotApi;

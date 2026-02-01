@@ -3,7 +3,7 @@ import json
 from django.conf import settings
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework import status, generics
 
@@ -138,5 +138,18 @@ class OrderList(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        # This is the magic filter: only show orders for the current user
+        # If user is Admin, return ALL orders.
+        if self.request.user.is_staff:
+            return Order.objects.all().order_by('-date')
+        
+        # Otherwise, return only the user's own orders
         return Order.objects.filter(user_profile__user=self.request.user).order_by('-date')
+
+class AdminOrderDetail(generics.RetrieveUpdateAPIView):
+    """
+    View to retrieve, update, or delete a specific order.
+    Only accessible by Admins.
+    """
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    permission_classes = [IsAdminUser]
