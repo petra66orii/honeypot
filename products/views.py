@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.parsers import MultiPartParser, FormParser
 from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models import Avg
 
@@ -12,6 +13,15 @@ from .serializers import CategorySerializer, ProductSerializer, ProductReviewSer
 # ==========================================
 # CUSTOM PERMISSIONS
 # ==========================================
+class IsAdminOrReadOnly(permissions.BasePermission):
+    """
+    The request is authenticated as a user, or is a read-only request.
+    """
+    def has_permission(self, request, view):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        return request.user and request.user.is_staff
+    
 class IsOwnerOrReadOnly(permissions.BasePermission):
     """
     Custom permission to only allow owners of a review to edit/delete it.
@@ -47,50 +57,33 @@ class CategoryList(generics.ListAPIView):
     permission_classes = [permissions.AllowAny]
 
 
-class ProductList(generics.ListAPIView):
+class ProductList(generics.ListCreateAPIView): # Changed from ListAPIView
     """
-    Replaces: `all_products`
-    Handles searching, filtering by category, and sorting.
+    GET: List all products (Public)
+    POST: Create a product (Admin only)
     """
-    queryset = Product.objects.all().order_by('id')
+    queryset = Product.objects.select_related('category').all().order_by('id')
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-
     filterset_fields = ['category__name'] 
     search_fields = ['name', 'description']
     ordering_fields = ['price', 'rating', 'name']
 
-    @action(detail=True, methods=['get', 'post'], permission_classes=[IsAuthenticatedOrReadOnly])
-    def reviews(self, request, pk=None):
-        product = self.get_object()
-
-        if request.method == 'GET':
-            # 1. Fetch only approved reviews for this product
-            reviews = Review.objects.filter(product=product, is_approved=True).order_by('-created_at')
-            serializer = ReviewSerializer(reviews, many=True)
-            return Response(serializer.data)
-
-        elif request.method == 'POST':
-            # 2. Create a new review
-            serializer = ReviewSerializer(data=request.data)
-            if serializer.is_valid():
-                # We manually attach the user and product since they aren't in the form data
-                serializer.save(user=request.user, product=product, is_approved=False)
-                return Response({'message': 'Review submitted! It is awaiting approval.'}, status=status.HTTP_201_CREATED)
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class ProductDetail(generics.RetrieveAPIView):
+class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
     """
-    Replaces: `product_detail` (The Product Info part)
-    Retrieves a single product.
+    GET: Retrieve product (Public)
+    PUT/PATCH: Update product (Admin only)
+    DELETE: Delete product (Admin only)
     """
-    queryset = Product.objects.all().order_by('id')
+    queryset = Product.objects.select_related('category').all().order_by('id')
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]
+    parser_classes = (MultiPartParser, FormParser)
 
+    def update(self, request, *args, **kwargs):
+        print("📥 INCOMING DATA:", request.data) # Check your terminal when you save!
+        return super().update(request, *args, **kwargs)
 
 class RelatedProductList(generics.ListAPIView):
     """
@@ -142,19 +135,6 @@ class UserReviewDetail(generics.RetrieveUpdateDestroyAPIView):
 # ==========================================
 # ADMIN MANAGEMENT VIEWS (Replacing @login_required + is_superuser checks)
 # ==========================================
-class AdminProductListCreate(generics.ListCreateAPIView):
-    """Replaces: `add_product`"""
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    permission_classes = [permissions.IsAdminUser]
-
-
-class AdminProductDetail(generics.RetrieveUpdateDestroyAPIView):
-    """Replaces: `edit_product` and `delete_product`"""
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    permission_classes = [permissions.IsAdminUser]
-
 
 class AdminReviewList(generics.ListAPIView):
     """

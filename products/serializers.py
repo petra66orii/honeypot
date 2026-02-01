@@ -16,6 +16,12 @@ class ProductReviewSerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
+
+    category_id = serializers.PrimaryKeyRelatedField(
+        queryset=Category.objects.all(),
+        source='category',
+        write_only=True
+    )
     # Exposing custom model properties to the API
     average_rating = serializers.ReadOnlyField()
     full_bees = serializers.ReadOnlyField()
@@ -24,7 +30,7 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = [
-            'id', 'category', 'sku', 'name', 'description', 
+            'id', 'category', 'category_id', 'sku', 'name', 'description', 
             'price', 'rating', 'image', 'average_rating', 
             'full_bees', 'has_half_bee'
         ]

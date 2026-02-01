@@ -32,10 +32,10 @@ urlpatterns = [
     # ADMIN DASHBOARD ENDPOINTS (Superuser Only)
     # ==========================================
     # GET: List all products / POST: Add a new product
-    path('admin/products/', views.AdminProductListCreate.as_view(), name='admin-product-list'),
+    path('admin/products/', views.ProductList.as_view(), name='admin-product-list'),
     
     # PUT/PATCH/DELETE: Edit or delete a specific product
-    path('admin/products/<int:pk>/', views.AdminProductDetail.as_view(), name='admin-product-detail'),
+    path('admin/products/<int:pk>/', views.ProductDetail.as_view(), name='admin-product-detail'),
 
     # GET: List ALL reviews (approved and unapproved)
     path('admin/reviews/', views.AdminReviewList.as_view(), name='admin-review-list'),
