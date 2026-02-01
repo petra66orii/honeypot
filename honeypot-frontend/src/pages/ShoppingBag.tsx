@@ -13,9 +13,11 @@ const ShoppingBag: React.FC = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const totalAmount = useSelector((state: RootState) => state.cart.totalAmount);
 
-  // 2. Fetch some products for the "You Might Also Like" section
-  // We just fetch the first 4 products for now as a suggestion
-  const { data: suggestions } = useGetProductsQuery({});
+  // 2. Fetch suggestions (Fix: include required category and page)
+  const { data: suggestionsData } = useGetProductsQuery({
+    category: "",
+    page: 1,
+  });
 
   // Helper to handle quantity changes
   const handleQuantityChange = (id: number, newQuantity: number) => {
@@ -176,8 +178,8 @@ const ShoppingBag: React.FC = () => {
           You might also like
         </h2>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-4">
-          {/* We take the first 4 products from the API as suggestions */}
-          {suggestions?.slice(0, 4).map((product) => (
+          {/* Fix: Access .results first, then slice */}
+          {suggestionsData?.results.slice(0, 4).map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
