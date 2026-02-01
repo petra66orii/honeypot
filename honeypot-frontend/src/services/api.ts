@@ -19,7 +19,7 @@ baseQuery: fetchBaseQuery({
       return headers;
     },
   }),  
-  tagTypes: ['Reviews', 'Profile', 'Comments'], 
+  tagTypes: ['Reviews', 'Profile', 'Comments', 'Products'], 
 
   endpoints: (builder) => ({
     getProducts: builder.query<PaginatedResponse<Product>, ProductFilters>({
@@ -32,6 +32,7 @@ baseQuery: fetchBaseQuery({
           page: params.page,
         }
       }),
+      providesTags: ['Products'],
       // transformResponse: (response: { results: Product[] }) => response.results,
     }),
     getCategories: builder.query<Category[], void>({
@@ -176,11 +177,15 @@ baseQuery: fetchBaseQuery({
       invalidatesTags: (_result, _error, { slug }) => [{ type: 'Comments', id: slug }],
     }),
 
+    // --- HOME ENDPOINTS ---
+
+    // Get Testimonials
     getTestimonials: builder.query<Testimonial[], void>({
       query: () => 'home/testimonials/',
       transformResponse: (response: { results: Testimonial[] }) => response.results,
     }),
 
+    // Get Deals
     getDeals: builder.query<Product[], void>({
       query: () => 'products/gifts/',
     }),
@@ -193,12 +198,49 @@ baseQuery: fetchBaseQuery({
         body,
       }),
     }),
+
+    // Send Contact Message
     sendContactMessage: builder.mutation<{ message: string }, { name: string; email: string; subject: string; message: string }>({
       query: (body) => ({
         url: 'home/contact/',
         method: 'POST',
         body,
       }),
+    }),
+
+    // ADMIN ENDPOINTS
+    deleteProduct: builder.mutation<void, number>({
+      query: (id) => ({
+        url: `products/${id}/`, // Adjust if your URL is different (e.g. products/${id})
+        method: 'DELETE',
+      }),
+      // This helps refresh the list immediately after deleting!
+      invalidatesTags: ['Products'], 
+    }),
+
+    // 1. Get Categories (for the dropdown)
+    getAdminCategories: builder.query<Category[], void>({
+      query: () => 'categories/', 
+    }),
+
+    // 2. Add Product (Multipart Form Data)
+    addProduct: builder.mutation<Product, FormData>({
+      query: (formData) => ({
+        url: 'products/',
+        method: 'POST',
+        body: formData,
+      }),
+      invalidatesTags: ['Products'],
+    }),
+
+    // 3. Update Product
+    updateProduct: builder.mutation<Product, { id: number; data: FormData }>({
+      query: ({ id, data }) => ({
+        url: `products/${id}/`,
+        method: 'PATCH',
+        body: data,
+      }),
+      invalidatesTags: ['Products'],
     }),
   }),
 });
@@ -228,4 +270,8 @@ export const {
   useGetDealsQuery,
   useSubscribeToNewsletterMutation,
   useSendContactMessageMutation,
+  useDeleteProductMutation,
+  useAddProductMutation,
+  useUpdateProductMutation,
+  useGetAdminCategoriesQuery,
 } = honeypotApi;
