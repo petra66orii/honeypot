@@ -23,6 +23,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 import AdminLayout from "./pages/admin/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
+import AdminProducts from "./pages/admin/AdminProducts";
+import AdminProductForm from "./pages/admin/AdminProductForm";
 
 function App() {
   return (
@@ -52,10 +54,9 @@ function App() {
           <Route path="/admin" element={<AdminLayout />}>
             {/* These render INSIDE the AdminLayout <Outlet /> */}
             <Route index element={<Dashboard />} />
-            <Route
-              path="products"
-              element={<div>Product Manager Coming Soon</div>}
-            />
+            <Route path="products" element={<AdminProducts />} />
+            <Route path="products/new" element={<AdminProductForm />} />
+            <Route path="products/edit/:id" element={<AdminProductForm />} />
             <Route
               path="orders"
               element={<div>Order Manager Coming Soon</div>}
