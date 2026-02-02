@@ -30,7 +30,8 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ productId, onSuccess }) => {
       await addReview({
         productId,
         rating,
-        content: comment,
+        review_text: comment,
+        product: productId,
       }).unwrap();
 
       setComment("");

@@ -59,6 +59,7 @@ export interface Product {
   name: string;
   description: string;
   price: string; // Decimals come over as strings from Django
+  reviews: Review[];
   rating: number | null;
   image: string | null;
   average_rating: number;
@@ -68,10 +69,12 @@ export interface Product {
 
 export interface Review {
   id: number;
+  product: string;
   user: string;
   rating: number;
-  content: string; // or 'comment' depending on your Django model
-  created_at: string;
+  review_text: string;
+  approved: boolean;
+  created_on: string;
 }
 
 export interface PaginatedResponse<T> {

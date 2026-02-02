@@ -73,16 +73,17 @@ baseQuery: fetchBaseQuery({
     getReviews: builder.query<Review[], string>({
       query: (productId) => `products/${productId}/reviews/`,
       providesTags: ['Reviews'], // This tells Redux "This list depends on the 'Reviews' tag"
+      transformResponse: (response: { results: Review[] }) => response.results,
     }),
 
     // Add Review
-    addReview: builder.mutation<{ message: string }, { productId: string; rating: number; content: string }>({
+    addReview: builder.mutation<{ message: string }, { productId: string; rating: number; review_text: string; product: string }>({
       query: ({ productId, ...body }) => ({
         url: `products/${productId}/reviews/`,
         method: 'POST',
         body,
       }),
-      invalidatesTags: ['Reviews'], // This tells Redux "I changed 'Reviews', please re-fetch the list!"
+            invalidatesTags: ['Reviews'], // This tells Redux "I changed 'Reviews', please re-fetch the list!"
     }),
 
     // --- AUTHENTICATION ENDPOINTS ---
