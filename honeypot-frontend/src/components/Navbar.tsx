@@ -20,6 +20,7 @@ const Navbar: React.FC = () => {
       console.log("Logout error", e);
     } finally {
       dispatch(logout()); // Clear frontend state
+      setIsMenuOpen(false); // Close mobile menu if open
     }
   };
 
@@ -68,27 +69,10 @@ const Navbar: React.FC = () => {
 
           {/* 3. Icons (Profile & Cart) */}
           <div className="flex items-center gap-6">
-            {/* Search Icon (Optional toggle could go here) */}
-            <button className="text-gray-500 hover:text-honey-gold">
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-            </button>
-
-            {/* User Profile / Login Link */}
+            {/* User Profile / Login Link (DESKTOP ONLY) */}
             {isAuthenticated ? (
-              <div className="flex items-center gap-4">
-                <span className="hidden text-sm font-medium sm:block text-gray-700">
+              <div className="hidden md:flex items-center gap-4">
+                <span className="text-sm font-medium text-gray-700">
                   Hi, {user?.first_name}!
                 </span>
                 <button
@@ -119,13 +103,13 @@ const Navbar: React.FC = () => {
             ) : (
               <Link
                 to="/login"
-                className="text-sm font-bold text-gray-700 hover:text-honey-gold"
+                className="hidden md:block text-sm font-bold text-gray-700 hover:text-honey-gold"
               >
                 Log In
               </Link>
             )}
 
-            {/* Shopping Bag with Badge */}
+            {/* Shopping Bag with Badge (ALWAYS VISIBLE) */}
             <Link
               to="/bag"
               className="group relative text-gray-500 hover:text-honey-gold"
@@ -186,8 +170,17 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu Dropdown */}
       {isMenuOpen && (
-        <div className="md:hidden border-t border-gray-100 bg-white px-4 py-4 shadow-lg">
+        <div className="md:hidden border-t border-gray-100 bg-white px-4 py-4 shadow-lg animate-fade-in-down">
           <div className="flex flex-col gap-4">
+            {/* MOBILE: User Greeting */}
+            {isAuthenticated && (
+              <div className="pb-2 border-b border-gray-100">
+                <p className="text-lg font-bold text-honey-gold">
+                  Hi, {user?.first_name}!
+                </p>
+              </div>
+            )}
+
             <NavLink
               to="/"
               className={navLinkClass}
@@ -209,13 +202,43 @@ const Navbar: React.FC = () => {
             >
               Blog
             </NavLink>
-            <Link
-              to="/profile"
-              className="text-gray-600"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              My Profile
-            </Link>
+
+            {/* MOBILE: Profile Links */}
+            {isAuthenticated ? (
+              <>
+                <Link
+                  to="/profile"
+                  className="text-gray-600 hover:text-honey-gold transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  My Profile
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="text-left text-gray-600 hover:text-red-500 transition-colors"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <Link
+                to="/login"
+                className="font-bold text-gray-700 hover:text-honey-gold"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Log In
+              </Link>
+            )}
+
+            {isAdmin && (
+              <NavLink
+                to="/admin"
+                className="text-purple-600 font-semibold"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Admin Panel 🛡️
+              </NavLink>
+            )}
           </div>
         </div>
       )}

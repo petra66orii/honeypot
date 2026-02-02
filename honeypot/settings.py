@@ -259,6 +259,3 @@ JWT_AUTH_SECURE = False if 'DEVELOPMENT' in os.environ else True
 JWT_AUTH_COOKIE = 'my-app-auth'
 JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 JWT_AUTH_SAMESITE = 'Lax' if 'DEVELOPMENT' in os.environ else 'None'
-
-# Prevent Django Allauth from rendering standard HTML templates
-ACCOUNT_EMAIL_VERIFICATION = 'none'
