@@ -34,6 +34,8 @@ const Navbar: React.FC = () => {
       ? "text-honey-gold font-semibold"
       : "text-gray-600 hover:text-honey-gold transition-colors";
 
+  const isAdmin = user?.is_staff;
+
   return (
     <nav className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-100">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -57,6 +59,11 @@ const Navbar: React.FC = () => {
             <NavLink to="/blog" className={navLinkClass}>
               Blog
             </NavLink>
+            {isAdmin && (
+              <NavLink to="/admin" className={navLinkClass}>
+                Admin
+              </NavLink>
+            )}
           </div>
 
           {/* 3. Icons (Profile & Cart) */}
@@ -82,7 +89,7 @@ const Navbar: React.FC = () => {
             {isAuthenticated ? (
               <div className="flex items-center gap-4">
                 <span className="hidden text-sm font-medium sm:block text-gray-700">
-                  Hi, {user?.username}
+                  Hi, {user?.first_name}!
                 </span>
                 <button
                   onClick={handleLogout}
@@ -90,7 +97,6 @@ const Navbar: React.FC = () => {
                 >
                   Logout
                 </button>
-                {/* Link to Profile (Coming soon) */}
                 <Link
                   to="/profile"
                   className="text-gray-500 hover:text-honey-gold"
