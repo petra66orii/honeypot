@@ -121,6 +121,12 @@ const AdminOrders: React.FC = () => {
             </span>
             <div className="flex gap-1">
               <button
+                onClick={() => handleBulkUpdate("Pending")}
+                className="px-3 py-1 bg-white border border-blue-200 rounded hover:bg-blue-100 text-xs"
+              >
+                Pending
+              </button>
+              <button
                 onClick={() => handleBulkUpdate("Processing")}
                 className="px-3 py-1 bg-white border border-blue-200 rounded hover:bg-blue-100 text-xs"
               >
@@ -196,6 +202,9 @@ const AdminOrders: React.FC = () => {
                     onChange={() => toggleSelect(order.id)}
                     className="rounded border-gray-300 text-honey-gold focus:ring-honey-gold"
                   />
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {order.id}
                 </td>
 
                 {/* ID with Truncation */}
