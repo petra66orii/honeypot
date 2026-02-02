@@ -5,6 +5,8 @@ export interface User {
   first_name?: string;
   last_name?: string;
   is_staff: boolean;
+  last_login?: string;
+  date_joined: string;
 }
 
 export interface UserProfile {
@@ -161,4 +163,13 @@ export interface OrderItem {
   product_name: string;
   product_price: string;
   quantity: number;
+}
+
+export interface ContactMessage {
+  id: number;
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  created_at: string;
 }

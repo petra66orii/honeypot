@@ -42,3 +42,8 @@ class CustomUserDetailsSerializer(serializers.ModelSerializer):
             'is_staff'  # <--- The magic key!
         )
         read_only_fields = ('email', 'is_staff')
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['pk', 'username', 'email', 'date_joined', 'is_staff', 'last_login']

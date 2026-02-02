@@ -19,7 +19,7 @@ baseQuery: fetchBaseQuery({
       return headers;
     },
   }),  
-  tagTypes: ['Reviews', 'Profile', 'Comments', 'Products', 'Orders'], 
+  tagTypes: ['Reviews', 'Profile', 'Comments', 'Products', 'Orders', 'Users'], 
 
   endpoints: (builder) => ({
     getProducts: builder.query<PaginatedResponse<Product>, ProductFilters>({
@@ -263,6 +263,31 @@ baseQuery: fetchBaseQuery({
       }),
       invalidatesTags: ['Orders'], // Refreshes the list automatically!
     }),
+
+    // --- ADMIN USER ENDPOINTS ---
+    getAdminUsers: builder.query<PaginatedResponse<User>, { page: number }>({
+      query: ({ page }) => ({
+        url: 'profiles/admin/users/', // Matches the URL we just made
+        params: { page },
+      }),
+      providesTags: ['Users'],
+    }),
+
+    deleteUser: builder.mutation<void, number>({
+      query: (pk) => ({
+        url: `profiles/admin/users/${pk}/`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Users'],
+    }),
+
+    toggleUserStaff: builder.mutation<void, number>({
+      query: (pk) => ({
+        url: `profiles/admin/users/${pk}/toggle_staff/`,
+        method: 'PATCH',
+      }),
+      invalidatesTags: ['Users'],
+    }),
   }),
 });
 
@@ -297,4 +322,7 @@ export const {
   useGetAdminCategoriesQuery,
   useGetAdminOrdersQuery,
   useUpdateOrderStatusMutation,
+  useGetAdminUsersQuery,
+  useDeleteUserMutation,
+  useToggleUserStaffMutation,
 } = honeypotApi;
