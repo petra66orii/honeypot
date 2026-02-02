@@ -1,7 +1,8 @@
 import stripe
 import json
 from django.conf import settings
-from django.shortcuts import get_object_or_404
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
@@ -153,3 +154,40 @@ class AdminOrderDetail(generics.RetrieveUpdateAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
     permission_classes = [IsAdminUser]
+
+    def perform_update(self, serializer):
+        # 1. Get the original order status before saving
+        original_instance = self.get_object()
+        original_status = original_instance.status
+
+        # 2. Save the new data
+        instance = serializer.save()
+
+        # 3. Check if status just changed to 'Shipped' (or 'fulfilled' depending on your choices)
+        # Ensure 'Shipped' matches exactly what is in your React dropdown/types.ts
+        if original_status != 'Shipped' and instance.status == 'Shipped':
+            self._send_shipping_email(instance)
+
+    def _send_shipping_email(self, order):
+        """Helper to send the shipping confirmation"""
+        subject = render_to_string(
+            'checkout/emails/order_fulfilled_email_subject.txt',
+            {'order': order}
+        )
+        body = render_to_string(
+            'checkout/emails/order_fulfilled_email_body.txt',
+            {
+                'order': order,
+                'contact_email': settings.DEFAULT_FROM_EMAIL,
+            }
+        )
+        
+        # Print to console for testing (optional)
+        print(f"Sending shipping email to {order.email}")
+        
+        send_mail(
+            subject,
+            body,
+            settings.DEFAULT_FROM_EMAIL,
+            [order.email]
+        )
