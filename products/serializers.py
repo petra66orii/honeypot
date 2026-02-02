@@ -41,5 +41,14 @@ class ReviewSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = ProductReview
-        fields = ['id', 'user', 'rating', 'content', 'created_at', 'is_approved']
+        fields = ['id', 'user', 'rating', 'review_text', 'created_at', 'approved']
         read_only_fields = ['is_approved', 'created_at']
+
+class AdminReviewSerializer(ProductReviewSerializer):
+    """
+    Serializer for Admins to manage reviews.
+    Makes 'approved' field writable.
+    """
+    class Meta(ProductReviewSerializer.Meta):
+        # We inherit everything from the parent Meta, but override read_only_fields
+        read_only_fields = []

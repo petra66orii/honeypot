@@ -3,10 +3,10 @@ from django.db.models import Sum, Count
 from django.db.models.functions import TruncDate
 from django.utils import timezone
 from datetime import timedelta
-from rest_framework import generics
+from rest_framework import generics, viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, AllowAny
 from checkout.models import Order
 from products.models import Product
 from .models import Testimonial, NewsletterSubscriber, ContactMessage
@@ -32,6 +32,19 @@ class ContactMessageAPI(generics.CreateAPIView):
     queryset = ContactMessage.objects.all()
     serializer_class = ContactMessageSerializer
     permission_classes = []
+
+class ContactMessageViewSet(viewsets.ModelViewSet):
+    """
+    Public: POST (Create) a message.
+    Admin: GET (List) all messages.
+    """
+    queryset = ContactMessage.objects.all().order_by('-created_at')
+    serializer_class = ContactMessageSerializer
+
+    def get_permissions(self):
+        if self.action == 'create':
+            return [AllowAny()]
+        return [IsAdminUser()]
 
 class DashboardStatsView(APIView):
     """

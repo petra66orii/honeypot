@@ -42,6 +42,12 @@ const AdminLayout: React.FC = () => {
             👥 Users
           </Link>
           <Link
+            to="/admin/content"
+            className={`block px-4 py-3 rounded-lg font-medium transition ${isActive("/admin/content")}`}
+          >
+            🛡️ Content
+          </Link>
+          <Link
             to="/"
             className="block px-4 py-3 rounded-lg font-medium text-red-600 hover:bg-red-50 mt-8"
           >

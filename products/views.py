@@ -1,14 +1,14 @@
-from rest_framework import generics, permissions, filters, status
+from rest_framework import generics, permissions, filters, viewsets
 from rest_framework.response import Response
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAdminUser
 from rest_framework.parsers import MultiPartParser, FormParser
 from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models import Avg
 
 from .models import Category, Product, ProductReview
-from .serializers import CategorySerializer, ProductSerializer, ProductReviewSerializer
+from .serializers import CategorySerializer, ProductSerializer, ProductReviewSerializer, AdminReviewSerializer   
 
 # ==========================================
 # CUSTOM PERMISSIONS
@@ -154,3 +154,14 @@ class AdminReviewDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = ProductReview.objects.all()
     serializer_class = ProductReviewSerializer
     permission_classes = [permissions.IsAdminUser]
+
+class AdminReviewViewSet(viewsets.ModelViewSet):
+    """
+    Admin-only view to manage ALL reviews.
+    """
+    queryset = ProductReview.objects.all().order_by('-created_on')
+    serializer_class = AdminReviewSerializer
+    permission_classes = [IsAdminUser]
+
+    # We only really need List and Destroy (Delete) for moderation
+    http_method_names = ['get', 'delete', 'patch']

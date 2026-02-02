@@ -1,5 +1,26 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { Product, Category, ProductFilters, PaymentIntentResponse, CartItem, SaveOrderResponse, SaveOrderRequest, Review, AuthResponse, User, Order, UserProfile, BlogPost, BlogPostDetail, Comment, RegisterRequest, LoginRequest, Testimonial, PaginatedResponse, DashboardStats, } from './types'; 
+import type { 
+  Product,
+  Category,
+  ProductFilters,
+  PaymentIntentResponse,
+  CartItem,
+  SaveOrderResponse,
+  SaveOrderRequest,
+  Review,
+  AuthResponse,
+  User,
+  Order,
+  UserProfile,
+  BlogPost,
+  BlogPostDetail,
+  Comment,
+  RegisterRequest,
+  LoginRequest,
+  Testimonial,
+  PaginatedResponse,
+  DashboardStats,
+  ContactMessage, } from './types'; 
 
 export const honeypotApi = createApi({
   reducerPath: 'honeypotApi',
@@ -19,7 +40,7 @@ baseQuery: fetchBaseQuery({
       return headers;
     },
   }),  
-  tagTypes: ['Reviews', 'Profile', 'Comments', 'Products', 'Orders', 'Users'], 
+  tagTypes: ['Reviews', 'Profile', 'Comments', 'Products', 'Orders', 'Users', 'Messages'], 
 
   endpoints: (builder) => ({
     getProducts: builder.query<PaginatedResponse<Product>, ProductFilters>({
@@ -294,6 +315,42 @@ baseQuery: fetchBaseQuery({
     getDashboardStats: builder.query<DashboardStats, void>({
       query: () => 'home/admin/stats/',
     }),
+
+    // --- CONTENT MANAGEMENT ---
+
+    // 1. Get All Reviews (Admin)
+    getAdminReviews: builder.query<Review[], void>({
+      query: () => 'products/admin/reviews/',
+      providesTags: ['Reviews'],
+      transformResponse: (response: { results: Review[] }) => response.results,
+    }),
+
+    // 2. Delete Review
+    deleteReview: builder.mutation<void, number>({
+      query: (id) => ({
+        url: `products/admin/reviews/${id}/`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Reviews', 'Products'], // Refresh both lists
+    }),
+
+    // 3. Approve Review
+    approveReview: builder.mutation<void, { id: number; approved: boolean }>({
+      query: ({ id, approved }) => ({
+        url: `products/admin/reviews/${id}/`,
+        method: 'PATCH',
+        body: { approved },
+      }),
+      invalidatesTags: ['Reviews', 'Products'], // Refresh lists immediately
+    }),
+
+        // 4. Get Contact Messages
+    getContactMessages: builder.query<ContactMessage[], void>({
+      query: () => 'home/messages/',
+      providesTags: ['Messages'],
+      transformResponse: (response: { results: ContactMessage[] }) => response.results,
+    }),
+
   }),
 });
 
@@ -332,4 +389,8 @@ export const {
   useDeleteUserMutation,
   useToggleUserStaffMutation,
   useGetDashboardStatsQuery,
+  useGetAdminReviewsQuery,
+  useDeleteReviewMutation,
+  useGetContactMessagesQuery,
+  useApproveReviewMutation,
 } = honeypotApi;

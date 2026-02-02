@@ -43,4 +43,9 @@ urlpatterns = [
     # PUT/PATCH/DELETE: Approve, edit, or delete ANY review
     path('admin/reviews/<int:pk>/', views.AdminReviewDetail.as_view(), name='admin-review-detail'),
     path('products/gifts/', views.DealProductList.as_view(), name='deals_list'),
-]
+    path('products/admin/reviews/', views.AdminReviewViewSet.as_view({'get': 'list'}), name='admin_reviews'),
+    path('products/admin/reviews/<int:pk>/', views.AdminReviewViewSet.as_view({
+            'delete': 'destroy', 
+            'patch': 'partial_update'
+        }), name='admin_review_detail'),
+        ]

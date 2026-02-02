@@ -14,4 +14,5 @@ class NewsletterSerializer(serializers.ModelSerializer):
 class ContactMessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ContactMessage
-        fields = ['name', 'email', 'subject', 'message']
+        fields = '__all__'
+        read_only_fields = ['is_read', 'created_at']
