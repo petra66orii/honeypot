@@ -173,3 +173,18 @@ export interface ContactMessage {
   message: string;
   created_at: string;
 }
+
+export interface DailySales {
+  day: string;
+  sales: number;
+  count: number;
+}
+
+export interface DashboardStats {
+  total_users: number;
+  total_orders: number;
+  total_products: number;
+  total_revenue: number;
+  recent_orders: Order[]; // Re-using your existing Order type
+  daily_sales: DailySales[];
+}

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { Product, Category, ProductFilters, PaymentIntentResponse, CartItem, SaveOrderResponse, SaveOrderRequest, Review, AuthResponse, User, Order, UserProfile, BlogPost, BlogPostDetail, Comment, RegisterRequest, LoginRequest, Testimonial, PaginatedResponse, } from './types'; 
+import type { Product, Category, ProductFilters, PaymentIntentResponse, CartItem, SaveOrderResponse, SaveOrderRequest, Review, AuthResponse, User, Order, UserProfile, BlogPost, BlogPostDetail, Comment, RegisterRequest, LoginRequest, Testimonial, PaginatedResponse, DashboardStats, } from './types'; 
 
 export const honeypotApi = createApi({
   reducerPath: 'honeypotApi',
@@ -288,6 +288,11 @@ baseQuery: fetchBaseQuery({
       }),
       invalidatesTags: ['Users'],
     }),
+
+    // --- DASHBOARD ENDPOINT ---
+    getDashboardStats: builder.query<DashboardStats, void>({
+      query: () => 'home/admin/stats/',
+    }),
   }),
 });
 
@@ -325,4 +330,5 @@ export const {
   useGetAdminUsersQuery,
   useDeleteUserMutation,
   useToggleUserStaffMutation,
+  useGetDashboardStatsQuery,
 } = honeypotApi;
