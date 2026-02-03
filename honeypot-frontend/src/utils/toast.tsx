@@ -1,4 +1,3 @@
-import React from "react";
 import toast from "react-hot-toast";
 
 export const showConfirmToast = (
@@ -7,7 +6,7 @@ export const showConfirmToast = (
   onCancel?: () => void,
 ) => {
   const id = toast.custom(
-    (t) => (
+    () => (
       <div className="w-[90vw] max-w-sm rounded-xl border border-yellow-200 bg-yellow-50 px-4 py-3 text-sm text-yellow-900 shadow-lg">
         <div className="flex items-start gap-3">
           <div className="mt-0.5 h-2.5 w-2.5 rounded-full bg-honey-gold/80 shadow-sm"></div>
