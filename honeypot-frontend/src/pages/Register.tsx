@@ -6,6 +6,8 @@ import { setCredentials } from "../services/authSlice";
 
 const Register: React.FC = () => {
   const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "",
     username: "",
     email: "",
     password: "",
@@ -30,21 +32,17 @@ const Register: React.FC = () => {
     }
 
     try {
-      // 1. Register with Django (allauth)
-      // Note: We map passwordConfirm to 'pass2' or 'password_confirm' depending on Django setup.
-      // Standard dj-rest-auth often just needs password1/password or handles validation internally.
       const payload = {
         username: formData.username,
         email: formData.email,
         password: formData.password,
         password_confirm: formData.passwordConfirm,
+        first_name: formData.first_name,
+        last_name: formData.last_name,
       };
 
       const user = await register(payload).unwrap();
 
-      // 2. Auto Login (Save to Redux)
-      // Sometimes registration returns the token immediately, sometimes it requires email verification.
-      // Assuming it returns key + user:
       if (user.key) {
         dispatch(setCredentials({ user: user.user, token: user.key }));
         navigate("/");
@@ -56,15 +54,28 @@ const Register: React.FC = () => {
     } catch (err: unknown) {
       console.error("Registration failed", err);
       // Try to extract a useful error message
+      // Define a type that matches what Django sends back
       type ApiError = {
-        data?: { username?: string[]; email?: string[]; password?: string[] };
+        data?: {
+          username?: string[];
+          email?: string[];
+          password1?: string[];
+          password2?: string[];
+          non_field_errors?: string[];
+        };
       };
+
       const e = err as ApiError;
+
+      // Check all possible error fields
       const msg =
+        e?.data?.non_field_errors?.[0] ||
         e?.data?.username?.[0] ||
         e?.data?.email?.[0] ||
-        e?.data?.password?.[0] ||
+        e?.data?.password1?.[0] ||
+        e?.data?.password2?.[0] ||
         "Registration failed. Please try again.";
+
       setError(msg);
     }
   };
@@ -81,6 +92,22 @@ const Register: React.FC = () => {
         </div>
 
         <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
+          <input
+            name="first_name"
+            type="text"
+            required
+            placeholder="First Name"
+            onChange={handleChange}
+            className="input-field-auth"
+          />
+          <input
+            name="last_name"
+            type="text"
+            required
+            placeholder="Last Name"
+            onChange={handleChange}
+            className="input-field-auth"
+          />
           <input
             name="username"
             type="text"

@@ -69,6 +69,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware'
 ]
 
 ROOT_URLCONF = 'honeypot.urls'
@@ -167,7 +168,6 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
 
-ACCOUNT_SIGNUP_FORM_CLASS = 'home.forms.CustomSignupForm'
 ACCOUNT_CHANGE_PASSWORD_REDIRECT_URL = "/edit-profile/"
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
@@ -251,7 +251,17 @@ REST_FRAMEWORK = {
 
 REST_AUTH = {
     'USER_DETAILS_SERIALIZER': 'userprofile.serializers.CustomUserDetailsSerializer',
+    'TOKEN_SERIALIZER': 'dj_rest_auth.serializers.TokenSerializer',
+    'SESSION_LOGIN': False,
+    'REGISTER_SERIALIZER': 'userprofile.serializers.HoneypotRegisterSerializer',
+    'PASSWORD_RESET_SERIALIZER': 'userprofile.serializers.FrontendPasswordResetSerializer',
 }
+
+ACCOUNT_ADAPTER = 'userprofile.adapters.CustomAccountAdapter'
+
+URL_FRONTEND = 'http://localhost:5173'
+
+RESET_PASSWORD_URL = f'{URL_FRONTEND}/password-reset/confirm'
 
 # JWT Configuration
 REST_USE_JWT = True

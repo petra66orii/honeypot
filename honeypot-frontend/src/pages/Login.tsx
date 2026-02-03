@@ -1,7 +1,11 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useLoginMutation, useLazyGetUserQuery } from "../services/api";
+import {
+  useLoginMutation,
+  useLazyGetUserQuery,
+  useResendEmailVerificationMutation,
+} from "../services/api";
 import { setCredentials } from "../services/authSlice";
 
 const Login: React.FC = () => {
@@ -9,12 +13,45 @@ const Login: React.FC = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
 
   const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
 
   const [login, { isLoading }] = useLoginMutation();
   const [triggerGetUser] = useLazyGetUserQuery();
+  const [resendEmail, { isLoading: isResending }] =
+    useResendEmailVerificationMutation();
 
   const [error, setError] = useState<string | null>(null);
+  const [resendEmailInput, setResendEmailInput] = useState("");
+  const [resendMessage, setResendMessage] = useState("");
+  const [resendError, setResendError] = useState("");
+  const [showResend, setShowResend] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const resendEmailParam = params.get("resend_email");
+    if (resendEmailParam) {
+      resendEmail({ email: resendEmailParam })
+        .unwrap()
+        .then(() => {
+          setShowResend(true);
+          setResendEmailInput(resendEmailParam);
+          setResendMessage("Verification email sent. Please check your inbox.");
+          setResendError("");
+        })
+        .catch((err: unknown) => {
+          setShowResend(true);
+          setResendEmailInput(resendEmailParam);
+          setResendMessage("");
+          const errorMessage =
+            (err as { data?: { email?: string[]; detail?: string } })?.data
+              ?.email?.[0] ||
+            (err as { data?: { detail?: string } })?.data?.detail ||
+            "Unable to resend verification email. Please try again.";
+          setResendError(errorMessage);
+        });
+    }
+  }, [location.search, resendEmail]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,6 +60,9 @@ const Login: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setResendMessage("");
+    setResendError("");
+    setShowResend(false);
 
     try {
       // Step 1: Login
@@ -78,7 +118,36 @@ const Login: React.FC = () => {
         }
       }
 
+      const lowerError = errorMsg.toLowerCase();
+      if (
+        lowerError.includes("verify") ||
+        lowerError.includes("verified") ||
+        lowerError.includes("email")
+      ) {
+        setShowResend(true);
+        if (!resendEmailInput && formData.username.includes("@")) {
+          setResendEmailInput(formData.username);
+        }
+      }
+
       setError(errorMsg);
+    }
+  };
+
+  const handleResend = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setResendMessage("");
+    setResendError("");
+    try {
+      await resendEmail({ email: resendEmailInput }).unwrap();
+      setResendMessage("Verification email sent. Please check your inbox.");
+    } catch (err: unknown) {
+      const errorMessage =
+        (err as { data?: { email?: string[]; detail?: string } })?.data
+          ?.email?.[0] ||
+        (err as { data?: { detail?: string } })?.data?.detail ||
+        "Unable to resend verification email. Please try again.";
+      setResendError(errorMessage);
     }
   };
 
@@ -144,6 +213,34 @@ const Login: React.FC = () => {
                   </div>
                 </div>
               </div>
+              {showResend && (
+                <form onSubmit={handleResend} className="mt-4">
+                  <input
+                    type="email"
+                    name="resend_email"
+                    required
+                    placeholder="Enter your email"
+                    value={resendEmailInput}
+                    onChange={(e) => setResendEmailInput(e.target.value)}
+                    className="w-full rounded-md border border-red-200 px-3 py-2 text-sm mb-3"
+                  />
+                  <button
+                    type="submit"
+                    disabled={isResending}
+                    className="w-full rounded-full bg-honey-gold py-2 text-sm font-semibold text-white hover:bg-yellow-600 disabled:opacity-50"
+                  >
+                    {isResending ? "Sending..." : "Resend Verification Email"}
+                  </button>
+                  {resendMessage && (
+                    <p className="mt-3 text-sm text-green-600">
+                      {resendMessage}
+                    </p>
+                  )}
+                  {resendError && (
+                    <p className="mt-3 text-sm text-red-500">{resendError}</p>
+                  )}
+                </form>
+              )}
             </div>
           )}
 
@@ -154,6 +251,15 @@ const Login: React.FC = () => {
           >
             {isLoading ? " buzzing in..." : "Sign in"}
           </button>
+
+          <div className="text-center text-sm">
+            <Link
+              to="/password-reset"
+              className="font-medium text-honey-gold hover:text-yellow-600"
+            >
+              Forgot your password?
+            </Link>
+          </div>
 
           <div className="text-center text-sm">
             <Link
