@@ -7,7 +7,8 @@ import { useCreatePaymentIntentMutation } from "../services/api";
 import CheckoutForm from "../components/CheckoutForm";
 
 // Replace with your actual key
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
+const stripePromise = stripePublicKey ? loadStripe(stripePublicKey) : null;
 
 const Checkout: React.FC = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
@@ -43,13 +44,19 @@ const Checkout: React.FC = () => {
         Secure Checkout
       </h1>
 
-      {clientSecret && stripePid ? (
+      {clientSecret && stripePid && stripePromise ? (
         <Elements stripe={stripePromise} options={{ clientSecret }}>
           <CheckoutForm stripePid={stripePid} />
         </Elements>
       ) : (
         <div className="flex justify-center py-20">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-honey-gold"></div>
+          {!stripePromise ? (
+            <div className="text-red-500 text-center">
+              Missing Stripe public key. Please configure VITE_STRIPE_PUBLIC_KEY.
+            </div>
+          ) : (
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-honey-gold"></div>
+          )}
         </div>
       )}
     </div>

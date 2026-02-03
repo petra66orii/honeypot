@@ -26,10 +26,13 @@ import type {
   PasswordResetRequest,
   PasswordResetConfirmRequest, } from './types'; 
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000/api/";
+
 export const honeypotApi = createApi({
   reducerPath: 'honeypotApi',
 baseQuery: fetchBaseQuery({ 
-    baseUrl: 'http://127.0.0.1:8000/api/',
+    baseUrl: API_BASE_URL,
     prepareHeaders: (headers, { getState }) => {
       // 1. Get the token from the Redux store
       // (Use a narrow typed state shape to avoid 'any' and circular deps)
