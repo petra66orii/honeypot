@@ -10,7 +10,7 @@ from rest_framework import status, generics
 
 from products.models import Product
 from userprofile.models import UserProfile
-from .models import Order, OrderItem
+from .models import Order, OrderItem, OrderDraft
 from .serializers import OrderSerializer
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -65,7 +65,7 @@ def create_payment_intent(request):
 def save_order(request):
     """
     Handle the checkout process.
-    If the user is logged in, attach their profile to the order.
+    Create a draft order that will be finalized after payment confirmation.
     """
     try:
         data = request.data
@@ -73,22 +73,10 @@ def save_order(request):
         cart_items = data.get('items', [])
         stripe_pid = data.get('stripe_pid')
 
-        # 1. Create the Order
-        order = Order(
-            first_name=order_data.get('firstName'),
-            last_name=order_data.get('lastName'),
-            email=order_data.get('email'),
-            phone_number=order_data.get('phone'),
-            country=order_data.get('country'),
-            postcode=order_data.get('postcode'),
-            town=order_data.get('city'),
-            street_address1=order_data.get('address'),
-            county=order_data.get('county'),
-            stripe_pid=stripe_pid,
-            bag=json.dumps(cart_items),
-        )
+        if not stripe_pid:
+            return Response({'error': 'Missing payment intent ID.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        # 2. ROBUST USER HANDLING
+        # 1. ROBUST USER HANDLING
         # If the user is logged in, we MUST attach a profile.
         if request.user.is_authenticated:
             try:
@@ -97,51 +85,23 @@ def save_order(request):
             except UserProfile.DoesNotExist:
                 # If profile is missing, create it instead of failing
                 profile = UserProfile.objects.create(user=request.user)
+        else:
+            profile = None
 
-            # Optional: Update saved delivery details on first order (only if blank)
-            if data.get('save_info'):
-                updated = False
-                if not profile.phone_number:
-                    profile.phone_number = order.phone_number
-                    updated = True
-                if not profile.street_address1:
-                    profile.street_address1 = order.street_address1
-                    updated = True
-                if not profile.town:
-                    profile.town = order.town
-                    updated = True
-                if not profile.county:
-                    profile.county = order.county
-                    updated = True
-                if not profile.postcode:
-                    profile.postcode = order.postcode
-                    updated = True
-                if not profile.country:
-                    profile.country = order.country
-                    updated = True
-                if updated:
-                    profile.save()
-            
-            # Attach the profile to the order
-            order.user_profile = profile
+        save_info = bool(data.get('save_info')) and profile is not None
 
-        # 3. Save the Order to DB
-        order.save()
+        # 2. Create/Update Draft Order
+        OrderDraft.objects.update_or_create(
+            stripe_pid=stripe_pid,
+            defaults={
+                'user_profile': profile,
+                'order_data': order_data,
+                'items': cart_items,
+                'save_info': save_info,
+            },
+        )
 
-        # 4. Create Order Items
-        for item in cart_items:
-            try:
-                product = Product.objects.get(id=item['id'])
-                order_item = OrderItem(
-                    order=order,
-                    product=product,
-                    quantity=item['quantity'],
-                )
-                order_item.save()
-            except Product.DoesNotExist:
-                continue
-
-        return Response({'success': True, 'order_number': order.order_number}, status=status.HTTP_201_CREATED)
+        return Response({'success': True}, status=status.HTTP_201_CREATED)
 
     except Exception as e:
         print(f"Order Save Error: {e}") 

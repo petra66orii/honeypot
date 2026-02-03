@@ -132,7 +132,7 @@ export interface CartItem {
 // Define the response shape for Saving an Order
 export interface SaveOrderResponse {
   success: boolean;
-  order_number: string;
+  order_number?: string;
 }
 
 // Request shape for saving an order

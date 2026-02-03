@@ -121,6 +121,28 @@ class Order(models.Model):
         return self.order_number
 
 
+class OrderDraft(models.Model):
+    """
+    Temporary storage for checkout data before payment confirmation.
+    Final Order is created from this record after Stripe confirms payment.
+    """
+    stripe_pid = models.CharField(max_length=254, unique=True)
+    user_profile = models.ForeignKey(
+        UserProfile,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='order_drafts',
+    )
+    order_data = models.JSONField()
+    items = models.JSONField()
+    save_info = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Draft {self.stripe_pid}"
+
+
 class OrderItem(models.Model):
     """
     OrderItem model to store individual items in an order.
