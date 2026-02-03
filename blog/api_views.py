@@ -1,6 +1,7 @@
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, viewsets
 from .models import BlogPost, Comment
 from .serializers import (
+    AdminCommentSerializer,
     BlogPostListSerializer, 
     BlogPostDetailSerializer, 
     CommentSerializer
@@ -50,3 +51,12 @@ class CommentListCreateAPI(generics.ListCreateAPIView):
         slug = self.kwargs['slug']
         post = BlogPost.objects.get(slug=slug)
         serializer.save(user=self.request.user, post=post)
+
+class AdminCommentViewSet(viewsets.ModelViewSet):
+    """
+    Admin: Manage ALL comments (Approve/Delete).
+    """
+    queryset = Comment.objects.all().order_by('-created_at')
+    serializer_class = AdminCommentSerializer
+    permission_classes = [permissions.IsAdminUser]
+    http_method_names = ['get', 'patch', 'delete']

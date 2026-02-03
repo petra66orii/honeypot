@@ -351,6 +351,32 @@ baseQuery: fetchBaseQuery({
       transformResponse: (response: { results: ContactMessage[] }) => response.results,
     }),
 
+    // 5. Get All Comments (Admin)
+    getAdminComments: builder.query<Comment[], void>({
+      query: () => 'blog/admin/comments/',
+      providesTags: ['Comments'],
+      transformResponse: (response: { results: Comment[] }) => response.results,
+    }),
+
+    // 6. Approve Comment (Admin)
+    approveComment: builder.mutation<void, { id: number; approved: boolean }>({
+      query: ({ id, approved }) => ({
+        url: `blog/admin/comments/${id}/`,
+        method: 'PATCH',
+        body: { approved },
+      }),
+      invalidatesTags: ['Comments'],
+    }),
+
+    // 7. Delete Comment (Admin)
+    deleteComment: builder.mutation<void, number>({
+      query: (id) => ({
+        url: `blog/admin/comments/${id}/`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Comments'],
+    }),
+
   }),
 });
 
@@ -393,4 +419,7 @@ export const {
   useDeleteReviewMutation,
   useGetContactMessagesQuery,
   useApproveReviewMutation,
+  useGetAdminCommentsQuery, 
+  useApproveCommentMutation,
+  useDeleteCommentMutation,
 } = honeypotApi;

@@ -7,8 +7,8 @@ class CommentSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Comment
-        fields = ['id', 'user', 'content', 'created_at', 'approved']
-        read_only_fields = ['approved', 'created_at']
+        fields = '__all__'
+        read_only_fields = ['approved', 'created_at', 'post']
 
 class BlogPostListSerializer(serializers.ModelSerializer):
     """Lighter serializer for the main blog page (no content, just snippets)"""
@@ -37,3 +37,8 @@ class BlogPostDetailSerializer(serializers.ModelSerializer):
     def get_comment_count(self, obj):
         # Count only approved comments
         return obj.comments.filter(approved=True).count()
+    
+class AdminCommentSerializer(CommentSerializer):
+    # Admins can edit the approval status
+    class Meta(CommentSerializer.Meta):
+        read_only_fields = ['created_at', 'post']

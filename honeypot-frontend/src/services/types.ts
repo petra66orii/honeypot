@@ -156,6 +156,7 @@ export interface BlogPostDetail extends BlogPost {
 export interface Comment {
   id: number;
   user: string;
+  post: number;
   content: string;
   created_at: string;
   approved: boolean;

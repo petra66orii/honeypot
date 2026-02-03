@@ -2,35 +2,54 @@ import React, { useState } from "react";
 import {
   useGetAdminReviewsQuery,
   useDeleteReviewMutation,
-  useGetContactMessagesQuery,
   useApproveReviewMutation,
+  useGetContactMessagesQuery,
+  useGetAdminCommentsQuery, // 👈 Ensure these are imported from your api.ts
+  useApproveCommentMutation,
+  useDeleteCommentMutation,
 } from "../../services/api";
 
 const AdminContent: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<"reviews" | "messages">("reviews");
+  // State to track which tab is open
+  const [activeTab, setActiveTab] = useState<
+    "reviews" | "messages" | "comments"
+  >("reviews");
 
-  // Reviews Data
+  // --- 1. REVIEWS HOOKS ---
   const { data: reviews, isLoading: loadingReviews } =
     useGetAdminReviewsQuery();
   const [deleteReview] = useDeleteReviewMutation();
   const [approveReview] = useApproveReviewMutation();
 
-  // Messages Data
+  // --- 2. MESSAGES HOOKS ---
   const { data: messages, isLoading: loadingMessages } =
     useGetContactMessagesQuery();
 
+  // --- 3. COMMENTS HOOKS ---
+  const { data: comments, isLoading: loadingComments } =
+    useGetAdminCommentsQuery();
+  const [approveComment] = useApproveCommentMutation();
+  const [deleteComment] = useDeleteCommentMutation();
+
+  // --- HANDLERS ---
   const handleDeleteReview = async (id: number) => {
     if (window.confirm("Are you sure you want to remove this review?")) {
       await deleteReview(id);
     }
   };
 
-  const handleApprove = async (id: number) => {
-    try {
-      await approveReview({ id, approved: true }).unwrap();
-    } catch (err) {
-      console.error("Failed to approve review", err);
+  const handleApproveReview = async (id: number) => {
+    await approveReview({ id, approved: true });
+  };
+
+  const handleDeleteComment = async (id: number) => {
+    if (window.confirm("Are you sure you want to delete this comment?")) {
+      await deleteComment(id);
     }
+  };
+
+  const handleApproveComment = async (id: number) => {
+    await approveComment({ id, approved: true });
   };
 
   return (
@@ -39,11 +58,11 @@ const AdminContent: React.FC = () => {
         Content Management 🛡️
       </h1>
 
-      {/* TABS */}
-      <div className="flex border-b border-gray-200 mb-6">
+      {/* === TABS HEADER === */}
+      <div className="flex border-b border-gray-200 mb-6 overflow-x-auto">
         <button
           onClick={() => setActiveTab("reviews")}
-          className={`px-6 py-3 font-medium text-sm transition-colors ${
+          className={`px-6 py-3 font-medium text-sm transition-colors whitespace-nowrap ${
             activeTab === "reviews"
               ? "border-b-2 border-honey-gold text-honey-gold"
               : "text-gray-500 hover:text-gray-700"
@@ -53,7 +72,7 @@ const AdminContent: React.FC = () => {
         </button>
         <button
           onClick={() => setActiveTab("messages")}
-          className={`px-6 py-3 font-medium text-sm transition-colors ${
+          className={`px-6 py-3 font-medium text-sm transition-colors whitespace-nowrap ${
             activeTab === "messages"
               ? "border-b-2 border-honey-gold text-honey-gold"
               : "text-gray-500 hover:text-gray-700"
@@ -61,13 +80,23 @@ const AdminContent: React.FC = () => {
         >
           📬 Contact Messages
         </button>
+        <button
+          onClick={() => setActiveTab("comments")}
+          className={`px-6 py-3 font-medium text-sm transition-colors whitespace-nowrap ${
+            activeTab === "comments"
+              ? "border-b-2 border-honey-gold text-honey-gold"
+              : "text-gray-500 hover:text-gray-700"
+          }`}
+        >
+          💬 Blog Comments
+        </button>
       </div>
 
-      {/* === REVIEWS TAB === */}
+      {/* === TAB 1: PRODUCT REVIEWS === */}
       {activeTab === "reviews" && (
         <div className="space-y-4">
           {loadingReviews ? (
-            <p>Loading reviews...</p>
+            <p className="text-gray-500">Loading reviews...</p>
           ) : reviews?.length === 0 ? (
             <p className="text-gray-500">No reviews found.</p>
           ) : (
@@ -94,9 +123,6 @@ const AdminContent: React.FC = () => {
                           ⏳ Pending
                         </span>
                       )}
-                      <span className="text-xs bg-gray-100 px-2 py-0.5 rounded text-gray-600">
-                        ID: #{review.id}
-                      </span>
                     </div>
                     <div className="flex text-honey-gold text-sm mb-2">
                       {"★".repeat(review.rating)}
@@ -107,16 +133,14 @@ const AdminContent: React.FC = () => {
                     </p>
                   </div>
                   <div className="flex flex-col gap-2">
-                    {/* 👇 Show Approve button only if NOT approved yet */}
                     {!review.approved && (
                       <button
-                        onClick={() => handleApprove(review.id)}
+                        onClick={() => handleApproveReview(review.id)}
                         className="text-green-600 hover:bg-green-50 px-3 py-1 rounded text-sm font-medium transition border border-green-200"
                       >
                         Approve
                       </button>
                     )}
-
                     <button
                       onClick={() => handleDeleteReview(review.id)}
                       className="text-red-500 hover:bg-red-50 px-3 py-1 rounded text-sm font-medium transition border border-red-200"
@@ -131,11 +155,11 @@ const AdminContent: React.FC = () => {
         </div>
       )}
 
-      {/* === MESSAGES TAB === */}
+      {/* === TAB 2: CONTACT MESSAGES === */}
       {activeTab === "messages" && (
         <div className="space-y-4">
           {loadingMessages ? (
-            <p>Loading messages...</p>
+            <p className="text-gray-500">Loading messages...</p>
           ) : messages?.length === 0 ? (
             <p className="text-gray-500">No messages found.</p>
           ) : (
@@ -166,6 +190,66 @@ const AdminContent: React.FC = () => {
                     >
                       Reply via Email →
                     </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* === TAB 3: BLOG COMMENTS === */}
+      {activeTab === "comments" && (
+        <div className="space-y-4">
+          {loadingComments ? (
+            <p className="text-gray-500">Loading comments...</p>
+          ) : comments?.length === 0 ? (
+            <p className="text-gray-500">No blog comments found.</p>
+          ) : (
+            <div className="grid gap-4">
+              {comments?.map((comment) => (
+                <div
+                  key={comment.id}
+                  className="bg-white p-4 rounded-lg shadow border border-gray-100 flex justify-between gap-4"
+                >
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="font-bold text-gray-900">
+                        {comment.user}
+                      </span>
+                      <span className="text-xs text-gray-500">
+                        • {new Date(comment.created_at).toLocaleDateString()}
+                      </span>
+                      <span className="text-xs text-gray-400">
+                        Post ID: #{comment.post}
+                      </span>
+                      {comment.approved ? (
+                        <span className="text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded border border-green-200">
+                          ✅ Published
+                        </span>
+                      ) : (
+                        <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded border border-yellow-200 animate-pulse">
+                          ⏳ Pending
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-gray-700 text-sm">{comment.content}</p>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    {!comment.approved && (
+                      <button
+                        onClick={() => handleApproveComment(comment.id)}
+                        className="text-green-600 border border-green-200 hover:bg-green-50 px-3 py-1 rounded text-sm"
+                      >
+                        Approve
+                      </button>
+                    )}
+                    <button
+                      onClick={() => handleDeleteComment(comment.id)}
+                      className="text-red-500 border border-red-200 hover:bg-red-50 px-3 py-1 rounded text-sm"
+                    >
+                      Delete
+                    </button>
                   </div>
                 </div>
               ))}
