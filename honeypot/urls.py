@@ -25,7 +25,7 @@ urlpatterns = [
     path('api/blog/', include('blog.urls')),
     path('summernote/', include('django_summernote.urls')),
     re_path(
-        r'^(?!api/|admin/|accounts/|summernote/|password-reset/).*$',
+        r'^(?!api/|admin/|accounts/|summernote/|password-reset/|static/|assets/).*$',
         TemplateView.as_view(template_name='index.html'),
         name='spa',
     ),
