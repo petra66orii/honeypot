@@ -1,0 +1,10 @@
+{
+  "name": "honeypot-heroku",
+  "private": true,
+  "engines": {
+    "node": ">=18 <21"
+  },
+  "scripts": {
+    "heroku-postbuild": "npm --prefix honeypot-frontend install && npm --prefix honeypot-frontend run build"
+  }
+}

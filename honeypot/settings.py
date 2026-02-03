@@ -7,6 +7,7 @@ import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+REACT_BUILD_DIR = BASE_DIR / 'honeypot-frontend' / 'dist'
 
 
 # Quick-start development settings - unsuitable for production
@@ -80,6 +81,7 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
             os.path.join(BASE_DIR, 'templates', 'allauth'),
+            os.path.join(REACT_BUILD_DIR),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -119,7 +121,8 @@ else:
 
 CSRF_TRUSTED_ORIGINS = [
     "https://127.0.0.1",
-    "https://*.herokuapp.com"
+    "https://*.herokuapp.com",
+    "https://honeypot-6aa199604c8f.herokuapp.com",
 ]
 
 # Password validation
@@ -192,6 +195,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+if REACT_BUILD_DIR.exists():
+    STATICFILES_DIRS = STATICFILES_DIRS + (os.path.join(REACT_BUILD_DIR, 'assets'),)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -237,6 +244,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "https://honeypot-6aa199604c8f.herokuapp.com",
 ]
 # Set up DRF to use JWT authentication
 REST_FRAMEWORK = {
@@ -259,7 +267,7 @@ REST_AUTH = {
 
 ACCOUNT_ADAPTER = 'userprofile.adapters.CustomAccountAdapter'
 
-URL_FRONTEND = 'http://localhost:5173'
+URL_FRONTEND = os.environ.get('URL_FRONTEND', 'http://localhost:5173')
 
 RESET_PASSWORD_URL = f'{URL_FRONTEND}/password-reset/confirm'
 
