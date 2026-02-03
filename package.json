@@ -5,6 +5,6 @@
     "node": ">=18 <21"
   },
   "scripts": {
-    "heroku-postbuild": "npm --prefix honeypot-frontend install && npm --prefix honeypot-frontend run build"
+    "heroku-postbuild": "npm --prefix honeypot-frontend install --include=dev && npm --prefix honeypot-frontend run build"
   }
 }
