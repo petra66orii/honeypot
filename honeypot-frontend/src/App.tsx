@@ -5,6 +5,9 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import ForgotPassword from "./pages/ForgotPassword";
+import PasswordResetConfirm from "./pages/PasswordResetConfirm";
+import VerifyEmail from "./pages/VerifyEmail";
 import Profile from "./pages/Profile";
 import ProductGrid from "./components/ProductGrid";
 import ProductDetail from "./pages/ProductDetail";
@@ -36,6 +39,12 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/password-reset" element={<ForgotPassword />} />
+        <Route
+          path="/password-reset/confirm/:uid/:token"
+          element={<PasswordResetConfirm />}
+        />
+        <Route path="/verify-email/:key" element={<VerifyEmail />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/gifts" element={<GiftsDeals />} />
         <Route path="/" element={<Home />} />

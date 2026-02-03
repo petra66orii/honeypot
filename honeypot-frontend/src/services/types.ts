@@ -31,12 +31,34 @@ export interface AuthResponse {
 export interface RegisterRequest {
   username: string;
   password: string;
+  password_confirm: string; 
   email: string;
+  first_name: string;
+  last_name: string;
 }
 
 export interface LoginRequest {
   username: string;
   password: string;
+}
+
+export interface VerifyEmailRequest {
+  key: string;
+}
+
+export interface ResendEmailVerificationRequest {
+  email: string;
+}
+
+export interface PasswordResetRequest {
+  email: string;
+}
+
+export interface PasswordResetConfirmRequest {
+  uid: string;
+  token: string;
+  new_password1: string;
+  new_password2: string;
 }
 
 export interface Testimonial {

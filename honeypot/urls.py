@@ -2,8 +2,17 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import RedirectView
 
 urlpatterns = [
+    path(
+        'password-reset/confirm/<uid>/<token>/',
+        RedirectView.as_view(
+            url=f"{settings.URL_FRONTEND}/password-reset/confirm/%(uid)s/%(token)s/",
+            permanent=False,
+        ),
+        name='password_reset_confirm',
+    ),
     path('api/auth/', include('dj_rest_auth.urls')),
     path('api/auth/registration/', include('dj_rest_auth.registration.urls')),
     path('api/profiles/', include('userprofile.urls')),

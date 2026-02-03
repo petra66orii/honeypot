@@ -20,7 +20,11 @@ import type {
   Testimonial,
   PaginatedResponse,
   DashboardStats,
-  ContactMessage, } from './types'; 
+  ContactMessage,
+  VerifyEmailRequest,
+  ResendEmailVerificationRequest,
+  PasswordResetRequest,
+  PasswordResetConfirmRequest, } from './types'; 
 
 export const honeypotApi = createApi({
   reducerPath: 'honeypotApi',
@@ -136,6 +140,42 @@ baseQuery: fetchBaseQuery({
       query: () => ({
         url: 'auth/logout/',
         method: 'POST',
+      }),
+    }),
+
+    // 1. Verify Email
+    verifyEmail: builder.mutation<void, VerifyEmailRequest>({
+      query: (body) => ({
+        url: 'auth/registration/verify-email/',
+        method: 'POST',
+        body,
+      }),
+    }),
+
+    // 1b. Resend Email Verification
+    resendEmailVerification: builder.mutation<void, ResendEmailVerificationRequest>({
+      query: (body) => ({
+        url: 'auth/registration/resend-email/',
+        method: 'POST',
+        body,
+      }),
+    }),
+
+    // 2. Request Password Reset (Send Email)
+    resetPassword: builder.mutation<void, PasswordResetRequest>({
+      query: (body) => ({
+        url: 'auth/password/reset/',
+        method: 'POST',
+        body,
+      }),
+    }),
+
+    // 3. Confirm Password Reset (Set New Password)
+    resetPasswordConfirm: builder.mutation<void, PasswordResetConfirmRequest>({
+      query: (body) => ({
+        url: 'auth/password/reset/confirm/',
+        method: 'POST',
+        body,
       }),
     }),
 
@@ -422,4 +462,8 @@ export const {
   useGetAdminCommentsQuery, 
   useApproveCommentMutation,
   useDeleteCommentMutation,
+  useVerifyEmailMutation,
+  useResendEmailVerificationMutation,
+  useResetPasswordMutation,
+  useResetPasswordConfirmMutation,
 } = honeypotApi;
