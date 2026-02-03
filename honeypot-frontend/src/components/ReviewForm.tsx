@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import BeeRatingInput from "./BeeRatingInput";
 import { useAddReviewMutation } from "../services/api";
+import { useToast } from "./ToastProvider";
 
 interface ReviewFormProps {
   productId: string;
@@ -13,6 +14,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ productId, onSuccess }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [addReview] = useAddReviewMutation();
+  const { showToast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,9 +38,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ productId, onSuccess }) => {
 
       setComment("");
       setRating(0);
-      alert(
-        "Review submitted! It will appear once approved by our hive keepers. 🐝",
-      );
+      showToast("Review submitted! It will appear once approved by our hive keepers.", "success");
       onSuccess();
     } catch (err) {
       console.error(err);
@@ -92,3 +92,4 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ productId, onSuccess }) => {
 };
 
 export default ReviewForm;
+

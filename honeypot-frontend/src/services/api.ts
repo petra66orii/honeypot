@@ -90,6 +90,7 @@ baseQuery: fetchBaseQuery({
             method: 'POST',
             body: orderData,
         }),
+        invalidatesTags: ['Orders', 'Profile'],
     }),
 
     // --- REVIEW ENDPOINTS ---

@@ -26,6 +26,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ stripePid }) => {
   );
   const { data: profile } = useGetUserProfileQuery(undefined, {
     skip: !isAuthenticated,
+    refetchOnMountOrArgChange: true,
   });
 
   // API Hook to save order

@@ -50,7 +50,7 @@ const ProductDetail: React.FC = () => {
     <div className="mx-auto max-w-7xl px-4 py-8">
       {/* Breadcrumb */}
       <Link
-        to="/"
+        to="/products"
         className="text-gray-500 hover:text-honey-gold mb-6 inline-block"
       >
         &larr; Back to Shop

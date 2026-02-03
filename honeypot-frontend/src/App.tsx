@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { ToastProvider } from "./components/ToastProvider";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -34,9 +35,10 @@ import AdminContent from "./pages/admin/AdminContent";
 
 function App() {
   return (
-    <div className="bg-gray-50 min-h-screen font-sans text-gray-900">
-      <Navbar />
-      <Routes>
+    <ToastProvider>
+      <div className="bg-gray-50 min-h-screen font-sans text-gray-900">
+        <Navbar />
+        <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/password-reset" element={<ForgotPassword />} />
@@ -76,8 +78,9 @@ function App() {
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </ToastProvider>
   );
 }
 

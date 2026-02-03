@@ -249,7 +249,7 @@ const Login: React.FC = () => {
             disabled={isLoading}
             className="group relative flex w-full justify-center rounded-full bg-honey-gold py-3 px-4 text-sm font-semibold text-white hover:bg-yellow-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600 disabled:opacity-50"
           >
-            {isLoading ? " buzzing in..." : "Sign in"}
+            {isLoading ? " Buzzing in..." : "Sign in"}
           </button>
 
           <div className="text-center text-sm">

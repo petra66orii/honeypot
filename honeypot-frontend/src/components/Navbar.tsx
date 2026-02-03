@@ -1,27 +1,37 @@
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../store";
 import { logout } from "../services/authSlice";
 import { useLogoutMutation } from "../services/api";
+import { useToast } from "./ToastProvider";
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { user, isAuthenticated } = useSelector(
     (state: RootState) => state.auth,
   );
   const [logoutApi] = useLogoutMutation();
+  const { showConfirm, showToast } = useToast();
 
   const handleLogout = async () => {
-    try {
-      await logoutApi().unwrap(); // Tell backend to destroy token
-    } catch (e) {
-      console.log("Logout error", e);
-    } finally {
-      dispatch(logout()); // Clear frontend state
-      setIsMenuOpen(false); // Close mobile menu if open
-    }
+    showConfirm("Log out of your account?", async () => {
+      try {
+        await logoutApi().unwrap(); // Tell backend to destroy token
+      } catch (e) {
+        console.log("Logout error", e);
+        showToast(
+          "Logged out locally. Server session may still be active.",
+          "info",
+        );
+      } finally {
+        dispatch(logout()); // Clear frontend state
+        setIsMenuOpen(false); // Close mobile menu if open
+        navigate("/");
+      }
+    });
   };
 
   // Connect to the Redux store to get the live cart count
@@ -101,12 +111,20 @@ const Navbar: React.FC = () => {
                 </Link>
               </div>
             ) : (
-              <Link
-                to="/login"
-                className="hidden md:block text-sm font-bold text-gray-700 hover:text-honey-gold"
-              >
-                Log In
-              </Link>
+              <>
+                <Link
+                  to="/login"
+                  className="hidden md:block text-sm font-bold text-gray-700 hover:text-honey-gold"
+                >
+                  Log In
+                </Link>
+                <Link
+                  to="/register"
+                  className="hidden md:block text-sm font-bold text-gray-700 hover:text-honey-gold"
+                >
+                  Register
+                </Link>
+              </>
             )}
 
             {/* Shopping Bag with Badge (ALWAYS VISIBLE) */}
@@ -182,7 +200,7 @@ const Navbar: React.FC = () => {
             )}
 
             <NavLink
-              to="/"
+              to="/products"
               className={navLinkClass}
               onClick={() => setIsMenuOpen(false)}
             >
@@ -221,13 +239,22 @@ const Navbar: React.FC = () => {
                 </button>
               </>
             ) : (
-              <Link
-                to="/login"
-                className="font-bold text-gray-700 hover:text-honey-gold"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Log In
-              </Link>
+              <>
+                <Link
+                  to="/login"
+                  className="font-bold text-gray-700 hover:text-honey-gold"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Log In
+                </Link>
+                <Link
+                  to="/register"
+                  className="font-bold text-gray-700 hover:text-honey-gold"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Register
+                </Link>
+              </>
             )}
 
             {isAdmin && (

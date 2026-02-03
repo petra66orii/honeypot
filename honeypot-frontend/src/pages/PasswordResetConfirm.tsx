@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useResetPasswordConfirmMutation } from "../services/api";
+import { useToast } from "../components/ToastProvider";
 
 const PasswordResetConfirm: React.FC = () => {
   const { uid, token } = useParams<{ uid: string; token: string }>();
@@ -9,6 +10,7 @@ const PasswordResetConfirm: React.FC = () => {
   const [formData, setFormData] = useState({ pass1: "", pass2: "" });
   const [resetConfirm, { isLoading }] = useResetPasswordConfirmMutation();
   const [error, setError] = useState("");
+  const { showToast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,7 +27,7 @@ const PasswordResetConfirm: React.FC = () => {
         new_password2: formData.pass2,
       }).unwrap();
 
-      alert("Password reset successful! Please log in.");
+      showToast("Password reset successful! Please log in.", "success");
       navigate("/login");
     } catch (err) {
       console.error(err);

@@ -36,7 +36,7 @@ const ShoppingBag: React.FC = () => {
           Looks like you haven't added any sweetness yet.
         </p>
         <Link
-          to="/"
+          to="/products"
           className="rounded-full bg-honey-gold px-8 py-3 font-semibold text-white transition hover:bg-yellow-600"
         >
           Start Shopping
