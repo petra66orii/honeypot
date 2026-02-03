@@ -22,7 +22,7 @@ const CheckoutSuccess: React.FC = () => {
         inbox.
       </p>
       <Link
-        to="/"
+        to="/products"
         className="rounded-full bg-honey-gold px-8 py-3 font-semibold text-white hover:bg-yellow-600 transition"
       >
         Continue Shopping

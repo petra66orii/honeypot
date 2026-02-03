@@ -236,7 +236,7 @@ const Profile: React.FC = () => {
                 You haven't placed any orders yet.
               </p>
               <button
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/products")}
                 className="mt-4 text-honey-gold font-bold hover:underline"
               >
                 Start Shopping

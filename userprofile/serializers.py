@@ -5,6 +5,7 @@ from dj_rest_auth.serializers import PasswordResetSerializer
 from allauth.account.models import EmailAddress
 from allauth.account.utils import user_pk_to_url_str
 from django.conf import settings
+from django_countries.serializer_fields import CountryField
 from .models import UserProfile
 
 class UserProfileSerializer(serializers.ModelSerializer):
@@ -14,6 +15,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
     first_name = serializers.CharField(source='user.first_name', read_only=True)
     last_name = serializers.CharField(source='user.last_name', read_only=True)
     is_staff = serializers.BooleanField(source='user.is_staff', read_only=True)
+    country = CountryField(required=False, allow_null=True)
 
     class Meta:
         model = UserProfile

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   useStripe,
   useElements,
@@ -6,7 +6,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { useSelector } from "react-redux";
 import type { RootState } from "../store";
-import { useSaveOrderMutation } from "../services/api";
+import { useGetUserProfileQuery, useSaveOrderMutation } from "../services/api";
 import { COUNTRIES } from "../utils/countries";
 
 interface CheckoutFormProps {
@@ -20,6 +20,13 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ stripePid }) => {
   // Redux State
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const totalAmount = useSelector((state: RootState) => state.cart.totalAmount);
+
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated,
+  );
+  const { data: profile } = useGetUserProfileQuery(undefined, {
+    skip: !isAuthenticated,
+  });
 
   // API Hook to save order
   const [saveOrder] = useSaveOrderMutation();
@@ -40,6 +47,25 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ stripePid }) => {
     county: "",
     country: "IE",
   });
+  const [hasPrefilled, setHasPrefilled] = useState(false);
+  const [saveInfo, setSaveInfo] = useState(true);
+
+  useEffect(() => {
+    if (!profile || hasPrefilled) return;
+    setFormData((prev) => ({
+      ...prev,
+      firstName: profile.first_name || prev.firstName,
+      lastName: profile.last_name || prev.lastName,
+      email: profile.email || prev.email,
+      phone: profile.phone_number || prev.phone,
+      address: profile.street_address1 || prev.address,
+      city: profile.town || prev.city,
+      county: profile.county || prev.county,
+      postcode: profile.postcode || prev.postcode,
+      country: profile.country || prev.country,
+    }));
+    setHasPrefilled(true);
+  }, [profile, hasPrefilled]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -65,6 +91,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ stripePid }) => {
         order_data: formData,
         items: cartItems.map((item) => ({ ...item, id: String(item.id) })),
         stripe_pid: stripePid,
+        save_info: isAuthenticated ? saveInfo : false,
       };
 
       // Type cast to 'any' to bypass strict TS check if needed, or rely on the updated API type
@@ -204,6 +231,16 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ stripePid }) => {
       </div>
 
       <div className="mt-6 border-t border-gray-200 pt-6">
+        {isAuthenticated && (
+          <label className="flex items-center gap-2 text-sm text-gray-700 mb-4">
+            <input
+              type="checkbox"
+              checked={saveInfo}
+              onChange={(e) => setSaveInfo(e.target.checked)}
+            />
+            Save this delivery information for next time
+          </label>
+        )}
         <h3 className="text-lg font-medium text-gray-900 mb-4">
           Payment Details
         </h3>

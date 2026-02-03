@@ -94,20 +94,33 @@ def save_order(request):
             try:
                 # Try to get the existing profile
                 profile = UserProfile.objects.get(user=request.user)
-                
-                # Optional: Update profile info if 'save_info' was checked
-                if data.get('save_info'):
-                    profile.default_phone_number = order.phone_number
-                    profile.default_street_address1 = order.street_address1
-                    profile.default_town = order.town
-                    profile.default_county = order.county
-                    profile.default_postcode = order.postcode
-                    profile.default_country = order.country
-                    profile.save()
-
             except UserProfile.DoesNotExist:
-                # FIX: If profile is missing, CREATE IT instead of failing
+                # If profile is missing, create it instead of failing
                 profile = UserProfile.objects.create(user=request.user)
+
+            # Optional: Update saved delivery details on first order (only if blank)
+            if data.get('save_info'):
+                updated = False
+                if not profile.phone_number:
+                    profile.phone_number = order.phone_number
+                    updated = True
+                if not profile.street_address1:
+                    profile.street_address1 = order.street_address1
+                    updated = True
+                if not profile.town:
+                    profile.town = order.town
+                    updated = True
+                if not profile.county:
+                    profile.county = order.county
+                    updated = True
+                if not profile.postcode:
+                    profile.postcode = order.postcode
+                    updated = True
+                if not profile.country:
+                    profile.country = order.country
+                    updated = True
+                if updated:
+                    profile.save()
             
             # Attach the profile to the order
             order.user_profile = profile
