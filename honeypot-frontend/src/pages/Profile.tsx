@@ -10,14 +10,14 @@ import {
 } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { COUNTRIES } from "../utils/countries";
-import { useToast } from "../components/ToastProvider";
+import toast from "react-hot-toast";
+import { showConfirmToast } from "../utils/toast";
 
 const Profile: React.FC = () => {
   const { user } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [logoutApi] = useLogoutMutation();
-  const { showConfirm, showToast } = useToast();
 
   // 1. Fetch Data
   const { data: orders, isLoading, error } = useGetMyOrdersQuery();
@@ -39,12 +39,12 @@ const Profile: React.FC = () => {
   const [msg, setMsg] = useState("");
 
   const handleLogout = async () => {
-    showConfirm("Log out of your account?", async () => {
+    showConfirmToast("Log out of your account?", async () => {
       try {
         await logoutApi().unwrap();
       } catch (err) {
         console.log("Logout error", err);
-        showToast("Logged out locally. Server session may still be active.", "info");
+        toast("Logged out locally. Server session may still be active.");
       } finally {
         dispatch(logout());
         navigate("/");

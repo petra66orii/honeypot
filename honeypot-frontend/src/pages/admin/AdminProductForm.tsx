@@ -7,7 +7,7 @@ import {
   useUpdateProductMutation,
   useGetCategoriesQuery,
 } from "../../services/api";
-import { useToast } from "../../components/ToastProvider";
+import toast from "react-hot-toast";
 import type { Product, Category } from "../../services/types";
 
 // --- TYPES ---
@@ -223,23 +223,23 @@ const AdminProductForm: React.FC = () => {
 
   const [addProduct, { isLoading: isAdding }] = useAddProductMutation();
   const [updateProduct, { isLoading: isUpdating }] = useUpdateProductMutation();
-  const { showToast } = useToast();
+  
 
   const handleFormSubmit = async (formData: FormData) => {
     try {
       if (isEditMode && id) {
         await updateProduct({ id: Number(id), data: formData }).unwrap();
-        showToast("Product updated!", "success");
+        toast.success("Product updated!");
       } else {
         await addProduct(formData).unwrap();
-        showToast("Product created!", "success");
+        toast.success("Product created!");
       }
       navigate("/admin/products");
     } catch (err) {
       console.error("Failed to save:", err);
       const error = err as ApiError;
       const msg = error?.data || error?.message || "An unknown error occurred";
-      showToast(`Error: ${typeof msg === "object" ? JSON.stringify(msg) : msg}`, "error");
+      toast.error(`Error: ${typeof msg === "object" ? JSON.stringify(msg) : msg}`);
     }
   };
 
@@ -265,4 +265,6 @@ const AdminProductForm: React.FC = () => {
 };
 
 export default AdminProductForm;
+
+
 

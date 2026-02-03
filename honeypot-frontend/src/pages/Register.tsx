@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useRegisterMutation } from "../services/api";
 import { setCredentials } from "../services/authSlice";
-import { useToast } from "../components/ToastProvider";
+import toast from "react-hot-toast";
 
 const Register: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -18,7 +18,6 @@ const Register: React.FC = () => {
   const dispatch = useDispatch();
   const [register, { isLoading }] = useRegisterMutation();
   const [error, setError] = useState("");
-  const { showToast } = useToast();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -50,7 +49,7 @@ const Register: React.FC = () => {
         navigate("/");
       } else {
         // If email verification is on, tell them to check email
-        showToast("Please check your email to verify your account!", "info");
+        toast("Please check your email to verify your account!");
         navigate("/login");
       }
     } catch (err: unknown) {

@@ -4,7 +4,7 @@ import {
   useGetProductsQuery,
   useDeleteProductMutation,
 } from "../../services/api";
-import { useToast } from "../../components/ToastProvider";
+import toast from "react-hot-toast";
 
 const AdminProducts: React.FC = () => {
   // 1. Setup Pagination State
@@ -24,7 +24,6 @@ const AdminProducts: React.FC = () => {
 
   // 3. Setup Delete Mutation
   const [deleteProduct, { isLoading: isDeleting }] = useDeleteProductMutation();
-  const { showToast } = useToast();
 
   const handleDelete = async (e: React.MouseEvent, id: number) => {
     e.stopPropagation(); // Prevents clicking the row (if you have row-click logic)
@@ -44,7 +43,7 @@ const AdminProducts: React.FC = () => {
           "status" in (value as Record<string, unknown>);
 
         if (!isErrorWithStatus(err) || err.status !== 404) {
-          showToast("Failed to delete product", "error");
+          toast.error("Failed to delete product");
         }
       }
     }

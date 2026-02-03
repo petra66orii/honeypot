@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../store";
 import { logout } from "../services/authSlice";
 import { useLogoutMutation } from "../services/api";
-import { useToast } from "./ToastProvider";
+import toast from "react-hot-toast";
+import { showConfirmToast } from "../utils/toast";
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,18 +15,14 @@ const Navbar: React.FC = () => {
     (state: RootState) => state.auth,
   );
   const [logoutApi] = useLogoutMutation();
-  const { showConfirm, showToast } = useToast();
 
   const handleLogout = async () => {
-    showConfirm("Log out of your account?", async () => {
+    showConfirmToast("Log out of your account?", async () => {
       try {
         await logoutApi().unwrap(); // Tell backend to destroy token
       } catch (e) {
         console.log("Logout error", e);
-        showToast(
-          "Logged out locally. Server session may still be active.",
-          "info",
-        );
+        toast("Logged out locally. Server session may still be active.");
       } finally {
         dispatch(logout()); // Clear frontend state
         setIsMenuOpen(false); // Close mobile menu if open

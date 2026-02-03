@@ -97,7 +97,9 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ stripePid }) => {
 
       // Type cast to 'any' to bypass strict TS check if needed, or rely on the updated API type
       const orderResponse = await saveOrder(orderPayload).unwrap();
-      console.log("Order saved:", orderResponse.order_number);
+      if (orderResponse.order_number) {
+        console.log("Order saved:", orderResponse.order_number);
+      }
 
       // 2. Confirm Payment with Stripe
       const { error } = await stripe.confirmPayment({
@@ -221,7 +223,12 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ stripePid }) => {
           required
           className="input-field"
         />
-        <select name="country" onChange={handleChange} className="input-field">
+        <select
+          name="country"
+          value={formData.country}
+          onChange={handleChange}
+          className="input-field"
+        >
           {COUNTRIES.map((c) => (
             // Change 'code'/'name' to 'value'/'label'
             <option key={c.value} value={c.value}>

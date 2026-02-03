@@ -3,7 +3,7 @@ import {
   useGetAdminOrdersQuery,
   useUpdateOrderStatusMutation,
 } from "../../services/api";
-import { useToast } from "../../components/ToastProvider";
+import toast from "react-hot-toast";
 import type { Order } from "../../services/types";
 import OrderDetailsModal from "../../components/admin/OrderDetailsModal";
 
@@ -34,7 +34,6 @@ const AdminOrders: React.FC = () => {
   } = useGetAdminOrdersQuery({ page });
   const [updateStatus, { isLoading: isUpdating }] =
     useUpdateOrderStatusMutation();
-  const { showToast } = useToast();
 
   // 🆕 STATE FOR MASS ACTIONS & MODAL
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
@@ -47,7 +46,7 @@ const AdminOrders: React.FC = () => {
       await updateStatus({ id, status: newStatus }).unwrap();
     } catch (err) {
       console.error(err);
-      showToast("Failed to update order status.", "error");
+      toast.error("Failed to update order status.");
     }
   };
 
@@ -90,10 +89,10 @@ const AdminOrders: React.FC = () => {
         ),
       );
       setSelectedIds([]); // Clear selection on success
-      showToast("Orders updated successfully!", "success");
+      toast.success("Orders updated successfully!");
     } catch (err) {
       console.error(err);
-      showToast("Some updates failed.", "error");
+      toast.error("Some updates failed.");
     }
   };
 

@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import { ToastProvider } from "./components/ToastProvider";
+import { Toaster } from "react-hot-toast";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -35,7 +35,34 @@ import AdminContent from "./pages/admin/AdminContent";
 
 function App() {
   return (
-    <ToastProvider>
+    <>
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 3500,
+          style: {
+            background: "#FFF7ED",
+            color: "#7C2D12",
+            border: "1px solid #FDE68A",
+            borderRadius: "14px",
+            boxShadow: "0 10px 30px rgba(120, 53, 15, 0.12)",
+          },
+          success: {
+            style: {
+              background: "#ECFDF5",
+              color: "#065F46",
+              border: "1px solid #A7F3D0",
+            },
+          },
+          error: {
+            style: {
+              background: "#FEF2F2",
+              color: "#991B1B",
+              border: "1px solid #FECACA",
+            },
+          },
+        }}
+      />
       <div className="bg-gray-50 min-h-screen font-sans text-gray-900">
         <Navbar />
         <Routes>
@@ -80,7 +107,7 @@ function App() {
       </Routes>
         <Footer />
       </div>
-    </ToastProvider>
+    </>
   );
 }
 
