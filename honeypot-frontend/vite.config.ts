@@ -8,6 +8,9 @@ export default defineConfig(({ mode }) => {
 
   return {
     base,
+    build: {
+      assetsDir: '',
+    },
     plugins: [
       react(),
       tailwindcss(),
