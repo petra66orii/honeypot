@@ -22,7 +22,7 @@ const Home: React.FC = () => {
   // Blog posts are likely still unwrapped (simple array) based on our previous config
   const recentPosts = posts?.slice(0, 3);
   const honeyDripVideo = new URL(
-    "/background-honey-drip.mp4",
+    "background-honey-drip.mp4",
     import.meta.env.BASE_URL,
   ).toString();
 
