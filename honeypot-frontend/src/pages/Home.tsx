@@ -21,6 +21,10 @@ const Home: React.FC = () => {
 
   // Blog posts are likely still unwrapped (simple array) based on our previous config
   const recentPosts = posts?.slice(0, 3);
+  const honeyDripVideo = new URL(
+    "/background-honey-drip.mp4",
+    import.meta.env.BASE_URL,
+  ).toString();
 
   return (
     <div className="bg-white">
@@ -34,9 +38,11 @@ const Home: React.FC = () => {
               loop
               muted
               playsInline
+              preload="auto"
+              crossOrigin="anonymous"
               className="w-full h-full object-cover"
             >
-              <source src="/background-honey-drip.mp4" type="video/mp4" />
+              <source src={honeyDripVideo} type="video/mp4" />
             </video>
           </div>
         </div>
