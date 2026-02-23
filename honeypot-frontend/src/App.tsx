@@ -1,37 +1,50 @@
+import { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { Toaster } from "react-hot-toast";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import ForgotPassword from "./pages/ForgotPassword";
-import PasswordResetConfirm from "./pages/PasswordResetConfirm";
-import VerifyEmail from "./pages/VerifyEmail";
-import Profile from "./pages/Profile";
-import ProductGrid from "./components/ProductGrid";
-import ProductDetail from "./pages/ProductDetail";
-import ShoppingBag from "./pages/ShoppingBag";
-import Checkout from "./pages/Checkout";
-import CheckoutSuccess from "./pages/CheckoutSuccess";
-import BlogList from "./pages/BlogList";
-import BlogPost from "./pages/BlogPost";
-import GiftsDeals from "./pages/GiftsDeals";
-import Contact from "./pages/Contact";
-import About from "./pages/About";
-import NotFound from "./pages/NotFound";
-import Forbidden from "./pages/Forbidden";
-import ServerError from "./pages/ServerError";
-import ProtectedRoute from "./components/ProtectedRoute";
 
-import AdminLayout from "./pages/admin/AdminLayout";
-import Dashboard from "./pages/admin/Dashboard";
-import AdminProducts from "./pages/admin/AdminProducts";
-import AdminProductForm from "./pages/admin/AdminProductForm";
-import AdminOrders from "./pages/admin/AdminOrders";
-import AdminUsers from "./pages/admin/AdminUsers";
-import AdminContent from "./pages/admin/AdminContent";
+// --- EAGER LOAD (Critical pages needed immediately) ---
+import Home from "./pages/Home";
+import ProductGrid from "./components/ProductGrid";
+import Login from "./pages/Login";
+
+// --- LAZY LOAD (Heavy pages loaded only when clicked) ---
+const Register = lazy(() => import("./pages/Register"));
+const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
+const PasswordResetConfirm = lazy(() => import("./pages/PasswordResetConfirm"));
+const VerifyEmail = lazy(() => import("./pages/VerifyEmail"));
+const Profile = lazy(() => import("./pages/Profile"));
+const ProductDetail = lazy(() => import("./pages/ProductDetail"));
+const ShoppingBag = lazy(() => import("./pages/ShoppingBag"));
+const Checkout = lazy(() => import("./pages/Checkout"));
+const CheckoutSuccess = lazy(() => import("./pages/CheckoutSuccess"));
+const BlogList = lazy(() => import("./pages/BlogList"));
+const BlogPost = lazy(() => import("./pages/BlogPost"));
+const GiftsDeals = lazy(() => import("./pages/GiftsDeals"));
+const Contact = lazy(() => import("./pages/Contact"));
+const About = lazy(() => import("./pages/About"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const Forbidden = lazy(() => import("./pages/Forbidden"));
+const ServerError = lazy(() => import("./pages/ServerError"));
+const ProtectedRoute = lazy(() => import("./components/ProtectedRoute"));
+
+// Admin - DEFINITELY Lazy Load this
+const AdminLayout = lazy(() => import("./pages/admin/AdminLayout"));
+const Dashboard = lazy(() => import("./pages/admin/Dashboard"));
+const AdminProducts = lazy(() => import("./pages/admin/AdminProducts"));
+const AdminProductForm = lazy(() => import("./pages/admin/AdminProductForm"));
+const AdminOrders = lazy(() => import("./pages/admin/AdminOrders"));
+const AdminUsers = lazy(() => import("./pages/admin/AdminUsers"));
+const AdminContent = lazy(() => import("./pages/admin/AdminContent"));
+
+// A simple loading spinner for the transitions
+const PageLoader = () => (
+  <div className="flex justify-center items-center min-h-[50vh]">
+    <div className="w-12 h-12 border-4 border-honey-gold border-t-transparent rounded-full animate-spin"></div>
+  </div>
+);
 
 function App() {
   return (
@@ -65,46 +78,55 @@ function App() {
       />
       <div className="bg-gray-50 min-h-screen font-sans text-gray-900">
         <Navbar />
-        <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/password-reset" element={<ForgotPassword />} />
-        <Route
-          path="/password-reset/confirm/:uid/:token"
-          element={<PasswordResetConfirm />}
-        />
-        <Route path="/verify-email/:key" element={<VerifyEmail />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/gifts" element={<GiftsDeals />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/products" element={<ProductGrid />} />
-        <Route path="/products/:id" element={<ProductDetail />} />
-        <Route path="/bag" element={<ShoppingBag />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/checkout/success" element={<CheckoutSuccess />} />
-        <Route path="/blog" element={<BlogList />} />
-        <Route path="/blog/:slug" element={<BlogPost />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/forbidden" element={<Forbidden />} />
-        <Route path="/server-error" element={<ServerError />} />
 
-        {/* --- ADMIN ROUTES (PROTECTED) --- */}
-        {/* The Wrapper checks if user is Admin. If yes, it renders the AdminLayout */}
-        <Route element={<ProtectedRoute adminOnly={true} />}>
-          <Route path="/admin" element={<AdminLayout />}>
-            {/* These render INSIDE the AdminLayout <Outlet /> */}
-            <Route index element={<Dashboard />} />
-            <Route path="products" element={<AdminProducts />} />
-            <Route path="products/new" element={<AdminProductForm />} />
-            <Route path="products/edit/:id" element={<AdminProductForm />} />
-            <Route path="orders" element={<AdminOrders />} />
-            <Route path="users" element={<AdminUsers />} />
-            <Route path="content" element={<AdminContent />} />
-          </Route>
-        </Route>
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+        {/* Wrap Routes in Suspense to handle the lazy loading state */}
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            {/* Standard Routes (Instant Load) */}
+            <Route path="/" element={<Home />} />
+            <Route path="/products" element={<ProductGrid />} />
+            <Route path="/login" element={<Login />} />
+
+            {/* Lazy Routes */}
+            <Route path="/register" element={<Register />} />
+            <Route path="/password-reset" element={<ForgotPassword />} />
+            <Route
+              path="/password-reset/confirm/:uid/:token"
+              element={<PasswordResetConfirm />}
+            />
+            <Route path="/verify-email/:key" element={<VerifyEmail />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/gifts" element={<GiftsDeals />} />
+            <Route path="/products/:id" element={<ProductDetail />} />
+            <Route path="/bag" element={<ShoppingBag />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/checkout/success" element={<CheckoutSuccess />} />
+            <Route path="/blog" element={<BlogList />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/forbidden" element={<Forbidden />} />
+            <Route path="/server-error" element={<ServerError />} />
+
+            {/* Admin Routes */}
+            <Route element={<ProtectedRoute adminOnly={true} />}>
+              <Route path="/admin" element={<AdminLayout />}>
+                <Route index element={<Dashboard />} />
+                <Route path="products" element={<AdminProducts />} />
+                <Route path="products/new" element={<AdminProductForm />} />
+                <Route
+                  path="products/edit/:id"
+                  element={<AdminProductForm />}
+                />
+                <Route path="orders" element={<AdminOrders />} />
+                <Route path="users" element={<AdminUsers />} />
+                <Route path="content" element={<AdminContent />} />
+              </Route>
+            </Route>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+
         <Footer />
       </div>
     </>
