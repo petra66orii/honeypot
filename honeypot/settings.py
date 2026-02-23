@@ -219,7 +219,7 @@ if 'USE_AWS' in os.environ:
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     AWS_S3_ENDPOINT_URL = 'https://736a1747e88c971bcaec3d96db03243a.r2.cloudflarestorage.com'
-    AWS_S3_CUSTOM_DOMAIN = f'736a1747e88c971bcaec3d96db03243a.r2.cloudflarestorage.com'
+    AWS_S3_CUSTOM_DOMAIN = f'https://pub-3ec93fbad8f541538b6b8c4c6e18c429.r2.dev'
     AWS_S3_SIGNATURE_VERSION = 's3v4'
     AWS_S3_FILE_OVERWRITE = False
     AWS_QUERYSTRING_AUTH = False
