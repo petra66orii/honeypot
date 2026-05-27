@@ -1,0 +1,217 @@
+export interface User {
+  pk: number;
+  username: string;
+  email: string;
+  first_name?: string;
+  last_name?: string;
+  is_staff: boolean;
+  last_login?: string;
+  date_joined: string;
+}
+
+export interface UserProfile {
+  username: string;
+  email: string;
+  first_name?: string;
+  last_name?: string;
+  phone_number: string;
+  street_address1: string;
+  street_address2: string;
+  town: string;
+  county: string;
+  postcode: string;
+  country: string;
+}
+
+export interface AuthResponse {
+  key: string; // The token
+  user: User;  // The user details
+}
+
+export interface RegisterRequest {
+  username: string;
+  password: string;
+  password_confirm: string; 
+  email: string;
+  first_name: string;
+  last_name: string;
+}
+
+export interface LoginRequest {
+  username: string;
+  password: string;
+}
+
+export interface VerifyEmailRequest {
+  key: string;
+}
+
+export interface ResendEmailVerificationRequest {
+  email: string;
+}
+
+export interface PasswordResetRequest {
+  email: string;
+}
+
+export interface PasswordResetConfirmRequest {
+  uid: string;
+  token: string;
+  new_password1: string;
+  new_password2: string;
+}
+
+export interface Testimonial {
+  id: number;
+  name: string;
+  text: string;
+  rating: number;
+}
+
+export interface Category {
+  id: number;
+  name: string;
+  friendly_name: string;
+}
+
+export interface Product {
+  id: number;
+  category: Category;
+  sku: string;
+  name: string;
+  description: string;
+  price: string; // Decimals come over as strings from Django
+  reviews: Review[];
+  rating: number | null;
+  image: string | null;
+  average_rating: number;
+  full_bees: number;
+  has_half_bee: boolean;
+}
+
+export interface Review {
+  id: number;
+  product: string;
+  user: string;
+  rating: number;
+  review_text: string;
+  approved: boolean;
+  created_on: string;
+}
+
+export interface PaginatedResponse<T> {
+    count: number;
+    next: string | null;
+    previous: string | null;
+    results: T[];
+}
+
+export interface ProductFilters {
+  category: string;
+  search?: string;
+  category__name?: string;
+  ordering?: string;
+  page: number;
+}
+
+// Define the response shape for Creating a Payment Intent
+export interface PaymentIntentResponse {
+  clientSecret: string;
+  id: string;
+}
+
+// Request shape for items in the cart/payment intent
+export interface CartItem {
+  // Accept either backend naming "productId" or "id" to be flexible
+  productId?: string;
+  id?: string;
+  quantity: number;
+  // additional optional fields can be added as needed
+}
+
+// Define the response shape for Saving an Order
+export interface SaveOrderResponse {
+  success: boolean;
+  order_number?: string;
+}
+
+// Request shape for saving an order
+export interface SaveOrderRequest {
+  items: CartItem[];
+  // add other order fields if required, e.g. shipping info, totals, etc.
+}
+
+export interface Order {
+  id: number;
+  order_number: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone_number: string;
+  street_address1: string;
+  town: string;
+  postcode: string;
+  country: string;
+  date: string;
+  total_price: string;
+  status: 'Pending' | 'Processing' | 'Shipped' | 'Delivered' | 'Cancelled';
+  items: OrderItem[];
+  shipping_address: string;
+}
+
+export interface BlogPost {
+  id: number;
+  title: string;
+  slug: string;
+  excerpt: string;
+  featured_image: string | null;
+  created_at: string;
+  post_type: 'blog' | 'recipe';
+}
+
+export interface BlogPostDetail extends BlogPost {
+  content: string;
+  author: string;
+  comment_count: number;
+}
+
+export interface Comment {
+  id: number;
+  user: string;
+  post: number;
+  content: string;
+  created_at: string;
+  approved: boolean;
+}
+
+export interface OrderItem {
+  id: number;
+  product_name: string;
+  product_price: string;
+  quantity: number;
+}
+
+export interface ContactMessage {
+  id: number;
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  created_at: string;
+  is_read: boolean;
+}
+
+export interface DailySales {
+  day: string;
+  sales: number;
+  count: number;
+}
+
+export interface DashboardStats {
+  total_users: number;
+  total_orders: number;
+  total_products: number;
+  total_revenue: number;
+  recent_orders: Order[]; // Re-using your existing Order type
+  daily_sales: DailySales[];
+}

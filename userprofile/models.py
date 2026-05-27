@@ -15,12 +15,12 @@ class UserProfile(models.Model):
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=20, null=True, blank=True)
-    street_address1 = models.CharField(max_length=255)
+    street_address1 = models.CharField(max_length=255, null=True, blank=True)
     street_address2 = models.CharField(max_length=255, null=True, blank=True)
     country = CountryField(blank_label='Country', null=True, blank=True)
     county = models.CharField(max_length=100, null=True, blank=True)
-    town = models.CharField(max_length=100)
-    postcode = models.CharField(max_length=20)
+    town = models.CharField(max_length=100, null=True, blank=True)
+    postcode = models.CharField(max_length=20, null=True, blank=True)
 
     def __str__(self):
         return self.user.username

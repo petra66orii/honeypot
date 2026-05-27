@@ -9,113 +9,115 @@ HoneyPot is an e-commerce website that specialises in selling honey and honey by
 # Table of Contents
 
 1. **[Project Goals](#project-goals)**
-    * [Workflow](#workflow)
-    * [Data Schema](#data-schema)
-        + [Product Model](#product-model)
-        + [ProductReview Model](#productreview-model)
-        + [Category Model](#category-model)
-        + [UserProfile Model](#userprofile-model)
-        + [Order Model](#order-model)
-        + [OrderItem Model](#orderitem-model)
-        + [BlogPost Model](#blogpost-model)
-        + [Comment Model](#comment-model)
-        + [ProductCarousel Model](#productcarousel-model)
-        + [Testimonial Model](#testimonial-model)
-    * [Business Model](#business-model)
-    * [Marketing Strategy](#marketing-strategy)
-    * [Facebook Business Page](#facebook-business-page)
+   - [Workflow](#workflow)
+   - [Data Schema](#data-schema)
+     - [Product Model](#product-model)
+     - [ProductReview Model](#productreview-model)
+     - [Category Model](#category-model)
+     - [UserProfile Model](#userprofile-model)
+     - [Order Model](#order-model)
+     - [OrderItem Model](#orderitem-model)
+     - [BlogPost Model](#blogpost-model)
+     - [Comment Model](#comment-model)
+     - [ProductCarousel Model](#productcarousel-model)
+     - [Testimonial Model](#testimonial-model)
+   - [Business Model](#business-model)
+   - [Marketing Strategy](#marketing-strategy)
+   - [Facebook Business Page](#facebook-business-page)
 2. **[Target Audience](#target-audience)**
 3. **[Design](#design)**
-    * [The Five Planes of UX](#the-five-planes-of-ux)
-        + [1. Strategy](#1-strategy)
-        + [2. Scope](#2-scope)
-        + [3. Structure](#3-structure)
-        + [4. Skeleton](#4-skeleton)
-        + [5. Surface](#5-surface)
-    * [Wireframes](#wireframes)
-        + [Home Page](#home-page)
-        + [Product Page](#product-page)
-        + [Product Detail Page](#product-detail-page)
-        + [Profile Page](#profile-page)
-        + [Shopping Bag Page](#shopping-bag-page)
-        + [Checkout Page](#checkout-page)
-        + [Blog Page](#blog-page)
-    * [Typography](#typography)
-    * [Color Scheme](#color-scheme)
+   - [The Five Planes of UX](#the-five-planes-of-ux)
+     - [1. Strategy](#1-strategy)
+     - [2. Scope](#2-scope)
+     - [3. Structure](#3-structure)
+     - [4. Skeleton](#4-skeleton)
+     - [5. Surface](#5-surface)
+   - [Wireframes](#wireframes)
+     - [Home Page](#home-page)
+     - [Product Page](#product-page)
+     - [Product Detail Page](#product-detail-page)
+     - [Profile Page](#profile-page)
+     - [Shopping Bag Page](#shopping-bag-page)
+     - [Checkout Page](#checkout-page)
+     - [Blog Page](#blog-page)
+   - [Typography](#typography)
+   - [Color Scheme](#color-scheme)
 4. **[Features](#features)**
-    * [Existing Features](#existing-features)
-        + [Navbar](#navbar)
-        + [Home Page](#home-page)
-            * [Products Carousel](#products-carousel)
-            * [Testimonials](#testimonials)
-            * [Newsletter](#newsletter)
-        + [User Profile](#user-profile)
-            * [My Profile](#my-profile)
-            * [Edit Profile](#edit-profile)
-            * [Change Password](#change-password)
-            * [Delete Account](#delete-account)
-        + [User Authentication](#user-authentication)
-            * [Sign Up Page](#sign-up-page)
-            * [Confirm Email Page](#confirm-email-page)
-            * [Sign In Page](#sign-in-page)
-            * [Reset Password](#reset-password)
-        + [Products Page](#products-page)
-            * [Product List](#product-list)
-            * [Searching & Filtering](#searching--filtering)
-            * [Product Details](#product-details)
-            * [Reviews & Ratings](#reviews--ratings)
-            * [Related Products](#related-products)
-        + [Shopping Bag](#shopping-bag)
-        + [Checkout](#checkout)
-            * [Successful Checkout](#successful-checkout)
-        + [Blog Posts](#blog-posts)
-            * [Recipes](#recipes)
-            * [Comments](#comments)
-        + [Admin Management](#admin-management)
-            * [Product Management](#product-management)
-            * [Reviews Management](#reviews-management)
-            * [Orders Management](#order-management)
-            * [Comments Management](#comments-management)
-    * [Future Implementations](#future-implementations)
+   - [Existing Features](#existing-features)
+     - [Navbar](#navbar)
+     - [Home Page](#home-page)
+       - [Products Carousel](#products-carousel)
+       - [Testimonials](#testimonials)
+       - [Newsletter](#newsletter)
+     - [User Profile](#user-profile)
+       - [My Profile](#my-profile)
+       - [Edit Profile](#edit-profile)
+       - [Change Password](#change-password)
+       - [Delete Account](#delete-account)
+     - [User Authentication](#user-authentication)
+       - [Sign Up Page](#sign-up-page)
+       - [Confirm Email Page](#confirm-email-page)
+       - [Sign In Page](#sign-in-page)
+       - [Reset Password](#reset-password)
+     - [Products Page](#products-page)
+       - [Product List](#product-list)
+       - [Searching & Filtering](#searching--filtering)
+       - [Product Details](#product-details)
+       - [Reviews & Ratings](#reviews--ratings)
+       - [Related Products](#related-products)
+     - [Shopping Bag](#shopping-bag)
+     - [Checkout](#checkout)
+       - [Successful Checkout](#successful-checkout)
+     - [Blog Posts](#blog-posts)
+       - [Recipes](#recipes)
+       - [Comments](#comments)
+     - [Admin Management](#admin-management)
+       - [Product Management](#product-management)
+       - [Reviews Management](#reviews-management)
+       - [Orders Management](#order-management)
+       - [Comments Management](#comments-management)
+   - [Future Implementations](#future-implementations)
 5. **[Technologies](#technologies)**
-6. **[Deployment and Local Development](#deployment-and-local-development)**
-    * [Create a Database](#create-a-database)
-    * [Django Project Settings](#django-project-settings)
-    * [Heroku Deployment](#deployment)
-    * [Local Development](#local-development)
-7. **[Testing](#testing)**
-    * [Validation](#validation)
-        + [Form Validation](#form-validation)
-        + [W3C Validator](#w3c-validator)
-        + [Jigsaw CSS Validator](#jigsaw-css-validator)
-        + [JS Hint](#jshint)
-        + [PEP8](#pep8)
-        + [Wave Accessibility](#wave-accessibility)
-        + [Lighthouse Report](#lighthouse-report)
-    * [Manual Testing](#manual-testing)
-        + [Sign Up Page](#sign-up-page-1)
-        + [Confirm Email](#confirm-email)
-        + [Sign In Page](#sign-in-page-1)
-        + [Reset Password](#reset-password-1)
-        + [Navigation Bar](#navigation-bar)
-        + [Home Page](#home-page-2)
-        + [User Profile](#user-profile-1)
-        + [Admin Management](#admin-management-1)
-        + [Products](#products)
-        + [Products Detail](#products-detail)
-        + [Shopping Bag](#shopping-bag-1)
-        + [Checkout](#checkout-1)
-        + [Blog Posts Page](#blog-posts-page)
-        + [Comment Section](#comment-section)
-        + [Footer](#footer)
-        + [Error Pages](#error-pages)
-    * [Fixed Bugs](#fixed-bugs)
-8. **[Credits](#credits)**
-    * [Code Used](#code-used)
-    * [Content](#content)
-        + [Icons](#icons)
-        + [Images](#images)
-9. **[Acknowledgements](#acknowledgements)**
+6. **[Frontend Migration (React/Vite + Tailwind)](#frontend-migration-reactvite--tailwind)**
+7. **[React Migration Documentation](#react-migration-documentation)**
+8. **[Deployment and Local Development](#deployment-and-local-development)**
+   - [Create a Database](#create-a-database)
+   - [Django Project Settings](#django-project-settings)
+   - [Heroku Deployment](#deployment)
+   - [Local Development](#local-development)
+9. **[Testing](#testing)**
+   - [Validation](#validation)
+     - [Form Validation](#form-validation)
+     - [W3C Validator](#w3c-validator)
+     - [Jigsaw CSS Validator](#jigsaw-css-validator)
+     - [JS Hint](#jshint)
+     - [PEP8](#pep8)
+     - [Wave Accessibility](#wave-accessibility)
+     - [Lighthouse Report](#lighthouse-report)
+   - [Manual Testing](#manual-testing)
+     - [Sign Up Page](#sign-up-page-1)
+     - [Confirm Email](#confirm-email)
+     - [Sign In Page](#sign-in-page-1)
+     - [Reset Password](#reset-password-1)
+     - [Navigation Bar](#navigation-bar)
+     - [Home Page](#home-page-2)
+     - [User Profile](#user-profile-1)
+     - [Admin Management](#admin-management-1)
+     - [Products](#products)
+     - [Products Detail](#products-detail)
+     - [Shopping Bag](#shopping-bag-1)
+     - [Checkout](#checkout-1)
+     - [Blog Posts Page](#blog-posts-page)
+     - [Comment Section](#comment-section)
+     - [Footer](#footer)
+     - [Error Pages](#error-pages)
+   - [Fixed Bugs](#fixed-bugs)
+10. **[Credits](#credits)**
+    - [Code Used](#code-used)
+    - [Content](#content)
+      - [Icons](#icons)
+      - [Images](#images)
+11. **[Acknowledgements](#acknowledgements)**
 
 # Project Goals
 
@@ -123,17 +125,17 @@ The main goal for this website is to offer ethically sourced, organic and health
 
 ## Workflow
 
-This project was planned using the Agile Methodology. Features were grouped into **EPICS** (*Milestones* on `Github`), which in turn contain **USER STORIES** (*Issues* on `Github`), which also contained *Tasks* and *Acceptance Criteria* to ensure the features were implemented most efficiently.
+This project was planned using the Agile Methodology. Features were grouped into **EPICS** (_Milestones_ on `Github`), which in turn contain **USER STORIES** (_Issues_ on `Github`), which also contained _Tasks_ and _Acceptance Criteria_ to ensure the features were implemented most efficiently.
 
 The project Kanban can be seen [here](https://github.com/users/petra66orii/projects/3)
 
 Users can do the following:
 
-* Browse Products: [EPIC: Product Details](https://github.com/petra66orii/honeypot/milestone/2)
-* Review Products: [EPIC: Product Reviews](https://github.com/petra66orii/honeypot/milestone/3)
-* Purchase Products: [EPIC: Checkout](https://github.com/petra66orii/honeypot/milestone/5)
+- Browse Products: [EPIC: Product Details](https://github.com/petra66orii/honeypot/milestone/2)
+- Review Products: [EPIC: Product Reviews](https://github.com/petra66orii/honeypot/milestone/3)
+- Purchase Products: [EPIC: Checkout](https://github.com/petra66orii/honeypot/milestone/5)
 
-## Data Schema 
+## Data Schema
 
 Planning for the database involved creating an ERD to see the relationships between the data models. Models have changed and evolved over the course of this project, so here is the initial ERD image:
 
@@ -149,113 +151,113 @@ The application uses a relational database to store and manage data. Below is th
 
 **Fields**:
 
-* `name`: CharField (max_length=255) - Name of the Product
-* `category`: *ForeignKey* to the *Category* model - *Relation*: 
-* `price`: DecimalField (max_digits=10) - Price of the product
-* `description`: TextField - Description of product
-* `sku`: CharField (max_length=100) - Unique indentifier of the product
-* `rating`: FloatField (default=0.0) - Average rating of the product
-* `image`: ImageField - Picture of the product
+- `name`: CharField (max_length=255) - Name of the Product
+- `category`: _ForeignKey_ to the _Category_ model - _Relation_:
+- `price`: DecimalField (max_digits=10) - Price of the product
+- `description`: TextField - Description of product
+- `sku`: CharField (max_length=100) - Unique indentifier of the product
+- `rating`: FloatField (default=0.0) - Average rating of the product
+- `image`: ImageField - Picture of the product
 
 ### ProductReview Model
 
 **Fields**:
 
-* `user`: *ForeignKey* to the *User* model - *Relation*:
-* `product`: *ForeignKey* to the *Product* model - *Relation*:
-* `review_text`: TextField - The content of the review
-* `rating`: FloatField - Rating of the product
-* `approved`: BooleanField - Whether the review is approved or not
-* `created_on`: DateTimeField - Date of creation
+- `user`: _ForeignKey_ to the _User_ model - _Relation_:
+- `product`: _ForeignKey_ to the _Product_ model - _Relation_:
+- `review_text`: TextField - The content of the review
+- `rating`: FloatField - Rating of the product
+- `approved`: BooleanField - Whether the review is approved or not
+- `created_on`: DateTimeField - Date of creation
 
 ### Category Model
 
 **Fields**:
 
-* `name`: CharField (max_length=100) - Name of the category in the Admin panel
-* `friendly_name`: CharField (max_length=100) - Category name displayed in the website
- 
+- `name`: CharField (max_length=100) - Name of the category in the Admin panel
+- `friendly_name`: CharField (max_length=100) - Category name displayed in the website
+
 ### UserProfile Model
 
 **Fields**:
 
-* `user`: *OneToOneField* to the *User* model (*Relation*: One user has one profile)
-* `phone_number`: CharField (max_length=20) - User's phone number
-* `street_address1`: CharField (max_length=255) - First line of the address
-* `street_address2`: CharField (max_length=255) - Second (optional) line of the address
-* `country`: CharField (max_length=100) - User's country of residence
-* `county`: CharField (max_length=100) - User's county of residence
-* `town`: CharField (max_length=100) - User's town/city of residence
-* `postcode`: CharField (max_length=20) - User's postcode
+- `user`: _OneToOneField_ to the _User_ model (_Relation_: One user has one profile)
+- `phone_number`: CharField (max_length=20) - User's phone number
+- `street_address1`: CharField (max_length=255) - First line of the address
+- `street_address2`: CharField (max_length=255) - Second (optional) line of the address
+- `country`: CharField (max_length=100) - User's country of residence
+- `county`: CharField (max_length=100) - User's county of residence
+- `town`: CharField (max_length=100) - User's town/city of residence
+- `postcode`: CharField (max_length=20) - User's postcode
 
 ### Order Model
 
 **Fields**:
 
-* `order_number`: CharField (max_length=100) - Unique number order
-* `user_profile`: *ForeignKey* to the *UserProfile* model
-* `first_name`: CharField (max_length=150) - User's first name
-* `last_name`: CharField (max_length=150) - User's last name
-* `email`: EmailField - User's email address
-* `phone_number`: CharField (max_length=20) - User's phone number
-* `street_address1`: CharField (max_length=255) - First line of the address
-* `street_address2`: CharField (max_length=255) - Second (optional) line of the address
-* `country`: CharField (max_length=100) - User's country of residence
-* `town`: CharField (max_length=100) - User's town/city of residence
-* `county`: CharField (max_length=100) - User's county of residence
-* `postcode`: CharField (max_length=20) - User's postcode
-* `date`: DateTimeField - Date of purchase
-* `delivery_cost`: DecimalField (max_digits=10) - Cost of delivery
-* `bag`: TextField - Contents of the bag
-* `order_total`: IntegerField - Total number of products ordered
-* `total_price`: DecimalField(max_digits=10) - Total price of the order
-* `stripe_pid`: CharField (max_length=255) - Unique client secret for Stripe API
-* `status`: CharField (max_length=20) - Whether the order has been fulfilled or not
+- `order_number`: CharField (max_length=100) - Unique number order
+- `user_profile`: _ForeignKey_ to the _UserProfile_ model
+- `first_name`: CharField (max_length=150) - User's first name
+- `last_name`: CharField (max_length=150) - User's last name
+- `email`: EmailField - User's email address
+- `phone_number`: CharField (max_length=20) - User's phone number
+- `street_address1`: CharField (max_length=255) - First line of the address
+- `street_address2`: CharField (max_length=255) - Second (optional) line of the address
+- `country`: CharField (max_length=100) - User's country of residence
+- `town`: CharField (max_length=100) - User's town/city of residence
+- `county`: CharField (max_length=100) - User's county of residence
+- `postcode`: CharField (max_length=20) - User's postcode
+- `date`: DateTimeField - Date of purchase
+- `delivery_cost`: DecimalField (max_digits=10) - Cost of delivery
+- `bag`: TextField - Contents of the bag
+- `order_total`: IntegerField - Total number of products ordered
+- `total_price`: DecimalField(max_digits=10) - Total price of the order
+- `stripe_pid`: CharField (max_length=255) - Unique client secret for Stripe API
+- `status`: CharField (max_length=20) - Whether the order has been fulfilled or not
 
 ### OrderItem Model
 
 **Fields**:
 
-* `order`: *ForeignKey* to the *Order* model
-* `product`: *ForeignKey* to the *Product* model
-* `quantity`: IntegerField - Quantity of the item bought
-* `item_total`: DecimalField (max_digits=10) - Total price of the product
+- `order`: _ForeignKey_ to the _Order_ model
+- `product`: _ForeignKey_ to the _Product_ model
+- `quantity`: IntegerField - Quantity of the item bought
+- `item_total`: DecimalField (max_digits=10) - Total price of the product
 
 ### BlogPost Model
 
 **Fields**:
 
-* `author`: *ForeignKey* to the *User* model
-* `title`: CharField (max_length=255) - Title of the blog post
-* `slug`: SlugField - Blog post's slug
-* `content`: TextField - Content of the post
-* `post_type`: CharField (max_length=10) - Whether the post is a regular blog post or recipe
-* `created_at`: DateTimeField - Date of creation
-* `updated_at`: DateTimeField - Date of update (if any)
-* `status`: CharField (max_length=10) - Whether the post is a draft or published
-* `excerpt`: TextField - A short excerpt of the post
-* `featured_image`: ImageField - Feautred image (optional)
+- `author`: _ForeignKey_ to the _User_ model
+- `title`: CharField (max_length=255) - Title of the blog post
+- `slug`: SlugField - Blog post's slug
+- `content`: TextField - Content of the post
+- `post_type`: CharField (max_length=10) - Whether the post is a regular blog post or recipe
+- `created_at`: DateTimeField - Date of creation
+- `updated_at`: DateTimeField - Date of update (if any)
+- `status`: CharField (max_length=10) - Whether the post is a draft or published
+- `excerpt`: TextField - A short excerpt of the post
+- `featured_image`: ImageField - Feautred image (optional)
 
 ### Comment Model
 
 **Fields**:
 
-* `blog_post`: *ForeignKey* to the *BlogPost* model
-* `user`: *ForeignKey* to the *User* model
-* `approved`: BooleanField - Whether the comment is approved or not
-* `content`: TextField - Content of comments
-* `created_on`: DateTimeField - Date of comment posted
+- `blog_post`: _ForeignKey_ to the _BlogPost_ model
+- `user`: _ForeignKey_ to the _User_ model
+- `approved`: BooleanField - Whether the comment is approved or not
+- `content`: TextField - Content of comments
+- `created_on`: DateTimeField - Date of comment posted
 
 ### ProductCarousel Model
 
-* `name`: CharField (max_length=255) - Name of the product
-* `image`: ImageField - The product's image
+- `name`: CharField (max_length=255) - Name of the product
+- `image`: ImageField - The product's image
 
 ### Testimonial Model
 
-* name: CharField (max_length=100) - The author's name
-* text: TextField - The content of the testimonial
-* rating: PositiveIntegerField (default=5) - Rating included in the testimonial
+- name: CharField (max_length=100) - The author's name
+- text: TextField - The content of the testimonial
+- rating: PositiveIntegerField (default=5) - Rating included in the testimonial
 
 ## Business Model
 
@@ -285,13 +287,13 @@ Content includes educational posts on honey’s benefits, product highlights, be
 
 # Target Audience
 
-HoneyPot sells raw, unfiltered honey infused with different ingredients (whilst also selling the *classical* honey) at a more affordable price than most honey retailers. Our target audience is large, addressing to people looking for organic products, young families that want to offer their children healthy desserts, people that want a healthier lifestyle, or that just want to replace sugar.
+HoneyPot sells raw, unfiltered honey infused with different ingredients (whilst also selling the _classical_ honey) at a more affordable price than most honey retailers. Our target audience is large, addressing to people looking for organic products, young families that want to offer their children healthy desserts, people that want a healthier lifestyle, or that just want to replace sugar.
 
 # Design
 
 ## The Five Planes of UX
 
-The five planes of UX — *Strategy*, *Scope*, *Structure*, *Skeleton*, and *Surface* — offer a structured approach to crafting a seamless and engaging user experience. These principles shape the design of the e-commerce honey website.
+The five planes of UX — _Strategy_, _Scope_, _Structure_, _Skeleton_, and _Surface_ — offer a structured approach to crafting a seamless and engaging user experience. These principles shape the design of the e-commerce honey website.
 
 ### 1. Strategy
 
@@ -299,15 +301,15 @@ The website’s purpose is to provide customers with high-quality honey and bee-
 
 **User Needs**:
 
-* A seamless shopping experience with clear product categories and easy checkout.
-* Informative content about honey, including health benefits, sustainability, and recipes.
-* Customer reviews and ratings to help with purchasing decisions.
+- A seamless shopping experience with clear product categories and easy checkout.
+- Informative content about honey, including health benefits, sustainability, and recipes.
+- Customer reviews and ratings to help with purchasing decisions.
 
 **Business Goals**:
 
-* Increase product sales through a well-optimized and conversion-driven design.
-* Build a strong brand identity and customer loyalty with engaging content and a smooth shopping experience.
-* Differentiate from competitors by emphasizing sustainability, ethical sourcing, and product quality.
+- Increase product sales through a well-optimized and conversion-driven design.
+- Build a strong brand identity and customer loyalty with engaging content and a smooth shopping experience.
+- Differentiate from competitors by emphasizing sustainability, ethical sourcing, and product quality.
 
 ### 2. Scope
 
@@ -315,83 +317,83 @@ The website includes key e-commerce and content-driven features:
 
 **Product Catalog & Shopping Experience**:
 
-* Browse products by category, type, and price range.
-* Add items to cart and complete a secure checkout using Stripe.
-* View product descriptions, ingredients, and customer reviews.
+- Browse products by category, type, and price range.
+- Add items to cart and complete a secure checkout using Stripe.
+- View product descriptions, ingredients, and customer reviews.
 
 **User Engagement & Content**:
 
-* *Blog*: Articles on honey’s benefits, recipes, and sustainable beekeeping.
-* *Product Reviews*: Customers can leave ratings and feedback to guide other buyers.
-* *Email Newsletter*: Users can sign up for updates, promotions, and exclusive offers.
+- _Blog_: Articles on honey’s benefits, recipes, and sustainable beekeeping.
+- _Product Reviews_: Customers can leave ratings and feedback to guide other buyers.
+- _Email Newsletter_: Users can sign up for updates, promotions, and exclusive offers.
 
 **Marketing & Retention**:
 
-* Discount codes and promotional offers.
-* Loyalty rewards for repeat customers.
-* Social media integration for sharing and engagement.
+- Discount codes and promotional offers.
+- Loyalty rewards for repeat customers.
+- Social media integration for sharing and engagement.
 
 ### 3. Structure
 
 **Content Hierarchy**:
 
-* *Primary Navigation*: Home, Shop, Blog, About Us, Contact.
-* *Secondary Navigation*: Account, Cart, Order History, FAQs.
+- _Primary Navigation_: Home, Shop, Blog, About Us, Contact.
+- _Secondary Navigation_: Account, Cart, Order History, FAQs.
 
 **User Flows**:
 
-*For purchasing a product*:
+_For purchasing a product_:
 
-* Browse products by category or use filters.
-* Select an item, read the description and reviews.
-* Add to cart and proceed to checkout.
-* Enter payment and shipping details, complete the order.
-* Receive confirmation and tracking updates.
+- Browse products by category or use filters.
+- Select an item, read the description and reviews.
+- Add to cart and proceed to checkout.
+- Enter payment and shipping details, complete the order.
+- Receive confirmation and tracking updates.
 
-*For reading the blog*:
+_For reading the blog_:
 
-* Browse articles by category (e.g., health benefits, recipes).
-* Read content and explore related posts.
-* Share or comment on blog posts.
+- Browse articles by category (e.g., health benefits, recipes).
+- Read content and explore related posts.
+- Share or comment on blog posts.
 
 ### 4. Skeleton
 
 **Navigation Design**:
 
-* A fixed top navigation bar with dropdown menus for quick access.
-* A search bar for finding products and blog content easily.
+- A fixed top navigation bar with dropdown menus for quick access.
+- A search bar for finding products and blog content easily.
 
 **Interface Elements**:
 
-* *Forms*: Simple, clean checkout and review submission forms.
-* *Product Cards*: Feature images, price, rating, and a quick “Add to Cart” button.
-* *Call-to-Action (CTA) Buttons*: Prominent "Buy Now," "Read More," and "Subscribe" buttons.
+- _Forms_: Simple, clean checkout and review submission forms.
+- _Product Cards_: Feature images, price, rating, and a quick “Add to Cart” button.
+- _Call-to-Action (CTA) Buttons_: Prominent "Buy Now," "Read More," and "Subscribe" buttons.
 
 **Feedback & Progress Indicators**:
 
-* Visual confirmation for actions like “Item added to cart” or “Order placed.”
-* Checkout progress bar to guide users through the purchase process.
+- Visual confirmation for actions like “Item added to cart” or “Order placed.”
+- Checkout progress bar to guide users through the purchase process.
 
 **Responsive Design**:
 
-* Mobile-first approach to ensure smooth shopping on all devices.
+- Mobile-first approach to ensure smooth shopping on all devices.
 
 ### 5. Surface
 
 **Design Style**:
 
-* *Theme*: A warm, natural aesthetic that reflects purity and sustainability.
-* High-quality images of honey, bees, and nature to enhance visual appeal.
+- _Theme_: A warm, natural aesthetic that reflects purity and sustainability.
+- High-quality images of honey, bees, and nature to enhance visual appeal.
 
 **Typography**:
 
-* A clean, modern sans-serif font for readability, paired with a handwritten or organic-style font for branding elements.
+- A clean, modern sans-serif font for readability, paired with a handwritten or organic-style font for branding elements.
 
 **Imagery & Emotional Impact**:
 
-* High-resolution product images showcasing texture and packaging details.
-* Lifestyle shots of honey being used in recipes or natural settings to reinforce authenticity.
-* Creates a sense of warmth, tradition, and natural goodness, encouraging users to connect with the brand and its values.
+- High-resolution product images showcasing texture and packaging details.
+- Lifestyle shots of honey being used in recipes or natural settings to reinforce authenticity.
+- Creates a sense of warmth, tradition, and natural goodness, encouraging users to connect with the brand and its values.
 
 ## Wireframes
 
@@ -427,11 +429,11 @@ For establishing the UX design, wireframes were designed using Balsamiq:
 
 ## Typography
 
-For the logo I went for the *"Lavishly Yours"* font, because it inspired elegance to me and it felt like an appropriate font for a compelling logo. 
+For the logo I went for the _"Lavishly Yours"_ font, because it inspired elegance to me and it felt like an appropriate font for a compelling logo.
 
 ![Lavishly Yours font](static/images/README/lavishly-yours-font.png)
 
-For the rest of the website I used *"Work Sans"* for its readablity.
+For the rest of the website I used _"Work Sans"_ for its readablity.
 
 ![Work Sans font](static/images/README/work-sans-font.png)
 
@@ -458,13 +460,13 @@ The navbar has a lot of options for users:
 Navbar changes its options depending on user's level of access:
 
 1. User not logged in:
-![Navbar not logged in](static/images/README/not-logged-in-navbar.png)
+   ![Navbar not logged in](static/images/README/not-logged-in-navbar.png)
 
 2. User logged in:
-![User logged in](static/images/README/user-navbar.png)
+   ![User logged in](static/images/README/user-navbar.png)
 
 3. Admin logged in:
-![Admin navbar](static/images/README/admin-navbar.png)
+   ![Admin navbar](static/images/README/admin-navbar.png)
 
 The navbar is also responsive:
 
@@ -473,7 +475,7 @@ The navbar is also responsive:
 
 ### Home Page
 
-The home page is Honeypot's calling card: the honey dripping video is meant to invoke a pleasant feeling and induce craving for honey. The user has the option to go straight to the Products section by clicking on the "Shop Now" button, or they can scroll down to see a carousel of products, where they can see a selection of products being displayed. 
+The home page is Honeypot's calling card: the honey dripping video is meant to invoke a pleasant feeling and induce craving for honey. The user has the option to go straight to the Products section by clicking on the "Shop Now" button, or they can scroll down to see a carousel of products, where they can see a selection of products being displayed.
 
 ![Home page display](static/images/README/home-page.gif)
 
@@ -481,7 +483,7 @@ Below the products, the users can sign up for the store's newsletter to receive 
 
 #### Products Carousel
 
-The Products carousel offers a selection of products that changes automatically, but also allows the user to scroll at their own pace. Below the carousel, a button "Check our products" redirects the user to the "Products" page. 
+The Products carousel offers a selection of products that changes automatically, but also allows the user to scroll at their own pace. Below the carousel, a button "Check our products" redirects the user to the "Products" page.
 
 ![Products carousel](static/images/README/products-carousel.png)
 
@@ -499,13 +501,13 @@ The newsletter is positioned between the two carousels, so that the user can see
 
 ### User Profile
 
-On sign up, a profile is automatically created for users. On the left side of the profile, they have multiple options within their profile, such as editing their delivery infromation, editing their account details, changing their password, and even deleting their account should they desire to do so. On the right side of their profile, there is a section displaying their order history, where they can access their previous orders by clicking on the order number (*See [Checkout](#checkout) section for more information*).
+On sign up, a profile is automatically created for users. On the left side of the profile, they have multiple options within their profile, such as editing their delivery infromation, editing their account details, changing their password, and even deleting their account should they desire to do so. On the right side of their profile, there is a section displaying their order history, where they can access their previous orders by clicking on the order number (_See [Checkout](#checkout) section for more information_).
 
 #### My Profile
 
 ![My profile](static/images/README/my-profile.png)
 
-At the top of the profile page, the user sees their details like full name, username, and email address (*Note: Did you spot the reference from "The Office"?*). Under these details, the button "Edit Profile" allows the user to make any changes they wish to any of their details. 
+At the top of the profile page, the user sees their details like full name, username, and email address (_Note: Did you spot the reference from "The Office"?_). Under these details, the button "Edit Profile" allows the user to make any changes they wish to any of their details.
 
 ![Profle information](static/images/README/profile-info.png)
 
@@ -551,7 +553,7 @@ An email is automatically sent to the user's email address where a link redirect
 
 #### Sign In Page
 
-This the user sign in page. They can sign in with their username or by using their email address. If the user doesn't remember their password, they can click on the "Forgot Password?" link. 
+This the user sign in page. They can sign in with their username or by using their email address. If the user doesn't remember their password, they can click on the "Forgot Password?" link.
 
 ![Sign in page](static/images/README/sign-in-page.png)
 
@@ -559,13 +561,13 @@ This the user sign in page. They can sign in with their username or by using the
 
 #### Reset Password
 
-When redirected to this page, the user is required to input their email address. After this, the user receives a link that redirects them to a page where they can input their new password and confirm it. 
+When redirected to this page, the user is required to input their email address. After this, the user receives a link that redirects them to a page where they can input their new password and confirm it.
 
 ![Reset password](static/images/README/reset-password.png)
 
 ### Products Page
 
-The Products page contains all of the products listed, each product having a name, rating (if applicable), their image, and a "Buy Now" button. User can click on either the name of the product or the image to be redirected to the product detail page. 
+The Products page contains all of the products listed, each product having a name, rating (if applicable), their image, and a "Buy Now" button. User can click on either the name of the product or the image to be redirected to the product detail page.
 
 If the user clicks on the "Buy Now" button, the product is added to cart and the user is immediately redirected to the checkout page.
 
@@ -577,9 +579,9 @@ Products are listed and paginated, the user can easily navigate throughout the p
 
 ![Sorting feature](static/images/README/sorting-feature.png)
 
-#### Searching & Filtering 
+#### Searching & Filtering
 
-User can filter the products as well by selecting one of the options in dropdown menus "Shop" and/or "Gift Baskets & Deals" located in the navbar (*See [Navbar](#navbar)*). If they want to look up a particular product, they can look it up by typing the name in the search bar:
+User can filter the products as well by selecting one of the options in dropdown menus "Shop" and/or "Gift Baskets & Deals" located in the navbar (_See [Navbar](#navbar)_). If they want to look up a particular product, they can look it up by typing the name in the search bar:
 
 ![Search bar](static/images/README/search-bar.png)
 
@@ -644,7 +646,7 @@ If the payment is successful, the user is redirected to this page, where they ge
 
 ### Blog Posts
 
-In order to raise awareness and to further educate users on the benefits of honey, users can read blog posts relating to the benefits of honey and what it takes to take up beekeeping. 
+In order to raise awareness and to further educate users on the benefits of honey, users can read blog posts relating to the benefits of honey and what it takes to take up beekeeping.
 
 ![Blog page](static/images/README/blog-page.gif)
 
@@ -669,14 +671,14 @@ Users can click on any blog post and read it:
 
 #### Recipes
 
-Another useful section for honey lovers is the Recipes section, where users can explore healthy honey recipes that contain our honey. 
+Another useful section for honey lovers is the Recipes section, where users can explore healthy honey recipes that contain our honey.
 
 ![Recipe posts list](static/images/README/recipe-section.png)
 ![Recipe post](static/images/README/recipe-post.png)
 
 #### Comments
 
-Users that have an account and are logged in can leave comments on any blog post or recipe post. After being submitted, the user is told that their comment is awaiting approval, in the same manner as the reviews of the products. 
+Users that have an account and are logged in can leave comments on any blog post or recipe post. After being submitted, the user is told that their comment is awaiting approval, in the same manner as the reviews of the products.
 
 ![Comment section](static/images/README/comment-section.png)
 
@@ -728,10 +730,10 @@ Admin can approve comments and/or delete them:
 
 This website has huge potential to expand upon, and a few future implementations I consider in the future would be:
 
-* *Wishlist* feature, where users can add to wishlist products they'd wish to buy in the future.
-* *Testimonials* feature, where users can leave reviews and testimonials regarding the business itself (for now, the testimonials are not implemented, they're read only)
-* *Sign In Social Accounts* feature, where users can sign in using their social media accounts, like Facebook, Google or Apple.
-* *Generate Sales Reports* feature, where the store owner can generate reports to see which products are the best-selling ones, which aren't performing as well, so that they can push offers on the less popular products to increase sales. This also provides great insight for the store owner.
+- _Wishlist_ feature, where users can add to wishlist products they'd wish to buy in the future.
+- _Testimonials_ feature, where users can leave reviews and testimonials regarding the business itself (for now, the testimonials are not implemented, they're read only)
+- _Sign In Social Accounts_ feature, where users can sign in using their social media accounts, like Facebook, Google or Apple.
+- _Generate Sales Reports_ feature, where the store owner can generate reports to see which products are the best-selling ones, which aren't performing as well, so that they can push offers on the less popular products to increase sales. This also provides great insight for the store owner.
 
 # Technologies
 
@@ -753,6 +755,128 @@ This website has huge potential to expand upon, and a few future implementations
 - **ChatGPT**: For generating the blog content and prompts for image generation.
 - **LeonardoAI**: Used for generating the product images.
 
+# Frontend Migration (React/Vite + Tailwind)
+
+After the initial Django + templates version, I migrated the entire frontend to **React (Vite)** with **Tailwind CSS** to achieve a more modern UI, faster navigation, and a smoother user experience. The Django project remains the backend API, while the new frontend lives in the `honeypot-frontend/` folder.
+
+## Why the migration?
+
+- **Improved UX**: snappy navigation with client-side routing and better feedback on user actions
+- **Modern UI**: Tailwind makes it easier to keep styles consistent and build new layouts quickly
+- **Clear separation**: Django is now focused on data + auth, while React handles the presentation
+
+## Frontend Stack
+
+- **React + Vite** for fast dev builds and a clean component structure
+- **Tailwind CSS** for utility-first styling and responsive layouts
+- **Redux Toolkit** for global state (auth + cart)
+- **RTK Query** for API calls and caching
+- **Stripe Elements** for secure payment handling
+- **react-hot-toast** for non-blocking feedback messages
+
+## Key Frontend Features
+
+- **Full UI migration**: products, blog, checkout, profile, and admin tools now live in React
+- **Auth flow**: registration, login, email verification, password reset, logout
+- **Checkout UX**: Stripe payment flow + saved delivery info for logged-in users
+- **Admin panels**: manage products, orders, reviews, comments, users
+- **Toasts**: clean, themed notifications replacing blocking alerts
+
+## Running the Frontend
+
+From the `honeypot-frontend/` directory:
+
+```
+npm install
+npm run dev
+```
+
+The frontend expects the Django API at `http://127.0.0.1:8000/api/`.
+
+# React Migration Documentation
+
+This section documents the UI refresh and architectural changes introduced in the **feature/react-migration** branch.
+
+## Architecture (React Frontend + Django API)
+
+```mermaid
+flowchart LR
+    subgraph Browser[Client (React + Vite + Tailwind)]
+        UI[Pages & Components]
+        RTK[RTK Query + Redux Store]
+        StripeJS[Stripe Elements]
+        UI --> RTK
+        UI --> StripeJS
+    end
+
+    subgraph Django[Django Backend API]
+        Auth[dj-rest-auth + allauth]
+        API[DRF Endpoints]
+        Checkout[Checkout API]
+        Webhooks[Stripe Webhooks]
+        DB[(PostgreSQL/SQLite)]
+        Auth --> API
+        Checkout --> DB
+        API --> DB
+        Webhooks --> Checkout
+    end
+
+    Stripe[Stripe] --> StripeJS
+    Stripe --> Webhooks
+
+    RTK -->|REST /api/*| API
+```
+
+## UI Screenshots (React/Vite + Tailwind)
+
+**Login Page**
+
+![Login Page](static/images/README/react-migration/react-signin.png)
+
+**Register Page**
+
+![Register Page](static/images/README/react-migration/react-signup.png)
+
+**Home Page (Hero)**
+
+![Home Page Hero](static/images/README/react-migration/react-home-page.png)
+
+**Products Page**
+
+![Products Page](static/images/README/react-migration/react-product-page.png)
+
+**Product Detail Page**
+
+![Product Detail Page](static/images/README/react-migration/react-product-detail.png)
+
+**Blog Page**
+
+![Blog Page](static/images/README/react-migration/react-blog-page.png)
+
+**Profile + Order History**
+
+![Profile Page](static/images/README/react-migration/react-profile-page.png)
+
+**Admin Dashboard**
+
+![Admin Dashboard](static/images/README/react-migration/react-admin-dashboard.png)
+
+**Admin Orders**
+
+![Admin Orders](static/images/README/react-migration/react-admin-orders.png)
+
+**Admin Products**
+
+![Admin Products](static/images/README/react-migration/react-admin-products.png)
+
+**Admin Users**
+
+![Admin Users](static/images/README/react-migration/react-admin-users.png)
+
+**Admin Content (Reviews/Comments)**
+
+![Admin Content](static/images/README/react-migration/react-admin-content.png)
+
 # Deployment and Local Development
 
 ## Create a Database
@@ -766,18 +890,18 @@ This website has huge potential to expand upon, and a few future implementations
 ## Django Project Settings
 
 6. In the project workspace, create a file named 'Procfile'.
-7. Add the following code replacing ```<myproject>``` with the actual project name then save the file:
+7. Add the following code replacing `<myproject>` with the actual project name then save the file:
 
-    ``` python
-    web: gunicorn <myproject>.wsgi:application
-    ```
+   ```python
+   web: gunicorn <myproject>.wsgi:application
+   ```
 
-8. Generate a secret key for your project - go to [Randon Keygen](https://randomkeygen.com/) and copy any random keys for your project. *Note: Your Secret Key in your Heroku app has to be different from the key in your workspace, so you'll need to generate two different keys for each.*
+8. Generate a secret key for your project - go to [Randon Keygen](https://randomkeygen.com/) and copy any random keys for your project. _Note: Your Secret Key in your Heroku app has to be different from the key in your workspace, so you'll need to generate two different keys for each._
 9. Create a file named `.python-version` and add the Python version that you're using in your workspace, like this: `3.12.9` (or whatever version you're currently using)
 10. Now, create a file named 'env.py'. This file contains all of your environment variables like `EMAIL_HOST_USER`, `EMAIL_HOST_PASSWORD` and your `Stripe` keys.
-11. Add the following code, replacing ```<myurl>``` with the URL just copied from Code Institute's PostgreSQL and ```<mykey>``` with your generated secret key then save the file:
+11. Add the following code, replacing `<myurl>` with the URL just copied from Code Institute's PostgreSQL and `<mykey>` with your generated secret key then save the file:
 
-    ``` python
+    ```python
     import os
 
     os.environ["DATABASE_URL"]=<myurl>
@@ -795,7 +919,7 @@ This website has huge potential to expand upon, and a few future implementations
 
 13. Further down the page, replace any current instance of the SECRET_KEY variable with:
 
-    ``` python
+    ```python
     SECRET_KEY = os.environ.get('SECRET_KEY')
     ```
 
@@ -807,7 +931,7 @@ This website has huge potential to expand upon, and a few future implementations
     }
     ```
 
-15. Save the file then run ```python manage.py migrate``` in the terminal
+15. Save the file then run `python manage.py migrate` in the terminal
 16. Commit and push these changes to the repository
 
 ## Heroku Deployment
@@ -816,22 +940,25 @@ This website has huge potential to expand upon, and a few future implementations
 18. Once signed in, click on the "**Create New App**" button located above your dashboard. Give your app a unique name, choose the region you're in (United States/Europe) and click "**Create app**".
 19. Before deploying, you need to go to the **Settings** tab. Once there, scroll down and click on **Reveal Config Vars** to open this section.
 20. In this section, enter all of your environment variables that are present in your `env.py` file. Fields like:
- * `DATABASE_URL` - Your PostgreSQL database URL that you received in your email
- * `SECRET_KEY` - (*!!! Important: This key has to be a different one from the secret key within your workspace.*)
- * `CLOUDINARY_URL` - *If using Cloudinary*
- * `AWS_ACCESS_ID_KEY` and `AWS_SECRET_ACCESS_KEY` - If using Amazon AWS for storage
- * `EMAIL_HOST_USER` and `EMAIL_HOST_PASSWORD` - If you are planning on sending emails to users (like having a *Reset Password* functionality).
- * `USE_AWS` - Add 'True' to `Value` field
- * `STRIPE_PUBLIC_KEY`, `STRIPE_SECRET_KEY` and `STRIPE_WH_SECRET` - If you're using a payment API like Stripe
+
+- `DATABASE_URL` - Your PostgreSQL database URL that you received in your email
+- `SECRET_KEY` - (_!!! Important: This key has to be a different one from the secret key within your workspace._)
+- `CLOUDINARY_URL` - _If using Cloudinary_
+- `AWS_ACCESS_ID_KEY` and `AWS_SECRET_ACCESS_KEY` - If using Amazon AWS for storage
+- `EMAIL_HOST_USER` and `EMAIL_HOST_PASSWORD` - If you are planning on sending emails to users (like having a _Reset Password_ functionality).
+- `USE_AWS` - Add 'True' to `Value` field
+- `STRIPE_PUBLIC_KEY`, `STRIPE_SECRET_KEY` and `STRIPE_WH_SECRET` - If you're using a payment API like Stripe
+
 21. After that, make sure to go to the **Resources** tab and make sure Heroku didn't automatically set up a database for you. If that happens, simply remove the PostgreSQL database.
 22. Now, go to the **Deploy** tab. Once there, in the **Deployment Method** section, click `GitHub` and if needed, authorize `GitHub` to access your `Heroku` account. Click **Connect to GitHub**.
-23. Once connected, look up your GitHub repository by entering the name of it under **Search for a repository to connect to** and click **Search**. After you've found your repo, click **Connect**. 
-24. Now, you can click on **Enable Automatic Deploys** (optional, but I'd recommend it to save time and to detect any issues should they arise), and then select **Deploy Branch**. *If you enabled automatic deploys, every time you push changes to GitHub, the app will be automatically deployed every time, just like you would with a webpage deployed on GitHub Pages*.
-25. The app can take a couple of minutes until it's deployed. Once it's done, you'll see the message **Your app was successfully deployed** and a **View** button will come up where you can see your deployed app. 
+23. Once connected, look up your GitHub repository by entering the name of it under **Search for a repository to connect to** and click **Search**. After you've found your repo, click **Connect**.
+24. Now, you can click on **Enable Automatic Deploys** (optional, but I'd recommend it to save time and to detect any issues should they arise), and then select **Deploy Branch**. _If you enabled automatic deploys, every time you push changes to GitHub, the app will be automatically deployed every time, just like you would with a webpage deployed on GitHub Pages_.
+25. The app can take a couple of minutes until it's deployed. Once it's done, you'll see the message **Your app was successfully deployed** and a **View** button will come up where you can see your deployed app.
 
 ## Local Development
 
 ### How to Clone
+
 1. Log into your account on GitHub
 2. Go to the repository of this project /petra66orii/honeypot/
 3. Click on the code button, and copy your preferred clone link
@@ -839,7 +966,9 @@ This website has huge potential to expand upon, and a few future implementations
 5. Type 'git clone' into the terminal, paste the link you copied in Step 3 and press enter
 
 ### How to Fork
+
 To fork the repository:
+
 1. Log in (or sign up) to Github.
 2. Go to the repository for this project, petra66orii/honeypot
 3. Click the Fork button in the top right corner
@@ -852,10 +981,10 @@ To fork the repository:
 
 There were several errors highlighted in the W3C Validator. The fixes can be seen within these commits:
 
-* [Remove meta tags with description class to correct validation error](https://github.com/petra66orii/honeypot/commit/e73e36a2b05a45cd9f4e5f09cdb3100ab25eb276)
-* [Fix W3C errors](https://github.com/petra66orii/honeypot/commit/6f476d7861c293234e023593ff8320032ef1f607)
-* [Fix further W3C errors and warnings](https://github.com/petra66orii/honeypot/commit/bf41f189971897cf4ed5c59830e2e215420e40ad)
-* [Fix duplicate ID W3C error by separating navbar files](https://github.com/petra66orii/honeypot/commit/aee3d2397ba4cc5f440df10efe91f72466aab3a3)
+- [Remove meta tags with description class to correct validation error](https://github.com/petra66orii/honeypot/commit/e73e36a2b05a45cd9f4e5f09cdb3100ab25eb276)
+- [Fix W3C errors](https://github.com/petra66orii/honeypot/commit/6f476d7861c293234e023593ff8320032ef1f607)
+- [Fix further W3C errors and warnings](https://github.com/petra66orii/honeypot/commit/bf41f189971897cf4ed5c59830e2e215420e40ad)
+- [Fix duplicate ID W3C error by separating navbar files](https://github.com/petra66orii/honeypot/commit/aee3d2397ba4cc5f440df10efe91f72466aab3a3)
 
 After these errors were corrected, the W3C validator returned no errors:
 
@@ -882,46 +1011,46 @@ All JavaScript files passed with no issues with the exception of a missing semic
 
 [Pep8 CI](https://pep8ci.herokuapp.com/) linter was used, the results are as follows:
 
-| App            | File                 | CI Linter Result           |
-|----------------|----------------------|----------------------------|
-| bag            | apps.py              | All clear, no errors found |
-|                | contexts.py          | All clear, no errors found |
-|                | urls.py              | All clear, no errors found |
-|                | views.py             | All clear, no errors found |
-| blog           | admin.py             | All clear, no errors found |
-|                | apps.py              | All clear, no errors found |
-|                | forms.py             | All clear, no errors found |
-|                | models.py            | All clear, no errors found |
-|                | urls.py              | All clear, no errors found |
-|                | views.py             | All clear, no errors found |
-| checkout       | admin.py             | All clear, no errors found |
-|                | apps.py              | All clear, no errors found |
-|                | forms.py             | All clear, no errors found |
-|                | models.py            | All clear, no errors found |
-|                | signals.py           | All clear, no errors found |
-|                | urls.py              | All clear, no errors found |
-|                | views.py             | All clear, no errors found |
-|                | webhook_handler.py   | All clear, no errors found |
-|                | webhooks.py          | All clear, no errors found |
-| home           | admin.py             | All clear, no errors found |
-|                | apps.py              | All clear, no errors found |
-|                | forms.py             | All clear, no errors found |
-|                | models.py            | All clear, no errors found |
-|                | urls.py              | All clear, no errors found |
-|                | views.py             | All clear, no errors found |
-| products       | admin.py             | All clear, no errors found |
-|                | apps.py              | All clear, no errors found |
-|                | forms.py             | All clear, no errors found |
-|                | models.py            | All clear, no errors found |
-|                | urls.py              | All clear, no errors found |
-|                | views.py             | All clear, no errors found |
-| userprofile    | admin.py             | All clear, no errors found |
-|                | apps.py              | All clear, no errors found |
-|                | forms.py             | All clear, no errors found |
-|                | models.py            | All clear, no errors found |
-|                | signals.py           | All clear, no errors found |
-|                | urls.py              | All clear, no errors found |
-|                | views.py             | All clear, no errors found |
+| App         | File               | CI Linter Result           |
+| ----------- | ------------------ | -------------------------- |
+| bag         | apps.py            | All clear, no errors found |
+|             | contexts.py        | All clear, no errors found |
+|             | urls.py            | All clear, no errors found |
+|             | views.py           | All clear, no errors found |
+| blog        | admin.py           | All clear, no errors found |
+|             | apps.py            | All clear, no errors found |
+|             | forms.py           | All clear, no errors found |
+|             | models.py          | All clear, no errors found |
+|             | urls.py            | All clear, no errors found |
+|             | views.py           | All clear, no errors found |
+| checkout    | admin.py           | All clear, no errors found |
+|             | apps.py            | All clear, no errors found |
+|             | forms.py           | All clear, no errors found |
+|             | models.py          | All clear, no errors found |
+|             | signals.py         | All clear, no errors found |
+|             | urls.py            | All clear, no errors found |
+|             | views.py           | All clear, no errors found |
+|             | webhook_handler.py | All clear, no errors found |
+|             | webhooks.py        | All clear, no errors found |
+| home        | admin.py           | All clear, no errors found |
+|             | apps.py            | All clear, no errors found |
+|             | forms.py           | All clear, no errors found |
+|             | models.py          | All clear, no errors found |
+|             | urls.py            | All clear, no errors found |
+|             | views.py           | All clear, no errors found |
+| products    | admin.py           | All clear, no errors found |
+|             | apps.py            | All clear, no errors found |
+|             | forms.py           | All clear, no errors found |
+|             | models.py          | All clear, no errors found |
+|             | urls.py            | All clear, no errors found |
+|             | views.py           | All clear, no errors found |
+| userprofile | admin.py           | All clear, no errors found |
+|             | apps.py            | All clear, no errors found |
+|             | forms.py           | All clear, no errors found |
+|             | models.py          | All clear, no errors found |
+|             | signals.py         | All clear, no errors found |
+|             | urls.py            | All clear, no errors found |
+|             | views.py           | All clear, no errors found |
 
 ### Wave Accessibility
 
@@ -938,195 +1067,182 @@ The Lighthouse report provided the following results:
 ## Manual Testing
 
 ### **Sign Up Page**
-|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
-|----------------|----------------|-------------------|---------|
-|Inputting details and click on *Sign Up* button|User should be signed up and redirected to verify their email address|User Sign Up #1 - AC 3|PASS|
-|Attempting signing up with an empty field|The empty field is highlighted and displays `Please fill out this field`|User Sign Up #1 - AC 2|PASS|
-|Hover over popover toggle (the little purple question mark)|When hovered over, the popover toggle displays password validation rules|User Sign Up #1 - AC 2|PASS|
-|`Your password can't be too similar to your other personal information`|Typing a password (`greg123`) resembing the username (`greg123`) stops the sign up process|User Sign Up #1 - AC 2|PASS|
-|`Your password must contain at least 8 characters`|User is not allowed to sign up and receives feedback accordingly|User Sign Up #1 - AC 2|PASS|
-|`Your password can't be a commonly used password`|Typing a common password like... `password`; The sign up process is stopped|User Sign Up #1 - AC 2|PASS|
-|`Your password can't be entirely numeric`|By typing a fully numeric password, `1234567890` the user is not allowed to sign up and receives feedback accordingly|User Sign Up #1 - AC 2|PASS|
-|`Sign In` link redirects to sign in template|If user clicks on the *sign in* link above the sign up form, they should be redirected to the *sign in* page|User Sign In #2 - AC 1|PASS|     
 
-
+| Test Carried Out                                                        | Expected Outcome                                                                                                      | User Story - Acceptance Criteria (AC) | Pass/Fail |
+| ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------- | --------- |
+| Inputting details and click on _Sign Up_ button                         | User should be signed up and redirected to verify their email address                                                 | User Sign Up #1 - AC 3                | PASS      |
+| Attempting signing up with an empty field                               | The empty field is highlighted and displays `Please fill out this field`                                              | User Sign Up #1 - AC 2                | PASS      |
+| Hover over popover toggle (the little purple question mark)             | When hovered over, the popover toggle displays password validation rules                                              | User Sign Up #1 - AC 2                | PASS      |
+| `Your password can't be too similar to your other personal information` | Typing a password (`greg123`) resembing the username (`greg123`) stops the sign up process                            | User Sign Up #1 - AC 2                | PASS      |
+| `Your password must contain at least 8 characters`                      | User is not allowed to sign up and receives feedback accordingly                                                      | User Sign Up #1 - AC 2                | PASS      |
+| `Your password can't be a commonly used password`                       | Typing a common password like... `password`; The sign up process is stopped                                           | User Sign Up #1 - AC 2                | PASS      |
+| `Your password can't be entirely numeric`                               | By typing a fully numeric password, `1234567890` the user is not allowed to sign up and receives feedback accordingly | User Sign Up #1 - AC 2                | PASS      |
+| `Sign In` link redirects to sign in template                            | If user clicks on the _sign in_ link above the sign up form, they should be redirected to the _sign in_ page          | User Sign In #2 - AC 1                | PASS      |
 
 ### **Confirm Email**
-|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
-|------------------|------------------|-------------------|-------|
-|Email is received|User receives email to verify their email address|User Sign Up #1 - AC 3|PASS|
 
-
+| Test Carried Out  | Expected Outcome                                  | User Story - Acceptance Criteria (AC) | Pass/Fail |
+| ----------------- | ------------------------------------------------- | ------------------------------------- | --------- |
+| Email is received | User receives email to verify their email address | User Sign Up #1 - AC 3                | PASS      |
 
 ### **Sign In Page**
-|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
-|------------------|------------------|-------------------|-------|
-|Inputting details and click on *Sign In* button|User should be signed up and redirected to *Home Page* with feedback from the webpage|User Sign In #2 - AC 3|PASS|
-|Enter the wrong password/username|Input is not accepted. The message `The username and/or password you specified are not correct.` User receives appropriate feedback and the form reloads.|User Sign In #2 - AC 2|PASS|
-|`Sign Up` link redirects to sign up template|If user clicks on the *sign up* link above, they are redirected to the *sign up* page|User Sign Up #1 - AC 1|PASS|
 
-
+| Test Carried Out                                | Expected Outcome                                                                                                                                          | User Story - Acceptance Criteria (AC) | Pass/Fail |
+| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- | --------- |
+| Inputting details and click on _Sign In_ button | User should be signed up and redirected to _Home Page_ with feedback from the webpage                                                                     | User Sign In #2 - AC 3                | PASS      |
+| Enter the wrong password/username               | Input is not accepted. The message `The username and/or password you specified are not correct.` User receives appropriate feedback and the form reloads. | User Sign In #2 - AC 2                | PASS      |
+| `Sign Up` link redirects to sign up template    | If user clicks on the _sign up_ link above, they are redirected to the _sign up_ page                                                                     | User Sign Up #1 - AC 1                | PASS      |
 
 ### **Reset Password**
-|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
-|------------------|------------------|-------------------|-------|
-|`Forgot Password?` link redirects the user to reset password|User is redirected to said page, where they are required to input their email address so that they can receive a link which will prompt them to reset their password|Password Reset #4 - AC 2|PASS|
-|Input an invalid email address|Input is not accepted. The message `Enter a valid email address.` appears and prompts the user to enter the email address again|Password Reset #4 - AC 2|PASS|
-|User receives email from HoneyPot|User receives reset password link through an email|Password Reset #4 - AC 3|PASS|
 
-
+| Test Carried Out                                             | Expected Outcome                                                                                                                                                     | User Story - Acceptance Criteria (AC) | Pass/Fail |
+| ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- | --------- |
+| `Forgot Password?` link redirects the user to reset password | User is redirected to said page, where they are required to input their email address so that they can receive a link which will prompt them to reset their password | Password Reset #4 - AC 2              | PASS      |
+| Input an invalid email address                               | Input is not accepted. The message `Enter a valid email address.` appears and prompts the user to enter the email address again                                      | Password Reset #4 - AC 2              | PASS      |
+| User receives email from HoneyPot                            | User receives reset password link through an email                                                                                                                   | Password Reset #4 - AC 3              | PASS      |
 
 ### **Navigation Bar**
-|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
-|------------------|------------------|-------------------|-------|
-|*Home* link brings the user to the main page|User is redirected to home page|N/A|PASS|
-|*Shop* dropdown brings the user to any of the dropdown items displayed|User is redirected as expected|Filter Feature #30 - AC 1|PASS|
-|*Gift Baskets & Deals* dropdown brings the user to any of the dropdown items displayed|User is redirected as expected|Filter Feature #30 - AC 1|PASS|
-|*Blog* dropdown brings the user to any of the dropdown items displayed|User is redirected as expected|Filter Feature #30 - AC 1|PASS|
-|Search feature|User can search for products|Search Feature #29 - AC 1|PASS|
-|Search feature|Products that the user is searching for are displayed|Search Feature #29 - AC 2|PASS|
-|*Login* link brings the user to the *sign in* page|User is redirected to login page|User Sign In #2 - AC 1|PASS|
-|*Register* link brings the user to the *register* page|User is redirected to sign up page|User Sign Up #1 - AC 1|PASS|
-|Navbar changes its links when a user is registered|*Login* and *Register* are changed to *My Profile* and *Logout*, respectively when the user is logged in, and new *Create Post* and *Admin* links appear next to *My Profile* for Admins|N/A|PASS|
-|*Create Post* button|Admin should be redirected to a `Create Post` form|Admin CRUD Capabilities #8 - AC 1|PASS|
-|*Admin* button|Admin should be redirected to Admin Management page|Admin CRUD Capabilities #8 - AC 1|PASS|
-|Login status information|When the user is logged in, the message is `Welcome, [first name]`. Otherwise, the message displayed is: `Welcome! Please log in`|User Sign In #2 - AC 3|PASS|
 
-
+| Test Carried Out                                                                       | Expected Outcome                                                                                                                                                                         | User Story - Acceptance Criteria (AC) | Pass/Fail |
+| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- | --------- |
+| _Home_ link brings the user to the main page                                           | User is redirected to home page                                                                                                                                                          | N/A                                   | PASS      |
+| _Shop_ dropdown brings the user to any of the dropdown items displayed                 | User is redirected as expected                                                                                                                                                           | Filter Feature #30 - AC 1             | PASS      |
+| _Gift Baskets & Deals_ dropdown brings the user to any of the dropdown items displayed | User is redirected as expected                                                                                                                                                           | Filter Feature #30 - AC 1             | PASS      |
+| _Blog_ dropdown brings the user to any of the dropdown items displayed                 | User is redirected as expected                                                                                                                                                           | Filter Feature #30 - AC 1             | PASS      |
+| Search feature                                                                         | User can search for products                                                                                                                                                             | Search Feature #29 - AC 1             | PASS      |
+| Search feature                                                                         | Products that the user is searching for are displayed                                                                                                                                    | Search Feature #29 - AC 2             | PASS      |
+| _Login_ link brings the user to the _sign in_ page                                     | User is redirected to login page                                                                                                                                                         | User Sign In #2 - AC 1                | PASS      |
+| _Register_ link brings the user to the _register_ page                                 | User is redirected to sign up page                                                                                                                                                       | User Sign Up #1 - AC 1                | PASS      |
+| Navbar changes its links when a user is registered                                     | _Login_ and _Register_ are changed to _My Profile_ and _Logout_, respectively when the user is logged in, and new _Create Post_ and _Admin_ links appear next to _My Profile_ for Admins | N/A                                   | PASS      |
+| _Create Post_ button                                                                   | Admin should be redirected to a `Create Post` form                                                                                                                                       | Admin CRUD Capabilities #8 - AC 1     | PASS      |
+| _Admin_ button                                                                         | Admin should be redirected to Admin Management page                                                                                                                                      | Admin CRUD Capabilities #8 - AC 1     | PASS      |
+| Login status information                                                               | When the user is logged in, the message is `Welcome, [first name]`. Otherwise, the message displayed is: `Welcome! Please log in`                                                        | User Sign In #2 - AC 3                | PASS      |
 
 ### **Home Page**
-|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
-|------------------|------------------|-------------------|-------|
-|*Shop Now* button|User is redirected to the *Products* page|Product List #12 - AC 1|PASS|
-|*Check Our Products* button|User is redirected to the *Products* page|Product List #12 - AC 1|PASS|
-|*Newsletter* sign up|User inputs their email to subscribe to newsletter and receives feedback messgae|Newsletter #34 - AC 2|PASS|
 
-
+| Test Carried Out            | Expected Outcome                                                                 | User Story - Acceptance Criteria (AC) | Pass/Fail |
+| --------------------------- | -------------------------------------------------------------------------------- | ------------------------------------- | --------- |
+| _Shop Now_ button           | User is redirected to the _Products_ page                                        | Product List #12 - AC 1               | PASS      |
+| _Check Our Products_ button | User is redirected to the _Products_ page                                        | Product List #12 - AC 1               | PASS      |
+| _Newsletter_ sign up        | User inputs their email to subscribe to newsletter and receives feedback messgae | Newsletter #34 - AC 2                 | PASS      |
 
 ### **User Profile**
-|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
-|------------------|------------------|-------------------|-------|
-|*Edit Profile* button|User is redirected to a form to edit their profile|Edit Profile #6 - AC 2|PASS|
-|Changes are saved|Changes that the user inputs are successfully saved if valid, else the errors are highlighted and require the user to input their details again|Edit Profile #6 - AC 3|PASS|
-|*Change Password* button|Button works|Change Password #32 - AC 1|PASS| 
-|*Change Password* button|User is required to input their current password before the new one|Change Password #32 - AC 2|PASS| 
-|*Change Password* button|User can change their password|Change Password #32 - AC 3|PASS| 
-|*Delete Account* button|Button works|Delete Account #7 - AC 1|PASS|
-|*Delete Account* button|User is asked to confirm|Delete Account #7 - AC 2|PASS|
-|*Delete Account* button|Profile is permanently deleted|Delete Account #7 - AC 3|PASS|
-|*Default Delivery Information* form|User can fill their delivery information within their profile|Auto Create Profile #5 - AC 2|PASS|
 
-
+| Test Carried Out                    | Expected Outcome                                                                                                                                | User Story - Acceptance Criteria (AC) | Pass/Fail |
+| ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- | --------- |
+| _Edit Profile_ button               | User is redirected to a form to edit their profile                                                                                              | Edit Profile #6 - AC 2                | PASS      |
+| Changes are saved                   | Changes that the user inputs are successfully saved if valid, else the errors are highlighted and require the user to input their details again | Edit Profile #6 - AC 3                | PASS      |
+| _Change Password_ button            | Button works                                                                                                                                    | Change Password #32 - AC 1            | PASS      |
+| _Change Password_ button            | User is required to input their current password before the new one                                                                             | Change Password #32 - AC 2            | PASS      |
+| _Change Password_ button            | User can change their password                                                                                                                  | Change Password #32 - AC 3            | PASS      |
+| _Delete Account_ button             | Button works                                                                                                                                    | Delete Account #7 - AC 1              | PASS      |
+| _Delete Account_ button             | User is asked to confirm                                                                                                                        | Delete Account #7 - AC 2              | PASS      |
+| _Delete Account_ button             | Profile is permanently deleted                                                                                                                  | Delete Account #7 - AC 3              | PASS      |
+| _Default Delivery Information_ form | User can fill their delivery information within their profile                                                                                   | Auto Create Profile #5 - AC 2         | PASS      |
 
 ### **Admin Management**
-|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
-|------------------|------------------|-------------------|-------|
-|*Add Product* button|Admin can add more products|Admin CRUD Capabilities #8 - AC 1|PASS|
-|*Manage Reviews* button|Admin is redirected to *Reviews Manageent* page, containing all reviews on the website, approved or otherwise|Manage User Reviews #9 - AC 1|PASS|
-|*Approve* button|Review is displayed once approved|Manage User Reviews #9 - AC 1|PASS|
-|*Edit* button|Admin can edit reviews|Manage User Reviews #9|PASS|
-|*Delete* button|Admin can delete reviews, after confirming it|Manage User Reviews #9 - AC 3|PASS|
-|*Manage Orders* button|Admin is redirected to *Order Management* page|Manage Orders #10 - AC 1|PASS|
-|Mark orders as *Fulfilled*|When the user clicks on *Mark as Fulfilled*, the customer receives an email confirming them that their order is on its way|Add Order Fulfillment #41 - AC 1|PASS|
-|*Manage Comments* button|Admin is redirected to *Comments Management* page, containing all comments on the website, approved or otherwise|Comments on Blog Posts #27 - AC 2|PASS|
-|*Approve* button|Comment is displayed once approved|Comments on Blog Posts #27 - AC 2|PASS|
-|*Delete* button|Admin can delete comments, after confirming so|Comments on Blog Posts #27 - AC 2|PASS|
 
-
+| Test Carried Out           | Expected Outcome                                                                                                           | User Story - Acceptance Criteria (AC) | Pass/Fail |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- | --------- |
+| _Add Product_ button       | Admin can add more products                                                                                                | Admin CRUD Capabilities #8 - AC 1     | PASS      |
+| _Manage Reviews_ button    | Admin is redirected to _Reviews Manageent_ page, containing all reviews on the website, approved or otherwise              | Manage User Reviews #9 - AC 1         | PASS      |
+| _Approve_ button           | Review is displayed once approved                                                                                          | Manage User Reviews #9 - AC 1         | PASS      |
+| _Edit_ button              | Admin can edit reviews                                                                                                     | Manage User Reviews #9                | PASS      |
+| _Delete_ button            | Admin can delete reviews, after confirming it                                                                              | Manage User Reviews #9 - AC 3         | PASS      |
+| _Manage Orders_ button     | Admin is redirected to _Order Management_ page                                                                             | Manage Orders #10 - AC 1              | PASS      |
+| Mark orders as _Fulfilled_ | When the user clicks on _Mark as Fulfilled_, the customer receives an email confirming them that their order is on its way | Add Order Fulfillment #41 - AC 1      | PASS      |
+| _Manage Comments_ button   | Admin is redirected to _Comments Management_ page, containing all comments on the website, approved or otherwise           | Comments on Blog Posts #27 - AC 2     | PASS      |
+| _Approve_ button           | Comment is displayed once approved                                                                                         | Comments on Blog Posts #27 - AC 2     | PASS      |
+| _Delete_ button            | Admin can delete comments, after confirming so                                                                             | Comments on Blog Posts #27 - AC 2     | PASS      |
 
 ### **Products**
-|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
-|------------------|------------------|-------------------|-------|
-|Product name contains link to said product|User is redirected to product detail page|Product List #12 - AC 1|PASS|
-|Product image contains link to said product|User is redirected to product detail page|Product List #12 - AC 1|PASS|
-|*Buy Now* button|Product is added to basket, and the user is redirected straight to checkout page|"Buy Now" Button #43 - AC 1|PASS|
-|*Sort* dropdown|User can sort products given the options|N/A|PASS|
 
+| Test Carried Out                            | Expected Outcome                                                                 | User Story - Acceptance Criteria (AC) | Pass/Fail |
+| ------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------- | --------- |
+| Product name contains link to said product  | User is redirected to product detail page                                        | Product List #12 - AC 1               | PASS      |
+| Product image contains link to said product | User is redirected to product detail page                                        | Product List #12 - AC 1               | PASS      |
+| _Buy Now_ button                            | Product is added to basket, and the user is redirected straight to checkout page | "Buy Now" Button #43 - AC 1           | PASS      |
+| _Sort_ dropdown                             | User can sort products given the options                                         | N/A                                   | PASS      |
 
 ### **Products Detail**
-|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
-|------------------|------------------|-------------------|-------|
-|*Add to Basket* button|User can add multiple items to basket|Add to Shopping Bag #19 - AC 1|PASS|
-|*Edit* button (Admin Only)|When Admin clicks on the *Edit* button, they can edit the product details - Users can't access this page|Admin CRUD Capabilities #8 - AC 2|PASS|
-|*Delete* button (Admin Only)|When Admin clicks on the *Delete* button, they are asked to confirm their decision and then the product is deleted - Users can't access this page|Admin CRUD Capabilities #8 - AC 2|PASS|
-|*Rating* bees|Bees are highlighted so the user can rate a product|Rate Products #16 - AC 1|PASS|
-|Submit rating without writing review|User can submit ratings without writing a review|Rate Products #16 - AC 1|PASS|
-|Can't submit review without rating|User can't submit review without rating product|Rate Products #16 - AC 1|PASS|
-|Review is submitted for approval|The review is first submitted for approval, the user receives feedback as well|Write Reviews #15 - AC 2|PASS|
-|*Edit* and *Delete* buttons are only visible to the author of the review|Logging in into a different account makes the buttons invisible|N/A|PASS|
-|*Edit* review button|Text field is filled with the review and the *Post Review* buttons changes to *Update*|N/A|PASS|
-|*Delete* review button|The *Delete* button triggers a modal box asking for confirmation|N/A|PASS|
-|*Related Products* have links to said product|User can choose a different product to view from the *Related Products* section|View Related Products #14 - AC 1|PASS|
 
-
+| Test Carried Out                                                         | Expected Outcome                                                                                                                                  | User Story - Acceptance Criteria (AC) | Pass/Fail |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- | --------- |
+| _Add to Basket_ button                                                   | User can add multiple items to basket                                                                                                             | Add to Shopping Bag #19 - AC 1        | PASS      |
+| _Edit_ button (Admin Only)                                               | When Admin clicks on the _Edit_ button, they can edit the product details - Users can't access this page                                          | Admin CRUD Capabilities #8 - AC 2     | PASS      |
+| _Delete_ button (Admin Only)                                             | When Admin clicks on the _Delete_ button, they are asked to confirm their decision and then the product is deleted - Users can't access this page | Admin CRUD Capabilities #8 - AC 2     | PASS      |
+| _Rating_ bees                                                            | Bees are highlighted so the user can rate a product                                                                                               | Rate Products #16 - AC 1              | PASS      |
+| Submit rating without writing review                                     | User can submit ratings without writing a review                                                                                                  | Rate Products #16 - AC 1              | PASS      |
+| Can't submit review without rating                                       | User can't submit review without rating product                                                                                                   | Rate Products #16 - AC 1              | PASS      |
+| Review is submitted for approval                                         | The review is first submitted for approval, the user receives feedback as well                                                                    | Write Reviews #15 - AC 2              | PASS      |
+| _Edit_ and _Delete_ buttons are only visible to the author of the review | Logging in into a different account makes the buttons invisible                                                                                   | N/A                                   | PASS      |
+| _Edit_ review button                                                     | Text field is filled with the review and the _Post Review_ buttons changes to _Update_                                                            | N/A                                   | PASS      |
+| _Delete_ review button                                                   | The _Delete_ button triggers a modal box asking for confirmation                                                                                  | N/A                                   | PASS      |
+| _Related Products_ have links to said product                            | User can choose a different product to view from the _Related Products_ section                                                                   | View Related Products #14 - AC 1      | PASS      |
 
 ### **Shopping Bag**
-|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
-|------------------|------------------|-------------------|-------|
-|Basket dynamically updates price|When adding to basket, the basket updates its' price|View Total Cost #22 - AC 2|PASS|
-|Update quantity from the *Shopping Bag* page|User can update product quantity by selecting the desired number and clicking *Update*|Update Shopping Bag #20 - AC 1|PASS|
-|Remove product from the *Shopping Bag* page|User can remove product from *Shopping Bag* and they're asked to confirm removal|Delete Shopping Bag Items #21 - AC 1|PASS|
-|*You Might Also Like* section displays reduced prices|Products in this section are displayed underneath the shopping bag with a discount|"You Might Also Like" Section #33 - AC 1|PASS|
-|*Add to Bag* button|User can add items in the *You Might Also Like* section straight to their bag|"You Might Also Like" Section #33 - AC 3|PASS|
-|*Keep Shopping* button|User is redirected back to the *Products* page|N/A|PASS|
-|*Go to Checkout* button|User is redirected to the *Checkout* page|Billing Information #23 - AC 1|PASS|
 
-
+| Test Carried Out                                      | Expected Outcome                                                                       | User Story - Acceptance Criteria (AC)    | Pass/Fail |
+| ----------------------------------------------------- | -------------------------------------------------------------------------------------- | ---------------------------------------- | --------- |
+| Basket dynamically updates price                      | When adding to basket, the basket updates its' price                                   | View Total Cost #22 - AC 2               | PASS      |
+| Update quantity from the _Shopping Bag_ page          | User can update product quantity by selecting the desired number and clicking _Update_ | Update Shopping Bag #20 - AC 1           | PASS      |
+| Remove product from the _Shopping Bag_ page           | User can remove product from _Shopping Bag_ and they're asked to confirm removal       | Delete Shopping Bag Items #21 - AC 1     | PASS      |
+| _You Might Also Like_ section displays reduced prices | Products in this section are displayed underneath the shopping bag with a discount     | "You Might Also Like" Section #33 - AC 1 | PASS      |
+| _Add to Bag_ button                                   | User can add items in the _You Might Also Like_ section straight to their bag          | "You Might Also Like" Section #33 - AC 3 | PASS      |
+| _Keep Shopping_ button                                | User is redirected back to the _Products_ page                                         | N/A                                      | PASS      |
+| _Go to Checkout_ button                               | User is redirected to the _Checkout_ page                                              | Billing Information #23 - AC 1           | PASS      |
 
 ### **Checkout**
-|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
-|------------------|------------------|-------------------|-------|
-|*Delivery Information* form|User is requested to fill their delivery information, otherwise the order can't be processed|Billing Information #23 - AC 2|PASS|
-|`4242 4242 4242 4242` - Successful payment|Payment is successful|Billing Information #23 - AC 2|PASS|
-|`4000 0000 0000 0002` - Payment declined|Payment is declined|N/A|PASS|
-|`4000 0027 6000 3184` - Authenticate before payment|User needs to confirm card authentication before payment is successful|N/A|PASS|
-|Checkout Success|User is redirected to a confirmation page, and is given feedback regarding their order|Billing Information #23 - AC 3|PASS|
-|Confirmation Email|User receives email confirming their order|Confirmation Email #25 - AC 1|PASS|
 
-
+| Test Carried Out                                    | Expected Outcome                                                                             | User Story - Acceptance Criteria (AC) | Pass/Fail |
+| --------------------------------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------- | --------- |
+| _Delivery Information_ form                         | User is requested to fill their delivery information, otherwise the order can't be processed | Billing Information #23 - AC 2        | PASS      |
+| `4242 4242 4242 4242` - Successful payment          | Payment is successful                                                                        | Billing Information #23 - AC 2        | PASS      |
+| `4000 0000 0000 0002` - Payment declined            | Payment is declined                                                                          | N/A                                   | PASS      |
+| `4000 0027 6000 3184` - Authenticate before payment | User needs to confirm card authentication before payment is successful                       | N/A                                   | PASS      |
+| Checkout Success                                    | User is redirected to a confirmation page, and is given feedback regarding their order       | Billing Information #23 - AC 3        | PASS      |
+| Confirmation Email                                  | User receives email confirming their order                                                   | Confirmation Email #25 - AC 1         | PASS      |
 
 ### **Blog Posts Page**
-|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
-|------------------|------------------|-------------------|-------|
-|Blog posts displaying|Blog posts are displayed|View Blog Posts #26 - AC 1|PASS|
-|Recipe posts displaying|Recipe posts are displayed|View Blog Posts #26 - AC 1|PASS|
-|Blog posts title links|When clicked, it should redirect the user to the post detail page|View Blog Posts #26 - AC 2|PASS|
-|Recipe posts title links|When clicked, it should redirect the user to the recipe detail page|View Blog Posts #26 - AC 2|PASS|
-|*Go Back* button|When clicked, it should redirect back to the main blog posts page|N/A|PASS|
-|*Edit Post* and *Delete* buttons are visible to Admin only|Buttons are only visible to Admin|Manage Blog Posts #28 - AC 1|PASS|
-|*Edit Post* button|When clicked, it redirects the Admin to a prefilled form and Admin is able to edit|Manage Blog Posts #28 - AC 2|PASS|
-|*Cancel* button|Admin goes back to the post detail page without any changes|N/A|PASS|
-|*Delete* button|Admin is asked to confirm if they want to delete a post|Manage Blog Posts #28 - AC 3|PASS|
 
-
+| Test Carried Out                                           | Expected Outcome                                                                   | User Story - Acceptance Criteria (AC) | Pass/Fail |
+| ---------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------- | --------- |
+| Blog posts displaying                                      | Blog posts are displayed                                                           | View Blog Posts #26 - AC 1            | PASS      |
+| Recipe posts displaying                                    | Recipe posts are displayed                                                         | View Blog Posts #26 - AC 1            | PASS      |
+| Blog posts title links                                     | When clicked, it should redirect the user to the post detail page                  | View Blog Posts #26 - AC 2            | PASS      |
+| Recipe posts title links                                   | When clicked, it should redirect the user to the recipe detail page                | View Blog Posts #26 - AC 2            | PASS      |
+| _Go Back_ button                                           | When clicked, it should redirect back to the main blog posts page                  | N/A                                   | PASS      |
+| _Edit Post_ and _Delete_ buttons are visible to Admin only | Buttons are only visible to Admin                                                  | Manage Blog Posts #28 - AC 1          | PASS      |
+| _Edit Post_ button                                         | When clicked, it redirects the Admin to a prefilled form and Admin is able to edit | Manage Blog Posts #28 - AC 2          | PASS      |
+| _Cancel_ button                                            | Admin goes back to the post detail page without any changes                        | N/A                                   | PASS      |
+| _Delete_ button                                            | Admin is asked to confirm if they want to delete a post                            | Manage Blog Posts #28 - AC 3          | PASS      |
 
 ### **Comment Section**
-|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
-|------------------|------------------|-------------------|-------|
-|*Post Comment* button|User can type a comment in the text field and post a comment|Comments on Blog Posts #27 - AC 1|PASS|
-|Comment is submitted for approval|Comment is first submitted for approval, the user receives feedback as well|Comments on Blog Posts #27 - AC 2|PASS|
-|*Edit* and *Delete* buttons are only visible to the author of the comment|Logging in into a different account makes the buttons invisible|N/A|PASS|
-|*Edit* comment button|Text field is filled with the comment and the *Post Comment* buttons changes to *Update*|N/A|PASS|
-|*Delete* comment button|The *Delete* button triggers a modal box asking for confirmation|N/A|PASS|
 
-
+| Test Carried Out                                                          | Expected Outcome                                                                         | User Story - Acceptance Criteria (AC) | Pass/Fail |
+| ------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------- | --------- |
+| _Post Comment_ button                                                     | User can type a comment in the text field and post a comment                             | Comments on Blog Posts #27 - AC 1     | PASS      |
+| Comment is submitted for approval                                         | Comment is first submitted for approval, the user receives feedback as well              | Comments on Blog Posts #27 - AC 2     | PASS      |
+| _Edit_ and _Delete_ buttons are only visible to the author of the comment | Logging in into a different account makes the buttons invisible                          | N/A                                   | PASS      |
+| _Edit_ comment button                                                     | Text field is filled with the comment and the _Post Comment_ buttons changes to _Update_ | N/A                                   | PASS      |
+| _Delete_ comment button                                                   | The _Delete_ button triggers a modal box asking for confirmation                         | N/A                                   | PASS      |
 
 ### **Footer**
-|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
-|------------------|------------------|-------------------|-------|
-|*GitHub* icon|Redirects to [GitHub](https://github.com/petra66orii) in a new tab|N/A|PASS|
-|*Facebook* icon|Redirects to [Facebook](https://www.facebook.com) in a new tab|N/A|PASS|
-|*Instagram* icon|Redirects to [Instagram](https://www.instagram.com) in a new tab|N/A|PASS|
-|*Youtube* icon|Redirects to [Youtube](https://www.youtube.com) in a new tab|N/A|PASS|
 
-
+| Test Carried Out | Expected Outcome                                                   | User Story - Acceptance Criteria (AC) | Pass/Fail |
+| ---------------- | ------------------------------------------------------------------ | ------------------------------------- | --------- |
+| _GitHub_ icon    | Redirects to [GitHub](https://github.com/petra66orii) in a new tab | N/A                                   | PASS      |
+| _Facebook_ icon  | Redirects to [Facebook](https://www.facebook.com) in a new tab     | N/A                                   | PASS      |
+| _Instagram_ icon | Redirects to [Instagram](https://www.instagram.com) in a new tab   | N/A                                   | PASS      |
+| _Youtube_ icon   | Redirects to [Youtube](https://www.youtube.com) in a new tab       | N/A                                   | PASS      |
 
 ### **Error Pages**
-|Test Carried Out|Expected Outcome|User Story - Acceptance Criteria (AC)|Pass/Fail|
-|------------------|------------------|-------------------|-------|
-|403 Page - Forbidden Access|Accessing an Admin-Only page while not logged in as Admin|N/A|PASS|
-|404 Page - Invalid URL|Entering an invalid URL should redirect to a 404 page|N/A|PASS|
-|500 Page - Server Error|Removing a website from `ALLOWED_HOSTS` should redirect to a 500 page|N/A|PASS|
+
+| Test Carried Out            | Expected Outcome                                                      | User Story - Acceptance Criteria (AC) | Pass/Fail |
+| --------------------------- | --------------------------------------------------------------------- | ------------------------------------- | --------- |
+| 403 Page - Forbidden Access | Accessing an Admin-Only page while not logged in as Admin             | N/A                                   | PASS      |
+| 404 Page - Invalid URL      | Entering an invalid URL should redirect to a 404 page                 | N/A                                   | PASS      |
+| 500 Page - Server Error     | Removing a website from `ALLOWED_HOSTS` should redirect to a 500 page | N/A                                   | PASS      |
 
 ## Fixed Bugs
 
@@ -1140,31 +1256,31 @@ All of these bugs are documented accordingly and they've been resolved.
 
 ## Code Used
 
-* [Django Documentation](https://docs.djangoproject.com/en/4.2/) - This was a lifesaver for so many things
-* [SwiperJS](https://swiperjs.com/get-started#use-swiper-from-cdn) - For the mobile carousels
-* [Adding Meta Tags in Django](https://dev.to/makneta/how-to-add-unique-meta-tags-in-django-328i) - Very informative article
-* [Boutique Ado Project](https://github.com/petra66orii/boutique-ado) - Code Institute's wakthrough project to create an e-commerce website
-* [Timeless Travel](https://github.com/petra66orii/timeless-travel) - My personal project, used the blog app and the JS scripts
-* [Django Paginator Class](https://docs.djangoproject.com/en/5.1/topics/pagination/):
-    * Used Django's `Paginator` class to build pagination within the posts section in a user's profile
-* [Bootstrap Documentation](https://getbootstrap.com/docs/5.3/getting-started/introduction/):
-    * I made extensive use of Bootstrap's 5 documentation to make sure I was applying the most appropriate classes and to troubleshoot some of the more troublesome templates.
-* [W3Schools - Bootstrap5](https://www.w3schools.com/bootstrap5/index.php):
-    * Also used W3Schools' tutorial on Bootstrap5 for troubleshooting
-    * Used this for the popover in the `Sign Up` page
-    * Made use if it as well when coding a tooltip in the profile page
-* [JavaScript fetch() API](https://www.geeksforgeeks.org/fetch-api/):
-    * Used this article to write the `toggle-task-completion.js` script
-* [Reset Password with Gmail](https://stackoverflow.com/questions/63435540/how-to-reset-password-using-django-and-gmail):
-    * Used this article from StackOverflow to enable password resetting with the help of a Gmail account.
-* [Change Email from `example.com` to `Time[less] Travel`](https://stackoverflow.com/questions/11372064/django-registration-how-do-i-change-example-com-in-the-email):
-    * This thread came in handy when I was modifying the automatic email message from `example.com` to `Time[less] Travel`
-* [Using Django's Built-In Template Tags](https://docs.djangoproject.com/en/4.2/ref/templates/builtins/#default):
-    * Used it throughout the project to style the template tags
+- [Django Documentation](https://docs.djangoproject.com/en/4.2/) - This was a lifesaver for so many things
+- [SwiperJS](https://swiperjs.com/get-started#use-swiper-from-cdn) - For the mobile carousels
+- [Adding Meta Tags in Django](https://dev.to/makneta/how-to-add-unique-meta-tags-in-django-328i) - Very informative article
+- [Boutique Ado Project](https://github.com/petra66orii/boutique-ado) - Code Institute's wakthrough project to create an e-commerce website
+- [Timeless Travel](https://github.com/petra66orii/timeless-travel) - My personal project, used the blog app and the JS scripts
+- [Django Paginator Class](https://docs.djangoproject.com/en/5.1/topics/pagination/):
+  - Used Django's `Paginator` class to build pagination within the posts section in a user's profile
+- [Bootstrap Documentation](https://getbootstrap.com/docs/5.3/getting-started/introduction/):
+  - I made extensive use of Bootstrap's 5 documentation to make sure I was applying the most appropriate classes and to troubleshoot some of the more troublesome templates.
+- [W3Schools - Bootstrap5](https://www.w3schools.com/bootstrap5/index.php):
+  - Also used W3Schools' tutorial on Bootstrap5 for troubleshooting
+  - Used this for the popover in the `Sign Up` page
+  - Made use if it as well when coding a tooltip in the profile page
+- [JavaScript fetch() API](https://www.geeksforgeeks.org/fetch-api/):
+  - Used this article to write the `toggle-task-completion.js` script
+- [Reset Password with Gmail](https://stackoverflow.com/questions/63435540/how-to-reset-password-using-django-and-gmail):
+  - Used this article from StackOverflow to enable password resetting with the help of a Gmail account.
+- [Change Email from `example.com` to `Time[less] Travel`](https://stackoverflow.com/questions/11372064/django-registration-how-do-i-change-example-com-in-the-email):
+  - This thread came in handy when I was modifying the automatic email message from `example.com` to `Time[less] Travel`
+- [Using Django's Built-In Template Tags](https://docs.djangoproject.com/en/4.2/ref/templates/builtins/#default):
+  - Used it throughout the project to style the template tags
 
 ## Content
 
-Blog content, alongside with recipes and *About Us* page were generated by [ChatGPT](https://chatgpt.com/).
+Blog content, alongside with recipes and _About Us_ page were generated by [ChatGPT](https://chatgpt.com/).
 
 ### Icons
 
