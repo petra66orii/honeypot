@@ -95,17 +95,20 @@ const Footer: React.FC = () => {
           <h4 className="font-bold text-lg mb-4">Shop</h4>
           <ul className="space-y-2 text-gray-400">
             <li>
-              <Link to="/shop" className="hover:text-honey-gold">
+              <Link to="/products" className="hover:text-honey-gold">
                 All Products
               </Link>
             </li>
             <li>
-              <Link to="/deals" className="hover:text-honey-gold">
+              <Link to="/gifts" className="hover:text-honey-gold">
                 Gifts & Deals
               </Link>
             </li>
             <li>
-              <Link to="/shop?category=honey" className="hover:text-honey-gold">
+              <Link
+                to="/products?category=honey"
+                className="hover:text-honey-gold"
+              >
                 Raw Honey
               </Link>
             </li>

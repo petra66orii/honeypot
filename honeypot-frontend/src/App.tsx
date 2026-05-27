@@ -7,10 +7,10 @@ import { Toaster } from "react-hot-toast";
 
 // --- EAGER LOAD (Critical pages needed immediately) ---
 import Home from "./pages/Home";
-import ProductGrid from "./components/ProductGrid";
-import Login from "./pages/Login";
 
 // --- LAZY LOAD (Heavy pages loaded only when clicked) ---
+const ProductGrid = lazy(() => import("./components/ProductGrid"));
+const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
 const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
 const PasswordResetConfirm = lazy(() => import("./pages/PasswordResetConfirm"));

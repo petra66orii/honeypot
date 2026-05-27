@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useGetProductsQuery, useGetBlogPostsQuery } from "../services/api";
 import Testimonials from "../components/Testimonials";
+import honeyDripVideo from "../assets/background-honey-drip.mp4";
 
 const Home: React.FC = () => {
   // Fetch Data for sections
@@ -21,10 +22,7 @@ const Home: React.FC = () => {
 
   // Blog posts are likely still unwrapped (simple array) based on our previous config
   const recentPosts = posts?.slice(0, 3);
-  const honeyDripVideo = new URL(
-    "background-honey-drip.mp4",
-    import.meta.env.BASE_URL,
-  ).toString();
+  const heroPoster = `${import.meta.env.BASE_URL}beekeeper-hero.jpg`;
 
   return (
     <div className="bg-white">
@@ -38,8 +36,9 @@ const Home: React.FC = () => {
               loop
               muted
               playsInline
-              preload="auto"
-              crossOrigin="anonymous"
+              preload="metadata"
+              poster={heroPoster}
+              aria-hidden="true"
               className="w-full h-full object-cover"
             >
               <source src={honeyDripVideo} type="video/mp4" />
