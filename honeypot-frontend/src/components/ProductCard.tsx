@@ -11,6 +11,8 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const dispatch = useDispatch();
+  const cardImage = product.image_thumbnail || product.image;
+
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault(); // Prevent navigating to the Detail page when clicking the button
     dispatch(addToCart(product));
@@ -21,10 +23,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       {/* Product Image */}
       <Link to={`/products/${product.id}`}>
         <div className="relative aspect-square overflow-hidden bg-gray-50">
-          {product.image ? (
+          {cardImage ? (
             <img
-              src={product.image}
+              src={cardImage}
               alt={product.name}
+              loading="lazy"
+              decoding="async"
+              sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
               className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
             />
           ) : (

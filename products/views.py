@@ -5,10 +5,19 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAdminUser
 from rest_framework.parsers import MultiPartParser, FormParser
 from django_filters.rest_framework import DjangoFilterBackend
-from django.db.models import Avg
+from django.db.models import Avg, Q
 
 from .models import Category, Product, ProductReview
 from .serializers import CategorySerializer, ProductSerializer, ProductReviewSerializer, AdminReviewSerializer   
+
+
+def products_with_category_and_rating():
+    return Product.objects.select_related('category').annotate(
+        average_rating_value=Avg(
+            'productreview__rating',
+            filter=Q(productreview__approved=True),
+        )
+    )
 
 # ==========================================
 # CUSTOM PERMISSIONS
@@ -48,7 +57,9 @@ class DealProductList(generics.ListAPIView):
         target_categories = ['honey_gifts', 'clearance', 'special_deals', 'bundles']
         
         # Filter products where the category name is in our target list
-        return Product.objects.filter(category__name__in=target_categories)
+        return products_with_category_and_rating().filter(
+            category__name__in=target_categories
+        )
 
 class CategoryList(generics.ListAPIView):
     """API endpoint to list all categories."""
@@ -62,7 +73,7 @@ class ProductList(generics.ListCreateAPIView): # Changed from ListAPIView
     GET: List all products (Public)
     POST: Create a product (Admin only)
     """
-    queryset = Product.objects.select_related('category').all().order_by('id')
+    queryset = products_with_category_and_rating().order_by('id')
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
@@ -76,7 +87,7 @@ class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
     PUT/PATCH: Update product (Admin only)
     DELETE: Delete product (Admin only)
     """
-    queryset = Product.objects.select_related('category').all().order_by('id')
+    queryset = products_with_category_and_rating().order_by('id')
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]
     parser_classes = (MultiPartParser, FormParser)
@@ -95,8 +106,10 @@ class RelatedProductList(generics.ListAPIView):
 
     def get_queryset(self):
         product_id = self.kwargs['product_id']
-        current_product = Product.objects.get(id=product_id)
-        return Product.objects.filter(category=current_product.category).exclude(id=product_id)[:4]
+        current_product = Product.objects.only('category_id').get(id=product_id)
+        return products_with_category_and_rating().filter(
+            category_id=current_product.category_id
+        ).exclude(id=product_id)[:4]
 
 
 # ==========================================

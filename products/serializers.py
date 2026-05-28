@@ -22,18 +22,36 @@ class ProductSerializer(serializers.ModelSerializer):
         source='category',
         write_only=True
     )
-    # Exposing custom model properties to the API
-    average_rating = serializers.ReadOnlyField()
-    full_bees = serializers.ReadOnlyField()
-    has_half_bee = serializers.ReadOnlyField()
+    # Exposing rating helpers to the API. List views annotate the average to
+    # avoid repeated review aggregate queries for every product card.
+    average_rating = serializers.SerializerMethodField()
+    full_bees = serializers.SerializerMethodField()
+    has_half_bee = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
         fields = [
             'id', 'category', 'category_id', 'sku', 'name', 'description', 
-            'price', 'rating', 'image', 'average_rating', 
+            'price', 'rating', 'image', 'image_thumbnail', 'average_rating',
             'full_bees', 'has_half_bee'
         ]
+
+    def _average_rating(self, obj):
+        if hasattr(obj, 'average_rating_value'):
+            annotated_average = obj.average_rating_value
+            return round(float(annotated_average), 1) if annotated_average else 0
+        return obj.average_rating
+
+    def get_average_rating(self, obj):
+        return self._average_rating(obj)
+
+    def get_full_bees(self, obj):
+        return int(self._average_rating(obj))
+
+    def get_has_half_bee(self, obj):
+        average_rating = self._average_rating(obj)
+        remainder = average_rating - int(average_rating)
+        return 0.25 <= remainder < 0.75
 
 class ReviewSerializer(serializers.ModelSerializer):
     # We want to show the username, not just the user ID

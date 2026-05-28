@@ -1,6 +1,12 @@
-from django.db import models
+from io import BytesIO
+from pathlib import PurePosixPath
+
+from django.core.files.base import ContentFile
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.db import models
+from django.utils.text import slugify
+from PIL import Image, ImageOps
 
 
 # Create your models here.
@@ -59,9 +65,60 @@ class Product(models.Model):
         null=True,
         blank=True)
     image = models.ImageField(null=True, blank=True)
+    image_thumbnail = models.ImageField(
+        upload_to='product_thumbnails/',
+        null=True,
+        blank=True,
+        editable=False,
+    )
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        previous_image_name = None
+        if self.pk:
+            previous_image_name = (
+                Product.objects
+                .filter(pk=self.pk)
+                .values_list('image', flat=True)
+                .first()
+            )
+
+        super().save(*args, **kwargs)
+
+        image_changed = previous_image_name != self.image.name
+        if self.image and (image_changed or not self.image_thumbnail):
+            self.generate_thumbnail()
+
+    def generate_thumbnail(self):
+        """
+        Create a lightweight WebP thumbnail for product-grid cards.
+        """
+        self.image.open('rb')
+        with Image.open(self.image) as source_image:
+            thumbnail = ImageOps.exif_transpose(source_image)
+            thumbnail.thumbnail((640, 640), Image.Resampling.LANCZOS)
+
+            if thumbnail.mode in ('RGBA', 'LA', 'P'):
+                thumbnail = thumbnail.convert('RGB')
+
+            output = BytesIO()
+            thumbnail.save(output, format='WEBP', quality=78, method=6)
+            output.seek(0)
+
+        stem = PurePosixPath(self.image.name).stem
+        thumbnail_name = f"{self.pk}-{slugify(stem) or 'product'}-640.webp"
+
+        if self.image_thumbnail:
+            self.image_thumbnail.delete(save=False)
+
+        self.image_thumbnail.save(
+            thumbnail_name,
+            ContentFile(output.read()),
+            save=False,
+        )
+        super().save(update_fields=['image_thumbnail'])
 
     @property
     def average_rating(self):

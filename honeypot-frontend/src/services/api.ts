@@ -54,9 +54,9 @@ baseQuery: fetchBaseQuery({
       query: (params) => ({
         url: 'products/',
         params: {
-          category: params.category,
-          search: params.search,
-          ordering: params.ordering,
+          category__name: params.category || undefined,
+          search: params.search || undefined,
+          ordering: params.ordering || undefined,
           page: params.page,
         }
       }),

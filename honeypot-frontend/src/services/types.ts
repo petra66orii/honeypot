@@ -84,6 +84,7 @@ export interface Product {
   reviews: Review[];
   rating: number | null;
   image: string | null;
+  image_thumbnail: string | null;
   average_rating: number;
   full_bees: number;
   has_half_bee: boolean;
