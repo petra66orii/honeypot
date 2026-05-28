@@ -26,7 +26,10 @@ const Dashboard: React.FC = () => {
       {/* 1. TOP STATS CARDS */}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {/* Revenue Card */}
-        <div className="rounded-lg bg-white p-6 shadow border border-gray-100">
+        <Link
+          to="/admin/orders"
+          className="block rounded-lg bg-white p-6 shadow border border-gray-100 transition hover:-translate-y-0.5 hover:border-honey-gold hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-honey-gold focus-visible:ring-offset-2"
+        >
           <div className="flex items-center justify-between gap-4">
             <div className="min-w-0">
               <p className="text-sm font-medium text-gray-500">Total Revenue</p>
@@ -38,10 +41,13 @@ const Dashboard: React.FC = () => {
               💰
             </div>
           </div>
-        </div>
+        </Link>
 
         {/* Orders Card */}
-        <div className="rounded-lg bg-white p-6 shadow border border-gray-100">
+        <Link
+          to="/admin/orders"
+          className="block rounded-lg bg-white p-6 shadow border border-gray-100 transition hover:-translate-y-0.5 hover:border-honey-gold hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-honey-gold focus-visible:ring-offset-2"
+        >
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-500">Total Orders</p>
@@ -53,10 +59,13 @@ const Dashboard: React.FC = () => {
               📦
             </div>
           </div>
-        </div>
+        </Link>
 
         {/* Products Card */}
-        <div className="rounded-lg bg-white p-6 shadow border border-gray-100">
+        <Link
+          to="/admin/products"
+          className="block rounded-lg bg-white p-6 shadow border border-gray-100 transition hover:-translate-y-0.5 hover:border-honey-gold hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-honey-gold focus-visible:ring-offset-2"
+        >
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-500">Products</p>
@@ -68,10 +77,13 @@ const Dashboard: React.FC = () => {
               🍯
             </div>
           </div>
-        </div>
+        </Link>
 
         {/* Users Card */}
-        <div className="rounded-lg bg-white p-6 shadow border border-gray-100">
+        <Link
+          to="/admin/users"
+          className="block rounded-lg bg-white p-6 shadow border border-gray-100 transition hover:-translate-y-0.5 hover:border-honey-gold hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-honey-gold focus-visible:ring-offset-2"
+        >
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-500">Total Users</p>
@@ -83,7 +95,7 @@ const Dashboard: React.FC = () => {
               👥
             </div>
           </div>
-        </div>
+        </Link>
       </div>
 
       {/* 2. MAIN CONTENT GRID */}

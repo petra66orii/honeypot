@@ -48,14 +48,14 @@ const Footer: React.FC = () => {
 
           <form
             onSubmit={handleSubscribe}
-            className="flex flex-col sm:flex-row justify-center gap-4 max-w-md mx-auto relative"
+            className="relative mx-auto flex max-w-md flex-col justify-center gap-4 sm:flex-row"
           >
             <input
               type="email"
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-5 py-3 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
+              className="min-w-0 w-full px-5 py-3 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
               required
               disabled={isLoading}
             />
@@ -80,8 +80,8 @@ const Footer: React.FC = () => {
       </div>
 
       {/* Main Footer Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div>
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 py-12 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
+        <div className="min-w-0">
           <h3 className="text-2xl font-bold text-honey-gold mb-4">
             HoneyPot 🍯
           </h3>
@@ -91,7 +91,7 @@ const Footer: React.FC = () => {
           </p>
         </div>
 
-        <div>
+        <div className="min-w-0">
           <h4 className="font-bold text-lg mb-4">Shop</h4>
           <ul className="space-y-2 text-gray-400">
             <li>
@@ -115,7 +115,7 @@ const Footer: React.FC = () => {
           </ul>
         </div>
 
-        <div>
+        <div className="min-w-0">
           <h4 className="font-bold text-lg mb-4">Company</h4>
           <ul className="space-y-2 text-gray-400">
             <li>
@@ -136,18 +136,18 @@ const Footer: React.FC = () => {
           </ul>
         </div>
 
-        <div>
+        <div className="min-w-0">
           <h4 className="font-bold text-lg mb-4">Contact</h4>
           <p className="text-gray-400 mb-2">
             123 Beehive Lane, Galway, Ireland
           </p>
-          <p className="text-gray-400">honeypot.shop96@gmail.com</p>
+          <p className="break-words text-gray-400">honeypot.shop96@gmail.com</p>
         </div>
       </div>
-      <div className="border-t border-gray-800 py-6 text-end text-gray-500 text-sm">
+      <div className="border-t border-gray-800 px-4 py-6 text-center text-sm text-gray-500 sm:text-end">
         © {new Date().getFullYear()} The Honey Pot. All rights reserved.
       </div>
-      <div className="border-gray-800 py-6 text-center text-gray-500 text-sm">
+      <div className="border-gray-800 px-4 py-6 text-center text-sm text-gray-500">
         © {new Date().getFullYear()} Powered by{" "}
         <Link to="https://missbott.online" className="font-bold underline">
           Miss Bott

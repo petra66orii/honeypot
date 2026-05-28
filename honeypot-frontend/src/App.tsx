@@ -4,6 +4,7 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import BackToTopButton from "./components/BackToTopButton";
+import ScrollToTop from "./components/ScrollToTop";
 import { Toaster } from "react-hot-toast";
 
 // --- EAGER LOAD (Critical pages needed immediately) ---
@@ -78,6 +79,7 @@ function App() {
         }}
       />
       <div className="bg-gray-50 min-h-screen font-sans text-gray-900">
+        <ScrollToTop />
         <Navbar />
 
         {/* Wrap Routes in Suspense to handle the lazy loading state */}

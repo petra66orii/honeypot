@@ -57,7 +57,7 @@ const Navbar: React.FC = () => {
           </Link>
 
           {/* 2. Desktop Navigation (Hidden on Mobile) */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-8">
             <NavLink to="/products" className={navLinkClass}>
               Shop
             </NavLink>
@@ -78,7 +78,7 @@ const Navbar: React.FC = () => {
           <div className="flex items-center gap-6">
             {/* User Profile / Login Link (DESKTOP ONLY) */}
             {isAuthenticated ? (
-              <div className="hidden md:flex items-center gap-4">
+              <div className="hidden lg:flex items-center gap-4">
                 <span className="text-sm font-medium text-gray-700">
                   Hi, {user?.first_name}!
                 </span>
@@ -111,13 +111,13 @@ const Navbar: React.FC = () => {
               <>
                 <Link
                   to="/login"
-                  className="hidden md:block text-sm font-bold text-gray-700 hover:text-honey-gold"
+                  className="hidden lg:block text-sm font-bold text-gray-700 hover:text-honey-gold"
                 >
                   Log In
                 </Link>
                 <Link
                   to="/register"
-                  className="hidden md:block text-sm font-bold text-gray-700 hover:text-honey-gold"
+                  className="hidden lg:block text-sm font-bold text-gray-700 hover:text-honey-gold"
                 >
                   Register
                 </Link>
@@ -153,7 +153,7 @@ const Navbar: React.FC = () => {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden text-gray-500"
+              className="lg:hidden text-gray-500"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               <svg
@@ -185,7 +185,7 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu Dropdown */}
       {isMenuOpen && (
-        <div className="md:hidden border-t border-gray-100 bg-white px-4 py-4 shadow-lg animate-fade-in-down">
+        <div className="lg:hidden border-t border-gray-100 bg-white px-4 py-4 shadow-lg animate-fade-in-down">
           <div className="flex flex-col gap-4">
             {/* MOBILE: User Greeting */}
             {isAuthenticated && (
