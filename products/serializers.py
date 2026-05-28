@@ -16,6 +16,7 @@ class ProductReviewSerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
+    image_thumbnail = serializers.SerializerMethodField()
 
     category_id = serializers.PrimaryKeyRelatedField(
         queryset=Category.objects.all(),
@@ -52,6 +53,28 @@ class ProductSerializer(serializers.ModelSerializer):
         average_rating = self._average_rating(obj)
         remainder = average_rating - int(average_rating)
         return 0.25 <= remainder < 0.75
+
+    def get_image_thumbnail(self, obj):
+        if not obj.image_thumbnail:
+            return None
+
+        try:
+            thumbnail_exists = obj.image_thumbnail.storage.exists(
+                obj.image_thumbnail.name
+            )
+        except Exception:
+            return None
+
+        if not thumbnail_exists:
+            return None
+
+        request = self.context.get('request')
+        thumbnail_url = obj.image_thumbnail.url
+        return (
+            request.build_absolute_uri(thumbnail_url)
+            if request is not None
+            else thumbnail_url
+        )
 
 class ReviewSerializer(serializers.ModelSerializer):
     # We want to show the username, not just the user ID

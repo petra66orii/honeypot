@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import BackToTopButton from "./components/BackToTopButton";
 import { Toaster } from "react-hot-toast";
 
 // --- EAGER LOAD (Critical pages needed immediately) ---
@@ -128,6 +129,7 @@ function App() {
         </Suspense>
 
         <Footer />
+        <BackToTopButton />
       </div>
     </>
   );
