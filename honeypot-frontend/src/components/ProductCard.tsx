@@ -11,11 +11,26 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const dispatch = useDispatch();
-  const cardImage = product.image_thumbnail || product.image;
+  const [cardImage, setCardImage] = React.useState(
+    product.image_thumbnail || product.image,
+  );
+
+  React.useEffect(() => {
+    setCardImage(product.image_thumbnail || product.image);
+  }, [product.image, product.image_thumbnail]);
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault(); // Prevent navigating to the Detail page when clicking the button
     dispatch(addToCart(product));
+  };
+
+  const handleImageError = () => {
+    if (cardImage !== product.image && product.image) {
+      setCardImage(product.image);
+      return;
+    }
+
+    setCardImage(null);
   };
 
   return (
@@ -30,6 +45,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               loading="lazy"
               decoding="async"
               sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+              onError={handleImageError}
               className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
             />
           ) : (
