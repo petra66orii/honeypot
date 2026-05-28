@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useGetProductsQuery } from "../services/api";
 import ProductCard from "./ProductCard";
 import ProductControls from "./ProductControls";
@@ -6,9 +6,18 @@ import ProductControls from "./ProductControls";
 const ProductGrid: React.FC = () => {
   // 1. State for filters AND Page
   const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [category, setCategory] = useState("");
   const [sort, setSort] = useState("");
   const [page, setPage] = useState(1); // <--- NEW: Track current page
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      setDebouncedSearch(search.trim());
+    }, 300);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [search]);
 
   // 2. Helper to handle page changes + Scroll to top
   const handlePageChange = (newPage: number) => {
@@ -33,7 +42,7 @@ const ProductGrid: React.FC = () => {
     isError,
     isFetching, // Good to know if we are reloading between pages
   } = useGetProductsQuery({
-    search: search,
+    search: debouncedSearch,
     category: category, // Ensure a string is always passed to match the API types
     ordering: sort,
     page: page, // FIX: Pass the page number
